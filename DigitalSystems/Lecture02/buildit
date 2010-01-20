@@ -2,9 +2,9 @@
 
 source ../../course.tcsh
 source ../section.tcsh
-set LNO=08
-set FILEDATE="18 November 1999"
-set VERSION="1.1"
+set LNO=02
+set FILEDATE="February 2010"
+set VERSION="1.2"
 set TITLE='Digital System Models'
 set SHORT_TITLE='Digital System Models' # $z would be interpreted by the shell
 set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"
