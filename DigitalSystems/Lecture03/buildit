@@ -2,9 +2,9 @@
 
 source ../../course.tcsh
 source ../section.tcsh
-set LNO=10
-set FILEDATE="25 November 1999"
-set VERSION="1.1"
+set LNO=03
+set FILEDATE="February 2010"
+set VERSION="1.2"
 set TITLE='Continuous System Equivalence'
 set SHORT_TITLE='Continuous System Equivalence' # $z would be interpreted by the shell
 set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"
