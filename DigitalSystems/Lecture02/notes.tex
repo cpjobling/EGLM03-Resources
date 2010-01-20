@@ -6,6 +6,8 @@
 % Notes pages *********************************************************
 % ----------------------------------------------------------------
 
+\section*{Digital System Models}
+
 The equivalent of the differential equation model for continuous
 systems is the difference equation for digital systems. Replacing
 the differential operator $\frac{d}{dt}$ by the advance operator
@@ -90,30 +92,119 @@ there is a direct analogy with the general form of the continuous
 system transfer function with $s$ instead of $z$. \item That was
 implemented with the physically realistic integral operator $\int
 dt$ for which the digital equivalent is the delay operator
-$\nabla$. \item The operational block diagrams of a digital system
-in the various canonical forms is shown in the final sequence of
-slides.
+$\nabla$. 
 \end{itemize}
 \end{slide}
 
-\begin{slide}\label{slide:l9s14}
-\heading{Controller Canonical Form}
-\resizebox{300pt}{!}{\includegraphics{pictures/dccanon.pdf}}
-\end{slide}
+%% Digital Systems
+%% Digital System Response
 
-\begin{slide}\label{slide:l9s15}
-\heading{Observer Canonical Form}
-\resizebox{300pt}{!}{\includegraphics{pictures/docanon.pdf}}
-\end{slide}
+\section*{Digital System Response}
 
-\begin{slide}\label{slide:l9s16}
-\heading{Normal Canonical Form}
-\resizebox{300pt}{!}{\includegraphics{pictures/dnrmlcan.pdf}}
-\end{slide}
+As in the case of a continuous system, the response of a digital
+signal comprises the sum of a free response and a forced response.
+The free response is dependent on the initial conditions of a
+digital system states, and as these are taken as zero here the
+free response is also zero and will not be considered further. The
+response of a digital system with transfer function $H(z)$ to a
+digital input signal $u$ is therefore the digital output signal
+$y$ given in transform form as
+\begin{equation}\label{eq:l10e1}
+  Y(z) =H(z) U(z)
+\end{equation}
+Taking the inverse transform gives the digital system response as
+\begin{equation}\label{eq:l10e2}
+  y_k = \mathcal{Z}^{-1}Y(z) = \mathcal{Z}^{-1} \left\{H(z)
+  U(z)\right\}
+\end{equation}
+The inverse transform needed to determine the digital system
+response is obtained using the inverse z transform methods, e.g.
+polynomial division and partial fraction expansion, discussed in a
+previous lecture.
 
-In the next lecture we will consider the system response of
-systems represented by digital transfer functions.
+\subsection*{Response to Singularity Signals}
 
+The elemental singularity signals in a digital system response
+include the digital impulse signal and the digital step input.
+
+\subsubsection*{Impulse response}
+The digital impulse signal is given by
+\begin{equation}\label{eq:l10e3}
+  v = \delta = \{\delta_k\}
+\end{equation}
+where $\delta_0 = 1$ when $k = 0$, and $\delta_k = 0$ otherwise.
+Therefore the sequence for the impulse is simply
+\[\delta_k = 1,\ 0,\ 0,\ 0,\ \ldots.\]
+
+The transform of the digital impulse signal is
+\begin{equation}\label{eq:l10e4}
+  V = \Delta = \sum_{k=0}^{\infty}\delta_k z^{-k} = 1
+\end{equation}
+
+Consider the system \[ H(z) = \frac{4z^2 - 16}{z^2 - 0.25}\], the
+impulse response will be
+\[ Y(z) = H(z)\times 1 = \frac{4z^2 - 16}{z^2 - 0.25}\]
+We shall determine this response using the partial fraction
+expansion.
+\begin{eqnarray*}
+Y(z) &=& \frac{4 - 16z^{-2}}{1 - 0.25 z^{-2}}\\
+     &=& \frac{4(4 - 16z^{-2})}{4 - z^{-2}}\\
+     &=& \frac{4(2 - 4z^{-1})(2 + 4z^{-1})}{(2 - z^{-1})(2 + z^{-1})}
+\end{eqnarray*}
+Assuming a partial fraction expansion of the form \[Y(z) =
+\frac{A}{2 - z^{-1}} + \frac{B}{2 + z^{-1}} + C \]  we have
+\begin{eqnarray*}
+ \frac{4(2 - 4z^{-1})(2 + 4z^{-1})}{(2 - z^{-1})(2 + z^{-1})}
+     &=& \frac{A(2 + z^{-1}) + B(2 - z^{-1}) + C(2 - z^{-1})(2 + z^{-1})}{(2 - z^{-1})(2 + z^{-1})}\\
+     16 - 64z^{-2} &=& 2A + Az^{-1} + 2B - Bz^{-1} + 4C - Cz^{-2}
+ \end{eqnarray*}
+Gathering terms and equating coefficients
+\begin{eqnarray}
+16 &=& 2A +2B + 4C\\ 0 &=& A - B\\ -64 &=& -C
+\end{eqnarray}
+Hence
+\begin{eqnarray}
+C &=& 64\\ A &=& B\\ 16 &=& 4A + 256\\ A &=& B = -60
+\end{eqnarray}
+Thus
+\begin{eqnarray*}
+    Y(z) &=& 64 -\frac{60}{2-z^{-1}}-\frac{60}{2+z^{-1}}\\
+    &=& 64 -\frac{30}{1-1/2 z^{-1}}-\frac{30}{1+1/2 z^{-1}}\\
+     y_k& =& \left\{64\delta_k - 30\left(\frac{1}{2}\right)^k - 30
+\left(-\frac{1}{2}\right)^k\right\}\\
+ &=& \left\{4,\ 0,\ -15,\ 0,\ -3.75,\ 0,\ -0.9375,\ \ldots
+ \right\}
+\end{eqnarray*}
+
+\subsubsection*{Step response}
+The digital step signal is
+\begin{equation}\label{eq:l10e5}
+  v = \epsilon = \{\epsilon_k\}
+\end{equation}
+where $\epsilon_k = 1$ when $k \ge 0$, and $\epsilon_k = 0$
+otherwise. Therefore the sequence for the step is simply
+\[\epsilon_k = 1,\ 1,\ 1,\ 1,\ \ldots.\]
+
+The transform of the digital step signal is
+\begin{eqnarray}\label{eq:l10e6}
+  V = E &=& \sum_{k=0}^{\infty}\epsilon_k z^{-k}\\
+        &=& \sum_{k=0}^{\infty} z^{-k}\nonumber \\
+        &=& 1 + z^{-1} + z^{-2} + z^{-3} + \cdots z^{-n} + \cdots \nonumber\\
+        &=& \frac{1}{1-z^{-1}} = \frac{z}{z-1}.
+\end{eqnarray}
+The step response of the example system is
+\[ Y(z) = H(z)\times \frac{z}{z-1} = \frac{z(4z^2 - 16)}{(z-1)(z^2 - 0.25)}\]
+We shall determine this response using the partial fraction
+expansion.
+\begin{eqnarray*}
+Y(z) &=& \frac{4z^3 - 16z}{z^3 - z^2 - 0.25z + 0.25}\\
+ &=& \frac{4 - 16z^{-2}}{1 - z^{-1} - 0.25z^{-2} + 0.25z^{-3}}\\
+\end{eqnarray*}
+Earlier we showed that the result of the partial
+fraction expansion was
+\[\frac{30}{1-1/2 z^{-1}} - \frac{10}{1+1/2z^{-1}} -
+\frac{16}{1-z^{-1}}\] and the corresponding sequence is
+\[y_k = \left\{10(1/2)^k -10(-1/2)^k -16\epsilon_k\right\}.\]
 
 
 %----------------------------------------------------------------
@@ -122,5 +213,5 @@ systems represented by digital transfer functions.
 \endinput
 
 % Local Variables:
-% TeX-master: "lecture8"
+% TeX-master: "lecture02"
 % End:
