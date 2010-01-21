@@ -2,8 +2,8 @@
 
 source ../../course.tcsh
 source ../section.tcsh
-set LNO=02
-set FILEDATE="February 2010"
+set LNO=10
+set FILEDATE="11th February 2010"
 set VERSION="1.2"
 set TITLE='Digital System Models and System Response'
 set SHORT_TITLE='Models and Response' # $z would be interpreted by the shell
