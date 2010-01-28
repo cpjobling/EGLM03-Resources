@@ -286,7 +286,7 @@ The approximation shown in SLIDE\sref{slide:l11s22}) is
 is known as ``\emph{Tustin's Bilinear Transformation}''.
 
 \begin{slide}\label{slide:l11s23}
-  \heading{Example}
+  \heading{Example 1}
   If \[H(s) = \frac{a}{s+a}\] then the bilinear transformation gives a
   digital system with transfer function
   \begin{eqnarray*}
@@ -314,12 +314,23 @@ Since continuous transfer functions often have more poles than zeros, that is $n
 	See examples in the notes.
 \end{slide}
 
-\subsubsection*{Example 1}
+\subsubsection*{Example 2}
 
-$$D(s)=\frac{s+b}{s+b}$$ the $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1 - e^{-bT}z^{-1})}$$ where for $D(s)$ the DC gain is $D(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $D(z)|_{z=1}$ (from final value theorem) that is $$k\frac{(1-e^{-aT})}{(1-e^{-bT})} = \frac{a}{b}.$$ We choose $k$ so that the DC gains match, i.e. $$k=\frac{a(1-e^{-bT})}{b(1-e^{-aT})}.
+Use the Matched-Pole-Zero (MPZ) approximation to give the z-transfer function equivalent to
+$$D(s)=\frac{s+b}{s+b}.$$ Order of numerator and denominator are equal so there are no infinite zeros and by matching poles and zeros  $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1 - e^{-bT}z^{-1})}.$$ For $D(s)$ the DC gain is $D(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $D(z)|_{z=1}$ (from final value theorem) that is $$k\frac{(1-e^{-aT})}{(1-e^{-bT})} = \frac{a}{b}.$$ We choose $k$ so that the DC gains match, i.e. $$k=\frac{a(1-e^{-bT})}{b(1-e^{-aT})}.$$
 
+\subsubsection*{Example 3}
 
+Use the Matched-Pole-Zero (MPZ) approximation to give the z-transfer function equivalent to
+$$D(s)=\frac{s+b}{s(s+b)}.$$ Here, the order of the denominator is one greater than the numerator so there is $n-m = 2 - 1 = 1$ infinite zero. Placing this zero at $z = -1$ makes the MPZ transfer function $$D(z)=k\frac{(1+z^{-1})(1-e^{-aT}z^{-1})}{(1-z^{-1})(1 - e^{-bT}z^{-1})}.$$ As $D(s)$ is type 1, the DC gain is $sD(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $(1-z^{-1})D(z)|_{z=1}$ that is 
+\begin{eqnarray*}
+k\frac{(1+z^{-1})(1-e^{-aT})}{(1-e^{-bT})}|_{z=1} & = & k\frac{2(1-e^{-aT})}{(1-e^{-bT})} \\
+        & = & \frac{a}{b} 
+\end{eqnarray*}
 
+Again, we choose $k$ so that the DC gains match, i.e. $$k = \frac{a}{2b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
+
+We would implement $D(z)$ as a \emph{difference equation} defined in terms of the sampled inputs and outputs as shown in SLIDE~\ref{slides:slides:l11s25} for Example 2.
 \begin{slide}\label{slides:l11s25}
 	\heading{Implementation of an MPZ Approximation}
 	If $$\frac{Y(z)}{U(z)}=D(z)=k\frac{1-\alpha z^{-1}}{1-\beta z^{-1}}$$ then digital implementation will be
@@ -329,7 +340,7 @@ $$D(s)=\frac{s+b}{s+b}$$ the $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1 - e^{-bT}z^{-1}
 	Implementation only works if computation rate $<<$ significant dynamics of the sampled system and a small fraction of sampling time $T$.
 \end{slide}
 
-Consider SLIDE~\ref{slides:l11s25}. In the implementation, you should notice that it is actually physically impossible to sample $u(t)$, compute $y(n)$ and output $y(n)$ all at the same instant of time. Hence the equation is actually impossible to implement. However, if the computation is sufficiently fast, the delay between sampling $u(t)$ and outputting $y(t)$ will be small and can often be neglected.  A rule of thumb has computation delay $< t_r/20$ of the dominant pole. It should certainly be a small fraction of the sampling period $T$. 
+In the implementation, you should notice that it is actually physically impossible to sample $u(t)$, compute $y(n)$ and output $y(n)$ all at the same instant of time. Hence the equation is actually impossible to implement. However, if the computation is sufficiently fast, the delay between sampling $u(t)$ and outputting $y(t)$ will be small and can often be neglected.  A rule of thumb has computation delay $< t_r/20$ of the dominant pole. It should certainly be a small fraction of the sampling period $T$. 
 
 \begin{slide}\label{slides:l11s26}
 	\heading{Modified MPZ}
@@ -345,9 +356,19 @@ Consider SLIDE~\ref{slides:l11s25}. In the implementation, you should notice tha
 See notes for an example.
 \end{slide}
 
+\subsubsection*{Example 4}
 
+Re-implement Example 3 using the Modified MPZ method. If we allow an infinite zero $$D(s)=\frac{s+2}{s(s+b)}$$ becomes $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1-z^{-1})(1-e^{-bT}z^{-1})}$$ and $$k=\frac{a}{b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
+
+The implementation is now
+
+$$y(n) = (1 - e^{-bT})y(n-1)-e^{-bT}y(n-2)+k(u(n-1)-e^{-aT}u(n-2))$$
+
+and now the computation for $y(n)$ is performed only on past values of $u(n)$ and $y(n)$ and a whole sample period is available for computation. 
 
  \subsection*{Comparison of approximations}
+
+Run script \emph{comparison.m} that you will find on Blackboard. You should note that the approximations are good for frequencies below about $\omega_s/4$. If $\omega_s$ is sufficiently high, then break frequencies are accurately reproduced. MPZ and Tustin show a notch at $\omega_s/2$ because of the zero term at $1+z^{-1}$. Apart from the large difference at $\omega_s/2$, which is typically outside the working frequency, all methods have similar performance. Since MPZ is easier to calculate by hand, it is often to be preferred. However, if you have access to Matlab and the control system toolbox function \emph{c2d}, there is no need to use anything other than ZOH (which is the default) or the Tustin method.
 
 
 %----------------------------------------------------------------
