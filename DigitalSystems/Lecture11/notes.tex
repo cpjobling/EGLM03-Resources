@@ -185,12 +185,80 @@ so
 
 \section*{Other Continuous System Equivalences}
 
+\subsection*{Approximations based on numerical integration}
+
 An alternative approach is to use the relationship \[ s  = \frac{1}{T}
 \ln z. \] This cannot be substituted into a transfer function directly
 as the result is not rational, but an approximation may be used. 
 
 Three approximations, obtained from numerical integration, may be
-used. These are illustrated in \sref{slide:l11s20} to \sref{slide:l11s22}
+used. 
+
+\begin{slide}\label{slide:l11s20a}
+  \heading{Approximation by Numerical Integration}
+  \begin{itemize}
+  \item We wish to find a transfer function $T(z)$ that is equivalent to $T(s)=s$.
+  \item Let us instead seek a transfer function $D(z)$ that is equivalent to $D(s) = 1/s$.
+  \end{itemize}
+  \resizebox{300pt}{!}{\includegraphics{pictures/s-to-z.pdf}}
+\end{slide}
+
+Thus, the transfer function we are seeking will in fact be an approximation of the integral $y(t)=\int u(t) dt$. We can illustrate this as shown in SLIDE~\ref{slide:l11s20b}. If we sample the curve $u(t)$ and consider the situation at the $n$-th sampling instant, we will have $$y(nT) = \int_{0}^{nT} u(t) dt$$ We can rewrite this as $$y(nT)= \int_{0}^{nT-T} u(t) dt + \int_{nT-T}^{nT} u(t) dt$$ where the second integral term is the shaded area shown in SLIDE~\ref{slide:l11s20c}. Now if we assume that the first integral term was approximated by the digital integrator in the previous sampling instant, then $y(nT-T) = \int_{0}^{nT-T} u(t) dt$ is known, and consequently we have $$y(nT) = y(nT-T) + \int_{nT-T}^{nT} u(t) dt$$ and we only need to determine the area of the shaded region to approximate $y(nT)$.
+
+\begin{slide}\label{slide:l11s20b}
+\heading{Model of Integration}
+\begin{center}
+	\resizebox{220pt}{!}{\includegraphics{pictures/integral1.pdf}}	
+\end{center}
+\end{slide}
+
+\begin{slide}\label{slide:l11s20c}
+\heading{Sampled Model of Integration}
+\begin{center}
+	\resizebox{220pt}{!}{\includegraphics{pictures/integral2.pdf}}	
+\end{center}
+\end{slide}
+
+The most obvious approximations are illustrated in \sref{slide:l11s20d} to \sref{slide:l11s20f}. It is clear that if we are to disallow any further subdivision of the shaded area, the \emph{trapezoidal approximation} will provide the most accurate result.
+
+\begin{slide}\label{slide:l11s20d}
+\heading{Forward Rectangular Approximation}
+\begin{center}
+	\resizebox{220pt}{!}{\includegraphics{pictures/forward-rect.pdf}}	
+\end{center}
+\end{slide}
+
+\begin{slide}\label{slide:l11s20e}
+\heading{Backward Rectangular Approximation}
+\begin{center}
+	\resizebox{220pt}{!}{\includegraphics{pictures/backward-rect.pdf}}	
+\end{center}
+\end{slide}
+
+\begin{slide}\label{slide:l11s20f}
+\heading{Trapezoidal Approximation}
+\begin{center}
+	\resizebox{220pt}{!}{\includegraphics{pictures/trapezoidal.pdf}}	
+\end{center}
+\end{slide}
+
+Completing the analysis, we can show that $$y(nT)\approx y(nT-T) + \frac{T}{2}\{u(nT-T)+u(T)\}$$ which on taking z-transforms gives $$Y(z)=z^{-1}Y(z)+\frac{T}{2}\{z^{-1}U(z)+U(z)\}$$ thus 
+\begin{equation}
+\frac{Y(z)}{U(z)}=D(z)=\frac{T}{2}\{\frac{1+z^{-1}}{1-z^{-1}}\}.
+\end{equation}
+By comparison with continuous integration $Y(s)/U(s)=1/s$, this result, obtained by \emph{numerical integration} allows us to say that $$s \approx \frac{2}{T}\{\frac{1-z^{-1}}{1+z^{-1}}\}.$$ This result is summarised in SLIDE~\ref{slide:l11s22}. Similar arguments can be used to determine the forward- and backward-rectangular approximations shown in SLIDES~\ref{slide:l11s20} and \ref{slide:l11s21}.
+
+\begin{slide}\label{slide:l11s22}
+  \heading{Trapezoidal Approximation}
+  
+  \begin{eqnarray*}
+     s &=& \frac{2}{T}\, \frac{z-1}{z+1} \\
+     z &=& \frac{1 + 1/2 sT}{1 - 1/2 sT}
+  \end{eqnarray*}
+  compare expansion $$z=(1+ 1/2 sT)(1- 1/2 sT)^{-1} = 1 + sT + 1/2
+ s^2T^2 + 1/4 s^3T^3
+ + \cdots$$  with $$z = e^{sT} = 1 + sT + 1/2 s^2T^2 + 1/6 s^3T^3 + \cdots$$
+\end{slide}
 
 \begin{slide}\label{slide:l11s20}
   \heading{Forward Rectangular Approximation}
@@ -213,20 +281,9 @@ used. These are illustrated in \sref{slide:l11s20} to \sref{slide:l11s22}
  + \cdots$$  with $$z = e^{sT} = 1 + sT + 1/2 s^2T^2 + 1/6 s^3T^3 + \cdots$$
 \end{slide}
 
-\begin{slide}\label{slide:l11s22}
-  \heading{Trapezoidal Approximation}
-  
-  \begin{eqnarray*}
-     s &=& \frac{2}{T}\, \frac{z-1}{z+1} \\
-     z &=& \frac{1 + 1/2 sT}{1 - 1/2 sT}
-  \end{eqnarray*}
-  compare expansion $$z=(1+ 1/2 sT)(1- 1/2 sT)^{-1} = 1 + sT + 1/2
- s^2T^2 + 1/4 s^3T^3
- + \cdots$$  with $$z = e^{sT} = 1 + sT + 1/2 s^2T^2 + 1/6 s^3T^3 + \cdots$$
-\end{slide}
 
-The approximation shown in the last slide (\sref{slide:l11s22}) is
-best, and is known as ``\emph{Tustin's Bilinear Transformation}''.
+The approximation shown in SLIDE\sref{slide:l11s22}) is
+is known as ``\emph{Tustin's Bilinear Transformation}''.
 
 \begin{slide}\label{slide:l11s23}
   \heading{Example}
@@ -237,6 +294,54 @@ best, and is known as ``\emph{Tustin's Bilinear Transformation}''.
         &=& \frac{\left(\frac{aT/2}{1+aT/2}\right)(z+1)}{z-\left(\frac{1-aT/2}{1+aT/2}\right)}.
   \end{eqnarray*}
 \end{slide}
+
+\subsection*{Matched pole-zero approximations}
+
+Another way to obtain a digital approximation of a continuous transfer function is to use the relationship $z = e^{sT}$ to map poles and zeros of the continuous transfer function into poles and zeros in the z-transfer function. 
+
+Since continuous transfer functions often have more poles than zeros, that is $n-m$ zeros at infinity, zeros at infinity are replaced in the z-transfer function by zeros at $z = -1$ which is equivalent to half the sampling frequency $\omega_s/2$ (i.e. the highest frequency possible in the z-domain). Thus if $n-m =1$ we add $(1+z^{-1})$, if $n-m=2$, $(1+z^{-1})^2$, etc. 
+
+\begin{slide}\label{slides:l11s24}
+	\heading{Matched-Pole Zero method}
+	Idea is that all poles and zeros of continuous transfer function $D(s)$ can become poles and zeros of digital transfer function $D(z)$ if the mapping $z=e^{sT}$ is used.
+	
+	Method:
+	\begin{enumerate}
+		\item Map finite poles and zeros of $D(s)$ to poles and zeros of $D(z)$ according to $z=e^{sT}$.
+		\item Add zeros at $z=-1$ for each infinite zero in $D(s)$.
+		\item Match DC or low-frequency gain.
+	\end{enumerate}
+	See examples in the notes.
+\end{slide}
+
+
+\begin{slide}\label{slides:l11s25}
+	\heading{Implementation of an MPZ Approximation}
+	If $$\frac{Y(z)}{U(z)}=D(z)=k\frac{1-\alpha z^{-1}}{1-\beta z^{-1}}$$ then digital implementation will be
+	$$y(n)=\beta y(n-1)+k(u(n)-\alpha u(n-1))$$
+	$y(n)$ is the current calculated value, $y(n-1)$ is previous calculated value, $u(n)$ is current sample, and $u(n-1)$ is previous sample.
+	
+	Implementation only works if computation rate $<<$ significant dynamics of the sampled system and a small fraction of sampling time $T$.
+\end{slide}
+
+Consider SLIDE~\ref{slides:l11s25}. In the implementation, you should notice that it is actually physically impossible to sample $u(t)$, compute $y(n)$ and output $y(n)$ all at the same instant of time. Hence the equation is actually impossible to implement. However, if the computation is sufficiently fast, the delay between sampling $u(t)$ and outputting $y(t)$ will be small and can often be neglected.  A rule of thumb has computation delay $< t_r/20$ of the dominant pole. It should certainly be a small fraction of the sampling period $T$. 
+
+\begin{slide}\label{slides:l11s26}
+	\heading{Modified MPZ}
+	\begin{itemize}
+	\item
+	Used if constraint on computation time cannot be met.
+	
+	\item Allow a zero at infinity in $D(z)$ so that order of numerator is one less than denominator.
+	
+	\item This ensures that only past values of $u$ and $y$ appear in the implementation equation and a whole sample period is available for computation
+	
+\end{itemize}
+See notes for an example.
+\end{slide}
+
+ \subsection*{Comparison of approximations}
+
 
 %----------------------------------------------------------------
 % The end of notes
