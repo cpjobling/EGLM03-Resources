@@ -314,6 +314,11 @@ Since continuous transfer functions often have more poles than zeros, that is $n
 	See examples in the notes.
 \end{slide}
 
+\subsubsection*{Example 1}
+
+$$D(s)=\frac{s+b}{s+b}$$ the $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1 - e^{-bT}z^{-1})}$$ where for $D(s)$ the DC gain is $D(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $D(z)|_{z=1}$ (from final value theorem) that is $$k\frac{(1-e^{-aT})}{(1-e^{-bT})} = \frac{a}{b}.$$ We choose $k$ so that the DC gains match, i.e. $$k=\frac{a(1-e^{-bT})}{b(1-e^{-aT})}.
+
+
 
 \begin{slide}\label{slides:l11s25}
 	\heading{Implementation of an MPZ Approximation}
@@ -339,6 +344,8 @@ Consider SLIDE~\ref{slides:l11s25}. In the implementation, you should notice tha
 \end{itemize}
 See notes for an example.
 \end{slide}
+
+
 
  \subsection*{Comparison of approximations}
 
