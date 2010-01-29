@@ -5,6 +5,43 @@
 % ----------------------------------------------------------------
 % Notes pages *********************************************************
 % ----------------------------------------------------------------
+\section*{Introduction to State Space}
+
+\begin{slide}\label{slides:l13s1}
+\heading{Introduction to State Space}
+\begin{itemize}
+	\item \emph{Classical control system theory} is based on the Transfer Function model.
+	\item Can only be used for systems that are defined by LTI differential equations. 
+	\item \emph{Modern control systems theory} is based on a time-domain description of systems.
+	\item Convenient matrix form makes the model attractive for simulation, analysis and design using packages like Matlab.
+	\item All classical control methods seen so far also apply to state-space models.
+\end{itemize}
+\end{slide}
+
+Classical control system theory is based on the Transfer Function (TF) model. This applies only to those dynamic systems which can be described by linear time-invariant (LTI) differential equations. TF models are usually applied to Single Input Single Output (SISO) systems. Since the TF is expressed in terms of the Laplace Transform variable, $s$, analysis and design is mostly carried out in the $s$-domain or the frequency domain ($s=j\omega$).
+
+Modern control systems theory is based on a time domain description of a system in terms of a set of first order coupled differential equations in the so-called \emph{state variables} of the system.
+
+State space models can do anything that classical TF models can do.
+
+In addition state space models have allowed control theory to be extended in various directions as shown in \sref{slides:l13s2}
+
+ 
+\begin{slide}\label{slides:l13s2}
+	\heading{The Advances Enabled by State Space Models}
+\begin{enumerate}
+\item Handling Multiple Input Multiple Output (MIMO) systems.
+\item Extension to linear time-varying systems.
+\item Clarification of issues of controllability and observability.
+\item Development of powerful compensation methods via state feedback and observers.
+\item Development of optimal control theory.
+\end{enumerate}
+\end{slide}
+In this module we will restrict ourselves to the study of mostly to SISO LTI systems, but is important to note the possibility of its extension to more challenging areas.
+
+ 
+\subsection*{Construction of State Space Models}
+
 The state-space model is a form of system representation that is used
 in several engineering disciplines. It is particularly used in control
 and in signal processing.
@@ -25,11 +62,11 @@ for high order systems\footnote{Systems with large numbers of
 transfer function. State-space models are easily simulated by the
 straightforward application of numerical integration.
 
-\sref{slide:l1s1} shows a simple electrical circuit. We shall develop
+\sref{slides:l13s1} shows a simple electrical circuit. We shall develop
 this circuit into a block diagram and from the block-diagram we shall
-develop the state-space model.
+develop the state-space model. Later we will generalise this result.
 
-\begin{slide}\label{slide:l1s1}
+\begin{slide}\label{slides:l13s1}
 \heading{Example}
 \begin{center}
 \resizebox{150pt}{!}{\includegraphics{pictures/circuit.pdf}}
@@ -38,7 +75,7 @@ develop the state-space model.
 
 
 \ifslidesonly
-\begin{slide}\label{opteq:l1e1a}
+\begin{slide}\label{opteq:l13e1a}
 \heading{Equations}
 \input{frag1a}
 \end{slide}
@@ -51,30 +88,30 @@ also introduce the additional constraint that we would like the derivative terms
 $dv_{31}/dt$ and $di_1/dt$ to
 appear as inputs to integrator blocks whose outputs are therefore
 \ifslidesonly
-\begin{slide}\label{opteq:l1e1b}
+\begin{slide}\label{opteq:l13e1b}
 \heading{Equations (continued)}
 Integrator equations:
 \input{frag1b}
 \end{slide}
 \fi\input{frag1b}
 The other
-components of equations (\ref{eq:l1e1}) to (\ref{eq:l1e3}) appear as
-gain blocks and (\ref{eq:l1e4}) and (\ref{eq:l1e5}) appear as summing
+components of equations (\ref{eq:l13e1}) to (\ref{eq:l13e3}) appear as
+gain blocks and (\ref{eq:l13e4}) and (\ref{eq:l13e5}) appear as summing
 junctions.  With these constraints, the resulting block diagram is
-that shown in \sref{slide:l1s2}.
+that shown in \sref{slides:l13s2}.
 
 We can model these equations in \Matlab{}/\Simulink{}\footnote{Note
   that in \Simulink{} triangular blocks are used for gains and that the transfer function
   block $1/s$ represents the integral operator $\int$. The small
-  elliptical blocks represent input and output ports.} as shown in \sref{slide:l1s1a}.
-\begin{slide}\label{slide:l1s1a}
+  elliptical blocks represent input and output ports.} as shown in \sref{slides:l13s1a}.
+\begin{slide}\label{slides:l13s1a}
 \heading{Modelled Equations}
 \resizebox{300pt}{!}{\rotatebox{90}{\includegraphics{pictures/blocks.pdf}}}
 \end{slide}
 Combining these blocks such that the input is $u$ and the output is
 the current flowing through the inductance $i_1$\footnote{We could have used any signal as an output as we shall
-  see later.} we obtain the block diagram shown in \sref{slide:l1s2}.
-\begin{slide}\label{slide:l1s2}
+  see later.} we obtain the block diagram shown in \sref{slides:l13s2}.
+\begin{slide}\label{slides:l13s2}
 \heading{Example as a Block Diagram}
 \resizebox{300pt}{!}{\rotatebox{90}{\includegraphics{pictures/blockdiag.pdf}}}
 \end{slide}
@@ -89,8 +126,8 @@ inductor $i_1$\footnote{A state variable that can be related to a
 physical quantity is called a ``\emph{physical state
 variable}.''}. The derivatives of these state variables become the
 left-hand-side of the ``\emph{state equations}''. These equations
-have apparently already been written down as (\ref{eq:l1e1}) and
-(\ref{eq:l1e2}), but we impose an additional condition that the
+have apparently already been written down as (\ref{eq:l13e1}) and
+(\ref{eq:l13e2}), but we impose an additional condition that the
 state equations can only involve the state-variables, their
 derivatives and the system input. Thus we have to trace the path
 back through the block diagram from the inputs to the integrator
@@ -103,14 +140,14 @@ shown in \sref{slide:ss1}
 \end{slide}
 \fi\input{frag2}
 
-Equations (\ref{eq:l1e6}) and (\ref{eq:l1e7}) together form a pair
+Equations (\ref{eq:l13e8}) and (\ref{eq:l13e9}) together form a pair
 of simultaneous equations (they must both be satisfied by the
 dynamic response of the circuit voltages and currents to the
 input) and they may therefore be written in vector
 form\footnote{You should expand this matrix equation
-(\ref{eq:l1e8}) out to verify that it is equivalent to
-(\ref{eq:l1e6}) and (\ref{eq:l1e7}).}:
-\begin{equation}\label{eq:l1e8}
+(\ref{eq:l13e8}) out to verify that it is equivalent to
+(\ref{eq:l13e6}) and (\ref{eq:l13e7}).}:
+\begin{equation}\label{eq:l13e10}
 \input{frag3}
 \end{equation}
 \ifslidesonly
@@ -134,7 +171,7 @@ sentence!}
 We can generalize this result by defining general state variables
 $x_1=v_{31}$ and $x_2=i_1$. Using the notational shorthand
 $\dot{x}=dx/dt$ we then get:
-\begin{equation}\label{eq:l1e9}
+\begin{equation}\label{eq:l13e11}
   \left[\begin{array}{c}
     \dot{x_1} \\
     \dot{x_2} \\
@@ -174,8 +211,8 @@ $\dot{x}=dx/dt$ we then get:
 \fi
 In general, we will have $n$ state variables and $q$ system
 inputs. In such a case we can write down a general matrix state
-equation as developed in \sref{slide:l1s3} and \sref{slide:l1s4}.
-\begin{slide}\label{slide:l1s3}
+equation as developed in \sref{slides:l13s3} and \sref{slides:l13s4}.
+\begin{slide}\label{slides:l13s3}
 \heading{General State Equation (1)} Let us define a general
 $n$-dimensional state vector
 \[\mathbf{x} = \left[x_1,\ x_2,\ \ldots, x_n\right]^T\] Its
@@ -191,7 +228,7 @@ general vector of $q$ inputs
 \[\mathbf{u}=\left[u_1,\ u_2,\ \ldots,\ u_q\right]^T\]
 \end{slide}
 
-\begin{slide}\label{slide:l1s4}
+\begin{slide}\label{slides:l13s4}
 \heading{General State Equation (2)}
 \[
 \dot{\mathbf{x}}=\left[\begin{array}{cccc}
@@ -227,11 +264,11 @@ circuit we need to complete the state space model with a set of
 Let us consider every possible output. From the block diagram, we
 see that, in terms of the state variables and the system input
 \begin{eqnarray}
-\label{eq:l1y1} v_{31}&=&1\times v_{31} \\
+\label{eq:l13y1} v_{31}&=&1\times v_{31} \\
 i_1 & = & 1\times i_1 \\
 v_{32} &=& 1\times v_{31} - R \times i_1 \\ 
 v_{21} & = & R \times i_1 \\ 
-\label{eq:l1yn} i_2 & = & u - 1\times i_1.
+\label{eq:l13yn} i_2 & = & u - 1\times i_1.
 \end{eqnarray}
 \ifslidesonly
 \begin{slide}
@@ -304,8 +341,8 @@ Arranging the ouput equations in vector form we have:
 \fi
 In general, we can describe a system with $r$ inputs in terms of
 the generic output variables $y_1, y_2,\ldots,\ y_r$ as shown in
-\sref{slide:l1s5} and \sref{slide:l1s6}.
-\begin{slide}\label{slide:l1s5}
+\sref{slides:l13s5} and \sref{slides:l13s6}.
+\begin{slide}\label{slides:l13s5}
 \heading{General Output Equation (1)} Let us define a general
 output vector
 \[\mathbf{y} = \left[y_1,\ y_2,\ \ldots, y_r\right]^T\]
@@ -314,7 +351,7 @@ Given that some of the inputs to the system may be directly
 connected to the output, the input vector may also appear in the
 output general equation.
 \end{slide}
-\begin{slide}\label{slide:l1s6}
+\begin{slide}\label{slides:l13s6}
 \heading{General Output Equation (2)}
 \[
 \mathbf{y}=\left[\begin{array}{cccc}
@@ -338,7 +375,7 @@ $\mathbf{D}$ is the $r\times q$ ``\emph{feedforward matrix}''.
 \end{slide} This
 equation relates the states and inputs to the outputs. There are
 no dynamic terms!
-\begin{slide}\label{slide:l1s7}
+\begin{slide}\label{slides:l13s7}
 \heading{The State Space Model}
 \begin{eqnarray*}
 \dot{\mathbf{x}}&=&\mathbf{A}\mathbf{x}+\mathbf{B}\mathbf{u}\\
@@ -350,13 +387,13 @@ states and physical realistic sources. Such a system is called
 system is called ``\emph{strictly proper}''.
 \end{slide}
 A block diagram representation of the state space model is shown
-in \sref{slide:l1s8}. The block diagram of the circuit, rearranged
-to match the general model is shown in \sref{slide:l1s9}.
-\begin{slide}\label{slide:l1s8}
+in \sref{slides:l13s8}. The block diagram of the circuit, rearranged
+to match the general model is shown in \sref{slides:l13s9}.
+\begin{slide}\label{slides:l13s8}
 \heading{Block Diagram of a State-Space Model}
 \resizebox{300pt}{!}{\includegraphics{pictures/ssmodel}}
 \end{slide}
-\begin{slide}\label{slide:l1s9}
+\begin{slide}\label{slides:l13s9}
 \heading{State Space Model of the Example}
 \resizebox{300pt}{!}{\rotatebox{90}{\includegraphics{pictures/statemodel.pdf}}}
 \end{slide}
