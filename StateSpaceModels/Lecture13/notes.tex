@@ -403,55 +403,36 @@ to match the general model is shown in \sref{slides:l13s9}.
 An nth order dynamic system can be described by an nth order differential equation in one dependent variable, $y(t)$, and an input forcing function, $u(t)$, with time, $t$, as the independent variable.
 
 \begin{equation}
-\frac{d^ny}{dt^n}=f\left\(\frac{d^{n-1}y}{dt^{n-1}, \frac{d^{n-2}y}{dt^{n-2}, \ldots, \frac{dy}{dt}, y, u(t), t \right) \label{eq:l13e12}
+\frac{d^ny}{dt^n}=f\left(\frac{d^{n-1}y}{dt^{n-1}}, \frac{d^{n-2}y}{dt^{n-2}}, \ldots, \frac{dy}{dt}, y, u(t), t \right) \label{eq:l13e12}
 \end{equation}
 
 Alternatively, in a state space model extra variables, called \textbf{states}, are introduced to create an equivalent description, but this time involving only 1st order differential equations.
 
 An nth order system gives rise to a state space model consisting of n coupled 1st order differential equations (the \emph{state equations}) in terms of $n$ state variables and the input forcing function(s). In addition there are the \emph{output equations}  expressing other variables, or outputs, of interest, also in terms of the states and inputs.
 
-This formulation is completely general and makes no assumptions about the nature of $f$. In fact the only condition is that it represents a lumped parameter system rather than a distributed parameter system. The need to solve such equations by simulation is the basis of the integral models we introduced in Lecture 2.
+You should note that the formulation used in (\ref{eq:l13e12}) is completely general and makes no assumptions about the nature of $f$. In fact the only condition, is that it represents a lumped parameter system rather than a distributed parameter system. The need to solve such equations by simulation is the basis of the integral models we introduced in Lecture 2.
  
-\subsection*{Example 2}
+\subsubsection*{Example 2}
 
 Derive a state space model for the system described by the differential equation:
  
-Introducing state variables:
- 
-Then the state equations are:
- 
-and the output equation is:
- 
+$$\frac{d^2y}{dt^2}+3\frac{dy}{dt}+2y=u(t)$$
 
+Introducing state variables $x_1=y$ and $x_2=dy/dt$ then the state equations are:
+$$\frac{dx_1}{dt}=\frac{dy}{dt}=x_2$$
+$$\frac{dx_2}{dt}=\frac{d^2y}{dt^2}=-2x_1 - 3x_2 + u$$
+and the output equation is:
+$$y=x_1.$$
+ 
 The states are often chosen to have a direct physical significance such as:
 
-Electrical Systems
- The charge or voltage on a capacitor or the current in an inductor.
-
-Mechanical Systems
-The force in springs or the velocity of mass or angular velocity of moments of inertia.
- 
-eg.  Find a state space model for the electrical circuit below.
-
-
-
-
-
-Using the convention     choose the states as:   
-Then, from the circuit:
-    1)
-We must express the rhs’s in terms of the states and the input forcing function (voltage source, u)
-
- 
+\begin{itemize}
+	\item \emph{Electrical Systems} -- the charge or voltage on a capacitor or the current in an inductor.
+    \item \emph{Mechanical Systems} -- the force in springs or the velocity of mass or angular velocity of moments of inertia.
+\end{itemize}
  
 
-Substituting into the rhs’s of equn 1) gives,
-The state equations:
- 
-and the output equations are:
- 
- 
-The nature of states
+\subsection*{The nature of states}
 
 •	The state equations can be solved uniquely when the input functions are given together with the initial values of all the states.
 •	The solutions for the states are substituted into the output equations to obtain the solutions for the other variables in the system.
