@@ -366,9 +366,6 @@ $$y(n) = (1 - e^{-bT})y(n-1)-e^{-bT}y(n-2)+k(u(n-1)-e^{-aT}u(n-2))$$
 
 and now the computation for $y(n)$ is performed only on past values of $u(n)$ and $y(n)$ and a whole sample period is available for computation. 
 
- \subsection*{Comparison of approximations}
-
-Run script \emph{comparison.m} that you will find on Blackboard. You should note that the approximations are good for frequencies below about $\omega_s/4$. If $\omega_s$ is sufficiently high, then break frequencies are accurately reproduced. MPZ and Tustin show a notch at $\omega_s/2$ because of the zero term at $1+z^{-1}$. Apart from the large difference at $\omega_s/2$, which is typically outside the working frequency, all methods have similar performance. Since MPZ is easier to calculate by hand, it is often to be preferred. However, if you have access to Matlab and the control system toolbox function \emph{c2d}, there is no need to use anything other than ZOH (which is the default) or the Tustin method.
 
 
 %----------------------------------------------------------------

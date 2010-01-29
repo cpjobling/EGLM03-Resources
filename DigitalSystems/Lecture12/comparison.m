@@ -11,7 +11,7 @@ dsz=c2d(ds, Ts, 'zoh')
 % Tustin equivalent
 dst = c2d(ds, Ts, 'tustin')
 % Matched pole-zero
-dsm = c2d(ds, Ts, 'mpz')
+dsm = c2d(ds, Ts, 'matched')
 % Make Bode plot
 bode(ds,dsz,'*',dst,'+',dsm,'o')
 grid
@@ -27,7 +27,7 @@ dsz=c2d(ds, Ts, 'zoh')
 % Tustin equivalent
 dst = c2d(ds, Ts, 'tustin')
 % Matched pole-zero
-dsm = c2d(ds, Ts, 'mpz')
+dsm = c2d(ds, Ts, 'matched')
 % Make Bode plot
 bode(ds,dsz,'*',dst,'+',dsm,'o')
 grid
