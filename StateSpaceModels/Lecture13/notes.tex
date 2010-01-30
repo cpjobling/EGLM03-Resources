@@ -67,7 +67,7 @@ this circuit into a block diagram and from the block-diagram we shall
 develop the state-space model. Later we will generalise this result.
 
 \begin{slide}\label{slides:l13s1}
-\heading{Example}
+\heading{Example 1}
 \begin{center}
 \resizebox{150pt}{!}{\includegraphics{pictures/circuit.pdf}}
 \end{center}
@@ -209,11 +209,159 @@ $\dot{x}=dx/dt$ we then get:
 \end{displaymath}
 \end{slide}
 \fi
+
+\subsection*{General State Space Models of Dynamic Systems}
+
+An $n^\mathrm{th}$ order dynamic system can be described by an $n^\mathrm{th}$ order differential equation in one dependent variable, $y(t)$, and an input forcing function, $u(t)$, with time, $t$, as the independent variable.
+
+\begin{equation}
+\frac{d^ny}{dt^n}=f\left(\frac{d^{n-1}y}{dt^{n-1}}, \frac{d^{n-2}y}{dt^{n-2}}, \ldots, \frac{dx_2}{dt}, \frac{dy}{dt}, y, u(t), t \right) \label{eq:l13e12}
+\end{equation}
+\ifslidesonly
+\begin{slide}
+	\heading{General State Space Models (1)}
+	\begin{equation}
+	\frac{d^ny}{dt^n}=f\left(\frac{d^{n-1}y}{dt^{n-1}}, \frac{d^{n-2}y}{dt^{n-2}}, \ldots, \frac{dx_2}{dt}, \frac{dy}{dt}, y, u(t), t \right) \nonumber
+	\end{equation}
+\end{slide}
+\fi
+Alternatively, in a state space model extra variables, called \textbf{states}, are introduced to create an equivalent description, but this time involving only 1st order differential equations.
+
+\begin{eqnarray}
+	x_1 & = & y \label{eq:l13e13a}\\
+	\frac{dx_1}{dt} & = & \frac{dy}{dt} = x_2  \label{eq:l13e13b} \\
+    \frac{dx_2}{dt} & = & \frac{d^2y}{dt^2} = x_3   \\
+	 \vdots      \nonumber \\
+	\frac{dx_{n-2}}{dt} & = & \frac{d^{n-2}y}{dt^{n-2}} = x_{n-1}   \\
+	\frac{dx_{n-1}}{dt} & = & \frac{d^{n-1}y}{dt^{n-1}} = x_n   \\
+    \frac{dx_n}{dt} &=& \frac{d^{n}y}{dt^{n}} =  f\left(x_n, x_{n-1}, \ldots, x_3, x_2, x_1, u(t), t \right) \label{eq:l13e13c}
+\end{eqnarray}
+\ifslidesonly
+\begin{slide}
+	\heading{General State Space Models (2)}
+	\begin{eqnarray}
+		x_1 & = & y \\
+		\frac{dx_1}{dt} & = & \frac{dy}{dt} = x_2  \\
+	    \frac{dx_2}{dt} & = & \frac{d^2y}{dt^2} = x_3   \\
+		 \vdots      \nonumber \\
+		\frac{dx_{n-2}}{dt} & = & \frac{d^{n-2}y}{dt^{n-2}} = x_{n-1}   \\
+		\frac{dx_{n-1}}{dt} & = & \frac{d^{n-1}y}{dt^{n-1}} = x_n   \\
+	    \frac{dx_n}{dt} &=& \frac{d^{n}y}{dt^{n}} =  f\left(x_n, x_{n-1}, \ldots, x_3, x_2, x_1, u(t), t \right) 
+	\end{eqnarray}
+\end{slide}
+\fi
+An nth order system gives rise to a state space model consisting of n coupled 1st order differential equations (the \emph{state equations} (\ref{eq:l13e13b})--(\ref{eq:l13e13c})) in terms of $n$ state variables and the input forcing function(s) . In addition there are the \emph{output equations} (\ref{eq:l13e13a}) expressing other variables, or outputs, of interest, also in terms of the states and inputs.
+
+You should note that the formulation used in the differential equation (\ref{eq:l13e12}) and its equivalent state equations (\ref{eq:l13e13a})--(\ref{eq:l13e13c}) is completely general and makes no assumptions about the nature of $f$. In fact the only condition, is that it represents a lumped parameter system rather than a distributed parameter system. The need to solve such equations by simulation is the basis of the integral models we introduced in Lecture 2.
+ 
+\subsubsection*{Example 2}
+
+Derive a state space model for the system described by the differential equation:
+ 
+$$\frac{d^2y}{dt^2}+3\frac{dy}{dt}+2y=u(t)$$
+\ifslidesonly
+\begin{slide}
+	\heading{Example 2}
+	
+	Derive a state space model for the system described by the differential equation:
+
+	$$\frac{d^2y}{dt^2}+3\frac{dy}{dt}+2y=u(t)$$
+\end{slide}
+\fi
+Introducing state variables $x_1=y$ and $x_2=dy/dt$ then the state equations are:
+$$\frac{dx_1}{dt}=\frac{dy}{dt}=x_2$$
+$$\frac{dx_2}{dt}=\frac{d^2y}{dt^2}=-2x_1 - 3x_2 + u$$
+and the output equation is:
+$$y=x_1.$$
+ 
+\begin{slide}
+\heading{Physical states}
+The states are often chosen to have a direct physical significance such as:
+
+\begin{itemize}
+	\item \emph{Electrical Systems} -- the charge or voltage on a capacitor or the current in an inductor.
+    \item \emph{Mechanical Systems} -- the force in springs or the velocity of mass or angular velocity of moments of inertia.
+    \item \emph{Aerospace Systems} -- forward velocity, thrust, pitch and pitch rate, yaw and yaw rate, position and velocity of control surfaces.
+    \item \emph{Chemical Process Plant} -- chemical composition, levels, temperatures, pressures and flows.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+	\heading{Example 3}
+	Derive the state equations for the Sprig-Mass-Damper system shown in the figure.
+	\begin{center}
+		\resizebox{100pt}{!}{\includegraphics{pictures/smd.pdf}}
+	\end{center}
+	(See lecture 2)
+\end{slide}
+
+For this system, summing the forces in the direction $x$ we have
+
+$$F = m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx$$
+
+If we chose the position of the mass $x$ and it's velocity $dx/dt$ to be the states, and let the force $F$ be the system input, then $x_1 = x$, $x_2 = dx/dt$ and $u=F$ and the state equations are:
+
+\begin{eqnarray*}
+	\frac{dx_1}{dt} & = & x_2 \\
+	\frac{dx_2}{dt} & = & -\frac{k}{m} x_1 -\frac{b}{m} x_2 + \frac{1}{m} u
+\end{eqnarray*}
+
+You should construct the Simulink model represented by these equations and compare the results with those shown in Lecture 2.
+
+\subsection*{The nature of the states}
+
+\begin{itemize}
+	\item The state equations can be solved uniquely when the input functions are given together with the initial values of all the states.
+	\item The solutions for the states are substituted into the output equations to obtain the solutions for the other variables in the system.
+	\item In the above examples the states are physical quantities associated with energy storage in the system. The energy stored in a inductor is $E_L=Li_L^2/2$, and the energy stored in a capacitor is $E_C=CV_C^2/2$. 
+	\item Similarly for mechanical systems the velocity of a mass relates to its kinetic energy and the force in a spring relates to its elastic potential energy.
+	\item The states encode the configuration of the system, or its whole past history.
+	\item The choice of states is not unique, but they must be chosen such that the configuration of the system can be unambiguously and completely determined from them.
+\end{itemize}
+\ifslidesonly
+\begin{slide}
+	\heading{State Properties}
+	\begin{itemize}
+	\item The state equations can be solved for a given input function and initial conditions.
+	\item Other variables in the system can be determined from the state solutions and the output equations.
+	\item Physical states are associated with energy storage.
+	\item The states encode a system's whole past history.
+	\item The choice of states is not unique.
+\end{itemize}
+\end{slide}
+\fi
+ 
+\subsection*{State Space Models for Linear Systems}
+
+Linear systems are the most important ones for control system analysis and design as the best methods and techniques apply to these.
+
+Non-linear systems are often approximated about a suitable operating point by the nearest equivalent linear system allowing linear techniques to be used in the design of a suitable controller.
+
+In the case of linear systems, each state equation expresses the derivative of one of the states as a linear function of the states and inputs. The output equations also express the output variables linearly. As a consequence the natural mathematical notation to use is that of vectors and matrices.
+Thus state, input and output variables are grouped in column vectors and are multiplied by matrices in the state and output equations.
+
+For linear time varying systems, the matrices have elements which are functions of time, but for time invariant systems all the matrices are constant.
+\ifslidesonly
+\begin{slide}
+	\heading{State Space Models for Linear Systems}
+	\begin{itemize}
+	 \item Linear systems most important for control systems analysis and design.
+	 \item Best control methods and techniques apply to linear systems.
+	 \item Nonlinear systems can often be \emph{linearized} around a given operating point allowing linear methods to be used.
+	 \item Linear models can be modelled with matrix equations with makes them attractive to tools like Matlab.
+	 \item Linear time-varying systems have matrix elements which are functions of time.
+	 \item Linear time invariant systems have constant matrix elements.
+  \end{itemize}
+\end{slide}
+\fi
+
+\subsubsection*{A vector/matrix notation}
+
 In general, we will have $n$ state variables and $q$ system
-inputs. In such a case we can write down a general matrix state
+inputs. In such a case we can write down a matrix state
 equation as developed in \sref{slides:l13s3} and \sref{slides:l13s4}.
 \begin{slide}\label{slides:l13s3}
-\heading{General State Equation (1)} Let us define a general
+\heading{Matrix State Equation (1)} Let us define a general
 $n$-dimensional state vector
 \[\mathbf{x} = \left[x_1,\ x_2,\ \ldots, x_n\right]^T\] Its
 derivative is
@@ -229,7 +377,7 @@ general vector of $q$ inputs
 \end{slide}
 
 \begin{slide}\label{slides:l13s4}
-\heading{General State Equation (2)}
+\heading{Matrix State Equation (2)}
 \[
 \dot{\mathbf{x}}=\left[\begin{array}{cccc}
   a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -253,8 +401,8 @@ $\mathbf{B}$ is the $n\times q$ ``\emph{input matrix}''.
 
 
 The state equations allow us to describe the internal behaviour of
-the system when subjected to stimuli from the inputs. In the
-example, we need nothing more if we wish to describe the way that
+the system when subjected to stimuli from the inputs. In 
+example 1, we need nothing more if we wish to describe the way that
 the capacitor voltage $v_{31}$ and inductor current $i_1$ change
 with time under the influence of the input current $u$. However,
 if we wish to describe the behaviour of the other variables in the
@@ -312,7 +460,7 @@ Arranging these equations in vector form we have:
 \ifslidesonly
 \begin{slide}
 \heading{Vectorised form...}
-Arranging the ouput equations in vector form we have:
+Arranging the output equations in vector form we have:
 \begin{displaymath}
 \left[\begin{array}{c}
   v_{31} \\
@@ -394,66 +542,11 @@ to match the general model is shown in \sref{slides:l13s9}.
 \resizebox{300pt}{!}{\includegraphics{pictures/ssmodel}}
 \end{slide}
 \begin{slide}\label{slides:l13s9}
-\heading{State Space Model of the Example}
+\heading{State Space Model of Example 1}
 \resizebox{300pt}{!}{\rotatebox{90}{\includegraphics{pictures/statemodel.pdf}}}
 \end{slide}
 
-\subsection*{State Space Models of General Systems}
 
-An nth order dynamic system can be described by an nth order differential equation in one dependent variable, $y(t)$, and an input forcing function, $u(t)$, with time, $t$, as the independent variable.
-
-\begin{equation}
-\frac{d^ny}{dt^n}=f\left(\frac{d^{n-1}y}{dt^{n-1}}, \frac{d^{n-2}y}{dt^{n-2}}, \ldots, \frac{dy}{dt}, y, u(t), t \right) \label{eq:l13e12}
-\end{equation}
-
-Alternatively, in a state space model extra variables, called \textbf{states}, are introduced to create an equivalent description, but this time involving only 1st order differential equations.
-
-An nth order system gives rise to a state space model consisting of n coupled 1st order differential equations (the \emph{state equations}) in terms of $n$ state variables and the input forcing function(s). In addition there are the \emph{output equations}  expressing other variables, or outputs, of interest, also in terms of the states and inputs.
-
-You should note that the formulation used in (\ref{eq:l13e12}) is completely general and makes no assumptions about the nature of $f$. In fact the only condition, is that it represents a lumped parameter system rather than a distributed parameter system. The need to solve such equations by simulation is the basis of the integral models we introduced in Lecture 2.
- 
-\subsubsection*{Example 2}
-
-Derive a state space model for the system described by the differential equation:
- 
-$$\frac{d^2y}{dt^2}+3\frac{dy}{dt}+2y=u(t)$$
-
-Introducing state variables $x_1=y$ and $x_2=dy/dt$ then the state equations are:
-$$\frac{dx_1}{dt}=\frac{dy}{dt}=x_2$$
-$$\frac{dx_2}{dt}=\frac{d^2y}{dt^2}=-2x_1 - 3x_2 + u$$
-and the output equation is:
-$$y=x_1.$$
- 
-The states are often chosen to have a direct physical significance such as:
-
-\begin{itemize}
-	\item \emph{Electrical Systems} -- the charge or voltage on a capacitor or the current in an inductor.
-    \item \emph{Mechanical Systems} -- the force in springs or the velocity of mass or angular velocity of moments of inertia.
-\end{itemize}
- 
-
-\subsection*{The nature of states}
-
-•	The state equations can be solved uniquely when the input functions are given together with the initial values of all the states.
-•	The solutions for the states are substituted into the output equations to obtain the solutions for the other variables in the system.
-•	In the above examples the states are physical quantities associated with energy storage in the system. The energy stored in a inductor is,
- 
-   and the energy stored in a capacitor is,
- .
-•	Similarly for mechanical systems the velocity of a mass relates to its kinetic energy and the force in a spring relates to its elastic potential energy.
-•	The states encode the configuration of the system, or its whole past history.
-•	The choice of states is not unique, but they must be chosen such that the configuration of the system can be unambiguously and completely determined from them.
- 
-State Space Models for Linear Systems
-
-Linear systems are the most important ones for control system analysis and design as the best methods and techniques apply to these.
-
-Non-linear systems are often approximated about a suitable operating point by the nearest equivalent linear system allowing linear techniques to be used in the design of a suitable controller.
-
-In the case of linear systems, each state equation expresses the derivative of one of the states as a linear function of the states and inputs. The output equations also express the output variables linearly. As a consequence the natural mathematical notation to use is that of vectors and matrices.
-Thus state, input and output variables are grouped in column vectors and are multiplied by matrices in the state and output equations.
-
-For linear time varying systems, the matrices have elements which are functions of time, but for time invariant systems all the matrices are constant.
 
 
 %----------------------------------------------------------------
