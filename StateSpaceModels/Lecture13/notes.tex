@@ -556,8 +556,9 @@ to match the general model is shown in \sref{slides:l13s9}.
 	B = [1/Cap; 0];
 	C = [1 0; 0 1; 1 -R; 0 R; 0 -1];
 	D = [0; 0; 0; 0; 1];
-	circ_ss = ss(A, B, C, D, ...
-	   'statename',{'v31' 'i1'}, 'inputname', 'u', 'outputname', {'v31' 'i1' 'v32' 'v21' 'i2'});	
+	circ_ss = ss(A, B, C, D,...
+	   'statename',{'v31' 'i1'}, 'inputname','u',...
+	   'outputname', {'v31' 'i1' 'v32' 'v21' 'i2'});	
 	\end{verbatim}
 	Once you have the state-space model, all the analysis techniques seen so far are open to you.
 \end{slide}
