@@ -2,8 +2,8 @@
 
 source ../../course.tcsh
 source ../section.tcsh
-set LNO=03
-set FILEDATE="14 October 1999"
+set LNO=15
+set FILEDATE="12 February 2010"
 set VERSION="1.1"
 set TITLE='Time Response for State Space Models'
 set SHORT_TITLE='Time Response' # $z would be interpreted by the shell
