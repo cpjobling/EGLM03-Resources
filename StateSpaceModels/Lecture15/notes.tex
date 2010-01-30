@@ -350,6 +350,15 @@ transfer function! What does this tell you about the transfer
 function as a representation of a system?
 \end{enumerate}
 
+\begin{slide}
+	\heading{Simulation State Space Models in Matlab}
+\begin{itemize}
+	\item The functions \emph{step} and \emph{impulse} will produce step impulse responses of a system with zero initial conditions.
+	\item The function \emph{lsim} can be used to determine the state space response to arbitrary inputs.
+	\item If you need to simulate a system with arbitrary inputs and predefined initial conditions, you should use the \emph{Linear Simulation Tool} which is opened when you execute \textt{lsim(model)}.
+	Visit the Matlab Control Systems Toolbox help pages to find out more.
+\end{itemize}
+
 %----------------------------------------------------------------
 % The end of slides
 % ----------------------------------------------------------------
