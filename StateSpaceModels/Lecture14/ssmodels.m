@@ -14,3 +14,5 @@ circ_ss
 step(circ_ss)
 %% Convert to transfer function matrix
 circ_tf=tf(circ_ss)
+%% Determine poles and zeros
+circ_zpk=zpk(circ_ss)

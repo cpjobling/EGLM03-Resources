@@ -19,6 +19,20 @@ transfer function, then it is convenient to transform the model
 description into one of a small number of ``standard'' or
 \emph{canonical forms}.
 
+\begin{slide}
+	\heading{Canonical Forms}
+	Standard forms for state space models derived from differential equations or transfer function models.
+	\begin{itemize}
+		\item Companion form
+		\item Controller canonical form
+		\item Observer canonical form
+		\item Normal form
+		\item Jordan forms
+	\end{itemize}
+\end{slide}
+
+
+
 \section*{The Companion Form}
 These notes describe how a general differential equation may be
 converted into a state-space model.
@@ -273,13 +287,6 @@ The companion form of the state matrices are
 % ----------------------------------------------------------------
 % Notes pages *********************************************************
 % ----------------------------------------------------------------
-
-In the previous lecture we examined the companion form of a
-state-space model which allows the direct transformation of a transfer
-function into state space form. In this lecture we examine three
-other ``canonical forms'' the \emph{controller canonical form},
-the \emph{observer canonical form} and the ``\emph{normal form}''. 
-
 
 \section*{Controller Canonical Form}
 If one defines a transfer function in \Matlab{}, e.g. as shown in
@@ -695,6 +702,43 @@ and the normal observable canonical form is:
   1
 \end{array}\right] u\\ y &=& \left[4/5,\ 2/3,\ 8/15\right] \mathbf{x} + d u
 \end{eqnarray*}
+
+\subsection*{Time Response from Normal Form}
+
+Notice that in the case of a system defined in \emph{normal form}, because the $\mathbf{A}$ matrix is diagonal, the state equations are decoupled from each other and can be solved independently. This canonical form is useful for the solution of the state equations. Thus given initial states $x_1(t)=x_{10}$, $x_2(t)=x_{20}$, etc at $t=0$ and taking Laplace transforms of the first row of the state equations derived above, the solutions are:
+\begin{eqnarray*}
+ sX_1 (s) - x_{10}  & = & p_1 X_1 (s) + r_1 U(s) \\ 
+ (s - p_1 )X_1 (s) & = & x_{10}  + r_1 U(s) \\ 
+ X_1 (s) & = & \frac{{x_{10} }}{{s - p_1 }} + \frac{{r_1 }}{{s - p_1 }}U(s)
+\end{eqnarray*}
+Taking inverse Laplace transforms:
+\[ x_1 = x_{10}e^{p_1t}+r_1\int_0^tu(t')e^{p_1(t-t')}dt' \]
+and similarly for the other states.
+\ifslidesonly
+\begin{slide}
+	\heading{Time response from Normal Form}
+	Given initial states $x_1(t)=x_{10}$, $x_2(t)=x_{20}$, etc at $t=0$
+	\begin{eqnarray*}
+	 sX_1 (s) - x_{10}  & = & p_1 X_1 (s) + r_1 U(s) \\ 
+	 (s - p_1 )X_1 (s) & = & x_{10}  + r_1 U(s) \\ 
+	 X_1 (s) & = & \frac{{x_{10} }}{{s - p_1 }} + \frac{{r_1 }}{{s - p_1 }}U(s)
+	\end{eqnarray*}
+	Taking inverse Laplace transforms:
+	\[ x_1 = x_{10}e^{p_1t}+r_1\int_0^tu(t')e^{p_1(t-t')}dt' \]
+	Repeated for the other states.
+\end{slide}
+\fi
+
+These are then combined through the output equation to give the solution for $y$:
+\input{frag1}
+\ifslidesonly
+\begin{slide}
+	\heading{System Response}
+	Combine state responses through the output equation
+	\input{frag1}
+\end{slide}
+\fi
+
 \subsection*{System with Repeated Poles}
 
 If the transfer function has repeated poles, then the form of the
