@@ -1,0 +1,15 @@
+Suppose we have a state space model with states $\mathbf{x}$ and matrices $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$ and $\mathbf{D}$ and we wish to transform to a model with states $\mathbf{w}$ where $\mathbf{x}=\mathbf{Tw}$. $\mathbf{T}$ is the \emph{transformation matrix} for the states.
+
+\begin{eqnarray*}
+	\frac{d\mathbf{x}}{dt} & = & \mathbf{A}\mathbf{x}+\mathbf{B}\mathbf{u} \\
+	\frac{d\mathbf{Tw}}{dt} & = & \mathbf{ATw}+\mathbf{B}\mathbf{u} \\
+	\mathbf{T}\frac{d\mathbf{w}}{dt} & = & \mathbf{ATw}+\mathbf{B}\mathbf{u} \\
+	\frac{d\mathbf{w}}{dt} & = & \mathbf{T}^{-1}\mathbf{ATw}+\mathbf{T}^{-1}\mathbf{B}\mathbf{u} \\	
+\end{eqnarray*}
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

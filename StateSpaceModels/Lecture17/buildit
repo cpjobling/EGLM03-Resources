@@ -1,0 +1,12 @@
+#!/bin/tcsh
+
+source ../../course.tcsh
+source ../section.tcsh
+set LNO=17
+set FILEDATE="15 February 2010"
+set VERSION="1.0"
+set TITLE='Transformation of States and the Solution of the State Equations'
+set SHORT_TITLE='State Transformation and SS Solutions' # $z would be interpreted by the shell
+set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"
+
+source ../../process.tcsh
