@@ -712,7 +712,7 @@ Notice that in the case of a system defined in \emph{normal form}, because the $
  X_1 (s) & = & \frac{{x_{10} }}{{s - p_1 }} + \frac{{r_1 }}{{s - p_1 }}U(s)
 \end{eqnarray*}
 Taking inverse Laplace transforms:
-\[ x_1 = x_{10}e^{p_1t}+r_1\int_0^tu(t')e^{p_1(t-t')}dt' \]
+\[ x_1 = x_{10}e^{p_1t}+r_1\int_0^tu(\tau)e^{p_1(t-\tau)}d\tau \]
 and similarly for the other states.
 \ifslidesonly
 \begin{slide}
@@ -724,7 +724,7 @@ and similarly for the other states.
 	 X_1 (s) & = & \frac{{x_{10} }}{{s - p_1 }} + \frac{{r_1 }}{{s - p_1 }}U(s)
 	\end{eqnarray*}
 	Taking inverse Laplace transforms:
-	\[ x_1 = x_{10}e^{p_1t}+r_1\int_0^tu(t')e^{p_1(t-t')}dt' \]
+	\[ x_1 = x_{10}e^{p_1t}+r_1\int_0^tu(\tau)e^{p_1(t-\tau)}d\tau \]
 	Repeated for the other states.
 \end{slide}
 \fi
