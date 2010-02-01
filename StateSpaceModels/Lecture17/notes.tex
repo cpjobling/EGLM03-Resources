@@ -780,7 +780,9 @@ The eigenvalues of the state matrix are the roots of:
 \]
 Thus $\lambda_1=-1$ and $\lambda_2=-2$.
 
-\emph{Next, find the transformation matrix}: The eigenvectors are the solutions of $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{x}_i$ for $i=1,2$. For $i=1$
+\emph{Next, find the transformation matrix}: The eigenvectors are the solutions of $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{x}_i$ for $i=1,2$. 
+
+For $i=1$
 % MathType!MTEF!2!1!+-
 % faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
 % 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
@@ -815,9 +817,9 @@ Thus $\lambda_1=-1$ and $\lambda_2=-2$.
   - 3x_1  - 2x_2  & = &  - x_1  \\ 
  x_1  + 0x_2  & = &  - x_2  \\ 
  \end{eqnarray*}
-These equations are linearly dependent, and if we let $x_1 =1$ then $x_2 = -1$ giving $\mathbf{x}_1=[1 -1]^T$.
+These equations are linearly dependent, and if we let $x_1 =1$ then $x_2 = -1$ giving $\mathbf{x}_1=[1,\ -1]^T$.
 
-Similarly, for $i=2$ we obtain $\mathbf{x}_2=[1 0.5]^T$. 
+Similarly, for $i=2$ we obtain $\mathbf{x}_2=[1, -0.5]^T$. 
 
 Then
 % MathType!MTEF!2!1!+-
@@ -829,17 +831,18 @@ Then
 % WabeqadaaabaGaaCiEamaaBaaaleaacaaIXaaabeaaaOqaaiabl6Ui
 % nbqaaiaahIhadaWgaaWcbaGaaGOmaaqabaaaaaGccaGLBbGaayzxaa
 % Gaeyypa0ZaamWaaeaafaWabeGacaaabaGaaGymaaqaaiaaigdaaeaa
-% cqGHsislcaaIXaaabaGaaGimaiaac6cacaaI1aaaaaGaay5waiaaw2
-% faaaqaaiaahsfadaahaaWcbeqaaiabgkHiTiaaigdaaaGccqGH9aqp
-% daWadaqaauaadeqaciaaaeaacqGHsislcaaIXaaabaGaeyOeI0IaaG
-% OmaaqaaiaaikdaaeaacaaIYaaaaaGaay5waiaaw2faaaaaaa!4AB4!
+% cqGHsislcaaIXaaabaGaeyOeI0IaaGimaiaac6cacaaI1aaaaaGaay
+% 5waiaaw2faaaqaaiaahsfadaahaaWcbeqaaiabgkHiTiaaigdaaaGc
+% cqGH9aqpdaWadaqaauaadeqaciaaaeaacqGHsislcaaIXaaabaGaey
+% OeI0IaaGOmaaqaaiaaikdaaeaacaaIYaaaaaGaay5waiaaw2faaaaa
+% aa!4BA1!
 \[
 \begin{array}{l}
  {\bf{T}} = \left[ {\begin{array}{*{20}c}
    {{\bf{x}}_1 } &  \vdots  & {{\bf{x}}_2 }  \\
 \end{array}} \right] = \left[ {\begin{array}{*{20}c}
    1 & 1  \\
-   { - 1} & {0.5}  \\
+   { - 1} & { - 0.5}  \\
 \end{array}} \right] \\ 
  {\bf{T}}^{ - 1}  = \left[ {\begin{array}{*{20}c}
    { - 1} & { - 2}  \\
@@ -847,6 +850,7 @@ Then
 \end{array}} \right] \\ 
  \end{array}
 \]
+
 
 
 \emph{Finally solve the state equations of the transformed system} 
