@@ -16,62 +16,52 @@ In mathematics, the Taylor series is a representation of a function as an infini
 
 We use Taylor series to approximate general functions, and here we adapt the Taylor series to discover the form of a function of a matrix.
  
-If a function $f(t)$ has Taylor series:
-\[
-f(t)=f_0 + f_1t + f_2t^2 + \cdots + f_nt^n + \cdots
-\]
-Then the corresponding matrix function is defined as:
-\[
-f(\mathbf{A}t)=f_0\mathbf{I} + f_1\mathbf{A}t + f_2\mathbf{A}^2t^2 + \cdots + f_n\mathbf{A}^nt^n + \cdots
-\]
- 
-
-Given the transformation $\mathbf{T}^{-1}\mathbf{AT}=\mathbf{\Lambda}$:
-\begin{eqnarray*}
-	\mathbf{A}t & = & (\mathbf{T\Lambda T}^{-1}) \\
-	\mathbf{A}^nt^n & = & (\mathbf{T\Lambda T}^{-1})(\mathbf{T\Lambda T}^{-1})\ldots(\mathbf{T\Lambda T}^{-1})t^n \\
-	                & = & \mathbf{T\Lambda T}^{-1}\mathbf{T\Lambda T}^{-1}\ldots\mathbf{T\Lambda T}^{-1}t^n \\
-	\mathbf{A}^nt^n & = & \mathbf{T\Lambda}\mathbf{I}\mathbf{\Lambda I}\ldots\mathbf{I\Lambda T}^{-1}t^n \\
-	\               & = & \mathbf{T\Lambda}^n\mathbf{T}^{-1}t^n \\
-\end{eqnarray*}
+\input{frag1}
+\ifslidesonly
+\begin{slide}
+	\heading{Taylor series}
+   \input{frag1}
+\end{slide}
+\fi
 
  
-The matrix function becomes:
-\begin{eqnarray*}
-	f(\mathbf{A}t) & = & f_0\mathbf{TIT}^{-1} + f_1\mathbf{T\Lambda T}^{-1}t + f_2\mathbf{T\Lambda}^2\mathbf{T}^{-1}t^2 + \cdots + f_n\mathbf{T\Lambda}^n\mathbf{T}^{-1}t^n + \cdots \\
-	f(\mathbf{A}t) & = & \mathbf{T}\left(f_0\mathbf{I} + f_1\mathbf{\Lambda}t + f_2\mathbf{\Lambda}^2t^2 + \cdots + f_n\mathbf{\Lambda}^nt^n + \cdots \right)\mathbf{T}^{-1}\\
-	               & = & \mathbf{T}f(\mathbf{\Lambda}t)\mathbf{T}^{-1}
-\end{eqnarray*}
- 
-The term inside the brackets on the rhs is a diagonal matrix and the $i^\mathrm{th}$ diagonal element is:
-\[
-f_0+f_1\lambda_it + f_2\lambda_i^2t^2 + \cdots + f_n\lambda_i^nt^ + \cdots
-\]
-From the Taylor series this must be $f(\lambda_i t)$:
-\[
-f(\mathbf{A} t)=\mathbf{T} f(\mathbf{\Lambda} t) \mathbf{T}^{-1}
-\]   
-where $f(\mathbf{\Lambda} t)=\mathrm{diag}\left(f(\lambda_i t)\right)$.
- 
-In particular, the solution of:
-\[
-\frac{d\mathbf{x}}{dt}=\mathbf{Ax}
-\]
-given $\mathbf{x}=\mathbf{x}_0$ at $t=0$ is:
-\[
-\mathbf{x}=e^{\mathbf{A}t}\mathbf{x}_0
-\]
-               
-The term  $\mathbf{\phi}(t) = e^{\mathbf{A}t}$  is known as the state transition matrix because it shows how time, $t$, transforms the initial state vector into the present one.
 
-Furthermore, the solution of:
-\[
-\frac{d\mathbf{x}}{dt}=\mathbf{Ax} + \mathbf{Bu}
-\]
-given $\mathbf{x}=\mathbf{x}_0$ at $t=0$ is:
-\[
-\mathbf{x}=e^{\mathbf{A}t}\mathbf{x}_0 + \int_0^t e^{\mathbf{A}(t-\tau)}\mathbf{Bu}(\tau)d\tau.
-\]
+\input{frag2}
+\ifslidesonly
+\begin{slide}
+	\heading{Using the Similarity Transform}
+   \input{frag2}
+\end{slide}
+\fi
+
+
+ 
+\input{frag3}
+\ifslidesonly
+\begin{slide}
+	\heading{Matrix Function}
+   \input{frag3}
+\end{slide}
+\fi
+
+ 
+\input{frag4}
+\ifslidesonly
+\begin{slide}
+	\heading{Transition Matrix}
+   \input{frag4}
+\end{slide}
+\fi
+
+
+\input{frag5}
+\ifslidesonly
+\begin{slide}
+	\heading{Forced Solution}
+   \input{frag5}
+\end{slide}
+\fi
+
 
  
 \subsection*{Example 1}
@@ -250,47 +240,235 @@ Therefore:
 % GccqGHsislcaaIXaGaaiOlaiaaiwdacaWGLbWaaWbaaSqabeaacqGH
 % sislcaaIYaGaamiDaaaaaaaakiaawUfacaGLDbaaaaa!4C2A!
 \[
-{\bf{x}}(t) = \left[ {\begin{array}{*{20}c}
+{\bf{x}}(dt) = \left[ {\begin{array}{*{20}c}
    { - 2e^{ - t}  + 3e^{ - 2t} }  \\
    {0.5 + 2e^{ - t}  - 1.5e^{ - 2t} }  \\
 \end{array}} \right]
 \]
 
 
-
  
 
 \subsection*{Alternative solution 1}
 Using the transformation to normal canonical form:
+\[
+\frac{d\mathbf{w}}{t}=\mathbf{\Lambda w}+ \mathbf{T}^{-1}\mathbf{B}u
+\]
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaWaaSaaaeaacaWGKbGaaC4Daaqaaiaads
+% gacaWG0baaaiabg2da9maadmaabaqbamqabiGaaaqaaiabgkHiTiaa
+% igdaaeaacaaIWaaabaGaaGimaaqaaiabgkHiTiaaikdaaaaacaGLBb
+% GaayzxaaGaaC4DaiabgUcaRmaadmaabaqbamqabiGaaaqaaiabgkHi
+% TiaaigdaaeaacqGHsislcaaIYaaabaGaaGOmaaqaaiaaikdaaaaaca
+% GLBbGaayzxaaWaamWaaeaafaWabeGabaaabaGaaGymaaqaaiaaicda
+% aaaacaGLBbGaayzxaaGaamyDaiaacUdacaaMf8UaamyDaiabg2da9i
+% aaigdaaaa!4BE3!
+\[
+\frac{{d{\bf{w}}}}{{dt}} = \left[ {\begin{array}{*{20}c}
+   { - 1} & 0  \\
+   0 & { - 2}  \\
+\end{array}} \right]{\bf{w}} + \left[ {\begin{array}{*{20}c}
+   { - 1} & { - 2}  \\
+   2 & 2  \\
+\end{array}} \right]\left[ {\begin{array}{*{20}c}
+   1  \\
+   0  \\
+\end{array}} \right]u;\quad u = 1
+\]
+\[
+\frac{dw_1}{dt}=-w_1-1\ \textrm{and}\ \frac{dw_2}{dt}=-2w_2 + 2
+\]
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGaaC4DamaaBaaaleaacaaIWaaabeaaki
+% abg2da9iaahsfadaahaaWcbeqaaiabgkHiTiaaigdaaaGccaWH4bWa
+% aSbaaSqaaiaaicdaaeqaaOGaeyypa0ZaamWaaeaafaWabeGacaaaba
+% GaeyOeI0IaaGymaaqaaiabgkHiTiaaikdaaeaacaaIYaaabaGaaGOm
+% aaaaaiaawUfacaGLDbaadaWadaqaauaadeqaceaaaeaacaaIXaaaba
+% GaaGymaaaaaiaawUfacaGLDbaacqGH9aqpdaWadaqaauaadeqaceaa
+% aeaacqGHsislcaaIZaaabaGaaGinaaaaaiaawUfacaGLDbaaaaa!466E!
+\[
+{\bf{w}}_0  = {\bf{T}}^{ - 1} {\bf{x}}_0  = \left[ {\begin{array}{*{20}c}
+   { - 1} & { - 2}  \\
+   2 & 2  \\
+\end{array}} \right]\left[ {\begin{array}{*{20}c}
+   1  \\
+   1  \\
+\end{array}} \right] = \left[ {\begin{array}{*{20}c}
+   { - 3}  \\
+   4  \\
+\end{array}} \right]
+\]
 
- 
- 
- 
 
+\begin{eqnarray*}
+	w_1 & = & w_{10}e^{-t}-\int_0^t e^{-(t-\tau)} d\tau \\
+	    & = & -3e^{-t}-\left[e^{-(t-\tau)}\right]_0^t \\
+	    & = & -3e^{-t}-\left[1 - e^{-t}\right] \\
+	    & = & -1 -2e^{-t}	
+\end{eqnarray*}
  
- 
+\begin{eqnarray*}
+	w_2 & = & w_{20}e^{-2t}+2\int_0^t e^{-2(t-\tau)} d\tau \\
+	    & = & 4e^{-2t}+2\left[0.5e^{-2(t-\tau)}\right]_0^t \\
+	    & = & 4e^{-2t}+\left[1 - e^{-2t}\right] \\
+	    & = & 1 + 3e^{-2t}	
+\end{eqnarray*}
+
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGaaCiEaiabg2da9iaahsfacaWH3bGaey
+% ypa0ZaamWaaeaafaWabeGacaaabaGaaGymaaqaaiaaigdaaeaacqGH
+% sislcaaIXaaabaGaeyOeI0IaaGimaiaac6cacaaI1aaaaaGaay5wai
+% aaw2faamaadmaabaqbamqabiqaaaqaaiabgkHiTiaaigdacqGHsisl
+% caaIYaGaamyzamaaCaaaleqabaGaeyOeI0IaamiDaaaaaOqaaiaaig
+% dacqGHRaWkcaaIZaGaamyzamaaCaaaleqabaGaeyOeI0IaaGOmaiaa
+% dshaaaaaaaGccaGLBbGaayzxaaaaaa!49AC!
+\[
+{\bf{x}} = {\bf{Tw}} = \left[ {\begin{array}{*{20}c}
+   1 & 1  \\
+   { - 1} & { - 0.5}  \\
+\end{array}} \right]\left[ {\begin{array}{*{20}c}
+   { - 1 - 2e^{ - t} }  \\
+   {1 + 3e^{ - 2t} }  \\
+\end{array}} \right]
+\]
+Therefore
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGaaCiEaiabg2da9maadmaabaqbamqabi
+% qaaaqaaiabgkHiTiaaikdacaWGLbWaaWbaaSqabeaacqGHsislcaWG
+% 0baaaOGaey4kaSIaaG4maiaadwgadaahaaWcbeqaaiabgkHiTiaaik
+% dacaWG0baaaaGcbaGaaGimaiaac6cacaaI1aGaey4kaSIaaGOmaiaa
+% dwgadaahaaWcbeqaaiabgkHiTiaadshaaaGccqGHsislcaaIXaGaai
+% OlaiaaiwdacaWGLbWaaWbaaSqabeaacqGHsislcaaIYaGaamiDaaaa
+% aaaakiaawUfacaGLDbaaaaa!49D8!
+\[
+{\bf{x}} = \left[ {\begin{array}{*{20}c}
+   { - 2e^{ - t}  + 3e^{ - 2t} }  \\
+   {0.5 + 2e^{ - t}  - 1.5e^{ - 2t} }  \\
+\end{array}} \right]
+\]
+
 
  
 \subsection*{Alternative solution 2} 
-Using the Laplace transform method:
+Using the Laplace transform method.
 
 Taking Laplace transforms of the state equations, taking account of the initial conditions:
+\[
+s\mathbf{X}(s)-\mathbf{x}_0=\mathbf{A}\mathbf{X}(s)+\mathbf{B}U(s)
+\]
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGaaiikaiaadohacaWHjbGaeyOeI0IaaC
+% yqaiaacMcacaWHybGaaiikaiaadohacaGGPaGaeyypa0JaaCiEamaa
+% BaaaleaacaaIWaaabeaakiabgUcaRiaahkeacaWGvbGaaiikaiaado
+% hacaGGPaGaeyypa0ZaamWaaeaafaWabeGabaaabaGaaGymaaqaaiaa
+% igdaaaaacaGLBbGaayzxaaGaey4kaSYaamWaaeaafaWabeGabaaaba
+% GaaGymaaqaaiaaicdaaaaacaGLBbGaayzxaaWaaSaaaeaacaaIXaaa
+% baGaam4Caaaaaaa!4885!
+\[
+(s{\bf{I}} - {\bf{A}}){\bf{X}}(s) = {\bf{x}}_0  + {\bf{B}}U(s) = \left[ {\begin{array}{*{20}c}
+   1  \\
+   1  \\
+\end{array}} \right] + \left[ {\begin{array}{*{20}c}
+   1  \\
+   0  \\
+\end{array}} \right]\frac{1}{s}
+\]
+Therefore
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGaaCiwaiaacIcacaWGZbGaaiykaiabg2
+% da9iaacIcacaWGZbGaaCysaiabgkHiTiaahgeacaGGPaWaaWbaaSqa
+% beaacqGHsislcaaIXaaaaOWaamWaaeaafaWabeGabaaabaGaaGymai
+% abgUcaRmaalaaabaGaaGymaaqaaiaadohaaaaabaGaaGymaaaaaiaa
+% wUfacaGLDbaaaaa!3F1F!
+\[
+{\bf{X}}(s) = (s{\bf{I}} - {\bf{A}})^{ - 1} \left[ {\begin{array}{*{20}c}
+   {1 + \frac{1}{s}}  \\
+   1  \\
+\end{array}} \right]
+\]
 
- 
-
- 
- 
-
- 
- 
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGaaeOtaiaab+gacaqG3bGaaeiiaiaacI
+% cacaWGZbGaaCysaiabgkHiTiaahgeacaGGPaWaaWbaaSqabeaacqGH
+% sislcaaIXaaaaOGaeyypa0ZaamWaaeaafaWabeGacaaabaGaam4Cai
+% abgUcaRiaaiodaaeaacaaIYaaabaGaeyOeI0IaaGymaaqaaiaadoha
+% aaaacaGLBbGaayzxaaWaaWbaaSqabeaacqGHsislcaaIXaaaaOGaey
+% ypa0ZaaSaaaeaacaaIXaaabaGaaiikaiaadohacqGHRaWkcaaIZaGa
+% aiykaiaadohacqGHRaWkcaaIYaaaamaadmaabaqbamqabiGaaaqaai
+% aadohaaeaacqGHsislcaaIYaaabaGaaGymaaqaaiaadohacqGHRaWk
+% caaIZaaaaaGaay5waiaaw2faaaaa!5355!
+\[
+{\rm{Now }}(s{\bf{I}} - {\bf{A}})^{ - 1}  = \left[ {\begin{array}{*{20}c}
+   {s + 3} & 2  \\
+   { - 1} & s  \\
+\end{array}} \right]^{ - 1}  = \frac{1}{{(s + 3)s + 2}}\left[ {\begin{array}{*{20}c}
+   s & { - 2}  \\
+   1 & {s + 3}  \\
+\end{array}} \right]
+\]
+Therefore
+\begin{eqnarray*}
+	{\bf{X}}(s) & = & \frac{1}{{s^2  + 3s + 2}}\left[ {\begin{array}{*{20}c}
+	   s & { - 2}  \\
+	   1 & {s + 3}  \\
+	\end{array}} \right]\left[ {\begin{array}{*{20}c}
+	   {1 + \frac{1}{s}}  \\
+	   1  \\
+	\end{array}} \right] \\
+	            & = & \frac{1}{{(s + 1)(s + 2)}}\left[ {\begin{array}{*{20}c}
+	   {s - 1}  \\
+	   {\frac{{s^2  + 4s + 1}}{s}}  \\
+	\end{array}} \right] \\
+	&  = & \left[ {\begin{array}{*{20}c}
+	   {\frac{{s - 1}}{{(s + 1)(s + 2)}}}  \\
+	   {\frac{{s^2  + 4s + 1}}{{s(s + 1)(s + 2)}}}  \\
+	\end{array}} \right]
+\end{eqnarray*}
 
 Taking partial fractions:
-
- 
+\[
+{\bf{X}}(s) = \left[ {\begin{array}{*{20}c}
+   {\frac{{ - 2}}{{s + 1}} + \frac{3}{{s + 2}}}  \\
+   {\frac{{0.5}}{s} + \frac{2}{{s + 1}} + \frac{{ - 1.5}}{{s + 2}}}  \\
+\end{array}} \right]
+\]
 
 Finally, taking inverse Laplace transforms:
+\[
+{\bf{x}}(t) = \left[ {\begin{array}{*{20}c}
+   { - 2e^{ - t}  + 3e^{ - 2t} }  \\
+   {0.5 + 2e^{ - t}  - 1.5e^{ - 2t} }  \\
+\end{array}} \right]
+\]
 
- 
 
 
 
