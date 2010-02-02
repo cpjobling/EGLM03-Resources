@@ -1,473 +1,359 @@
 %% State Space Modelling of Dynamic Systems
-%% Lecture 18: General Solution of a State Space System
+%% Lecture 19: Controllability and Observability
 \def\FileDate{10/02/01}
 \def\FileVersion{1.0}
 % ----------------------------------------------------------------
 % Notes pages *********************************************************
 % ----------------------------------------------------------------
 
-In this lecture we conclude our introduction to state space systems by developing a method that can be used to solve any linear time invariant (LTI) system using the state space model. This will put on a formal mathematical footing the approach described in Lecture 15. To do this we need to derive the Taylor series for the state matrix and then use the results from the previous two lectures to formally derive the state transmission matrix $\mathbf{\phi}(t)$ from the resolvant matrix $\mathbf{\Phi}(\lambda) = |\lambda\mathbf{I}-\mathbf{A}|$. This will lead is to a general solution which we will illustrate with examples and compare with the solution developed in the last lecture and the solution obtained by inverting the system transfer function. As before, we will refer to Matlab where relevant.
+We now turn our attention to the design of control systems using stats space techniques. The idea is that we measure the state of the system in some way and adjust the inputs to modify the state behaviour. However this implies that we can both \emph{observe} the states and \emph{control} them. This section introduces the basic concept of observability and controllability.
 
-Once we have completed this material, we will be in a position to move on to look at state-space methods for control system design.
+The development of state space system models led to clarification of the issues of controllability and observability.
 
-\section*{The Matrix Exponential Function}
+In classical control system theory, which is based on transfer functions, there is really no equivalent concept.
 
-In mathematics, the Taylor series is a representation of a function as an infinite sum of terms calculated from the values of its derivatives at a single point. It is named after the English mathematician Brook Taylor. It is common practice to use a finite number of terms of the series to approximate a function. The Taylor series may be regarded as the limit of the Taylor polynomials.\footnote{Definition from `Taylor Series', Wikipedia.}
+\section{System Partitioning} % (fold)
+\label{sec:system_partitioning}
 
-We use Taylor series to approximate general functions, and here we adapt the Taylor series to discover the form of a function of a matrix.
- 
+Imagine a system with a set of inputs feeding a set of state equations which in turn generate a set of outputs.
+
+The state equations may be partitioned into four subsets forming sub-systems, $\mathbf{S1}$, $\mathbf{S2}$, $\mathbf{S3}$ and $\mathbf{S4}$. 
+
+(Some of the sets may be empty depending on the extent of the system controllability and/or observability)
+
 \input{frag1}
 \ifslidesonly
 \begin{slide}
-	\heading{Taylor series}
+   \heading{System Partitioning}
    \input{frag1}
 \end{slide}
 \fi
 
+If a sub-system is connected to the inputs $\mathbf{u}$ then it is said to be \emph{controllable}. That is, we can control the states of that sub-system from the inputs. Conversely, if there is no connection, then we cannot influence those states from the inputs and the sub-system is \emph{uncontrollable}.
+
+Similarly, if a sub-system is connected to the outputs $\mathbf{y}$ then it is said to be \emph{observable}. That is, we can observe or measure the states of that sub-system from a knowledge of the output values. Conversely, if there is no connection, then there is no information about those states contained in the outputs and the sub-system is \emph{unobservable}.
+\ifslidesonly
+\begin{slide}
+   \heading{Controllability}
+\begin{itemize}
+	\item If a sub-system is connected to the inputs $\mathbf{u}$ then it is said to be \emph{controllable}. 
+	\item If there is no connection the sub-system is \emph{uncontrollable}.
+	\item If a sub-system is connected to the outputs $\mathbf{y}$ then it is said to be \emph{observable}. 
+	\item If there is no connection the sub-system is \emph{unobservable}.
+\end{itemize}
+\end{slide}
+\fi
  
+% section system_partitioning (end)
+
+\section*{Controllability and observability of the sub-systems} % (fold)
+\label{sec:section_name}
 
 \input{frag2}
 \ifslidesonly
 \begin{slide}
-	\heading{Using the Similarity Transform}
+   \heading{Controllability and observability of the sub-systems}
    \input{frag2}
 \end{slide}
 \fi
 
 
- 
-\input{frag3}
-\ifslidesonly
-\begin{slide}
-	\heading{Matrix Function}
-   \input{frag3}
-\end{slide}
-\fi
+If sub-sets $\mathbf{S}_3$ and $\mathbf{S}_4$ are empty then the entire system is completely controllable.
 
- 
-\input{frag4}
-\ifslidesonly
-\begin{slide}
-	\heading{Transition Matrix}
-   \input{frag4}
-\end{slide}
-\fi
+If sub-sets $\mathbf{S}_1$ and $\mathbf{S}_4$ are empty then the entire system is completely observable.
 
 
-\input{frag5}
-\ifslidesonly
-\begin{slide}
-	\heading{Forced Solution}
-   \input{frag5}
-\end{slide}
-\fi
+% section Controllability_and_observability_of_the_sub-systems (end)
+
+\section*{Mathematical Test for Controllability} % (fold)
+\label{sec:mathematical_test_for_controllability}
 
 
- 
-\subsection*{Example 1}
+If we transform the state equations to normal canonical form, then the term involving the inputs constitutes the link in the previous figure between $\mathbf{u}$ and the sub-systems.
 
-\textbf{Problem}: Find the solution of:
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaWaaSaaaeaacaWGKbGaaCiEaaqaaiaads
-% gacaWG0baaaiabg2da9maadmaabaqbamqabiGaaaqaaiabgkHiTiaa
-% iodaaeaacqGHsislcaaIYaaabaGaaGymaaqaaiaaicdaaaaacaGLBb
-% GaayzxaaGaaCiEaiabgUcaRmaadmaabaqbamqabiqaaaqaaiaaigda
-% aeaacaaIWaaaaaGaay5waiaaw2faaiaadwhaaaa!4013!
+From previous work we had:
 \[
-\frac{{d{\bf{x}}}}{{dt}} = \left[ {\begin{array}{*{20}c}
-   { - 3} & { - 2}  \\
-   1 & 0  \\
-\end{array}} \right]{\bf{x}} + \left[ {\begin{array}{*{20}c}
-   1  \\
-   0  \\
-\end{array}} \right]u
+\dot{\mathbf{x}} = \mathbf{Ax} + \mathbf{Bu}
 \]
-given $\mathbf{x}_0=[1,\ 1]^T$, and $u = 1$ for $t\ge 0$.
-
-\textbf{SOLUTION}: The state matrix $\mathbf{A}$ is the same as Example 4 from Lecture 17, so the transformation matrix is:
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaCivaiabg2da9iabg2da9maadmaaba
-% qbamqabiGaaaqaaiaaigdaaeaacaaIXaaabaGaeyOeI0IaaGymaaqa
-% aiabgkHiTiaaicdacaGGUaGaaGynaaaaaiaawUfacaGLDbaaaaa!3935!
-\[
-{\bf{T}} = \left[ {\begin{array}{*{20}c}
-   1 & 1  \\
-   { - 1} & { - 0.5}  \\
-\end{array}} \right]
-\]
-with an inverse:
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaCivamaaCaaaleqabaGaeyOeI0IaaG
-% ymaaaakiabg2da9iabg2da9maadmaabaqbamqabiGaaaqaaiabgkHi
-% TiaaigdaaeaacqGHsislcaaIYaaabaGaaGOmaaqaaiaaikdaaaaaca
-% GLBbGaayzxaaaaaa!39A7!
-\[
-{\bf{T}}^{ - 1}  = \left[ {\begin{array}{*{20}c}
-   { - 1} & { - 2}  \\
-   2 & 2  \\
-\end{array}} \right]
-\]
-and with corresponding eigenvalues $\lambda_1=-1$ and $\lambda_2=-2$.
- 
-Therefore the state transition matrix is:
+with state transformation matrix $\mathbf{T}$ giving:
 \begin{eqnarray*}
-\mathbf{\phi}(t) & = & e^{\mathbf{A}t}=\mathbf{T}e^{\mathbf{\Lambda}t}\mathbf{T}^{-1} \\
-	             & = & \left[ {\begin{array}{*{20}c}
-	   1 & 1  \\
-	   { - 1} & { - 0.5}  \\
-	\end{array}} \right]\left[ {\begin{array}{*{20}c}
-	   {e^{ - t} } & 0  \\
-	   0 & {e^{ - 2t} }  \\
-	\end{array}} \right]\left[ {\begin{array}{*{20}c}
-	   { - 1} & { - 2}  \\
-	   2 & 2  \\
-	\end{array}} \right] \\
-	             & = & \left[ {\begin{array}{*{20}c}
-	   1 & 1  \\
-	   { - 1} & { - 0.5}  \\
-	\end{array}} \right]\left[ {\begin{array}{*{20}c}
-	   {-e^{ - t} } & {-2e^{ - t} }  \\
-	   {2e^{ - 2t} } & {2e^{ - 2t} }  \\
-	\end{array}} \right] \\
-	             & = & \left[ {\begin{array}{*{20}c}
-	   \left\{ {-e^{ - t} + 2e^{-2t}} \right\} & \left\{ {-2e^{ - t} + 2e^{-2t}} \right\}  \\
-	   \left\{ {e^{ - t} - e^{-2t}} \right\} & \left\{ {2e^{ - t} - e^{-2t}} \right\}  \\
-	\end{array}} \right] \\
+	\mathbf{x} & = & \mathbf{Tw} \\
+	\dot{\mathbf{w}}& = &\mathbf{T}^{-1}\mathbf{ATw}+\mathbf{T}^{-1}\mathbf{Bu} \\
+	& = & \mathbf{\Lambda w}= \mathbf{T}^{-1}\mathbf{Bw}
+\end{eqnarray*}
+where $\mathbf{\Lambda}$ is a diagonal matrix.
+ 
+For controllability of all the system states, every state equation must be linked to at least one of the inputs. The $i^\mathrm{th}$ state equation is:
+\[
+\dot{w}_i = \lambda_iw_i + \left[i^{\mathrm{th}}\mathrm{\ row\ of\ }\mathbf{T}^{-1}\mathbf{B}\right]\mathbf{u}
+\]
+ 
+Therefore for every state equation to be linked to at least one input, there must be no row of $\mathbf{T}^{-1}\mathbf{B}$  containing all zero entries.
+\ifslidesonly
+\begin{slide}
+   \heading{Mathematical Test for Controllability (1)}
+   If we transform the state equations to normal canonical form, then the term involving the inputs constitutes the link in the previous figure between $\mathbf{u}$ and the sub-systems.
+
+From previous work we had:
+\[
+\dot{\mathbf{x}} = \mathbf{Ax} + \mathbf{Bu}
+\]
+with state transformation matrix $\mathbf{T}$ giving:
+\begin{eqnarray*}
+	\mathbf{x} & = & \mathbf{Tw} \\
+	\dot{\mathbf{w}}& = &\mathbf{T}^{-1}\mathbf{ATw}+\mathbf{T}^{-1}\mathbf{Bu} \\
+	& = & \mathbf{\Lambda w}= \mathbf{T}^{-1}\mathbf{Bw}
+\end{eqnarray*}
+where $\mathbf{\Lambda}$ is a diagonal matrix.
+\end{slide}
+
+\begin{slide}
+   \heading{Mathematical Test for Controllability (2)}
+\begin{itemize}
+	\item For controllability of all the system states, every state equation must be linked to at least one of the inputs.
+	\item  The $i^\mathrm{th}$ state equation is:
+	\[
+	\dot{w}_i = \lambda_iw_i + \left[i^{\mathrm{th}}\mathrm{\ row\ of\ }\mathbf{T}^{-1}\mathbf{B}\right]\mathbf{u}
+	\]
+	\item Therefore for every state equation to be linked to at least one input, there must be no row of $\mathbf{T}^{-1}\mathbf{B}$  containing all zero entries.
+\end{itemize}
+
+\end{slide}
+\fi
+
+
+% section mathematical_test_for_controllability (end)
+
+\section{Mathematical Test for Observability} % (fold)
+\label{sec:mathematical_test_for_observability}
+
+If we transform the output equations to normal canonical form, then the term involving the states constitutes the link in the previous figure between the sub-system states and outputs $\mathbf{y}$.
+
+From previous work we had:
+\[
+\mathbf{y} = \mathbf{Cx} + \mathbf{Du}
+\]
+ 
+Transforming to normal canonical form with matrix $\mathbf{T}$ gives:
+\begin{eqnarray*}
+	\mathbf{x} & = & \mathbf{Tw} \\
+	\mathbf{y}& = &\mathbf{CTw}+\mathbf{Du} \\
 \end{eqnarray*}
 
- 
-The solution is:
+For observability of all the system states, every state $w_i$ must be linked to at least one of the outputs.  Therefore, there must be no column of $\mathbf{CT}$  containing all zero entries.
+\ifslidesonly
+\begin{slide}
+   \heading{Mathematical Test for Observability (1)}
+If we transform the output equations to normal canonical form, then the term involving the states constitutes the link in the previous figure between the sub-system states and outputs $\mathbf{y}$.
+
+From previous work we had:
 \[
-\mathbf{x}(t) = \mathrm{term}_1+\int_0^t\mathrm{term}_2 d\tau.
+\mathbf{y} = \mathbf{Cx} + \mathbf{Du}
 \]
-where $\mathrm{term}_1=\mathbf{\phi}(t)\mathbf{x}_0=e^{\mathbf{A}t}\mathbf{x}_0$.
+
+Transforming to normal canonical form with matrix $\mathbf{T}$ gives:
 \begin{eqnarray*}
-\mathrm{term}_1 & = & \left[ {\begin{array}{*{20}c}
-	   \left\{ {-e^{ - t} + 2e^{-2t}} \right\} & \left\{ {-2e^{ - t} + 2e^{-2t}} \right\}  \\
-	   \left\{ {e^{ - t} - e^{-2t}} \right\} & \left\{ {2e^{ - t} - e^{-2t}} \right\}  \\
-	\end{array}} \right] \left[ {\begin{array}{*{20}c}
-	   1  \\
-	   1  \\
-	\end{array}} \right] \\
-	& = & \left[ {\begin{array}{*{20}c}
-	   {\left\{ {\left. { - 3e^{ - t}  + 4e^{ - 2t} } \right\}} \right.}  \\
-	   {\left\{ {\left. {3e^{ - t}  - 2e^{ - 2t} } \right\}} \right.}  \\
-	\end{array}} \right]
+	\mathbf{x} & = & \mathbf{Tw} \\
+	\mathbf{y}& = &\mathbf{CTw}+\mathbf{Du} \\
 \end{eqnarray*}
-and
+\end{slide}
+\begin{slide}
+   \heading{Mathematical Test for Observability (2)}
+\begin{itemize}
+	\item For observability of all the system states, every state $w_i$ must be linked to at least one of the outputs.
+	\item Therefore, there must be no column of $\mathbf{CT}$  containing all zero entries.   
+\end{itemize}
+\end{slide}
+\fi
+
+The previous arguments have indicated necessary conditions for controllability and observability but even if they are true they do not give a guarantee. Sufficient conditions require more subtle tests as quoted in the next section.
+
+
+% section mathematical_test_for_observability (end)
+
+\section*{Alternative Tests for Controllability and Observability} % (fold)
+\label{sec:alternative_tests_for_controllability_and_observability}
+
+To apply the tests of the previous sections involves deriving the transformation matrix $\mathbf{T}$, the columns of which consist of the eigenvectors of the original state matrix $\mathbf{A}$. It is not necessary to form $\mathbf{T}$ explicitly and alternative tests exist based on the untransformed matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{C}$ only.
+
+For an $n^{\mathrm{th}}$ order system, the system is completely \emph{state controllable} if the \textbf{controllability matrix}:
+\[
+\left[\mathbf{B}\vdots\mathbf{AB}\vdots\cdots\vdots\mathbf{A}^{n-1}\mathbf{B}\right]
+\]
+is of rank $n$. (i.e. it contains $n$ linearly independent rows or, in other words, its determinant is non-zero.)
+
+Similarly, a system is completely \emph{state observable} if the \textbf{observability matrix}
+\[
+\left[\mathbf{C}^T\vdots\mathbf{A}^T\mathbf{C}^T\vdots\cdots\vdots\left(\mathbf{A}^T\right)^{n-1}\mathbf{C}^T\right]
+\]
+is of rank $n$ (i.e. its determinant is non-zero.)
+
+These two conditions can result in numerically ill-conditioned calculations for large $n$.
+
+\ifslidesonly
+\begin{slide}
+   \heading{Alternative tests: Controllability}
+   For an $n^{\mathrm{th}}$ order system, the system is completely \emph{state controllable} if the \textbf{controllability matrix}:
+\[
+\left[\mathbf{B}\vdots\mathbf{AB}\vdots\cdots\vdots\mathbf{A}^{n-1}\mathbf{B}\right]
+\]
+is of rank $n$.
+\end{slide}
+
+\begin{slide}
+\heading{Alternative tests: Observability}
+For an $n^{\mathrm{th}}$ order system, a system is completely \emph{state observable} if the \textbf{observability matrix}
+\[
+\left[\mathbf{C}^T\vdots\mathbf{A}^T\mathbf{C}^T\vdots\cdots\vdots\left(\mathbf{A}^T\right)^{n-1}\mathbf{C}^T\right]
+\]
+is of rank $n$.
+\end{slide}
+\fi
+
+\subsection*{Example} % (fold)
+\label{sub:example}
+
+\textbf{Problem}: test the following system for controllability and observability:
 \begin{eqnarray*}
-	{\rm{term}}_2  & = & e^{{\bf{A}}(t - \tau )} {\bf{B}}u = e^{{\bf{A}}(t - \tau )} \left[ {\begin{array}{*{20}c}
+	 {\bf{\dot x}}  & = &   \left[ {\begin{array}{*{20}c}
+	   { - 6} & { - 5}  \\
+	   1 & 0  \\
+	\end{array}} \right]{\bf{x}} + \left[ {\begin{array}{*{20}c}
 	   1  \\
 	   0  \\
-	\end{array}} \right] \times 1 \\
- & = & \left[ {\begin{array}{*{20}c}
-   {\left. {\left\{ { - e^{ - (t - \tau )}  + 2e^{ - 2(t - \tau )} } \right.} \right\}}  \\
-   {\left. {\left\{ {e^{ - (t - \tau )}  - e^{ - 2(t - \tau )} } \right.} \right\}}  \\
-\end{array}} \right]
+	\end{array}} \right]u \\
+		 y & = &  \left[ {\begin{array}{*{20}c}
+	   3 & 1  \\
+	\end{array}} \right]{\bf{x}} \\ 
 \end{eqnarray*}
 
-\begin{eqnarray*}
-	\int_0^t {{\rm{term}}_2 d\tau }  & = & \left[ {\begin{array}{*{20}c}
-	   {\int_0^t {\left. {\left\{ { - e^{ - (t - \tau )}  + 2e^{ - 2(t - \tau )} } \right.} \right\}d\tau } }  \\
-	   {\int_0^t {\left. {\left\{ {e^{ - (t - \tau )}  - e^{ - 2(t - \tau )} } \right.} \right\}d\tau } }  \\
-	\end{array}} \right] \\
-	& = & 
-	  \left[ {\begin{array}{*{20}c}
-	   {\left. {\left\{ { - e^{ - (t - \tau )}  + e^{ - 2(t - \tau )} } \right.} \right\}}  \\
-	   {\left. {\left\{ {e^{ - (t - \tau )}  - 0.5e^{ - 2(t - \tau )} } \right.} \right\}}  \\
-	\end{array}} \right]_{\tau  = 0}^t  \\ 
-	 & = & \left[ {\begin{array}{*{20}c}
-	   { - 1 + e^{ - t}  + 1 - e^{ - 2t} }  \\
-	   { - 1 + e^{ - t}  - 0.5 + 0.5e^{ - 2t} }  \\
-	\end{array}} \right] \\ 
-	 &  = & \left[ {\begin{array}{*{20}c}
-	   {e^{ - t}  - e^{ - 2t} }  \\
-	   {0.5 - e^{ - t}  + 0.5e^{ - 2t} }  \\
-	\end{array}} \right]
-\end{eqnarray*}
 
-Combining $\mathrm{term}_1$ and $\int_0^t \mathrm{term}_2 d\tau$ we find the total, forced, response:
+\textbf{SOLUTION}:
 % MathType!MTEF!2!1!+-
 % faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
 % 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
 % bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
 % pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaCiEaiaacIcacaWG0bGaaiykaiabg2
-% da9maadmaabaqbamqabiqaaaqaaiabgkHiTiaaiodacaWGLbWaaWba
-% aSqabeaacqGHsislcaWG0baaaOGaey4kaSIaaGinaiaadwgadaahaa
-% WcbeqaaiabgkHiTiaaikdacaWG0baaaaGcbaGaaG4maiaadwgadaah
-% aaWcbeqaaiabgkHiTiaadshaaaGccqGHsislcaaIYaGaamyzamaaCa
-% aaleqabaGaeyOeI0IaaGOmaiaadshaaaaaaaGccaGLBbGaayzxaaGa
-% ey4kaSYaamWaaeaafaWabeGabaaabaGaamyzamaaCaaaleqabaGaey
-% OeI0IaamiDaaaakiabgkHiTiaadwgadaahaaWcbeqaaiabgkHiTiaa
-% ikdacaWG0baaaaGcbaGaaGimaiaac6cacaaI1aGaeyOeI0IaaGOmai
-% aadwgadaahaaWcbeqaaiabgkHiTiaadshaaaGccqGHRaWkcaaIWaGa
-% aiOlaiaaiwdacaWGLbWaaWbaaSqabeaacqGHsislcaaIYaGaamiDaa
-% aaaaaakiaawUfacaGLDbaaaaa!5FF5!
+% aiaabeqaamaabaabaaGcbaGaaCOqaiabg2da9maadmaabaqbamqabi
+% qaaaqaaiaaigdaaeaacaaIWaaaaaGaay5waiaaw2faaiaacUdacaaM
+% f8UaaCyqaiaahkeacqGH9aqpdaWadaqaauaadeqaciaaaeaacqGHsi
+% slcaaI2aaabaGaeyOeI0IaaGynaaqaaiaaigdaaeaacaaIWaaaaaGa
+% ay5waiaaw2faamaadmaabaqbamqabiqaaaqaaiaaigdaaeaacaaIWa
+% aaaaGaay5waiaaw2faaiabg2da9maadmaabaqbamqabiqaaaqaaiab
+% gkHiTiaaiAdaaeaacaaIXaaaaaGaay5waiaaw2faaaaa!47F8!
 \[
-{\bf{x}}(t) = \left[ {\begin{array}{*{20}c}
-   { - 3e^{ - t}  + 4e^{ - 2t} }  \\
-   {3e^{ - t}  - 2e^{ - 2t} }  \\
-\end{array}} \right] + \left[ {\begin{array}{*{20}c}
-   {e^{ - t}  - e^{ - 2t} }  \\
-   {0.5 - 2e^{ - t}  + 0.5e^{ - 2t} }  \\
-\end{array}} \right]
-\]
-
-Therefore:
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaCiEaiaacIcacaWG0bGaaiykaiabg2
-% da9maadmaabaqbamqabiqaaaqaaiabgkHiTiaaikdacaWGLbWaaWba
-% aSqabeaacqGHsislcaWG0baaaOGaey4kaSIaaG4maiaadwgadaahaa
-% WcbeqaaiabgkHiTiaaikdacaWG0baaaaGcbaGaaGimaiaac6cacaaI
-% 1aGaey4kaSIaaGOmaiaadwgadaahaaWcbeqaaiabgkHiTiaadshaaa
-% GccqGHsislcaaIXaGaaiOlaiaaiwdacaWGLbWaaWbaaSqabeaacqGH
-% sislcaaIYaGaamiDaaaaaaaakiaawUfacaGLDbaaaaa!4C2A!
-\[
-{\bf{x}}(dt) = \left[ {\begin{array}{*{20}c}
-   { - 2e^{ - t}  + 3e^{ - 2t} }  \\
-   {0.5 + 2e^{ - t}  - 1.5e^{ - 2t} }  \\
-\end{array}} \right]
-\]
-
-
- 
-
-\subsection*{Alternative solution 1}
-Using the transformation to normal canonical form:
-\[
-\frac{d\mathbf{w}}{t}=\mathbf{\Lambda w}+ \mathbf{T}^{-1}\mathbf{B}u
-\]
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaWaaSaaaeaacaWGKbGaaC4Daaqaaiaads
-% gacaWG0baaaiabg2da9maadmaabaqbamqabiGaaaqaaiabgkHiTiaa
-% igdaaeaacaaIWaaabaGaaGimaaqaaiabgkHiTiaaikdaaaaacaGLBb
-% GaayzxaaGaaC4DaiabgUcaRmaadmaabaqbamqabiGaaaqaaiabgkHi
-% TiaaigdaaeaacqGHsislcaaIYaaabaGaaGOmaaqaaiaaikdaaaaaca
-% GLBbGaayzxaaWaamWaaeaafaWabeGabaaabaGaaGymaaqaaiaaicda
-% aaaacaGLBbGaayzxaaGaamyDaiaacUdacaaMf8UaamyDaiabg2da9i
-% aaigdaaaa!4BE3!
-\[
-\frac{{d{\bf{w}}}}{{dt}} = \left[ {\begin{array}{*{20}c}
-   { - 1} & 0  \\
-   0 & { - 2}  \\
-\end{array}} \right]{\bf{w}} + \left[ {\begin{array}{*{20}c}
-   { - 1} & { - 2}  \\
-   2 & 2  \\
+{\bf{B}} = \left[ {\begin{array}{*{20}c}
+   1  \\
+   0  \\
+\end{array}} \right];\quad {\bf{AB}} = \left[ {\begin{array}{*{20}c}
+   { - 6} & { - 5}  \\
+   1 & 0  \\
 \end{array}} \right]\left[ {\begin{array}{*{20}c}
    1  \\
    0  \\
-\end{array}} \right]u;\quad u = 1
+\end{array}} \right] = \left[ {\begin{array}{*{20}c}
+   { - 6}  \\
+   1  \\
+\end{array}} \right]
 \]
-\[
-\frac{dw_1}{dt}=-w_1-1\ \textrm{and}\ \frac{dw_2}{dt}=-2w_2 + 2
-\]
+
+Therefore the determinant of the controllability matrix is:
 % MathType!MTEF!2!1!+-
 % faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
 % 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
 % bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
 % pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaC4DamaaBaaaleaacaaIWaaabeaaki
-% abg2da9iaahsfadaahaaWcbeqaaiabgkHiTiaaigdaaaGccaWH4bWa
-% aSbaaSqaaiaaicdaaeqaaOGaeyypa0ZaamWaaeaafaWabeGacaaaba
-% GaeyOeI0IaaGymaaqaaiabgkHiTiaaikdaaeaacaaIYaaabaGaaGOm
-% aaaaaiaawUfacaGLDbaadaWadaqaauaadeqaceaaaeaacaaIXaaaba
-% GaaGymaaaaaiaawUfacaGLDbaacqGH9aqpdaWadaqaauaadeqaceaa
-% aeaacqGHsislcaaIZaaabaGaaGinaaaaaiaawUfacaGLDbaaaaa!466E!
+% aiaabeqaamaabaabaaGcbaGaciizaiaacwgacaGG0bWaamWaaeaafa
+% WabeGacaaabaGaaGymaaqaaiabgkHiTiaaiAdaaeaacaaIWaaabaGa
+% aGymaaaaaiaawUfacaGLDbaacqGH9aqpcaaIXaGaeyOeI0Iaaiikai
+% abgkHiTiaaiAdacqGHxdaTcaaIWaGaaiykaiabg2da9iaaigdacqGH
+% GjsUcaaIWaaaaa!4385!
 \[
-{\bf{w}}_0  = {\bf{T}}^{ - 1} {\bf{x}}_0  = \left[ {\begin{array}{*{20}c}
-   { - 1} & { - 2}  \\
-   2 & 2  \\
-\end{array}} \right]\left[ {\begin{array}{*{20}c}
+\det \left[ {\begin{array}{*{20}c}
+   1 & { - 6}  \\
+   0 & 1  \\
+\end{array}} \right] = 1 - ( - 6 \times 0) = 1 \ne 0
+\]
+Therefore the system is controllable.
+ 
+\[
+{\bf{C}^T} = \left[ {\begin{array}{*{20}c}
+   3  \\
    1  \\
+\end{array}} \right];\quad {\bf A}^T{\bf C}^T = \left[ {\begin{array}{*{20}c}
+   { - 6} & { - 5}  \\
+   1 & 0  \\
+\end{array}} \right]\left[ {\begin{array}{*{20}c}
+   3  \\
    1  \\
 \end{array}} \right] = \left[ {\begin{array}{*{20}c}
-   { - 3}  \\
-   4  \\
+   { -17 }  \\
+   { -15 }  \\
 \end{array}} \right]
 \]
 
-
-\begin{eqnarray*}
-	w_1 & = & w_{10}e^{-t}-\int_0^t e^{-(t-\tau)} d\tau \\
-	    & = & -3e^{-t}-\left[e^{-(t-\tau)}\right]_0^t \\
-	    & = & -3e^{-t}-\left[1 - e^{-t}\right] \\
-	    & = & -1 -2e^{-t}	
-\end{eqnarray*}
- 
-\begin{eqnarray*}
-	w_2 & = & w_{20}e^{-2t}+2\int_0^t e^{-2(t-\tau)} d\tau \\
-	    & = & 4e^{-2t}+2\left[0.5e^{-2(t-\tau)}\right]_0^t \\
-	    & = & 4e^{-2t}+\left[1 - e^{-2t}\right] \\
-	    & = & 1 + 3e^{-2t}	
-\end{eqnarray*}
-
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaCiEaiabg2da9iaahsfacaWH3bGaey
-% ypa0ZaamWaaeaafaWabeGacaaabaGaaGymaaqaaiaaigdaaeaacqGH
-% sislcaaIXaaabaGaeyOeI0IaaGimaiaac6cacaaI1aaaaaGaay5wai
-% aaw2faamaadmaabaqbamqabiqaaaqaaiabgkHiTiaaigdacqGHsisl
-% caaIYaGaamyzamaaCaaaleqabaGaeyOeI0IaamiDaaaaaOqaaiaaig
-% dacqGHRaWkcaaIZaGaamyzamaaCaaaleqabaGaeyOeI0IaaGOmaiaa
-% dshaaaaaaaGccaGLBbGaayzxaaaaaa!49AC!
+Therefore the determinant of the observability matrix is:
 \[
-{\bf{x}} = {\bf{Tw}} = \left[ {\begin{array}{*{20}c}
-   1 & 1  \\
-   { - 1} & { - 0.5}  \\
-\end{array}} \right]\left[ {\begin{array}{*{20}c}
-   { - 1 - 2e^{ - t} }  \\
-   {1 + 3e^{ - 2t} }  \\
-\end{array}} \right]
+\det \left[ {\begin{array}{*{20}c}
+   3 & { -17 }  \\
+   1 & { -15 }  \\
+\end{array}} \right] = 3\times(-15) - (-17) \times 1) = -28 \ne 0
 \]
-Therefore
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaCiEaiabg2da9maadmaabaqbamqabi
-% qaaaqaaiabgkHiTiaaikdacaWGLbWaaWbaaSqabeaacqGHsislcaWG
-% 0baaaOGaey4kaSIaaG4maiaadwgadaahaaWcbeqaaiabgkHiTiaaik
-% dacaWG0baaaaGcbaGaaGimaiaac6cacaaI1aGaey4kaSIaaGOmaiaa
-% dwgadaahaaWcbeqaaiabgkHiTiaadshaaaGccqGHsislcaaIXaGaai
-% OlaiaaiwdacaWGLbWaaWbaaSqabeaacqGHsislcaaIYaGaamiDaaaa
-% aaaakiaawUfacaGLDbaaaaa!49D8!
-\[
-{\bf{x}} = \left[ {\begin{array}{*{20}c}
-   { - 2e^{ - t}  + 3e^{ - 2t} }  \\
-   {0.5 + 2e^{ - t}  - 1.5e^{ - 2t} }  \\
-\end{array}} \right]
-\]
+Therefore the system is observable.
+
+% subsection example (end)Test the following system for controllability and observability:
+
+\subsection{Exercise} % (fold)
+\label{sub:exercise}
+
+Confirm these results by using system transformation to normal form.
+
+% subsection exercise (end)
 
 
  
-\subsection*{Alternative solution 2} 
-Using the Laplace transform method.
 
-Taking Laplace transforms of the state equations, taking account of the initial conditions:
-\[
-s\mathbf{X}(s)-\mathbf{x}_0=\mathbf{A}\mathbf{X}(s)+\mathbf{B}U(s)
-\]
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaiikaiaadohacaWHjbGaeyOeI0IaaC
-% yqaiaacMcacaWHybGaaiikaiaadohacaGGPaGaeyypa0JaaCiEamaa
-% BaaaleaacaaIWaaabeaakiabgUcaRiaahkeacaWGvbGaaiikaiaado
-% hacaGGPaGaeyypa0ZaamWaaeaafaWabeGabaaabaGaaGymaaqaaiaa
-% igdaaaaacaGLBbGaayzxaaGaey4kaSYaamWaaeaafaWabeGabaaaba
-% GaaGymaaqaaiaaicdaaaaacaGLBbGaayzxaaWaaSaaaeaacaaIXaaa
-% baGaam4Caaaaaaa!4885!
-\[
-(s{\bf{I}} - {\bf{A}}){\bf{X}}(s) = {\bf{x}}_0  + {\bf{B}}U(s) = \left[ {\begin{array}{*{20}c}
-   1  \\
-   1  \\
-\end{array}} \right] + \left[ {\begin{array}{*{20}c}
-   1  \\
-   0  \\
-\end{array}} \right]\frac{1}{s}
-\]
-Therefore
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaCiwaiaacIcacaWGZbGaaiykaiabg2
-% da9iaacIcacaWGZbGaaCysaiabgkHiTiaahgeacaGGPaWaaWbaaSqa
-% beaacqGHsislcaaIXaaaaOWaamWaaeaafaWabeGabaaabaGaaGymai
-% abgUcaRmaalaaabaGaaGymaaqaaiaadohaaaaabaGaaGymaaaaaiaa
-% wUfacaGLDbaaaaa!3F1F!
-\[
-{\bf{X}}(s) = (s{\bf{I}} - {\bf{A}})^{ - 1} \left[ {\begin{array}{*{20}c}
-   {1 + \frac{1}{s}}  \\
-   1  \\
-\end{array}} \right]
-\]
 
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaeOtaiaab+gacaqG3bGaaeiiaiaacI
-% cacaWGZbGaaCysaiabgkHiTiaahgeacaGGPaWaaWbaaSqabeaacqGH
-% sislcaaIXaaaaOGaeyypa0ZaamWaaeaafaWabeGacaaabaGaam4Cai
-% abgUcaRiaaiodaaeaacaaIYaaabaGaeyOeI0IaaGymaaqaaiaadoha
-% aaaacaGLBbGaayzxaaWaaWbaaSqabeaacqGHsislcaaIXaaaaOGaey
-% ypa0ZaaSaaaeaacaaIXaaabaGaaiikaiaadohacqGHRaWkcaaIZaGa
-% aiykaiaadohacqGHRaWkcaaIYaaaamaadmaabaqbamqabiGaaaqaai
-% aadohaaeaacqGHsislcaaIYaaabaGaaGymaaqaaiaadohacqGHRaWk
-% caaIZaaaaaGaay5waiaaw2faaaaa!5355!
-\[
-{\rm{Now }}(s{\bf{I}} - {\bf{A}})^{ - 1}  = \left[ {\begin{array}{*{20}c}
-   {s + 3} & 2  \\
-   { - 1} & s  \\
-\end{array}} \right]^{ - 1}  = \frac{1}{{(s + 3)s + 2}}\left[ {\begin{array}{*{20}c}
-   s & { - 2}  \\
-   1 & {s + 3}  \\
-\end{array}} \right]
-\]
-Therefore
-\begin{eqnarray*}
-	{\bf{X}}(s) & = & \frac{1}{{s^2  + 3s + 2}}\left[ {\begin{array}{*{20}c}
-	   s & { - 2}  \\
-	   1 & {s + 3}  \\
-	\end{array}} \right]\left[ {\begin{array}{*{20}c}
-	   {1 + \frac{1}{s}}  \\
-	   1  \\
-	\end{array}} \right] \\
-	            & = & \frac{1}{{(s + 1)(s + 2)}}\left[ {\begin{array}{*{20}c}
-	   {s - 1}  \\
-	   {\frac{{s^2  + 4s + 1}}{s}}  \\
-	\end{array}} \right] \\
-	&  = & \left[ {\begin{array}{*{20}c}
-	   {\frac{{s - 1}}{{(s + 1)(s + 2)}}}  \\
-	   {\frac{{s^2  + 4s + 1}}{{s(s + 1)(s + 2)}}}  \\
-	\end{array}} \right]
-\end{eqnarray*}
+% section alternative_tests_for_controllability_and_observability (end)
 
-Taking partial fractions:
-\[
-{\bf{X}}(s) = \left[ {\begin{array}{*{20}c}
-   {\frac{{ - 2}}{{s + 1}} + \frac{3}{{s + 2}}}  \\
-   {\frac{{0.5}}{s} + \frac{2}{{s + 1}} + \frac{{ - 1.5}}{{s + 2}}}  \\
-\end{array}} \right]
-\]
 
-Finally, taking inverse Laplace transforms:
-\[
-{\bf{x}}(t) = \left[ {\begin{array}{*{20}c}
-   { - 2e^{ - t}  + 3e^{ - 2t} }  \\
-   {0.5 + 2e^{ - t}  - 1.5e^{ - 2t} }  \\
-\end{array}} \right]
-\]
+\section*{Matlab functions} % (fold)
+\label{sec:matlab_functions}
+
+\begin{slide}
+   \heading{Matlab function for testing controllability}
+\begin{verbatim}
+A = [-6 -5; 1 0];
+B = [1; 0]
+CM = ctrb(A, B)
+rank(CM) % should be 2.
+\end{verbatim}
+\textbf{Important note}: \texttt{ctrb} is not recommended for serious control design use as it is numerically unstable.
+\end{slide}
+
+\begin{slide}
+   \heading{Matlab function for testing observability}
+\begin{verbatim}
+A = [-6 -5; 1 0];
+C = [3 1]
+OM = obsv(A, C)
+rank(OM) % should be 2.
+\end{verbatim}
+\textbf{Important note}: \texttt{obsv} is not recommended for serious control design use as it is numerically unstable.
+\end{slide}
+
+\begin{slide}
+   \heading{Observability/controllability of systems}
+\begin{verbatim}
+A = [-6 -5; 1 0]; B = [1; 0]
+C = [3 1];
+sys = ss(A, B, C);
+OM = obsv(sys)
+CM = ctrb(sys)
+\end{verbatim}
+\end{slide}
+% section matlab_functions (end)
+
 
 
 
