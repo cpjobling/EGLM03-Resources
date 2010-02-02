@@ -1,358 +1,207 @@
 %% State Space Modelling of Dynamic Systems
-%% Lecture 19: Controllability and Observability
-\def\FileDate{10/02/01}
+%% Lecture 20: State Feedback Control
+\def\FileDate{10/02/02}
 \def\FileVersion{1.0}
 % ----------------------------------------------------------------
 % Notes pages *********************************************************
 % ----------------------------------------------------------------
 
-We now turn our attention to the design of control systems using stats space techniques. The idea is that we measure the state of the system in some way and adjust the inputs to modify the state behaviour. However this implies that we can both \emph{observe} the states and \emph{control} them. This section introduces the basic concept of observability and controllability.
-
-The development of state space system models led to clarification of the issues of controllability and observability.
-
-In classical control system theory, which is based on transfer functions, there is really no equivalent concept.
-
-\section{System Partitioning} % (fold)
-\label{sec:system_partitioning}
-
-Imagine a system with a set of inputs feeding a set of state equations which in turn generate a set of outputs.
-
-The state equations may be partitioned into four subsets forming sub-systems, $\mathbf{S1}$, $\mathbf{S2}$, $\mathbf{S3}$ and $\mathbf{S4}$. 
-
-(Some of the sets may be empty depending on the extent of the system controllability and/or observability)
-
-\input{frag1}
-\ifslidesonly
 \begin{slide}
-   \heading{System Partitioning}
-   \input{frag1}
+   \heading{State Feedback Control}
+One of the advantages of state space models is that it is possible to apply state feedback to place the closed loop poles into any desired positions.
+
+\textbf{State Space Design Methodology}
+
+\begin{enumerate}
+	\item Design control law to place closed loop poles where desired
+	\item If full state not available for feedback, then design an \emph{Observer} to compute the states from the system output
+	\item Combine \emph{Observer} and \emph{Controller} -- this takes the place of the \emph{Classical Compensator}
+	\item Introduce the \emph{Reference Input} -- affects the closed loop zeros but not the poles making it possible to improve the transient response and tracking accuracy
+\end{enumerate}	
 \end{slide}
-\fi
 
-If a sub-system is connected to the inputs $\mathbf{u}$ then it is said to be \emph{controllable}. That is, we can control the states of that sub-system from the inputs. Conversely, if there is no connection, then we cannot influence those states from the inputs and the sub-system is \emph{uncontrollable}.
-
-Similarly, if a sub-system is connected to the outputs $\mathbf{y}$ then it is said to be \emph{observable}. That is, we can observe or measure the states of that sub-system from a knowledge of the output values. Conversely, if there is no connection, then there is no information about those states contained in the outputs and the sub-system is \emph{unobservable}.
-\ifslidesonly
 \begin{slide}
-   \heading{Controllability}
-\begin{itemize}
-	\item If a sub-system is connected to the inputs $\mathbf{u}$ then it is said to be \emph{controllable}. 
-	\item If there is no connection the sub-system is \emph{uncontrollable}.
-	\item If a sub-system is connected to the outputs $\mathbf{y}$ then it is said to be \emph{observable}. 
-	\item If there is no connection the sub-system is \emph{unobservable}.
-\end{itemize}
+   \heading{State Feedback Compensator}
+   \begin{center}
+   	\resizebox{280pt}{!}{\includegraphics{pictures/statefb.pdf}}
+   \end{center}
 \end{slide}
-\fi
+
+\section*{Finding the Control Law} % (fold)
+\label{sec:finding_the_control_law}
+
+We shall only consider SISO systems here.
+
+Let the input to the plant, $u$ be derived from the reference input $r$, and the states, $\mathbf{x}$, as follows:
+\[
+u=r-\mathbf{Kx}=r-(k_1x_1+k_2x_2+\cdots k_nx_n)
+\]
+Thus:
+\begin{eqnarray*}
+	\dot{\mathbf{x}} & = & \mathbf{Ax}+\mathbf{B}u \\
+	                 & = & \mathbf{Ax}+\mathbf{B}(r = \mathbf{Kx}) \\
+	                 & = & \mathbf{Ax}+\mathbf{B}u \\	
+\end{eqnarray*} 
+
+The state matrix for the closed loop system with input, $r$,  is:  $\mathbf{A}-\mathbf{BK}$ and taking Laplace Transforms  (ignoring initial conditions) gives:
+\[
+	s\mathbf{X}(s) = (\mathbf{A}-\mathbf{BK})\mathbf{X}(s) + \mathbf{B}R(s)
+\]
+Therefore 
+\[
+    (s\mathbf{I}-\mathbf{A}+\mathbf{BK})\mathbf{X}(s) = \mathbf{B}R(s).
+\]
+
+The closed loop poles are the roots of $s$ in the Characteristic Equation (CE):
+\begin{equation}
+	\label{eq:1}
+	\det\left[s\mathbf{I}-\mathbf{A}+\mathbf{BK}\right]=0
+\end{equation}
  
-% section system_partitioning (end)
+Suppose the desired closed loop poles are to be at $p_1$, $p_2$, $\cdots$, $p_n$, then the desired CE is:
+\begin{equation}
+	\label{eq:2}
+	\alpha_c(s) = (s-p_1)(s-p_2)\cdots(s-p_n)=0
+\end{equation} 
 
-\section*{Controllability and observability of the sub-systems} % (fold)
-\label{sec:section_name}
+Equation (\ref{eq:2}) is multiplied out to a polynomial in $s$.
 
-\input{frag2}
-\ifslidesonly
-\begin{slide}
-   \heading{Controllability and observability of the sub-systems}
-   \input{frag2}
-\end{slide}
-\fi
+Finally, we need to find the $k$  coefficients in $\mathbf{K}$ such that the polynomials in equations  (\ref{eq:1})  and  \ref{eq:2}) above have matching coefficients in each power of $s$.
 
+This leads to a set of linear equations in the $k$'s  which can always be solved to give the required feedback control law, for whatever closed loop pole locations are given.
 
-If sub-sets $\mathbf{S}_3$ and $\mathbf{S}_4$ are empty then the entire system is completely controllable.
+\subsection*{Example 1} % (fold)
+\label{sub:example_1}
 
-If sub-sets $\mathbf{S}_1$ and $\mathbf{S}_4$ are empty then the entire system is completely observable.
-
-
-% section Controllability_and_observability_of_the_sub-systems (end)
-
-\section*{Mathematical Test for Controllability} % (fold)
-\label{sec:mathematical_test_for_controllability}
-
-
-If we transform the state equations to normal canonical form, then the term involving the inputs constitutes the link in the previous figure between $\mathbf{u}$ and the sub-systems.
-
-From previous work we had:
+\textbf{Problem}: Given,
 \[
-\dot{\mathbf{x}} = \mathbf{Ax} + \mathbf{Bu}
+{\bf{\dot x}} = \left[ {\begin{array}{*{20}c}
+   { - 4} & 0  \\
+   0 & { - 11}  \\
+\end{array}} \right]{\bf{x}} + \left[ {\begin{array}{*{20}c}
+   1  \\
+   { - 1}  \\
+\end{array}} \right]u
 \]
-with state transformation matrix $\mathbf{T}$ giving:
-\begin{eqnarray*}
-	\mathbf{x} & = & \mathbf{Tw} \\
-	\dot{\mathbf{w}}& = &\mathbf{T}^{-1}\mathbf{ATw}+\mathbf{T}^{-1}\mathbf{Bu} \\
-	& = & \mathbf{\Lambda w}= \mathbf{T}^{-1}\mathbf{Bw}
-\end{eqnarray*}
-where $\mathbf{\Lambda}$ is a diagonal matrix.
- 
-For controllability of all the system states, every state equation must be linked to at least one of the inputs. The $i^\mathrm{th}$ state equation is:
-\[
-\dot{w}_i = \lambda_iw_i + \left[i^{\mathrm{th}}\mathrm{\ row\ of\ }\mathbf{T}^{-1}\mathbf{B}\right]\mathbf{u}
-\]
- 
-Therefore for every state equation to be linked to at least one input, there must be no row of $\mathbf{T}^{-1}\mathbf{B}$  containing all zero entries.
-\ifslidesonly
-\begin{slide}
-   \heading{Mathematical Test for Controllability (1)}
-   If we transform the state equations to normal canonical form, then the term involving the inputs constitutes the link in the previous figure between $\mathbf{u}$ and the sub-systems.
-
-From previous work we had:
-\[
-\dot{\mathbf{x}} = \mathbf{Ax} + \mathbf{Bu}
-\]
-with state transformation matrix $\mathbf{T}$ giving:
-\begin{eqnarray*}
-	\mathbf{x} & = & \mathbf{Tw} \\
-	\dot{\mathbf{w}}& = &\mathbf{T}^{-1}\mathbf{ATw}+\mathbf{T}^{-1}\mathbf{Bu} \\
-	& = & \mathbf{\Lambda w}= \mathbf{T}^{-1}\mathbf{Bw}
-\end{eqnarray*}
-where $\mathbf{\Lambda}$ is a diagonal matrix.
-\end{slide}
-
-\begin{slide}
-   \heading{Mathematical Test for Controllability (2)}
-\begin{itemize}
-	\item For controllability of all the system states, every state equation must be linked to at least one of the inputs.
-	\item  The $i^\mathrm{th}$ state equation is:
-	\[
-	\dot{w}_i = \lambda_iw_i + \left[i^{\mathrm{th}}\mathrm{\ row\ of\ }\mathbf{T}^{-1}\mathbf{B}\right]\mathbf{u}
-	\]
-	\item Therefore for every state equation to be linked to at least one input, there must be no row of $\mathbf{T}^{-1}\mathbf{B}$  containing all zero entries.
-\end{itemize}
-
-\end{slide}
-\fi
-
-
-% section mathematical_test_for_controllability (end)
-
-\section{Mathematical Test for Observability} % (fold)
-\label{sec:mathematical_test_for_observability}
-
-If we transform the output equations to normal canonical form, then the term involving the states constitutes the link in the previous figure between the sub-system states and outputs $\mathbf{y}$.
-
-From previous work we had:
-\[
-\mathbf{y} = \mathbf{Cx} + \mathbf{Du}
-\]
- 
-Transforming to normal canonical form with matrix $\mathbf{T}$ gives:
-\begin{eqnarray*}
-	\mathbf{x} & = & \mathbf{Tw} \\
-	\mathbf{y}& = &\mathbf{CTw}+\mathbf{Du} \\
-\end{eqnarray*}
-
-For observability of all the system states, every state $w_i$ must be linked to at least one of the outputs.  Therefore, there must be no column of $\mathbf{CT}$  containing all zero entries.
-\ifslidesonly
-\begin{slide}
-   \heading{Mathematical Test for Observability (1)}
-If we transform the output equations to normal canonical form, then the term involving the states constitutes the link in the previous figure between the sub-system states and outputs $\mathbf{y}$.
-
-From previous work we had:
-\[
-\mathbf{y} = \mathbf{Cx} + \mathbf{Du}
-\]
-
-Transforming to normal canonical form with matrix $\mathbf{T}$ gives:
-\begin{eqnarray*}
-	\mathbf{x} & = & \mathbf{Tw} \\
-	\mathbf{y}& = &\mathbf{CTw}+\mathbf{Du} \\
-\end{eqnarray*}
-\end{slide}
-\begin{slide}
-   \heading{Mathematical Test for Observability (2)}
-\begin{itemize}
-	\item For observability of all the system states, every state $w_i$ must be linked to at least one of the outputs.
-	\item Therefore, there must be no column of $\mathbf{CT}$  containing all zero entries.   
-\end{itemize}
-\end{slide}
-\fi
-
-The previous arguments have indicated necessary conditions for controllability and observability but even if they are true they do not give a guarantee. Sufficient conditions require more subtle tests as quoted in the next section.
-
-
-% section mathematical_test_for_observability (end)
-
-\section*{Alternative Tests for Controllability and Observability} % (fold)
-\label{sec:alternative_tests_for_controllability_and_observability}
-
-To apply the tests of the previous sections involves deriving the transformation matrix $\mathbf{T}$, the columns of which consist of the eigenvectors of the original state matrix $\mathbf{A}$. It is not necessary to form $\mathbf{T}$ explicitly and alternative tests exist based on the untransformed matrices $\mathbf{A}$, $\mathbf{B}$ and $\mathbf{C}$ only.
-
-For an $n^{\mathrm{th}}$ order system, the system is completely \emph{state controllable} if the \textbf{controllability matrix}:
-\[
-\left[\mathbf{B}\vdots\mathbf{AB}\vdots\cdots\vdots\mathbf{A}^{n-1}\mathbf{B}\right]
-\]
-is of rank $n$. (i.e. it contains $n$ linearly independent rows or, in other words, its determinant is non-zero.)
-
-Similarly, a system is completely \emph{state observable} if the \textbf{observability matrix}
-\[
-\left[\mathbf{C}^T\vdots\mathbf{A}^T\mathbf{C}^T\vdots\cdots\vdots\left(\mathbf{A}^T\right)^{n-1}\mathbf{C}^T\right]
-\]
-is of rank $n$ (i.e. its determinant is non-zero.)
-
-These two conditions can result in numerically ill-conditioned calculations for large $n$.
-
-\ifslidesonly
-\begin{slide}
-   \heading{Alternative tests: Controllability}
-   For an $n^{\mathrm{th}}$ order system, the system is completely \emph{state controllable} if the \textbf{controllability matrix}:
-\[
-\left[\mathbf{B}\vdots\mathbf{AB}\vdots\cdots\vdots\mathbf{A}^{n-1}\mathbf{B}\right]
-\]
-is of rank $n$.
-\end{slide}
-
-\begin{slide}
-\heading{Alternative tests: Observability}
-For an $n^{\mathrm{th}}$ order system, a system is completely \emph{state observable} if the \textbf{observability matrix}
-\[
-\left[\mathbf{C}^T\vdots\mathbf{A}^T\mathbf{C}^T\vdots\cdots\vdots\left(\mathbf{A}^T\right)^{n-1}\mathbf{C}^T\right]
-\]
-is of rank $n$.
-\end{slide}
-\fi
-
-\subsection*{Example} % (fold)
-\label{sub:example}
-
-\textbf{Problem}: test the following system for controllability and observability:
-\begin{eqnarray*}
-	 {\bf{\dot x}}  & = &   \left[ {\begin{array}{*{20}c}
-	   { - 6} & { - 5}  \\
-	   1 & 0  \\
-	\end{array}} \right]{\bf{x}} + \left[ {\begin{array}{*{20}c}
-	   1  \\
-	   0  \\
-	\end{array}} \right]u \\
-		 y & = &  \left[ {\begin{array}{*{20}c}
-	   3 & 1  \\
-	\end{array}} \right]{\bf{x}} \\ 
-\end{eqnarray*}
-
+find the feedback control law which places the closed-loop poles at: $-10\pm j10$.
 
 \textbf{SOLUTION}:
+\begin{eqnarray*}
+	0 & = & \det \left[ {s{\bf{I}} - {\bf{A}} + {\bf{BK}}} \right] = \det \left\{ {\left. {\left[ {\begin{array}{*{20}c}
+	   {s + 4} & 0  \\
+	   0 & {s + 11}  \\
+	\end{array}} \right] + \left[ {\begin{array}{*{20}c}
+	   1  \\
+	   { - 1}  \\
+	\end{array}} \right]\left[ {\begin{array}{*{20}c}
+	   {k_1 } & {k_2 }  \\
+	\end{array}} \right]} \right\}} \right. \\
+	0 & = & \det \left[ {\begin{array}{*{20}c}
+	   {s + 4 + k_1 } & {k_2 }  \\
+	   { - k_1 } & {s + 11 - k_2 }  \\
+	\end{array}} \right] \\
+	0 & = & (s + 4 + k_1 )(s + 11 - k_2 ) - (k_2 )( - k_1 ) \\
+	0 & = & (s+4+k_1)(s+11-k_2)+k_1k_2
+\end{eqnarray*}
+\begin{equation}
+	\label{eq:3}
+	s^2+(15+k_1-k_2)s+(44+11k_1-4k_2)=0
+\end{equation}
+
+Now the desired CE is:
+\[
+\alpha_c(s)=(s+10-j10)(s+10-j10) = 0
+\]
+\begin{equation}\label{eq:4}
+	s^2+20s+200=0
+\end{equation}
+
+Therefore matching coefficients in Eqs. (\ref{eq:3}) and (\ref{eq:4}):
+\[
+\begin{array}{c}
+ s^2 :1 = 1 \to {\rm{OK}} \\ 
+ s^1 :15 + k_1  - k_2  = 20 \to k_1  - k_2  = 5 \\ 
+ s^0 :44 + 11k_1  - 4k_2  = 200 \to 11k_1  - 4k_2  = 156 \\ 
+ \end{array}
+\]
+
+ 
+
+Solving for the $k$'s:
+\[
+\left[ {\begin{array}{*{20}c}
+   1 & { - 1}  \\
+   {11} & { - 4}  \\
+\end{array}} \right]\left[ {\begin{array}{*{20}c}
+   {k_1 }  \\
+   {k_2 }  \\
+\end{array}} \right] = \left[ {\begin{array}{*{20}c}
+   5  \\
+   {156}  \\
+\end{array}} \right]
+\]
 % MathType!MTEF!2!1!+-
 % faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
 % 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
 % bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
 % pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaCOqaiabg2da9maadmaabaqbamqabi
-% qaaaqaaiaaigdaaeaacaaIWaaaaaGaay5waiaaw2faaiaacUdacaaM
-% f8UaaCyqaiaahkeacqGH9aqpdaWadaqaauaadeqaciaaaeaacqGHsi
-% slcaaI2aaabaGaeyOeI0IaaGynaaqaaiaaigdaaeaacaaIWaaaaaGa
-% ay5waiaaw2faamaadmaabaqbamqabiqaaaqaaiaaigdaaeaacaaIWa
-% aaaaGaay5waiaaw2faaiabg2da9maadmaabaqbamqabiqaaaqaaiab
-% gkHiTiaaiAdaaeaacaaIXaaaaaGaay5waiaaw2faaaaa!47F8!
+% aiaabeqaamaabaabaaGcbaWaamWaaeaafaWabeGabaaabaGaam4Aam
+% aaBaaaleaacaaIXaaabeaaaOqaaiaadUgadaWgaaWcbaGaaGOmaaqa
+% baaaaaGccaGLBbGaayzxaaGaeyypa0ZaaSaaaeaacaaIXaaabaGaey
+% OeI0IaaGinaiabgUcaRiaaigdacaaIXaaaamaadmaabaqbamqabiGa
+% aaqaaiabgkHiTiaaisdaaeaacaaIXaaabaGaeyOeI0IaaGymaiaaig
+% daaeaacaaIXaaaaaGaay5waiaaw2faamaadmaabaqbamqabiqaaaqa
+% aiaaiwdaaeaacaaIXaGaaGynaiaaiAdaaaaacaGLBbGaayzxaaGaey
+% ypa0ZaaSaaaeaacaaIXaaabaGaaG4naaaadaWadaqaauaadeqaceaa
+% aeaacaaIXaGaaG4maiaaiAdaaeaacaaIXaGaaGimaiaaigdaaaaaca
+% GLBbGaayzxaaGaeyypa0ZaamWaaeaafaWabeGabaaabaGaaGymaiaa
+% iMdacaGGUaGaaGinaiaaiMdacaaIYaGaaGyoaaqaaiaaigdacaaI0a
+% GaaiOlaiaaisdacaaIYaGaaGyoaaaaaiaawUfacaGLDbaaaaa!5BC6!
 \[
-{\bf{B}} = \left[ {\begin{array}{*{20}c}
-   1  \\
-   0  \\
-\end{array}} \right];\quad {\bf{AB}} = \left[ {\begin{array}{*{20}c}
-   { - 6} & { - 5}  \\
-   1 & 0  \\
+\left[ {\begin{array}{*{20}c}
+   {k_1 }  \\
+   {k_2 }  \\
+\end{array}} \right] = \frac{1}{{ - 4 + 11}}\left[ {\begin{array}{*{20}c}
+   { - 4} & 1  \\
+   { - 11} & 1  \\
 \end{array}} \right]\left[ {\begin{array}{*{20}c}
-   1  \\
-   0  \\
+   5  \\
+   {156}  \\
+\end{array}} \right] = \frac{1}{7}\left[ {\begin{array}{*{20}c}
+   {136}  \\
+   {101}  \\
 \end{array}} \right] = \left[ {\begin{array}{*{20}c}
-   { - 6}  \\
-   1  \\
+   {19.429}  \\
+   {14.429}  \\
 \end{array}} \right]
 \]
 
-Therefore the determinant of the controllability matrix is:
+ 
+
+Therefore the required feedback control law is:
 % MathType!MTEF!2!1!+-
 % faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
 % 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
 % bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
 % pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaciizaiaacwgacaGG0bWaamWaaeaafa
-% WabeGacaaabaGaaGymaaqaaiabgkHiTiaaiAdaaeaacaaIWaaabaGa
-% aGymaaaaaiaawUfacaGLDbaacqGH9aqpcaaIXaGaeyOeI0Iaaiikai
-% abgkHiTiaaiAdacqGHxdaTcaaIWaGaaiykaiabg2da9iaaigdacqGH
-% GjsUcaaIWaaaaa!4385!
+% aiaabeqaamaabaabaaGcbaGaamyDaiabg2da9iaadkhacqGHsislda
+% WadaqaauaadeqabiaaaeaacaaIXaGaaGyoaiaac6cacaaI0aGaaGOm
+% aiaaiMdaaeaacaaIXaGaaGinaiaac6cacaaI0aGaaGOmaiaaiMdaaa
+% aacaGLBbGaayzxaaGaaCiEaaaa!3DCD!
 \[
-\det \left[ {\begin{array}{*{20}c}
-   1 & { - 6}  \\
-   0 & 1  \\
-\end{array}} \right] = 1 - ( - 6 \times 0) = 1 \ne 0
+u = r - \left[ {\begin{array}{*{20}c}
+   {19.429} & {14.429}  \\
+\end{array}} \right]{\bf{x}}
 \]
-Therefore the system is controllable.
+
+
+
+\textbf{COMMENT}
+This matching of coefficients can always be done, though it is tedious for $n>3$, \textbf{EXCEPT} in the case of the \emph{Control Canonical Form}.
+
+% subsection example_1 (end)
  
-\[
-{\bf{C}^T} = \left[ {\begin{array}{*{20}c}
-   3  \\
-   1  \\
-\end{array}} \right];\quad {\bf A}^T{\bf C}^T = \left[ {\begin{array}{*{20}c}
-   { - 6} & { - 5}  \\
-   1 & 0  \\
-\end{array}} \right]\left[ {\begin{array}{*{20}c}
-   3  \\
-   1  \\
-\end{array}} \right] = \left[ {\begin{array}{*{20}c}
-   { -17 }  \\
-   { -15 }  \\
-\end{array}} \right]
-\]
-
-Therefore the determinant of the observability matrix is:
-\[
-\det \left[ {\begin{array}{*{20}c}
-   3 & { -17 }  \\
-   1 & { -15 }  \\
-\end{array}} \right] = 3\times(-15) - (-17) \times 1) = -28 \ne 0
-\]
-Therefore the system is observable.
-
-% subsection example (end)Test the following system for controllability and observability:
-
-\subsection{Exercise} % (fold)
-\label{sub:exercise}
-
-Confirm these results by using system transformation to normal form.
-
-% subsection exercise (end)
-
-
- 
-
-
-% section alternative_tests_for_controllability_and_observability (end)
-
-
-\section*{Matlab functions} % (fold)
-\label{sec:matlab_functions}
-
-\begin{slide}
-   \heading{Matlab function for testing controllability}
-\begin{verbatim}
-A = [-6 -5; 1 0];
-B = [1; 0]
-CM = ctrb(A, B)
-rank(CM) % should be 2.
-\end{verbatim}
-\textbf{Important note}: \texttt{ctrb} is not recommended for serious control design use as it is numerically unstable.
-\end{slide}
-
-\begin{slide}
-   \heading{Matlab function for testing observability}
-\begin{verbatim}
-A = [-6 -5; 1 0];
-C = [3 1]
-OM = obsv(A, C)
-rank(OM) % should be 2.
-\end{verbatim}
-\textbf{Important note}: \texttt{obsv} is not recommended for serious control design use as it is numerically unstable.
-\end{slide}
-
-\begin{slide}
-   \heading{Observability/controllability of systems}
-\begin{verbatim}
-A = [-6 -5; 1 0]; B = [1; 0]
-C = [3 1];
-sys = ss(A, B, C);
-OM = obsv(sys)
-CM = ctrb(sys)
-\end{verbatim}
-\end{slide}
-% section matlab_functions (end)
+% section finding_the_control_law (end)
 
 
 
