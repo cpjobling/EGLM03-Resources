@@ -203,8 +203,51 @@ This matching of coefficients can always be done, though it is tedious for $n>3$
  
 % section finding_the_control_law (end)
 
+\section{State Feedback in the Case of the Control Canonical Form} % (fold)
+\label{sec:state_feedback_in_the_case_of_the_control_canonical_form}
 
 
+In the control canonical form we have matrices:
+
+ 
+with open loop CE:
+ 
+Feedback results in the closed loop CE:
+ 
+
+   1)
+ 
+Suppose the desired CE is:
+
+ 
+
+or         2)
+
+Matching coefficients in equns 1)  &  2)  is now simple:
+
+ 
+
+
+ 
+eg.Given the system TF:
+ 
+find the control law for the control canonical form which places the closed loop poles at s=−10±10j.
+Answer:
+ 
+The control canonical form has matrices:
+ 
+NB:  C  is obtained from the TF numerator   (0s+7)
+so:    
+and the closed loop CE is :
+        1)
+The desired CE is:
+ 
+Comparing equns  1)  and  2) gives:
+ 
+giving the control law as:   
+
+
+% section state_feedback_in_the_case_of_the_control_canonical_form (end)
 
 
 
