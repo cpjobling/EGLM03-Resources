@@ -1,0 +1,20 @@
+The state matrix for the closed loop system with input, $r$,  is:  $\mathbf{A}-\mathbf{BK}$ and taking Laplace Transforms  (ignoring initial conditions) gives:
+\[
+	s\mathbf{X}(s) = (\mathbf{A}-\mathbf{BK})\mathbf{X}(s) + \mathbf{B}R(s)
+\]
+Therefore 
+\[
+    (s\mathbf{I}-\mathbf{A}+\mathbf{BK})\mathbf{X}(s) = \mathbf{B}R(s).
+\]
+
+The closed loop poles are the roots of $s$ in the Characteristic Equation (CE):
+\begin{equation}
+	\label{eq:1}
+	\det\left[s\mathbf{I}-\mathbf{A}+\mathbf{BK}\right]=0
+\end{equation}
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

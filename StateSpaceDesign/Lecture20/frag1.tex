@@ -1,0 +1,17 @@
+Let the input to the plant, $u$ be derived from the reference input $r$, and the states, $\mathbf{x}$, as follows:
+\[
+u=r-\mathbf{Kx}=r-(k_1x_1+k_2x_2+\cdots k_nx_n)
+\]
+Thus:
+\begin{eqnarray*}
+	\dot{\mathbf{x}} & = & \mathbf{Ax}+\mathbf{B}u \\
+	                 & = & \mathbf{Ax}+\mathbf{B}(r - \mathbf{Kx}) \\
+	                 & = & (\mathbf{A}-\mathbf{BK})\mathbf{x}+\mathbf{B}r \\	
+\end{eqnarray*}
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

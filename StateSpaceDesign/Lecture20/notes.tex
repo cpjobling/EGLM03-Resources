@@ -32,43 +32,40 @@ One of the advantages of state space models is that it is possible to apply stat
 
 We shall only consider SISO systems here.
 
-Let the input to the plant, $u$ be derived from the reference input $r$, and the states, $\mathbf{x}$, as follows:
-\[
-u=r-\mathbf{Kx}=r-(k_1x_1+k_2x_2+\cdots k_nx_n)
-\]
-Thus:
-\begin{eqnarray*}
-	\dot{\mathbf{x}} & = & \mathbf{Ax}+\mathbf{B}u \\
-	                 & = & \mathbf{Ax}+\mathbf{B}(r = \mathbf{Kx}) \\
-	                 & = & \mathbf{Ax}+\mathbf{B}u \\	
-\end{eqnarray*} 
+\input{frag1}
+\ifslidesonly
+\begin{slide}
+   \heading{Finding the Control Law (1)}
+   \input{frag1}
+\end{slide}
+\fi
 
-The state matrix for the closed loop system with input, $r$,  is:  $\mathbf{A}-\mathbf{BK}$ and taking Laplace Transforms  (ignoring initial conditions) gives:
-\[
-	s\mathbf{X}(s) = (\mathbf{A}-\mathbf{BK})\mathbf{X}(s) + \mathbf{B}R(s)
-\]
-Therefore 
-\[
-    (s\mathbf{I}-\mathbf{A}+\mathbf{BK})\mathbf{X}(s) = \mathbf{B}R(s).
-\]
+\input{frag2}
+\ifslidesonly
+\begin{slide}
+	\heading{Finding the Control Law (2)}
+   \input{frag2}
+\end{slide}
+\fi
 
-The closed loop poles are the roots of $s$ in the Characteristic Equation (CE):
-\begin{equation}
-	\label{eq:1}
-	\det\left[s\mathbf{I}-\mathbf{A}+\mathbf{BK}\right]=0
-\end{equation}
  
-Suppose the desired closed loop poles are to be at $p_1$, $p_2$, $\cdots$, $p_n$, then the desired CE is:
-\begin{equation}
-	\label{eq:2}
-	\alpha_c(s) = (s-p_1)(s-p_2)\cdots(s-p_n)=0
-\end{equation} 
+\input{frag3}
+\ifslidesonly
+\begin{slide}
+	\heading{Finding the Control Law (3)}
+   \input{frag3}
+\end{slide}
+\fi
 
-Equation (\ref{eq:2}) is multiplied out to a polynomial in $s$.
+\input{frag4}
+\ifslidesonly
+\begin{slide}
+	\heading{Finding the Control Law (4)}
+   \input{frag4}
+\end{slide}
+\fi
 
-Finally, we need to find the $k$  coefficients in $\mathbf{K}$ such that the polynomials in equations  (\ref{eq:1})  and  \ref{eq:2}) above have matching coefficients in each power of $s$.
 
-This leads to a set of linear equations in the $k$'s  which can always be solved to give the required feedback control law, for whatever closed loop pole locations are given.
 
 \subsection*{Example 1} % (fold)
 \label{sub:example_1}
@@ -110,7 +107,7 @@ find the feedback control law which places the closed-loop poles at: $-10\pm j10
 
 Now the desired CE is:
 \[
-\alpha_c(s)=(s+10-j10)(s+10-j10) = 0
+\alpha_c(s)=(s+10-j10)(s+10+j10) = 0
 \]
 \begin{equation}\label{eq:4}
 	s^2+20s+200=0
@@ -203,53 +200,148 @@ This matching of coefficients can always be done, though it is tedious for $n>3$
  
 % section finding_the_control_law (end)
 
-\section{State Feedback in the Case of the Control Canonical Form} % (fold)
+\section*{State Feedback in the Case of the Control Canonical Form} % (fold)
 \label{sec:state_feedback_in_the_case_of_the_control_canonical_form}
 
 
-In the control canonical form we have matrices:
-
- 
-with open loop CE:
- 
-Feedback results in the closed loop CE:
- 
-
-   1)
- 
-Suppose the desired CE is:
-
- 
-
-or         2)
-
-Matching coefficients in equns 1)  &  2)  is now simple:
-
- 
+\input{frag5}
+\ifslidesonly
+\begin{slide}
+	\heading{Control Canonical Form Simplifies Calculation (1)}
+   \input{frag5}
+\end{slide}
+\fi
 
 
+\input{frag6}
+\input{frag7}
+\ifslidesonly
+\begin{slide}
+	\heading{Control Canonical Form (2)}
+   \input{frag6}
+\end{slide}
+\begin{slide}
+	\heading{Control Canonical Form (3)}
+   \input{frag7}
+\end{slide}
+\fi
+
+
  
-eg.Given the system TF:
+\input{frag8}
+\ifslidesonly
+\begin{slide}
+	\heading{Control Canonical Form (4)}
+   \input{frag8}
+\end{slide}
+\fi
+
  
-find the control law for the control canonical form which places the closed loop poles at s=−10±10j.
-Answer:
+\subsection*{Example 2} % (fold)
+\label{sub:example_2}
+
+\textbf{Problem}: Given the system TF:
+\[
+G(s) = \frac{7}{(s+4)(s+11)}
+\]
+find the control law for the control canonical form which places the closed loop poles at $s=−10\pm j10$.
+
+\textbf{SOLUTION}:
+\[
+G(s) = \frac{7}{(s+4)(s+11)} = \frac{7}{(s^2+15s+44)}
+\]
  
 The control canonical form has matrices:
+\[
+{\bf{A}} = \left[ {\begin{array}{*{20}c}
+   { - 15} & { - 44}  \\
+   1 & 0  \\
+\end{array}} \right];\quad {\bf{B}} = \left[ {\begin{array}{*{20}c}
+   1  \\
+   0  \\
+\end{array}} \right];\quad {\bf{C}} = \left[ {\begin{array}{*{20}c}
+   0 & 7  \\
+\end{array}} \right];\quad {\bf{D}} = 0
+\]
  
-NB:  C  is obtained from the TF numerator   (0s+7)
+\textbf{NB}:  $\mathbf{C}$ is obtained from the TF numerator $(0s+7)$.
 so:    
-and the closed loop CE is :
-        1)
+\[
+{\bf{A}} - {\bf{BK}} = \left[ {\begin{array}{*{20}c}
+   { - 15 - k_1 } & { - 44 - k_2 }  \\
+   1 & 0  \\
+\end{array}} \right]
+\]
+and the closed loop CE is:
+\begin{equation}
+	s^2+(15+k_1)s+(44+k_2)=0 \label{eq:7}
+\end{equation}
 The desired CE is:
+\[
+\alpha_c(s)=(s+10-j10)(s+10+j10) = 0
+\]
+\begin{equation}\label{eq:8}
+	s^2+20s+200=0
+\end{equation}
  
-Comparing equns  1)  and  2) gives:
- 
+Comparing Eqs. (\ref{eq:7})  and  (\ref{eq:8}) gives:
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGaaGymaiaaiwdacqGHRaWkcaWGRbWaaS
+% baaSqaaiaaigdaaeqaaOGaeyypa0JaaGOmaiaaicdacqGHsgIRcaWG
+% RbWaaSbaaSqaaiaaigdaaeqaaOGaeyypa0JaaGynaaaa!3A5E!
+\[
+15 + k_1  = 20 \to k_1  = 5
+\]
+and
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGaaGymaiaaiwdacqGHRaWkcaWGRbWaaS
+% baaSqaaiaaigdaaeqaaOGaeyypa0JaaGOmaiaaicdacqGHsgIRcaWG
+% RbWaaSbaaSqaaiaaigdaaeqaaOGaeyypa0JaaGynaaaa!3A5E!
+\[
+44 + k_2  = 200 \to k_2  = 156
+\]
 giving the control law as:   
+\[
+u = r - \left[ {\begin{array}{*{20}c}
+   {5} & {156}  \\
+\end{array}} \right]{\bf{x}}
+\]
+
+% subsection example_2 (end)Given the system TF:
 
 
 % section state_feedback_in_the_case_of_the_control_canonical_form (end)
 
+\section*{A Transfer Function Model of State Feedback} % (fold)
+\label{sec:a_transfer_function_model_of_state_feedback}
 
+\input{frag9}
+\ifslidesonly
+\begin{slide}
+	\heading{Transfer Function Model of State Feedback (1)}
+   \input{frag9}
+\end{slide}
+\fi
+
+\input{frag10}
+\ifslidesonly
+\begin{slide}
+	\heading{Transfer Function Model of State Feedback (2)}
+   \input{frag10}
+\end{slide}
+\fi
+
+
+
+% section a_transfer_function_model_of_state_feedback (end)
 
 %----------------------------------------------------------------
 % The end of notes
