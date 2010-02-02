@@ -5,7 +5,7 @@ echo "Building all notes and slides for module ${CODE}: ${MODULE}"
 echo "Put ${CODE} Disk into Floppy Drive"
 echo ""
 
-foreach section (DigitalSystems StateSpaceModels)
+foreach section (DigitalSystems StateSpaceModels StateSpaceDesign)
    (cd $section; ./buildit)
 end
 
