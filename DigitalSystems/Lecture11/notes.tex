@@ -1,371 +1,210 @@
 %% Digital Systems
-%% Continuous System Equivalence
-\def\FileDate{98/12/02}
+%% Digital System Models
+\def\FileDate{98/11/18}
 \def\FileVersion{1.0}
 % ----------------------------------------------------------------
 % Notes pages *********************************************************
 % ----------------------------------------------------------------
 
-In many cases, e.g. signal processing, control systems, etc., we want to design a digital system so that it behaves
-(dynamically and in steady-state) the same as a continuous
-system. A digital system that has the same input-behaviour as
-a (sampled) continuous system is called a \emph{continuous
-  equivalent}.
+\section*{Digital System Models}
 
-Before we can present such a system, it is necessary to establish the
-relationship between digital operations, such as the shift, and
-continuous operations.
+The equivalent of the differential equation model for continuous
+systems is the difference equation for digital systems. Replacing
+the differential operator $\frac{d}{dt}$ by the advance operator
+$\triangle$ gives the general form of the differential equation as
+\begin{equation}\label{eq:l9e1}
+  \triangle^ny + a_{1}\triangle^{n-1}y + \ldots +  a_n y = b_0
+  \triangle^n u + b_{1}\triangle^{n-1} u + \ldots + b_n u.
+\end{equation}
+Now, given the definition of the advance operator derived in a
+previous lecture $$\triangle^n v_k = v_{k+n}$$ we can re-write
+equation (\ref{eq:l9e1}) as the \emph{difference equation}
+\begin{equation}\label{eq:l9e2}
+  y_{k+n} + a_{1}y_{k+n-1} + \ldots + a_n y_k = b_0
+   u_{k+n} + b_{1} u_{k+n-1} + \ldots +  b_n u_k.
+\end{equation}
 
-\section*{Equivalence of $s$ and $z$}
+Unlike the differential equation, however, which is hardly ever
+expressed in an integral form, the difference equation is more
+usually expressed in terms of the delay operator $\nabla$.
+Applying the operator $\nabla^n$ to equation (\ref{eq:l9e1}) gives
+\begin{eqnarray}\label{eq:l9e3}
+y + a_{1}\nabla y + \ldots  + a_n \nabla^n y &=& b_0 u +
+b_{1}\nabla u + \ldots +  b_n\nabla^n u\\
+  y_{k} + a_{1}y_{k-1} + \ldots +  a_n y_{k-n}
+   &=& b_0
+   u_{k} + b_{1} u + \ldots + b_n u_{k-n}.\label{eq:19e4}
+   \end{eqnarray}
 
-\begin{slide}\label{slide:l11s1}
-  \heading{Delaying a Sampled Signal}
+Applying the $z$ transform directly to the difference equation
+with the delay operator (\ref{eq:l9e3}) gives
+\begin{eqnarray}\label{l9e5}
+ Y + a_{1}z^{-1} Y + \ldots + a_n z^{-n} Y
+&=& b_0 U + b_{1}z^{-1} U + \ldots + b_n z^{-n} U\\ (1 +
+a_{1}z^{-1} + \ldots +  a_n z^{-n}) Y &=& (b_0 + b_{1}z^{-1} +
+\ldots + b_n z^{-n}) U \label{eq:19e6}
+   \end{eqnarray}
+
+\begin{slide}\label{slide:l9s1} \heading{$z$ Transfer Function}
+Given that
+\[(1 +
+a_{1}z^{-1} + \ldots +  a_n z^{-n}) Y(z) = (b_0 + b_1 z^{-1} +
+\ldots + b_n z^{-n}) U(z)\] The $z$ transfer function is
+\[H(z) = \frac{Y(z)}{U(z)}=\frac{b_0 + b_{1}z^{-1} + \ldots + b_n
+z^{-n}}{1 + a_1z^{-1} + \ldots + a_n z^{-n}}\]
+
+A digital system in this general form is known as a
+``\emph{pole-zero, infinite impulse response, recursive
+auto-regressive moving average digital filter(!)}''
+\end{slide}
+
+\begin{slide}\label{slide:l9s2} \heading{$z$ Transfer Function (2)}
+If $b_1 = b_2 = \cdots = b_n = 0$ then the transfer function is
+\[H(z) = \frac{b_0}{1 + a_1z^{-1} + \ldots + a_n z^{-n}}\]
+
+A digital system in this form is known as an ``\emph{all pole,
+infinite impulse response, recursive auto-regressive digital
+filter.}''
+\end{slide}
+
+\begin{slide}\label{slide:l9s3} \heading{$z$ Transfer Function (3)}
+When $a_1 = a_2 = \cdots = a_n = 0$ then the transfer function is
+\[H(z) = b_0 + b_{1}z^{-1} + \ldots + b_n
+z^{-n}\]
+
+A digital system in this form is known as an ``\emph{all zero,
+finite impulse response, non recursive moving average digital
+filter.}''
+\end{slide}
+\begin{slide}\heading{Other forms of digital transfer function}
+The transfer function can also be expressed in the
+zero-pole-gain form
+\[H(z) = \frac{k(z-z_1)(z-z_2)\cdots(z-z_n)}{(z-p_1)(z-p_2)\cdots(z-p_n)}\]
+and the partial fraction form
+\[H(z) = \frac{r_1}{z-p_1}+\frac{r_2}{z-p_2}\cdots\frac{r_n}{z-p_n}\]
+\end{slide}
+
+\begin{slide}\label{slide:l9s4} \heading{Canonical Forms}
 \begin{itemize}
-  \item Consider a simple operation of sampling with a delay
-  \begin{center}
-    \resizebox{180pt}{!}{\includegraphics{pictures/cse1.png}}
-  \end{center}
-  \item This can be represented in transform as
-  \begin{center}
-    \resizebox{180pt}{!}{\includegraphics{pictures/cse2.png}}
-  \end{center}
+\item With the transfer function written as
+\[H(z) = \frac{b_0 z^n + b_{n-1} z^{n-1} + \cdots + b_1 z + b_n}{z^n + a_1 z^{n-1} + \cdots + a_{n-1} z + b_n}\]
+there is a direct analogy with the general form of the continuous
+system transfer function with $s$ instead of $z$. \item That was
+implemented with the physically realistic integral operator $\int
+dt$ for which the digital equivalent is the delay operator
+$\nabla$. 
 \end{itemize}
 \end{slide}
 
-\begin{slide}\label{slide:l11s2}
-  \heading{Sampling a Delayed Signal}
-\begin{itemize}
-  \item The same result could be obtained by delaying the continuous
-    signal and then sampling.
-  \begin{center}
-  \resizebox{180pt}{!}{\includegraphics{pictures/cse3.png}}
-  \end{center}
-  \item Which can be represented in transform as
-  \begin{center}
-   \resizebox{180pt}{!}{\includegraphics{pictures/cse4.png}}
-  \end{center}
-\end{itemize}
-\end{slide}
+%% Digital Systems
+%% Digital System Response
 
-From the preceding arguments
-  \begin{equation}
-    \label{eq:l11e1}
-    z^{-1} = e^{-sT}
-  \end{equation}
-  That is 
-  \begin{equation}
-    \label{eq:l11e2}
-    z=e^{sT}
-  \end{equation}
-or 
-\begin{equation}
-  \label{eq:l11e3}
-  s=\frac{1}{T}\ln z
+\section*{Digital System Response}
+
+As in the case of a continuous system, the response of a digital
+signal comprises the sum of a free response and a forced response.
+The free response is dependent on the initial conditions of a
+digital system states, and as these are taken as zero here the
+free response is also zero and will not be considered further. The
+response of a digital system with transfer function $H(z)$ to a
+digital input signal $u$ is therefore the digital output signal
+$y$ given in transform form as
+\begin{equation}\label{eq:l10e1}
+  Y(z) =H(z) U(z)
 \end{equation}
-This is the fundamental relationship of equivalence. Before using it,
-we must see how a continuous signal is reconstructed from a digital
-signal. This is accomplished by means of a ``\emph{Digital-to-Analogue
-Converter}''
-
-\section*{Digital-to-Analogue
-Converter}
-The simplest converter is a ``\emph{Zero-Order Hold}'' (see
-Fig.~\ref{fig:l11f1}). This acts the opposite way to a sampler.
-\begin{figure}[htbp]
-  \begin{center}
-    \includegraphics{pictures/zoh.pdf}
-    \caption{Zero-Order Hold}
-    \label{fig:l11f1}
-  \end{center}
-\end{figure}
-
-During each sample period, the device holds the output $v(t)$ constant
-at the current value of the digital signal $v_k$. That is
-\begin{equation}
-  \label{eq:l11e4}
-  v(t) = v_k\ \mathrm{for}\ kT \le t < (k+1)T
+Taking the inverse transform gives the digital system response as
+\begin{equation}\label{eq:l10e2}
+  y_k = \mathcal{Z}^{-1}Y(z) = \mathcal{Z}^{-1} \left\{H(z)
+  U(z)\right\}
 \end{equation}
-This generates a stepwise continuous signal $v(t)$ which at the
-sampling instants is equal to the continuous signal from which the
-digital signal ${v_k}$ was generated (\sref{slide:l11s3}).
+The inverse transform needed to determine the digital system
+response is obtained using the inverse z transform methods, e.g.
+polynomial division and partial fraction expansion, discussed in a
+previous lecture.
 
-\begin{slide}\label{slide:l11s3}
-  \heading{Step-wise continuous signal}
-  This represents the output of the zero-order hold $v(t) = v_k$ for
-  $kT \le t < (k+1)T$.\\
-  \begin{center}
-\resizebox{300pt}{!}{\includegraphics{pictures/steps.pdf}}
-  \end{center}
-\end{slide}
+\subsection*{Response to Singularity Signals}
 
-The signal may be considered as an infinite number of pulses of which
-  the $k$-th is that shown in \sref{slide:l11s4}. To model such a
-  signal we use the so-called ``\emph{gating}'' property of the
-  time-delayed unit-step function $\epsilon(t)$ illustrated in \sref{slide:l11s5}.
+The elemental singularity signals in a digital system response
+include the digital impulse signal and the digital step input.
 
-\begin{slide}\label{slide:l11s4}
-  \heading{The $k$-th ``Pulse''}
+\subsubsection*{Impulse response}
+The digital impulse signal is given by
+\begin{equation}\label{eq:l10e3}
+  v = \delta = \{\delta_k\}
+\end{equation}
+where $\delta_0 = 1$ when $k = 0$, and $\delta_k = 0$ otherwise.
+Therefore the sequence for the impulse is simply
+\[\delta_k = 1,\ 0,\ 0,\ 0,\ \ldots.\]
 
-  \begin{center}
-\resizebox{300pt}{!}{\includegraphics{pictures/pulse.png}}
-  \end{center}
-\end{slide}
+The transform of the digital impulse signal is
+\begin{equation}\label{eq:l10e4}
+  V = \Delta = \sum_{k=0}^{\infty}\delta_k z^{-k} = 1
+\end{equation}
 
-\begin{slide}\label{slide:l11s5}
-  \heading{The Gating Function}
-  \begin{center}
-\resizebox{300pt}{!}{\includegraphics{pictures/gate.png}}
-  \end{center}
-\end{slide}
-
-The opening ``gate'' is given by $v_k \epsilon (t-kT)$, a step of height
-$v_k$, which is activated at $t=kT$ seconds. The gate is ``closed'' by
-a negative going unit step, also of height $v_k$, which is activated
-at $t=\{k+1\}T$ seconds. The sum of these two signals is 
+Consider the system \[ H(z) = \frac{4z^2 - 16}{z^2 - 0.25}\], the
+impulse response will be
+\[ Y(z) = H(z)\times 1 = \frac{4z^2 - 16}{z^2 - 0.25}\]
+We shall determine this response using the partial fraction
+expansion.
 \begin{eqnarray*}
-  p(t) &=& v_k \epsilon(t - kT) - v_k \epsilon(t - \{k+1\}T)\\
-       &=& v_k\left[\epsilon(t - kT) - v_k \epsilon(t - \{k+1\}T)\right]
+Y(z) &=& \frac{4 - 16z^{-2}}{1 - 0.25 z^{-2}}\\
+     &=& \frac{4(4 - 16z^{-2})}{4 - z^{-2}}\\
+     &=& \frac{4(2 - 4z^{-1})(2 + 4z^{-1})}{(2 - z^{-1})(2 + z^{-1})}
 \end{eqnarray*}
-So for the sequence:
-\begin{equation}
-  \label{eq:l11e5}
-  v(t) = \sum_{k=0}^{\infty} v_k\left[\epsilon(t - kT) - v_k \epsilon(t - \{k+1\}T)\right]
-\end{equation}
-In transform form this is
+Assuming a partial fraction expansion of the form \[Y(z) =
+\frac{A}{2 - z^{-1}} + \frac{B}{2 + z^{-1}} + C \]  we have
 \begin{eqnarray*}
-  V(s) &=& \sum_{k=0}^{\infty} v_k\left(\frac{1}{s}e^{-kTs} -
-  \frac{1}{s}e^{-\left\{k+1\right\}Ts}\right)\\
-       &=& \frac{1}{s}\left(1-e^{-Ts}\right) \sum_{k=0}^{\infty} v_k
-  e^{-kTs}\\
-       &=& \frac{1}{s}\left(1-z^{-1}\right) \sum_{k=0}^{\infty} v_k
-  z^{-k}\\
-       &=& \frac{1}{s}\,\frac{z-1}{z}\,V(z)
-\end{eqnarray*}
-
-So the zero-order hold is represented by the mixed transfer function 
-\begin{equation}
-  \label{eq:l11e10}
-  G_{\mathrm{zoh}}=\frac{1}{s}\,\frac{z-1}{z}
-\end{equation}
-as shown in Fig.~\ref{fig:l11f2}.
-\begin{figure}[htbp]
-  \begin{center}
-    \includegraphics{pictures/zohtf.pdf}
-    \caption{Transfer Function of the Zero-Order Hold}
-    \label{fig:l11f2}
-  \end{center}
-\end{figure}
-
-We can now design a `hold-equivalent' digital system as shown in
-\sref{slide:l11s10}. From the diagram
-\begin{eqnarray*}
-  Y(z) &=& H(z) U(z)\\
-  Y(z) &=& \mathcal{Z} Y(s)\\
-       &=& \mathcal{Z} \frac{1}{s} H(s) \frac{z-1}{z} U(z)
-\end{eqnarray*}
-so
-\begin{eqnarray}\label{eq:l11e14}
-  H(z) &=& \frac{z-1}{z} \mathcal{Z} \frac{H(s)}{s}
+ \frac{4(2 - 4z^{-1})(2 + 4z^{-1})}{(2 - z^{-1})(2 + z^{-1})}
+     &=& \frac{A(2 + z^{-1}) + B(2 - z^{-1}) + C(2 - z^{-1})(2 + z^{-1})}{(2 - z^{-1})(2 + z^{-1})}\\
+     16 - 64z^{-2} &=& 2A + Az^{-1} + 2B - Bz^{-1} + 4C - Cz^{-2}
+ \end{eqnarray*}
+Gathering terms and equating coefficients
+\begin{eqnarray}
+16 &=& 2A +2B + 4C\\ 0 &=& A - B\\ -64 &=& -C
 \end{eqnarray}
-
-\begin{slide}\label{slide:l11s10}
-  \heading{Hold-Equivalent Digital System}
-  \resizebox{300pt}{!}{\includegraphics{pictures/holdequiv.pdf}}
-\end{slide}
-
-\begin{slide}\label{slide:l11s11}
-  \heading{Example}
-  If \[H(s) = \frac{a}{s+a}\] then
-  \begin{eqnarray*}
-    H(z) &=& \frac{z-1}{z}\mathcal{Z} \frac{a}{s(s+a)}\\
-         &=& \frac{z-1}{z} \frac{z(1-e^{-aT})}{(z-1)(z-e^{-aT})}\\
-         &=& \frac{1-e^{aT}}{z-e^{-aT}}.
-  \end{eqnarray*}
-\end{slide}
-
-\section*{Other Continuous System Equivalences}
-
-\subsection*{Approximations based on numerical integration}
-
-An alternative approach is to use the relationship \[ s  = \frac{1}{T}
-\ln z. \] This cannot be substituted into a transfer function directly
-as the result is not rational, but an approximation may be used. 
-
-Three approximations, obtained from numerical integration, may be
-used. 
-
-\begin{slide}\label{slide:l11s20a}
-  \heading{Approximation by Numerical Integration}
-  \begin{itemize}
-  \item We wish to find a transfer function $T(z)$ that is equivalent to $T(s)=s$.
-  \item Let us instead seek a transfer function $D(z)$ that is equivalent to $D(s) = 1/s$.
-  \end{itemize}
-  \resizebox{300pt}{!}{\includegraphics{pictures/s-to-z.pdf}}
-\end{slide}
-
-Thus, the transfer function we are seeking will in fact be an approximation of the integral $y(t)=\int u(t) dt$. We can illustrate this as shown in SLIDE~\ref{slide:l11s20b}. If we sample the curve $u(t)$ and consider the situation at the $n$-th sampling instant, we will have $$y(nT) = \int_{0}^{nT} u(t) dt$$ We can rewrite this as $$y(nT)= \int_{0}^{nT-T} u(t) dt + \int_{nT-T}^{nT} u(t) dt$$ where the second integral term is the shaded area shown in SLIDE~\ref{slide:l11s20c}. Now if we assume that the first integral term was approximated by the digital integrator in the previous sampling instant, then $y(nT-T) = \int_{0}^{nT-T} u(t) dt$ is known, and consequently we have $$y(nT) = y(nT-T) + \int_{nT-T}^{nT} u(t) dt$$ and we only need to determine the area of the shaded region to approximate $y(nT)$.
-
-\begin{slide}\label{slide:l11s20b}
-\heading{Model of Integration}
-\begin{center}
-	\resizebox{220pt}{!}{\includegraphics{pictures/integral1.pdf}}	
-\end{center}
-\end{slide}
-
-\begin{slide}\label{slide:l11s20c}
-\heading{Sampled Model of Integration}
-\begin{center}
-	\resizebox{220pt}{!}{\includegraphics{pictures/integral2.pdf}}	
-\end{center}
-\end{slide}
-
-The most obvious approximations are illustrated in \sref{slide:l11s20d} to \sref{slide:l11s20f}. It is clear that if we are to disallow any further subdivision of the shaded area, the \emph{trapezoidal approximation} will provide the most accurate result.
-
-\begin{slide}\label{slide:l11s20d}
-\heading{Forward Rectangular Approximation}
-\begin{center}
-	\resizebox{220pt}{!}{\includegraphics{pictures/forward-rect.pdf}}	
-\end{center}
-\end{slide}
-
-\begin{slide}\label{slide:l11s20e}
-\heading{Backward Rectangular Approximation}
-\begin{center}
-	\resizebox{220pt}{!}{\includegraphics{pictures/backward-rect.pdf}}	
-\end{center}
-\end{slide}
-
-\begin{slide}\label{slide:l11s20f}
-\heading{Trapezoidal Approximation}
-\begin{center}
-	\resizebox{220pt}{!}{\includegraphics{pictures/trapezoidal.pdf}}	
-\end{center}
-\end{slide}
-
-Completing the analysis, we can show that $$y(nT)\approx y(nT-T) + \frac{T}{2}\{u(nT-T)+u(T)\}$$ which on taking z-transforms gives $$Y(z)=z^{-1}Y(z)+\frac{T}{2}\{z^{-1}U(z)+U(z)\}$$ thus 
-\begin{equation}
-\frac{Y(z)}{U(z)}=D(z)=\frac{T}{2}\{\frac{1+z^{-1}}{1-z^{-1}}\}.
-\end{equation}
-By comparison with continuous integration $Y(s)/U(s)=1/s$, this result, obtained by \emph{numerical integration} allows us to say that $$s \approx \frac{2}{T}\{\frac{1-z^{-1}}{1+z^{-1}}\}.$$ This result is summarised in SLIDE~\ref{slide:l11s22}. Similar arguments can be used to determine the forward- and backward-rectangular approximations shown in SLIDES~\ref{slide:l11s20} and \ref{slide:l11s21}.
-
-\begin{slide}\label{slide:l11s22}
-  \heading{Trapezoidal Approximation}
-  
-  \begin{eqnarray*}
-     s &=& \frac{2}{T}\, \frac{z-1}{z+1} \\
-     z &=& \frac{1 + 1/2 sT}{1 - 1/2 sT}
-  \end{eqnarray*}
-  compare expansion $$z=(1+ 1/2 sT)(1- 1/2 sT)^{-1} = 1 + sT + 1/2
- s^2T^2 + 1/4 s^3T^3
- + \cdots$$  with $$z = e^{sT} = 1 + sT + 1/2 s^2T^2 + 1/6 s^3T^3 + \cdots$$
-\end{slide}
-
-\begin{slide}\label{slide:l11s20}
-  \heading{Forward Rectangular Approximation}
-  
-  \begin{eqnarray*}
-     s &=& \frac{z-1}{T} \\
-     z &=& 1 + sT
-  \end{eqnarray*}
-  compare with $$z = e^{sT} = 1 + sT + 1/2 s^2T^2 + 1/6 s^3T^3 + \cdots$$
-\end{slide}
-
-\begin{slide}\label{slide:l11s21}
-  \heading{Backward Rectangular Approximation}
-  
-  \begin{eqnarray*}
-     s &=& \frac{z-1}{Tz} \\
-     z &=& \frac{1}{1 + sT}
-  \end{eqnarray*}
-  compare expansion $$z=(1-sT)^{-1} = 1 + sT + s^2T^2 + s^3T^3
- + \cdots$$  with $$z = e^{sT} = 1 + sT + 1/2 s^2T^2 + 1/6 s^3T^3 + \cdots$$
-\end{slide}
-
-
-The approximation shown in SLIDE\sref{slide:l11s22}) is
-is known as ``\emph{Tustin's Bilinear Transformation}''.
-
-\begin{slide}\label{slide:l11s23}
-  \heading{Example 1}
-  If \[H(s) = \frac{a}{s+a}\] then the bilinear transformation gives a
-  digital system with transfer function
-  \begin{eqnarray*}
-    H(z)&=& \frac{a}{\frac{2}{T}\,\frac{z-1}{z+1}+a} \\
-        &=& \frac{\left(\frac{aT/2}{1+aT/2}\right)(z+1)}{z-\left(\frac{1-aT/2}{1+aT/2}\right)}.
-  \end{eqnarray*}
-\end{slide}
-
-\subsection*{Matched pole-zero approximations}
-
-Another way to obtain a digital approximation of a continuous transfer function is to use the relationship $z = e^{sT}$ to map poles and zeros of the continuous transfer function into poles and zeros in the z-transfer function. 
-
-Since continuous transfer functions often have more poles than zeros, that is $n-m$ zeros at infinity, zeros at infinity are replaced in the z-transfer function by zeros at $z = -1$ which is equivalent to half the sampling frequency $\omega_s/2$ (i.e. the highest frequency possible in the z-domain). Thus if $n-m =1$ we add $(1+z^{-1})$, if $n-m=2$, $(1+z^{-1})^2$, etc. 
-
-\begin{slide}\label{slides:l11s24}
-	\heading{Matched-Pole Zero method}
-	Idea is that all poles and zeros of continuous transfer function $D(s)$ can become poles and zeros of digital transfer function $D(z)$ if the mapping $z=e^{sT}$ is used.
-	
-	Method:
-	\begin{enumerate}
-		\item Map finite poles and zeros of $D(s)$ to poles and zeros of $D(z)$ according to $z=e^{sT}$.
-		\item Add zeros at $z=-1$ for each infinite zero in $D(s)$.
-		\item Match DC or low-frequency gain.
-	\end{enumerate}
-	See examples in the notes.
-\end{slide}
-
-\subsubsection*{Example 2}
-
-Use the Matched-Pole-Zero (MPZ) approximation to give the z-transfer function equivalent to
-$$D(s)=\frac{s+b}{s+b}.$$ Order of numerator and denominator are equal so there are no infinite zeros and by matching poles and zeros  $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1 - e^{-bT}z^{-1})}.$$ For $D(s)$ the DC gain is $D(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $D(z)|_{z=1}$ (from final value theorem) that is $$k\frac{(1-e^{-aT})}{(1-e^{-bT})} = \frac{a}{b}.$$ We choose $k$ so that the DC gains match, i.e. $$k=\frac{a(1-e^{-bT})}{b(1-e^{-aT})}.$$
-
-\subsubsection*{Example 3}
-
-Use the Matched-Pole-Zero (MPZ) approximation to give the z-transfer function equivalent to
-$$D(s)=\frac{s+b}{s(s+b)}.$$ Here, the order of the denominator is one greater than the numerator so there is $n-m = 2 - 1 = 1$ infinite zero. Placing this zero at $z = -1$ makes the MPZ transfer function $$D(z)=k\frac{(1+z^{-1})(1-e^{-aT}z^{-1})}{(1-z^{-1})(1 - e^{-bT}z^{-1})}.$$ As $D(s)$ is type 1, the DC gain is $sD(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $(1-z^{-1})D(z)|_{z=1}$ that is 
+Hence
+\begin{eqnarray}
+C &=& 64\\ A &=& B\\ 16 &=& 4A + 256\\ A &=& B = -60
+\end{eqnarray}
+Thus
 \begin{eqnarray*}
-k\frac{(1+z^{-1})(1-e^{-aT})}{(1-e^{-bT})}|_{z=1} & = & k\frac{2(1-e^{-aT})}{(1-e^{-bT})} \\
-        & = & \frac{a}{b} 
+    Y(z) &=& 64 -\frac{60}{2-z^{-1}}-\frac{60}{2+z^{-1}}\\
+    &=& 64 -\frac{30}{1-1/2 z^{-1}}-\frac{30}{1+1/2 z^{-1}}\\
+     y_k& =& \left\{64\delta_k - 30\left(\frac{1}{2}\right)^k - 30
+\left(-\frac{1}{2}\right)^k\right\}\\
+ &=& \left\{4,\ 0,\ -15,\ 0,\ -3.75,\ 0,\ -0.9375,\ \ldots
+ \right\}
 \end{eqnarray*}
 
-Again, we choose $k$ so that the DC gains match, i.e. $$k = \frac{a}{2b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
+\subsubsection*{Step response}
+The digital step signal is
+\begin{equation}\label{eq:l10e5}
+  v = \epsilon = \{\epsilon_k\}
+\end{equation}
+where $\epsilon_k = 1$ when $k \ge 0$, and $\epsilon_k = 0$
+otherwise. Therefore the sequence for the step is simply
+\[\epsilon_k = 1,\ 1,\ 1,\ 1,\ \ldots.\]
 
-We would implement $D(z)$ as a \emph{difference equation} defined in terms of the sampled inputs and outputs as shown in SLIDE~\ref{slides:slides:l11s25} for Example 2.
-\begin{slide}\label{slides:l11s25}
-	\heading{Implementation of an MPZ Approximation}
-	If $$\frac{Y(z)}{U(z)}=D(z)=k\frac{1-\alpha z^{-1}}{1-\beta z^{-1}}$$ then digital implementation will be
-	$$y(n)=\beta y(n-1)+k(u(n)-\alpha u(n-1))$$
-	$y(n)$ is the current calculated value, $y(n-1)$ is previous calculated value, $u(n)$ is current sample, and $u(n-1)$ is previous sample.
-	
-	Implementation only works if computation rate $<<$ significant dynamics of the sampled system and a small fraction of sampling time $T$.
-\end{slide}
-
-In the implementation, you should notice that it is actually physically impossible to sample $u(t)$, compute $y(n)$ and output $y(n)$ all at the same instant of time. Hence the equation is actually impossible to implement. However, if the computation is sufficiently fast, the delay between sampling $u(t)$ and outputting $y(t)$ will be small and can often be neglected.  A rule of thumb has computation delay $< t_r/20$ of the dominant pole. It should certainly be a small fraction of the sampling period $T$. 
-
-\begin{slide}\label{slides:l11s26}
-	\heading{Modified MPZ}
-	\begin{itemize}
-	\item
-	Used if constraint on computation time cannot be met.
-	
-	\item Allow a zero at infinity in $D(z)$ so that order of numerator is one less than denominator.
-	
-	\item This ensures that only past values of $u$ and $y$ appear in the implementation equation and a whole sample period is available for computation
-	
-\end{itemize}
-See notes for an example.
-\end{slide}
-
-\subsubsection*{Example 4}
-
-Re-implement Example 3 using the Modified MPZ method. If we allow an infinite zero $$D(s)=\frac{s+2}{s(s+b)}$$ becomes $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1-z^{-1})(1-e^{-bT}z^{-1})}$$ and $$k=\frac{a}{b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
-
-The implementation is now
-
-$$y(n) = (1 - e^{-bT})y(n-1)-e^{-bT}y(n-2)+k(u(n-1)-e^{-aT}u(n-2))$$
-
-and now the computation for $y(n)$ is performed only on past values of $u(n)$ and $y(n)$ and a whole sample period is available for computation. 
-
+The transform of the digital step signal is
+\begin{eqnarray}\label{eq:l10e6}
+  V = E &=& \sum_{k=0}^{\infty}\epsilon_k z^{-k}\\
+        &=& \sum_{k=0}^{\infty} z^{-k}\nonumber \\
+        &=& 1 + z^{-1} + z^{-2} + z^{-3} + \cdots z^{-n} + \cdots \nonumber\\
+        &=& \frac{1}{1-z^{-1}} = \frac{z}{z-1}.
+\end{eqnarray}
+The step response of the example system is
+\[ Y(z) = H(z)\times \frac{z}{z-1} = \frac{z(4z^2 - 16)}{(z-1)(z^2 - 0.25)}\]
+We shall determine this response using the partial fraction
+expansion.
+\begin{eqnarray*}
+Y(z) &=& \frac{4z^3 - 16z}{z^3 - z^2 - 0.25z + 0.25}\\
+ &=& \frac{4 - 16z^{-2}}{1 - z^{-1} - 0.25z^{-2} + 0.25z^{-3}}\\
+\end{eqnarray*}
+Earlier we showed that the result of the partial
+fraction expansion was
+\[\frac{30}{1-1/2 z^{-1}} - \frac{10}{1+1/2z^{-1}} -
+\frac{16}{1-z^{-1}}\] and the corresponding sequence is
+\[y_k = \left\{10(1/2)^k -10(-1/2)^k -16\epsilon_k\right\}.\]
 
 
 %----------------------------------------------------------------
@@ -374,5 +213,5 @@ and now the computation for $y(n)$ is performed only on past values of $u(n)$ an
 \endinput
 
 % Local Variables:
-% TeX-master: "lecture03"
+% TeX-master: "lecture02"
 % End:

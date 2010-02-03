@@ -2,12 +2,11 @@
 
 source ../../course.tcsh
 source ../section.tcsh
-set LNO=09
+set LNO=13
 set FILEDATE="11th February 2010"
 set VERSION="1.2"
-set TITLE='Introduction to Digital Systems'
-set SHORT_TITLE='Introduction' # $z would be interpreted by the shell
+set TITLE='Introduction to Digital Control'
+set SHORT_TITLE='Digital Control (Intro)' # $z would be interpreted by the shell
 set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"
 
 source ../../process.tcsh
-

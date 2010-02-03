@@ -5,8 +5,11 @@ source ../section.tcsh
 set LNO=14
 set FILEDATE="12 February 2010"
 set VERSION="1.2"
-set TITLE='Transforms of State-Space Models'
-set SHORT_TITLE='Transforms' # $z would be interpreted by the shell
-set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"
+set TITLE='State-Space Models'
+set SHORT_TITLE='' # $z would be interpreted by the shell
+set RIGHT="${TITLE}"
+
 
 source ../../process.tcsh
+
+

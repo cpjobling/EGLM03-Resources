@@ -5,8 +5,8 @@ source ../section.tcsh
 set LNO=11
 set FILEDATE="11th February 2010"
 set VERSION="1.2"
-set TITLE='Continuous System Equivalence'
-set SHORT_TITLE='Continuous System Equivalence' # $z would be interpreted by the shell
+set TITLE='Digital System Models and System Response'
+set SHORT_TITLE='Models and Response' # $z would be interpreted by the shell
 set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"
 
 source ../../process.tcsh

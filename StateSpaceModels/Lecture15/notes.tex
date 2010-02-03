@@ -1,10 +1,374 @@
 %% State Space Modelling of Dynamic Systems
-%% Lecture 4: Time Response of a State-Space Model
-\def\FileDate{98/10/14}
-\def\FileVersion{1.0}
+%% Lecture 2: Transforms and Time Responses of State-Space Models
+\def\FileDate{99/10/06}
+\def\FileVersion{1.2}
 % ----------------------------------------------------------------
 % Notes pages *********************************************************
 % ----------------------------------------------------------------
+
+\begin{slide}
+   \heading{Transforms and Time Responses for SS Models}
+   \begin{itemize}
+   	\item Laplace Transform of State Space Models
+   	\item Time Responses for State Space Models
+   	\item Problems
+   \end{itemize}
+\end{slide}
+
+\section*{Transforms of State Space Models} % (fold)
+\label{sec:transforms_of_state_space_models}
+
+The Laplace transform can be used to convert a differential equation
+into a transfer function. It can also be used to convert a state space
+model into a transfer function. In this lecture we demonstrate how
+this is done and we give an example.
+
+\ifslidesonly
+\begin{slide}
+  \heading{Laplace transform of a vector of functions}
+  \input{frag1}
+\end{slide}
+\fi
+\input{frag1}
+
+\ifslidesonly
+\begin{slide}
+  \heading{Laplace transform of a vector of functions (cont)}
+  \input{frag1a}
+\end{slide}
+\fi
+\input{frag1a}
+
+\ifslidesonly
+\begin{slide}
+  \heading{Example}
+  \input{frag2}
+\end{slide}
+\fi
+\input{frag2}
+\ifslidesonly
+  \begin{slide}
+    \heading{Transform of state equations}
+    \input{frag3}
+  \end{slide}
+\fi
+\input{frag3}
+
+For the system in the example the state vector is defined as
+$\mathbf{x}=[v_{31}, i_1]^{T}$, the input current is $u$, and the output
+variables are all the currents and voltages in the circuit
+$\mathbf{y}=[v_{31}, i_1, v_{32}, v_{21}, i_2]^{T}$. The transformed
+state space model is therefore that shown in
+\sref{slide:slide-l2eg1}.
+\begin{slide}\label{slide:slide-l2eg1}
+\heading{Transformed State-Equations for Example 1 from L12}
+\begin{eqnarray*} s\left[\begin{array}{c}
+  V_{31} \\
+  I_1
+\end{array}\right]-\left[\begin{array}{c}
+  v_{31}(0) \\
+  i_1(0)
+\end{array}\right]&=&\left[\begin{array}{cc}
+  0 & -1/C \\
+  1/L & -R/L
+\end{array}\right]\left[\begin{array}{c}
+  V_{31} \\
+  I_1
+\end{array}\right]+\left[\begin{array}{c}
+  1/C \\
+  0
+\end{array}\right]\left[U\right]\\
+\left[\begin{array}{c}
+  V_{31} \\
+  I_1 \\
+  V_{32} \\
+  V_{21} \\
+  I_{2}
+\end{array}\right]&=&\left[\begin{array}{cc}
+  1 & 0 \\
+  0 & 1 \\
+  1 & -R \\
+  0 & R \\
+  0 & -1
+\end{array}\right]\left[\begin{array}{c}
+  V_{31} \\
+  I_1
+\end{array}\right]+\left[\begin{array}{c}
+  0 \\
+  0 \\
+  0 \\
+  0 \\
+  1
+\end{array}\right]\left[U\right].
+\end{eqnarray*}
+\end{slide}
+
+\ifslidesonly
+\begin{slide}
+\heading{Transfer function from state space models (1)}
+\input{frag4}
+\end{slide}\fi\input{frag4}
+\ifslidesonly
+\begin{slide}\heading{Transfer function from state space models (2)}
+\input{frag5}
+\end{slide}\fi\input{frag5}
+\ifslidesonly
+\begin{slide}\heading{Transfer function from state space models (3)}
+\input{frag6}
+\end{slide}\fi\input{frag6}
+\ifslidesonly
+\begin{slide}\heading{Transfer function from state space models (4)}
+\input{frag7}\end{slide}\fi\input{frag7}
+\ifslidesonly
+\begin{slide}\heading{The Resolvant Matrix}
+\input{frag8}\end{slide}\fi\input{frag8}
+
+For the system in the example, the resolvent matrix is developed
+in \sref{slide:l2eg2}.
+\begin{slide}\label{slide:l2eg2}
+\heading{Resolvent matrix for the example}
+\begin{eqnarray*}
+\mathbf{A}&=&\left[\begin{array}{cc}
+  0 & -1/C \\
+  1/L & -R/L
+\end{array}\right] \\
+s\mathbf{I}-\mathbf{A}&=&\left[
+\begin{array}{cc}
+  s & 0 \\
+  0 & s
+\end{array}
+\right] - \left[
+\begin{array}{cc}
+  0 & -1/C \\
+  1/L & -R/L
+\end{array}
+\right] = \left[
+\begin{array}{cc}
+  s & +1/C \\
+  -1/L & s+R/L
+\end{array}\right] \\
+\left[s\mathbf{I}-\mathbf{A}\right]^{-1}&=&\frac{
+\left[\begin{array}{cc}
+  s+R/L & -1/C \\
+  +1/L & s
+\end{array} \right]
+}{s(s+R/L)+1/(LC)}=\frac{\left[\begin{array}{cc}
+  s+R/L & -1/C \\
+  +1/L & s
+\end{array} \right]}{s^2 + (R/L)s + 1/(LC) }
+\end{eqnarray*}
+\end{slide}
+
+When $\left[s\mathbf{I}-\mathbf{A}\right]^{-1}$ has been obtained,
+then the system transfer function is easily obtained through
+$\mathbf{C}\left[s\mathbf{I}-\mathbf{A}\right]^{-1}\mathbf{B}+\mathbf{D}$.
+For the system in the example, when all outputs are measured, the
+system transfer matrix is that shown in \sref{slide:l2eg3}.
+
+\begin{slide}\label{slide:l2eg3}
+\heading{Transfer matrix for example}
+\begin{eqnarray*}
+\left[\begin{array}{cc}
+  1 & 0 \\
+  0 & 1 \\
+  1 & -R \\
+  0 & R \\
+  0 & -1
+\end{array}\right]
+\left\{\frac{\left[
+\begin{array}{cc}
+  s+R/L & -1/C \\
+ +1/L & s
+\end{array}\right]}{s^2 + (R/L)s +1/(LC)}\right\}
+\left[\begin{array}{c}
+  1/C \\
+  0
+\end{array}\right]
+ &+& \left[\begin{array}{c}
+  0 \\
+  0 \\
+  0 \\
+  0 \\
+  1
+\end{array} \right]\\
+= \left[\begin{array}{cc}
+  1 & 0 \\
+  0 & 1 \\
+  1 & -R \\
+  0 & R \\
+  0 & -1
+\end{array}\right]
+\left\{\frac{\left[
+\begin{array}{c}
+  (1/C)s+R/(LC)  \\
+ +1/(LC)
+\end{array}\right]}{s^2 + (R/L)s +1/(LC)}\right\}
+ &+& \left[\begin{array}{c}
+  0 \\
+  0 \\
+  0 \\
+  0 \\
+  1
+\end{array} \right]\\
+\end{eqnarray*}
+\end{slide}
+\begin{slide}
+\heading{Transfer matrix for example (completed)}
+\begin{eqnarray*} &=& \frac{1}{s^2 + (R/L)s
++1/(LC)}\left[\begin{array}{c}
+  (1/C)s+R/(LC) \\
+  1/(LC) \\
+  (1/C)s \\
+  R/(LC) \\
+  -1/(LC)
+\end{array}\right] + \left[\begin{array}{c}
+  0 \\
+  0 \\
+  0 \\
+  0 \\
+  1
+\end{array} \right]\\
+&=& \left[\begin{array}{c}
+  \frac{(1/C)s+R/(LC)}{s^2 + (R/L)s
++1/(LC)} \\
+  \frac{1/(LC)}{s^2 + (R/L)s
++1/(LC)} \\
+  \frac{(1/C)s}{s^2 + (R/L)s
++1/(LC)} \\
+  \frac{R/(LC)}{s^2 + (R/L)s
++1/(LC)} \\
+  -\frac{1/(LC)}{s^2 + (R/L)s
++1/(LC)}+1
+\end{array}\right]
+\end{eqnarray*}
+\end{slide}
+
+In matrix form, when combined with the input and output transforms we
+have the situation illustrated in \sref{slide:l2final}.
+Each transfer function relates the corresponding output transform
+to the input transform. For example
+\[V_{31}= \frac{(1/C)s+R/(LC)}{s^2 + (R/L)s
++1/(LC)}\ U.\]
+
+\begin{slide}
+  \label{slide:l2final}
+  \heading{Transform Equations for Example}
+\begin{eqnarray*}
+\mathbf{Y}(s)&=&\left[\mathbf{C}\left[s\mathbf{I}-\mathbf{A}\right]^{-1}\mathbf{B}+\mathbf{D}\right]\mathbf{U}(s)\\
+\mathbf{Y}(s) &=& \mathbf{G}(s)\mathbf{U}(s)\\
+\left[\begin{array}{c}
+  V_{31}(s) \\
+  I_1(s) \\
+  V_{32}(s) \\
+  V_{21}(s) \\
+  I_{2}(s)
+\end{array}\right] &=& \left[\begin{array}{c}
+  \frac{(1/C)s+R/(LC)}{s^2 + (R/L)s
++1/(LC)} \\
+  \frac{1/(LC)}{s^2 + (R/L)s
++1/(LC)} \\
+  \frac{(1/C)s}{s^2 + (R/L)s
++1/(LC)} \\
+  \frac{R/(LC)}{s^2 + (R/L)s
++1/(LC)} \\
+  -\frac{1/(LC)}{s^2 + (R/L)s
++1/(LC)}+1
+\end{array}\right]\mathbf{U}(s).
+\end{eqnarray*}
+\end{slide}
+Note that the denominator is the same for each transfer function,
+and that the order of the numerator is less than the denominator
+except for one case, for which
+\begin{eqnarray*}
+I_2 & = & \left(-\frac{1/(LC)}{s^2 + (R/L)s +1/(LC)}+1\right)U\\
+    & = & \frac{-1/{LC}+s^2 + (R/L)s +1/(LC)}{s^2 + (R/L)s
+    +1/(LC)}\ U
+    \\
+    & = &\frac{s^2 + (R/L)s}{s^2 + (R/L)s
+    +1/(LC)}\ U
+\end{eqnarray*}
+Replacing $s$ by $\frac{d}{dt}$ gives the corresponding
+differential equations relating the dependant variable to the
+input.
+
+\begin{slide}
+	\heading{Converting SS to TF in Matlab}
+	Continuing example from previous lecture
+	\begin{verbatim}
+		circ_tf = tf(circ_ss)
+	\end{verbatim}
+	Returns a vector of transfer functions.
+\end{slide}
+
+\subsection*{Some Important Properties}
+
+\subsubsection*{System poles}
+
+Clearly the denominator of the transfer function is generated by the matrix inverse which produces the term:
+$$\det[s\mathbf{I}-\mathbf{A}]$$
+ 
+This evaluates to the denominator polynomial and the poles of the system are the roots of the system's characteristic equation:
+$$\det[s\mathbf{I}-\mathbf{A}] = 0.$$
+\ifslidesonly
+\begin{slide}
+	\heading{System Poles}
+	The system poles are solutions to the system's characteristic equation
+	$$\det[s\mathbf{I}-\mathbf{A}] = 0.$$
+\end{slide}
+\fi
+
+
+\subsubsection*{System zeros}
+
+What is the corresponding numerator polynomial of the transfer function, whose roots give the zeros of the system?
+The zeros are those values of $s$ for which the output is zero when the input and states are not zero. Thus:
+\begin{eqnarray*}
+(s\mathbf{I}-\mathbf{A})\mathbf{X}-\mathbf{B}U & = & \mathbf{0} \\
+\mathbf{CX}+dU = Y & = & 0
+\end{eqnarray*}
+\input{frag9}
+\ifslidesonly
+\begin{slide}
+	\heading{System Zeros (1)}
+	Zeros are those values of $s$ for which the system output is zero when the input and states are not zero
+	\begin{eqnarray*}
+		(s\mathbf{I}-\mathbf{A})\mathbf{X}-\mathbf{B}U & = & \mathbf{0} \\
+		\mathbf{CX}+dU = Y & = & 0
+	\end{eqnarray*}
+	\input{frag9}
+\end{slide}
+\fi
+ 
+\input{frag10}
+\ifslidesonly
+\begin{slide}
+	\heading{System Zeros (2)}
+	\input{frag10}
+\end{slide}
+\fi
+
+
+
+\input{frag11}
+\ifslidesonly
+\begin{slide}
+	\heading{System Zeros (3)}
+	\input{frag11}
+\end{slide}
+\fi
+
+\begin{slide}
+	\heading{Determine Poles and Zeros in Matlab}
+	\begin{verbatim}
+		circ_zpk = zpk(circ_ss)
+	\end{verbatim}
+\end{slide}
+
+%% State Space Modelling of Dynamic Systems
+%% Time Response of a State-Space Model
+
+\section*{Time Response for State Space Models} % (fold)
+\label{sec:time_response_for_state_space_models}
 
 In this lecture we shall determine the time response of a system
 represented by a state-space model. We shall take as a starting
@@ -19,8 +383,8 @@ In the last lecture, we showed that the state space model was
 In this lecture we will show how the time response of the state
 space model may be derived from the transformed model.
 
-\section*{Zero Input Response}
-\label{sec:zero_input_response} We first consider the response of
+\subsection*{Zero Input Response}
+\label{ssec:zero_input_response} We first consider the response of
 the system to its initial conditions and zero input. This is the
 \emph{zero input response} or homogeneous response of the system.
 With the input transform $U(s)=0$ the state equation becomes
@@ -42,8 +406,8 @@ constants becomes:
 \left\{\Phis{}\right\}\mathbf{x}(0)\nonumber \\ & = &
 \phit{}\mathbf{x}(0).\label{eq:l4eq3}
 \end{eqnarray}
-\section*{State Transition
-Matrix}\label{sec:state_transition_matrix} The vector of time
+\subsection*{State Transition
+Matrix}\label{ssec:state_transition_matrix} The vector of time
 functions $\phit{}$ is known as the \emph{state transition
 matrix}. It defines the motion (or \emph{trajectory}) of the state
 variables through the $n$-dimensional \emph{state space} from a
@@ -149,7 +513,7 @@ of the final equation gives \[x(t) = e^{at}.\] For the vector case
 a little more involved!}, we can show that
 \[\phit{}=e^{\mathbf{A}t}\] where $e^{\mathbf{A}t}$ is called the matrix exponential.
 
-\section*{The Zero State Response}
+\subsection*{The Zero State Response}
 We now consider the case where the initial condition vector
 $\mathbf{x}(0)=\mathbf{0}$ and we will obtain the response of the
 system to an input. This is called the \emph{zero state response}
@@ -251,7 +615,7 @@ Note that response is now a linear combination of the system modes
 ($e^{-2t}$ and $e^{-3t}$) and the input modes ($\epsilon(t)$ [the
 unit step function] and $e^{-t}$).
 \end{slide}
-\section*{Full System Response}
+\subsection*{Full System Response}
 The full system response for the state-space model is simply the
 sum of the zero-state and zero-input responses:
 \begin{eqnarray*}\mathbf{Y}_{\mathrm{full}}(s) &=& \mathbf{Y}_{\mathrm{zs}}(s) +
@@ -312,7 +676,7 @@ the total response of the system?
 \end{slide}
 
 
-\subsection*{Problems}
+\section*{Problems}
 \begin{enumerate}
 \item Prove that the impulse response of a state-space model is
 \begin{eqnarray*}
@@ -362,8 +726,14 @@ transfer function! What does this tell you about the transfer
 function as a representation of a system?
 \end{enumerate}
 
+% section time_response_for_state_space_models (end)
 
 %----------------------------------------------------------------
 % The end of slides
 % ----------------------------------------------------------------
 \endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "#"
+%%% End: 

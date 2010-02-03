@@ -1,21 +1,14 @@
-The transformed variables are
-\begin{displaymath}
-  \mathcal{L}\mathbf{v}(t) = \left[
-  \begin{array}{c}
-   \mathcal{L} v_1(t) \\
-   \mathcal{L} v_2(t) \\
-    \vdots \\
-   \mathcal{L} v_n(t) \\
-  \end{array}
-  \right] = \left[
-  \begin{array}{c}
-   V_1(s) \\
-   V_2(s) \\
-    \vdots \\
-   V_n(s) \\
-  \end{array}
-  \right] = \mathbf{V}(s)
-\end{displaymath}
+If we write down the equations for the elements we get:
+\begin{eqnarray}
+  \frac{dv_{31}}{dt} &=& \frac{1}{C}\ i_2 \label{eq:l13e1}\\
+  \frac{di_{i}}{dt} &=& \frac{1}{L}\ v_{32} \label{eq:l13e2}\\
+  v_{21} &=& R\ i_1 \label{eq:l13e3}
+\end{eqnarray}
+The ``compatability'' and ``continuity'' equations are
+\begin{eqnarray}
+  u &=& i_1 + i_2 \label{eq:l13e4}\\
+  v_{31} &=& v_{32} + v_{21} \label{eq:l13e5}
+\end{eqnarray}
 
 \endinput
 %%% Local Variables: 
