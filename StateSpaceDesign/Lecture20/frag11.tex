@@ -1,0 +1,19 @@
+State feedback: $u=r-\mathbf{K}\mathbf{k}$ will place the closed loop poles at the roots of the desired CE:
+\[
+\alpha_c(s) = s^n + \alpha_1s^{n-1} + \cdots + \alpha_n = 0
+\]
+where the row vector $\mathbf{K}$ is given by Ackermann's formula:
+\[
+\mathbf{K} = 
+\left[ {\begin{array}{*{20}c}
+   0 &  \cdots  & 0 & 1  \\
+\end{array}} \right]
+\mathcal{C}^{-1}\alpha_c(\mathbf A)
+\]
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

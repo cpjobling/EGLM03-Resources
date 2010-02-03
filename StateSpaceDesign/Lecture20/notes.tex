@@ -343,6 +343,188 @@ u = r - \left[ {\begin{array}{*{20}c}
 
 % section a_transfer_function_model_of_state_feedback (end)
 
+\section*{Ackermann's Formula} % (fold)
+\label{sec:ackermann_s_formula}
+
+\subsection*{State Feedback Design for any Form of State Space Model} % (fold)
+As stated previously, the derivation of the feedback law is tedious for systems of order  $n>3$  except in the case of the controller canonical form. One approach to the problem is to transform the given model to controller canonical form, derive the control law in terms of these states and then transform back to the original system. Ackermann derived the following formula by this method.
+\ifslidesonly
+\begin{slide}
+   \heading{State Feedback Design for any Form of State Space Model}
+\begin{itemize}
+	\item As stated previously, the derivation of the feedback law is tedious for systems of order  $n>3$  except in the case of the controller canonical form.
+	\item One approach to the problem is to transform the given model to controller canonical form, derive the control law in terms of these states and then transform back to the original system.
+	\item Ackermann derived the following formula by this method.
+\end{itemize}
+\end{slide}
+\fi
+
+\subsection*{The formula} % (fold)
+\label{sub:the_formula}
+
+\input{frag11}
+\ifslidesonly
+\begin{slide}
+	\heading{Ackermann's Formula}
+   \input{frag11}
+\end{slide}
+\fi
+
+\input{frag12}
+\ifslidesonly
+\begin{slide}
+	\heading{Explanation of the Terms}
+   \input{frag12}
+\end{slide}
+\fi
+
+\input{frag13}
+\ifslidesonly
+\begin{slide}
+	\heading{Caveats}
+   \input{frag13}
+\end{slide}
+\fi
+
+\subsection*{Matlab Function}
+\input{frag14}
+\ifslidesonly
+\begin{slide}
+	\heading{Matlab Function}
+   \input{frag14}
+\end{slide}
+\fi
+
+% subsection the_formula (end)
+ 
+eg. Given:
+ 
+find the feedback vector K to place the closed loop poles at s = −1 , −1 using Ackermann's formula.
+Answer
+ 
+ 
+ 
+ 
+Add 3 x row1 to row2 then:  -9v2=1, and v1=2v2  
+ 
+
+ 
+Effect of State Feedback on the Closed Loop Zeros
+Since,
+ 
+
+then the closed loop system is:
+
+ 
+
+By analogy with previous work, the TF from input  r  to output  y  is:
+
+ 
+
+ 
+The closed loop TF zeros are determined by the numerator determinant.
+
+Adding K times the 2nd column to the first cancels terms whilst leaving the determinant unchanged.
+
+The new form for the TF is:
+
+ 
+
+Notice now that numerator is identical to that of the open loop TF.
+
+This implies that the state feedback control has left the open loop zeros unchanged.
+
+The different denominator is due to the feedback action which alters the pole positions as required.
+ 
+Effect of Zero Locations on the Feedback Gains
+
+When a zero is close to a pole in the TF there is a marked increase in the feedback gains. This effect is best illustrated with an example:
+
+Given a system with a TF,
+ 
+find the control law to move the pole to  pc.
+
+Using the observer canonical form,
+ 
+Design the feedback to move the closed loop pole to pc.
+Now,
+ 
+Comparing the constant:
+ 
+ 
+Notice that the feedback gain  k1  is large if:
+(i)	the zero is close to the pole:    z≈p
+(ii)	the closed loop pole pc   is far from  p
+
+Therefore, large feedback control gains are required if:
+
+(i)	there exist almost cancelling pole-zero pairs in the open loop TF, making the system almost uncontrollable.
+
+
+
+
+
+
+
+(Notice that in this condition the input  u  is almost disconnected from the integrator for the state.)
+
+(ii)	one tries to move the poles a long way,
+ .  This imposes a practical limit on how arbitrarily the poles can be placed. You cannot make a slow system fast without using large gains requiring powerful, expensive actuators to force the plant response. Indeed, excessively large forces may destroy the plant.
+ 
+Pole Selection for Good Design
+
+Large control gains (large values in K) are to be avoided since they result in high energy costs and require high power/bandwidth actuators.
+
+A compromise must be achieved between good system response and control effort.
+
+Sensible choices of poles may be obtained from standard tables which optimise the step response in some way.
+
+e.g. The ITAE (Integral Time and Absolute Error) poles are designed to minimise,
+ 
+These have overshoot. If this is really unacceptable (e.g. in machine tools) then Bessel polynomials can be used.
+
+
+Order/Type	ITAE	Bessel
+1	 
+ 
+2	 
+ 
+3	 
+ 
+etc.	etc.	etc.
+
+ 
+The above are normalised to give  . To obtain polynomials for  , replace   in the above with  .
+
+e.g.  , the 2nd order ITAE polynomial is:
+ 
+
+Comments
+
+•	In general the Bessel polynomials have too much damping for normal applications – it is preferable to use ITAE (or Butterworth) poles if some overshoot is acceptable.
+
+•	If zeros are present they tend to "sharpen up" the transient response (faster rise times but consequently with more overshoot). In such cases it may be desirable to place a closed loop pole on top of a troublesome zero and work with the reduced order system as above.
+
+•	The poles closest to the origin matter most; other poles give rise to shorter-term transients only and may need only to be shifted to a better damped location, if necessary, at a similar frequency (distance from the origin).
+ 
+•	A most effective technique is to use optimal control to achieve a compromise between control effort, u, and error, z.
+
+i.e. Find the feedback vector K such as to minimise,
+ 
+
+where the choice of the parameter k determines the required compromise between,
+
+High Accuracy for High Control Effort
+                  (use a large value for k)
+
+Lower Accuracy for Reduced Control Effort
+                  (use a smaller value for k)
+
+
+
+
+% section ackermann_s_formula (end)
+
 %----------------------------------------------------------------
 % The end of notes
 % ----------------------------------------------------------------

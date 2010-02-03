@@ -1,0 +1,23 @@
+From Matlab CST, \verb|help acker|:
+\verb|K = ACKER(A,B,P)|  calculates the feedback gain matrix $\mathbf{K}$ such that
+the single input system
+\[	            .
+\dot{\mathbf{x}}=\mathbf{Ax}+\mathbf{B}u
+\]
+with a feedback law of  $u = -\mathbf{Kx}$  has closed loop poles at the 
+values specified in vector $\mathbf{P}$, i.e.,  \texttt{P = eig(A-B*K)}.
+
+\textbf{Note}: This algorithm uses Ackermann's formula.  This method
+is NOT numerically reliable and starts to break down rapidly
+for problems of order greater than 10, or for weakly controllable
+systems.  A warning message is printed if the nonzero closed-loop
+poles are greater than 10\% from the desired locations specified 
+in $\mathbf{P}$.
+
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:
