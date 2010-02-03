@@ -3,10 +3,10 @@
 source ../../course.tcsh
 source ../section.tcsh
 set LNO=16
-set FILEDATE="15 February 2010"
+set FILEDATE="12 February 2010"
 set VERSION="1.2"
-set TITLE='State Space Models from Transfer Functions'
-set SHORT_TITLE='SS from TF' # $z would be interpreted by the shell
+set TITLE='Canonical Forms'
+set SHORT_TITLE='Canonical Forms' # $z would be interpreted by the shell
 set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"
 
 source ../../process.tcsh

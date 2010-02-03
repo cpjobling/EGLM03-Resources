@@ -8,11 +8,13 @@
 
 We now turn our attention to the design of control systems using stats space techniques. The idea is that we measure the state of the system in some way and adjust the inputs to modify the state behaviour. However this implies that we can both \emph{observe} the states and \emph{control} them. This section introduces the basic concept of observability and controllability.
 
+\section*{Introduction}
+
 The development of state space system models led to clarification of the issues of controllability and observability.
 
 In classical control system theory, which is based on transfer functions, there is really no equivalent concept.
 
-\section{System Partitioning} % (fold)
+\section*{System Partitioning} % (fold)
 \label{sec:system_partitioning}
 
 Imagine a system with a set of inputs feeding a set of state equations which in turn generate a set of outputs.
@@ -124,7 +126,7 @@ where $\mathbf{\Lambda}$ is a diagonal matrix.
 
 % section mathematical_test_for_controllability (end)
 
-\section{Mathematical Test for Observability} % (fold)
+\section*{Mathematical Test for Observability} % (fold)
 \label{sec:mathematical_test_for_observability}
 
 If we transform the output equations to normal canonical form, then the term involving the states constitutes the link in the previous figure between the sub-system states and outputs $\mathbf{y}$.
