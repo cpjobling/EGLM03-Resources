@@ -1,0 +1,26 @@
+Using the observer canonical form,
+\[
+\dot{x}=px+(p - z)u,\ y = x + u.
+\]
+
+Design the feedback to move the closed-loop pole to $p_c$.
+Now,
+\[
+\mathbf{A}=p;\ \mathbf{B}=p-z;\ \mathbf{K}=k_1.
+\]
+Desired CE polynomial: $\alpha_c(s)=s-p_c$. Actual CE polynomial: 
+$\det(s\mathbf{I}-\mathbf{A}-\mathbf{BK}) = s - p + (p - z)k_1.$
+
+Comparing the constant:
+\begin{eqnarray*}
+	-p_c & = & -p + (p - z)k_1 \\
+	k_1 & = & \frac{p-p_c}{p-z}
+\end{eqnarray*}
+
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

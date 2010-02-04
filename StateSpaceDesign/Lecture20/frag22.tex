@@ -1,0 +1,18 @@
+Large control gains (large values in $\mathbf{K}$) are to be avoided since they result in high energy costs and require high power/bandwidth actuators.
+
+\textbf{A compromise must be achieved between good system response and control effort.}
+
+Sensible choices of poles may be obtained from standard tables which optimise the step response in some way.
+
+e.g. The \textbf{ITAE} (Integral Time and Absolute Error) \textbf{poles} are designed to minimise,
+\[
+I=\int_0^\infty t|\mathrm{error}| dt
+\]
+These have overshoot. If this is really unacceptable (\emph{e.g.} in machine tools) then Bessel polynomials can be used.
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

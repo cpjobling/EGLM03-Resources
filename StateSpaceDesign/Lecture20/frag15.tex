@@ -1,0 +1,17 @@
+Since,
+\[
+u = r - \mathbf{Kx}
+\]
+then the closed-loop system is:
+\begin{eqnarray*}
+	\dot{\mathbf{x}} & = & \mathbf{A}\mathbf{x}+\mathbf{B}u;\ y = \mathbf{C}\mathbf{x}+\mathbf{D}u \\
+	\dot{\mathbf{x}} & = & \mathbf{A}\mathbf{x}+\mathbf{B}(r - \mathbf{K}\mathbf{x});\ y = \mathbf{C}\mathbf{x}+\mathbf{D}(r - \mathbf{K}\mathbf{x}) \\
+	\dot{\mathbf{x}} & = & (\mathbf{A}-\mathbf{B}\mathbf{K})\mathbf{x}+\mathbf{B}r;\ y = (\mathbf{C}-\mathbf{D}\mathbf{K})\mathbf{x}+\mathbf{D}r \\
+\end{eqnarray*}
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

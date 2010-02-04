@@ -1,0 +1,18 @@
+Adding $\mathbf{K}$ times the $2^\mathrm{nd}$ column to the first cancels terms whilst leaving the determinant unchanged.
+
+The new form for the TF is:
+\[
+\frac{{Y(s)}}{{R(s)}} = \frac{{\det \left[ {\begin{array}{*{20}c}
+   {(s{\bf{I}} - {\bf{A}})} & { - {\bf{B}}}  \\
+   {\bf{C}} & {\bf{D}}  \\
+\end{array}} \right]}}{{\det (s{\bf{I}} - {\bf{A}} + {\bf{BK}})}}
+\]
+
+Notice now that numerator is identical to that of the open loop TF. This implies that the state feedback control has left the open loop zeros unchanged. The different denominator is due to the feedback action which alters the pole positions as required.
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

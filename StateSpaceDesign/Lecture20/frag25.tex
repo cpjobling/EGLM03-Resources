@@ -1,0 +1,17 @@
+A most effective technique is to use optimal control to achieve a compromise between control effort, $u$, and error, $e$.
+i.e. Find the feedback vector $\mathbf{K}$ such as to minimise,
+\[
+J=\int_0^{\infty}\left(e^2+\frac{u^2}{k}\right) dt
+\]
+where the choice of the parameter $k$ determines the required compromise between,
+\begin{itemize}
+	\item High Accuracy for High Control Effort (use a large value for $k$)
+	\item Lower Accuracy for Reduced Control Effort (use a smaller value for $k$)
+\end{itemize}
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

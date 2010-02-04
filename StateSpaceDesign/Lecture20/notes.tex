@@ -20,6 +20,7 @@ One of the advantages of state space models is that it is possible to apply stat
 \end{enumerate}	
 \end{slide}
 
+
 \begin{slide}
    \heading{State Feedback Compensator}
    \begin{center}
@@ -27,6 +28,20 @@ One of the advantages of state space models is that it is possible to apply stat
    \end{center}
 \end{slide}
 
+\ifslidesonly
+\begin{slide}
+   \heading{This Lecture}
+   \begin{itemize}
+   	\item Finding the control law
+   	\item State feedback for controller canonical form
+   	\item Transfer function model
+   	\item Ackermann's formula
+   	\item Effect of state feedback on closed-loop zeros
+   	\item Effect of plant zeros on the feedback gains
+   	\item Pole-selection for good design
+   \end{itemize}
+\end{slide}
+\fi
 \section*{Finding the Control Law} % (fold)
 \label{sec:finding_the_control_law}
 
@@ -397,133 +412,274 @@ As stated previously, the derivation of the feedback law is tedious for systems 
 
 % subsection the_formula (end)
  
-eg. Given:
+\subsection*{Example 3} % (fold)
+\label{ssec:example_2}
+
+\textbf{Problem}: 
+Given:
+\[
+{\bf{A}} = \left[ {\begin{array}{*{20}c}
+   1 & 2  \\
+   { - 1} & 1  \\
+\end{array}} \right]\quad {\rm{and}}\quad {\bf{B}} = \left[ {\begin{array}{*{20}c}
+   1  \\
+   { - 2}  \\
+\end{array}} \right]
+\]
+find the feedback vector $\mathbf{K}$ to place the closed loop poles at $s = −1,\ −1$ using Ackermann's formula.
+
+\textbf{SOLUTION}:
+\[
+\alpha_c(s) = (s + 1)(s + 1) = s^2 + 2s + 1
+\]
+therefore
+\[
+\alpha_c(s) = \mathbf{A}s^2 + 2\mathbf{A}s + \mathbf{I}
+\]
+\[
+\alpha _c ({\bf{A}}) = \left[ {\begin{array}{*{20}c}
+   { - 1} & 4  \\
+   { - 2} & { - 1}  \\
+\end{array}} \right] + 2\left[ {\begin{array}{*{20}c}
+   1 & 2  \\
+   { - 1} & 1  \\
+\end{array}} \right] + \left[ {\begin{array}{*{20}c}
+   1 & 0  \\
+   0 & 1  \\
+\end{array}} \right] = \left[ {\begin{array}{*{20}c}
+   2 & 8  \\
+   { - 4} & 2  \\
+\end{array}} \right]
+\]
+
+\[
+{\bf{AB}} = \left[ {\begin{array}{*{20}c}
+   { - 3}  \\
+   { - 3}  \\
+\end{array}} \right];\quad \mathcal{C} = \left[ {{\bf{A}} \vdots {\bf{AB}}} \right] = \left[ {\begin{array}{*{20}c}
+   1 & { - 3}  \\
+   { - 2} & { - 3}  \\
+\end{array}} \right]
+\]
+
+\begin{eqnarray*}
+	{\bf{K}} & = & \left[ {\begin{array}{*{20}c}
+	   0 &  \cdots  & 0 & 1  \\
+	\end{array}} \right]\mathcal{C}^{ - 1} \alpha _c ({\bf{A}}) \\
+	& = & \left[ {\begin{array}{*{20}c}
+	   0 & 1  \\
+	\end{array}} \right]\left[ {\begin{array}{*{20}c}
+	   1 & { - 3}  \\
+	   { - 2} & { - 3}  \\
+	\end{array}} \right]^{ - 1} \left[ {\begin{array}{*{20}c}
+	   2 & 8  \\
+	   { - 4} & 2  \\
+	\end{array}} \right] \\
+	& = & \left[ {\begin{array}{*{20}c}
+	   0 & 1  \\
+	\end{array}} \right]\frac{\left[ {\begin{array}{*{20}c}
+	   { -3 } & { 3 }  \\
+	   { 2 } & { 1 }  \\
+	\end{array}} \right]}{-3-(+6)} \left[ {\begin{array}{*{20}c}
+	   2 & 8  \\
+	   { - 4} & 2  \\
+	\end{array}} \right] \\
+	& = & \left[ {\begin{array}{*{20}c}
+	   0 & 1  \\
+	\end{array}} \right]\frac{1}{-9}\left[ \begin{array}{*{20}c}
+	   { -18 } & { -18 }  \\
+	   { 0 } & { 18 }  \\
+	\end{array} \right] \\
+	& = & \left[ {\begin{array}{*{20}c}
+	   0 & 1  \\
+	\end{array}} \right]\left[ \begin{array}{*{20}c}
+	   { 2 } & { 2 }  \\
+	   { 0 } & { -2 }  \\
+	\end{array} \right] \\
+	& = & \left[ {\begin{array}{*{20}c}
+	   0 & -2  \\
+	\end{array}} \right]
+\end{eqnarray*}
+% subsection example_3 (end)
+
+\subsection*{Solution in Matlab} % (fold)
+\label{sub:solution_in_matlab}
+\begin{verbatim}
+% Using the formula
+A = [1 2; -1 1]; B = [1; -2];
+alpha_c = A * A + 2 * A + eye(2);
+K = [0 1] * inv(ctrb(A, B)) * alpha_c
+
+% Using the function Acker
+P = [-1, -1] % vector of desired pole locations
+Ka = acker(A, B, P)
+\end{verbatim}
+\ifslidesonly
+\begin{slide}
+   \heading{Solution in Matlab(1)}
+\begin{verbatim}
+A = [1 2; -1 1]; B = [1; -2];
+alpha_c = A * A + 2 * A + eye(2);
+K = [0 1] * inv(ctrb(A, B)) * alpha_c
+\end{verbatim}
+\end{slide}
+\begin{slide}
+   \heading{Solution in Matlab(2)}
+\begin{verbatim}
+% Using the function Acker
+P = [-1, -1] % vector of desired pole locations
+Ka = acker(A, B, P)
+\end{verbatim}
+\end{slide}
+\fi 
+% subsection solution_in_matlab (end)
+
+
  
-find the feedback vector K to place the closed loop poles at s = −1 , −1 using Ackermann's formula.
-Answer
- 
- 
- 
- 
-Add 3 x row1 to row2 then:  -9v2=1, and v1=2v2  
- 
+
 
  
-Effect of State Feedback on the Closed Loop Zeros
-Since,
- 
-
-then the closed loop system is:
-
- 
-
-By analogy with previous work, the TF from input  r  to output  y  is:
-
- 
-
- 
-The closed loop TF zeros are determined by the numerator determinant.
-
-Adding K times the 2nd column to the first cancels terms whilst leaving the determinant unchanged.
-
-The new form for the TF is:
-
- 
-
-Notice now that numerator is identical to that of the open loop TF.
-
-This implies that the state feedback control has left the open loop zeros unchanged.
-
-The different denominator is due to the feedback action which alters the pole positions as required.
- 
-Effect of Zero Locations on the Feedback Gains
-
-When a zero is close to a pole in the TF there is a marked increase in the feedback gains. This effect is best illustrated with an example:
-
-Given a system with a TF,
- 
-find the control law to move the pole to  pc.
-
-Using the observer canonical form,
- 
-Design the feedback to move the closed loop pole to pc.
-Now,
- 
-Comparing the constant:
- 
- 
-Notice that the feedback gain  k1  is large if:
-(i)	the zero is close to the pole:    z≈p
-(ii)	the closed loop pole pc   is far from  p
-
-Therefore, large feedback control gains are required if:
-
-(i)	there exist almost cancelling pole-zero pairs in the open loop TF, making the system almost uncontrollable.
-
-
-
-
-
-
-
-(Notice that in this condition the input  u  is almost disconnected from the integrator for the state.)
-
-(ii)	one tries to move the poles a long way,
- .  This imposes a practical limit on how arbitrarily the poles can be placed. You cannot make a slow system fast without using large gains requiring powerful, expensive actuators to force the plant response. Indeed, excessively large forces may destroy the plant.
- 
-Pole Selection for Good Design
-
-Large control gains (large values in K) are to be avoided since they result in high energy costs and require high power/bandwidth actuators.
-
-A compromise must be achieved between good system response and control effort.
-
-Sensible choices of poles may be obtained from standard tables which optimise the step response in some way.
-
-e.g. The ITAE (Integral Time and Absolute Error) poles are designed to minimise,
- 
-These have overshoot. If this is really unacceptable (e.g. in machine tools) then Bessel polynomials can be used.
-
-
-Order/Type	ITAE	Bessel
-1	 
- 
-2	 
- 
-3	 
- 
-etc.	etc.	etc.
-
- 
-The above are normalised to give  . To obtain polynomials for  , replace   in the above with  .
-
-e.g.  , the 2nd order ITAE polynomial is:
- 
-
-Comments
-
-•	In general the Bessel polynomials have too much damping for normal applications – it is preferable to use ITAE (or Butterworth) poles if some overshoot is acceptable.
-
-•	If zeros are present they tend to "sharpen up" the transient response (faster rise times but consequently with more overshoot). In such cases it may be desirable to place a closed loop pole on top of a troublesome zero and work with the reduced order system as above.
-
-•	The poles closest to the origin matter most; other poles give rise to shorter-term transients only and may need only to be shifted to a better damped location, if necessary, at a similar frequency (distance from the origin).
- 
-•	A most effective technique is to use optimal control to achieve a compromise between control effort, u, and error, z.
-
-i.e. Find the feedback vector K such as to minimise,
- 
-
-where the choice of the parameter k determines the required compromise between,
-
-High Accuracy for High Control Effort
-                  (use a large value for k)
-
-Lower Accuracy for Reduced Control Effort
-                  (use a smaller value for k)
-
-
-
 
 % section ackermann_s_formula (end)
+
+\section*{Effect of State Feedback on the Closed Loop Zeros} % (fold)
+\label{sec:effect_of_state_feedback_on_the_closed_loop_zeros}
+
+\input{frag15}
+\ifslidesonly
+\begin{slide}
+	\heading{Closed-Loop System}
+   \input{frag15}
+\end{slide}
+\fi
+
+
+
+\input{frag16}
+\ifslidesonly
+\begin{slide}
+	\heading{Closed-loop Transfer Function}
+   \input{frag16}
+\end{slide}
+\fi
+
+\input{frag17}
+\ifslidesonly
+\begin{slide}
+	\heading{Effect of State-Feedback on Closed-Loop Zeros}
+   \input{frag17}
+\end{slide}
+\fi
+
+
+% section effect_of_state_feedback_on_the_closed_loop_zeros (end)
+
+\section*{Effect of Zero Locations on the Feedback Gains} % (fold)
+\label{sec:effect_of_zero_locations_on_the_feedback_gains}
+
+
+\input{frag18}
+\ifslidesonly
+\begin{slide}
+	\heading{Effect of Zero Locations on the Feedback Gains -- Example}
+   \input{frag18}
+\end{slide}
+\fi
+
+\input{frag19}
+\ifslidesonly
+\begin{slide}
+	\heading{Solution}
+   \input{frag19}
+\end{slide}
+\fi
+
+\ifslidesonly
+\begin{slide}
+   \heading{Comments on Solution}
+\[
+	k_1 =  \frac{p-p_c}{p-z}
+\]
+\input{frag20}
+\end{slide}
+\fi
+\input{frag20}
+	
+\input{frag21}
+\ifslidesonly
+\begin{slide}
+	\heading{Effect of Zero Locations on the Feedback Gains}
+   \input{frag21}
+\end{slide}
+\fi
+
+
+ 
+% section effect_of_zero_locations_on_the_feedback_gains (end)
+
+\section*{Pole Selection for Good Design} % (fold)
+\label{sec:pole_selection_for_good_design}
+
+\input{frag22}
+\ifslidesonly
+\begin{slide}
+	\heading{Pole Selection for Good Design (1)}
+   \input{frag22}
+\end{slide}
+\fi
+
+
+\input{frag23}
+\ifslidesonly
+\begin{slide}
+	\heading{Pole Selection for Good Design (2)}
+   \input{frag23}
+\end{slide}
+\fi
+
+\subsubsection*{Comments} % (fold)
+\label{ssub:comments}
+
+\input{frag24}
+\ifslidesonly
+\begin{slide}
+	\heading{Comments}
+   \input{frag24}
+\end{slide}
+\fi
+
+
+\input{frag25}
+\ifslidesonly
+\begin{slide}
+	\heading{Optimal State Feedback}
+   \input{frag25}
+\end{slide}
+\fi
+
+
+% subsubsection comments (end)
+
+
+
+% section pole_selection_for_good_design (end)
+
+
+\ifslidesonly
+\begin{slide}
+   \heading{Summary of this Lecture}
+   \begin{itemize}
+   	\item Finding the control law
+   	\item State feedback for controller canonical form
+   	\item Transfer function model
+   	\item Ackermann's formula
+   	\item Effect of state feedback on closed-loop zeros
+   	\item Effect of plant zeros on the feedback gains
+   	\item Pole-selection for good design
+   \end{itemize}
+\end{slide}
+\fi
+
 
 %----------------------------------------------------------------
 % The end of notes
