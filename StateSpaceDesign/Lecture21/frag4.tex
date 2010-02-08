@@ -1,0 +1,49 @@
+This is particularly easy when we use the observer canonical form.
+
+Given the TF:
+\[
+\frac{Y(s)}{U(s)}=\frac{C_1s^{n-1}+\cdots+c_n}{s^2 + a_1s^{n-1}+\cdots+a_n}
+\]
+the matrices of the state space model are:
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGceaqabeaacaWHbbGaeyypa0ZaamWaaeaafa
+% WabeabeaaaaaqaaiabgkHiTiaadggadaWgaaWcbaGaaGymaaqabaaa
+% keaacaaIXaaabaGaeS47IWeabaGaaGimaaqaaiabgkHiTiaadggada
+% WgaaWcbaGaaGOmaaqabaaakeaacaaIWaaabaGaeSy8I8eabaaabaGa
+% eSO7I0eabaGaeSO7I0eabaaabaGaeSO7I0eabaGaeyOeI0Iaamyyam
+% aaBaaaleaacaWGUbaabeaaaOqaaiaaicdaaeaacqWIVlctaeaacaaI
+% WaaaaaGaay5waiaaw2faaiaacUdacaaMf8UaaCOqaiabg2da9maadm
+% aabaqbamqabqqaaaaabaGaam4yamaaBaaaleaacaaIXaaabeaaaOqa
+% aiaadogadaWgaaWcbaGaaGOmaaqabaaakeaacqWIUlstaeaacaWGJb
+% WaaSbaaSqaaiaad6gaaeqaaaaaaOGaay5waiaaw2faaaqaaiaahoea
+% cqGH9aqpdaWadaqaauaadeqabqaaaaqaaiaaigdaaeaacaaIWaaaba
+% GaeS47IWeabaGaaGimaaaaaiaawUfacaGLDbaacaGG7aGaaGzbVlaa
+% hseacqGH9aqpcaaIWaaaaaa!6461!
+\begin{eqnarray*}
+	 {\bf{A}} & = & \left[ {\begin{array}{*{20}c}
+	   { - a_1 } & 1 &  \cdots  & 0  \\
+	   { - a_2 } & 0 &  \ddots  & {0}  \\
+	    \vdots  &  \vdots  & {} &  \vdots   \\
+	   { - a_n } & 0 &  \cdots  & 0  \\
+	\end{array}} \right];\quad {\bf{B}} = \left[ {\begin{array}{*{20}c}
+	   {c_1 }  \\
+	   {c_2 }  \\
+	    \vdots   \\
+	   {c_n }  \\
+	\end{array}} \right] \\ 
+	 {\bf{C}} & = & \left[ {\begin{array}{*{20}c}
+	   1 & 0 &  \cdots  & 0  \\
+	\end{array}} \right];\quad {\bf{D}} = 0 \\ 	
+\end{eqnarray*}
+
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

@@ -41,146 +41,125 @@ Severe differences occur between $\mathbf{x}$  and  $\hat{\mathbf{x}}$ due to di
 \end{slide}
 \textbf{NB} To simplify treatment, we take $\mathbf{D}=0$.
 
-For the \textbf{observer} we have the state equations:
-\[
-\frac{{d{\bf{\hat x}}}}{{dt}} = {\bf{A\hat x}} + {\bf{B}}u + {\bf{L}}\underbrace {(y - {\bf{C\hat x}})}_{{\rm{feedback}}}
-\]
+\input{frag1}
+\ifslidesonly
+\begin{slide}
+	\heading{Observer State Equations}
+   \input{frag1}
+\end{slide}
+\fi
 
-Let the error in the estimated states $\hat{\mathbf{x}}$ be:
-\[
-\mathbf{e}=\mathbf{x}=\hat{\mathbf{x}}
-\]
-then
-\[
-\frac{d\mathbf{e}}{dt}=\frac{d\mathbf{x}}{dt}-\frac{d\hat{\mathbf{x}}}{dt}
-\]
 
-Given,
-\[
-\frac{d\mathbf{x}}{dt}=\mathbf{A}\mathbf{x}+\mathbf{B}u\ \mathrm{and}\ y=\mathbf{C}\mathbf{x}
-\] 
-then
-\begin{eqnarray*}
-	\frac{d\mathbf{e}}{dt} & = & \left(\mathbf{A}\mathbf{x}+\mathbf{B}u\right)-\left\{\mathbf{A}\hat{\mathbf{x}}+\mathbf{B}u+\mathbf{L}(y-\mathbf{C}\hat{\mathbf{x}})\right\} \\
-	& = & \mathbf{A}(\mathbf{x}-\hat{\mathbf{x}})-\mathbf{L}(\mathbf{C}\mathbf{x}-\mathbf{C}\hat{\mathbf{x}}) = \mathbf{Ae}-\mathbf{LCe}\\
-	& = & (\mathbf{A}-\mathbf{LC})\mathbf{e}
-\end{eqnarray*}
+\input{frag2}
+\ifslidesonly
+\begin{slide}
+	\heading{Observed State Errors}
+   \input{frag2}
+\end{slide}
+\fi
  
-\begin{itemize}
-	\item These are the state equations for the observer error.
-	\item The errors decay to zero with time if the eigen values of  $(\mathbf{A}-\mathbf{LC})$ lie in the left half plane (LHP).
-	\item In fact we can design the matrix $\mathbf{L}$ to place the eigen values anywhere we wish
-	\item If we place them well into the LHP then $\mathbf{e}$ will decay quickly to zero making the observer states accurately track the system states $\mathbf{x}$ after a short time.
-	\item $\hat{\mathbf{x}}$ can then be used for feedback control.
-\end{itemize}
+\input{frag3}
+\ifslidesonly
+\begin{slide}
+	\heading{Properties of the Observed Error State Equations}
+   \input{frag3}
+\end{slide}
+\fi
+
 
 \section*{Design of the $\mathbf{L}$ Matrix} % (fold)
 \label{sec:design_of_the_l_matrix}
 
-This is particularly easy when we use the observer canonical form.
+\input{frag4}
+\ifslidesonly
+\begin{slide}
+	\heading{Design of the $\mathbf{L}$ Matrix (1)}
+   \input{frag4}
+\end{slide}
+\fi
 
-Given the TF:
+\input{frag5}
+\ifslidesonly
+\begin{slide}
+	\heading{Design of the $\mathbf{L}$ Matrix (2)}
+   \input{frag5}
+\end{slide}
+\fi
+
+\input{frag6}
+\ifslidesonly
+\begin{slide}
+	\heading{Design of the $\mathbf{L}$ Matrix (3)}
+   \input{frag6}
+\end{slide}
+\fi
+
+
+\subsection*{Example 1} % (fold)
+\label{sub:example_1}
+
+\textbf{Problem}: Design an observer with poles or eigen values $\lambda_{1,2} = –20,\ −20$ using the observer canonical form for the system with a TF:
 \[
-\frac{Y(s)}{U(s)}=\frac{C_1s^{n-1}+\cdots+c_n}{s^2 + a_1s^{n-1}+\cdots=a_n}
+\frac{Y(s)}{U(s)}=\frac{7}{s^2+15s+44}.
 \]
-the matrices of the state space model are:
+ 
+\textbf{SOLUTION}:
+The observer canonical form gives:
 % MathType!MTEF!2!1!+-
 % faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
 % 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
 % bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
 % pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGceaqabeaacaWHbbGaeyypa0ZaamWaaeaafa
-% WabeabeaaaaaqaaiabgkHiTiaadggadaWgaaWcbaGaaGymaaqabaaa
-% keaacaaIXaaabaGaeS47IWeabaGaaGimaaqaaiabgkHiTiaadggada
-% WgaaWcbaGaaGOmaaqabaaakeaacaaIWaaabaGaeSy8I8eabaaabaGa
-% eSO7I0eabaGaeSO7I0eabaaabaGaeSO7I0eabaGaeyOeI0Iaamyyam
-% aaBaaaleaacaWGUbaabeaaaOqaaiaaicdaaeaacqWIVlctaeaacaaI
-% WaaaaaGaay5waiaaw2faaiaacUdacaaMf8UaaCOqaiabg2da9maadm
-% aabaqbamqabqqaaaaabaGaam4yamaaBaaaleaacaaIXaaabeaaaOqa
-% aiaadogadaWgaaWcbaGaaGOmaaqabaaakeaacqWIUlstaeaacaWGJb
-% WaaSbaaSqaaiaad6gaaeqaaaaaaOGaay5waiaaw2faaaqaaiaahoea
-% cqGH9aqpdaWadaqaauaadeqabqaaaaqaaiaaigdaaeaacaaIWaaaba
-% GaeS47IWeabaGaaGimaaaaaiaawUfacaGLDbaacaGG7aGaaGzbVlaa
-% hseacqGH9aqpcaaIWaaaaaa!6461!
+% aiaabeqaamaabaabaaGcbaGaaCyqaiabg2da9maadmaabaqbamqabi
+% GaaaqaaiabgkHiTiaaigdacaaI1aaabaGaaGymaaqaaiabgkHiTiaa
+% isdacaaI0aaabaGaaGimaaaaaiaawUfacaGLDbaacaGG7aGaaGjbVl
+% aahkeacqGH9aqpdaWadaqaauaadeqaceaaaeaacaaIWaaabaGaaG4n
+% aaaaaiaawUfacaGLDbaacaGG7aGaaGjbVlaahoeacqGH9aqpdaWada
+% qaauaadeqabiaaaeaacaaIXaaabaGaaGimaaaaaiaawUfacaGLDbaa
+% caGG7aGaaGjbVlaahseacqGH9aqpcaaIWaaaaa!4C31!
+\[
+{\bf{A}} = \left[ {\begin{array}{*{20}c}
+   { - 15} & 1  \\
+   { - 44} & 0  \\
+\end{array}} \right];\;{\bf{B}} = \left[ {\begin{array}{*{20}c}
+   0  \\
+   7  \\
+\end{array}} \right];\;{\bf{C}} = \left[ {\begin{array}{*{20}c}
+   1 & 0  \\
+\end{array}} \right];\;{\bf{D}} = 0
+\]
+with $\mathbf{L}=[l_1,\ l_2]^T$  we have observer poles at the roots of:
+\[
+s^2+(15+l_1)s+(44+l_2)=0.
+\]
+ 
+
+The desired CE is:
+\[
+\alpha_e(s)=(s + 20)(s + 20)=s^2+40s+400=0
+\]
+
+Comparing coefficients gives:
 \begin{eqnarray*}
-	 {\bf{A}} & = & \left[ {\begin{array}{*{20}c}
-	   { - a_1 } & 1 &  \cdots  & 0  \\
-	   { - a_2 } & 0 &  \ddots  & {0}  \\
-	    \vdots  &  \vdots  & {} &  \vdots   \\
-	   { - a_n } & 0 &  \cdots  & 0  \\
-	\end{array}} \right];\quad {\bf{B}} = \left[ {\begin{array}{*{20}c}
-	   {c_1 }  \\
-	   {c_2 }  \\
-	    \vdots   \\
-	   {c_n }  \\
-	\end{array}} \right] \\ 
-	 {\bf{C}} & = & \left[ {\begin{array}{*{20}c}
-	   1 & 0 &  \cdots  & 0  \\
-	\end{array}} \right];\quad {\bf{D}} = 0 \\ 	
-\end{eqnarray*}
-and the feedback vector is:
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaamitaiabg2da9maadmaabaqbamqabe
-% abaaaabaGaamiBamaaBaaaleaacaaIXaaabeaaaOqaaiaadYgadaWg
-% aaWcbaGaaGOmaaqabaaakeaacqWIVlctaeaacaWGSbWaaSbaaSqaai
-% aad6gaaeqaaaaaaOGaay5waiaaw2faamaaCaaaleqabaGaamivaaaa
-% aaa!3AC1!
-\[
-L = \left[ {\begin{array}{*{20}c}
-   {l_1 } & {l_2 } &  \cdots  & {l_n }  \\
-\end{array}} \right]^T 
-\]
-
-The state matrix of the observer is:
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGaaCyqaiabgkHiTiaahYeacaWHdbGaey
-% ypa0ZaamWaaeaafaWabeabeaaaaaqaaiaacIcacqGHsislcaWGHbWa
-% aSbaaSqaaiaaigdaaeqaaOGaeyOeI0IaamiBamaaBaaaleaacaaIXa
-% aabeaakiaacMcaaeaacaaIXaaabaGaeS47IWeabaGaaGimaaqaaiaa
-% cIcacqGHsislcaWGHbWaaSbaaSqaaiaaikdaaeqaaOGaeyOeI0Iaam
-% iBamaaBaaaleaacaaIYaaabeaakiaacMcaaeaacaaIWaaabaGaeSy8
-% I8eabaGaaGimaaqaaiabl6Uinbqaaiabl6Uinbqaaaqaaiabl6Uinb
-% qaaiaacIcacqGHsislcaWGHbWaaSbaaSqaaiaad6gaaeqaaOGaeyOe
-% I0IaciiBamaaBaaaleaacaWGUbaabeaakiaacMcaaeaacaaIWaaaba
-% GaeS47IWeabaGaaGimaaaaaiaawUfacaGLDbaaaaa!59B1!
-\[
-{\bf{A}} - {\bf{LC}} = \left[ {\begin{array}{*{20}c}
-   {( - a_1  - l_1 )} & 1 &  \cdots  & 0  \\
-   {( - a_2  - l_2 )} & 0 &  \ddots  & 0  \\
-    \vdots  &  \vdots  & {} &  \vdots   \\
-   {( - a_n  - l_n )} & 0 &  \cdots  & 0  \\
-\end{array}} \right]
-\]
- 
- 
-The poles of the observer are the roots of the CE:
-\[
-s^n+(a_1+l_1)s^{n-1}+\cdots+(a_n=l_n)=0
-\]
- 
-
-If the desired observer poles are at  $s=p_1,p_2,\ldots,p_n$ 
-then the desired CE equation is:
-\begin{eqnarray*}
-	\alpha_e(s) & = & (s-p_1)(s-p_2)\cdots(s-p_n) \\
-	            & = & s^n + \alpha_1s^{n-1} + \cdots + \alpha_n = 0
+	s^1:\ 15 + l_1 & = & 40 \to l_1=25 \\
+	s^0:\ 44 + l_2 & = & 400 \to l_2=356 \\	
 \end{eqnarray*}
  
 
-The  l  coefficients may be found by matching the two equations above. 
-Thus,
+So the observer states are given by:
 \[
-l_1=\alpha_1-a_1,\ l_2=\alpha_2-a_2,\ \cdots\ l_n=\alpha_n-a_n.
-\] 
+\frac{d\hat{\mathbf{x}}}{dt}=\mathbf{A}\hat{\mathbf{x}}+\mathbf{B}u-\mathbf{L}(\mathbf{C}\hat{\mathbf{x}}-y)
+\]
+where $\mathbf{L}=[25\ 356]^T.$
 
+\begin{slide}
+   \heading{Block Diagram of the Observer}
+\begin{center}
+	\resizebox{250pt}{!}{\includegraphics{pictures/observer3.pdf}}
+\end{center}
+\end{slide}
+
+% subsection example_1 (end)
 
 % section design_of_the_l_matrix (end)
 
@@ -189,81 +168,45 @@ l_1=\alpha_1-a_1,\ l_2=\alpha_2-a_2,\ \cdots\ l_n=\alpha_n-a_n.
 \label{sec:design_of_l_matrix_for_other_forms_of_state_equation}
 
 
-When the observer canonical form is not used, then the design of the observer is more difficult. Ackermann's formula can be adapted as follows:
+\input{frag7}
+\ifslidesonly
+\begin{slide}
+	\heading{Design of $\mathbf{L}$ Matrix for Other Forms of State Equation}
+   \input{frag7}
+\end{slide}
+\fi
 
+In MATLAB we could evaluate the $\mathbf{L}$ matrix using:
+\begin{verbatim}
+	L=(acker(A',C',p))'
+\end{verbatim}  where  \verb|p|  is a vector of desired observer poles.
  
-
-O is the observability matrix:
- 
-
- 
-
-Notice that if the system is unobservable, then the matrix inverse does not exist and we cannot design an observer for this system.
-
-In MATLAB we could evaluate the L matrix using:
-
-L=(acker(A',C',p))'  where  p  is a vector of desired observer poles.
- 
-eg.  Design an observer with poles or eigen values
-–20,−20 using the observer canonical form for the system with a TF:
- 
-Answer:
-
-The observer canonical form gives:
-
- 
-
-with     we have observer poles at the roots of:
-
- 
-
-The desired CE is:
-
- 
-
- 
-Comparing coefficients gives:
-
- 
-
-So the observer states are given by:
-
- 
-
-Block Diagram of the Observer
-
-
-
-
 
 
 % section design_of_l_matrix_for_other_forms_of_state_equation (end)
-
-
-
-
-
-
-
 
  
 \section*{Choice of Observer Poles} % (fold)
 \label{sec:choice_of_observer_poles}
 
 
-•	Rule of thumb:   observer poles can be faster than the controller poles (i.e. further from the origin) by a factor of 2 to 6. This makes the effect of the observer dynamics short-term and the overall response is dominated by the controller poles.
+\input{frag8}
+\ifslidesonly
+\begin{slide}
+	\heading{Choice of Observer Poles (1)}
+   \input{frag8}
+\end{slide}
+\fi
 
-•	If noise/disturbance is present this has an effect on the choice:
- 
+\input{frag9}
+\ifslidesonly
+\begin{slide}
+	\heading{Choice of Observer Poles (2)}
+   \input{frag9}
+\end{slide}
+\fi
 
-In the error equation, the sensor noise is multiplied by L and the process noise is not. Therefore,
 
- 
-(i)  if  L  is very small, the effect of sensor noise  v  is removed but the observer is “slow” to respond, so that the error will not reject the effect of  w  very well.
-
-(ii)	if  L  is large, the observer response is “fast” and the error rejects the process noise  w  well, but the sensor noise  v  is amplified by  L  resulting in large errors.
-
-Optimal control design methods can be used to achieve the “best” compromise.
 
 % section choice_of_observer_poles (end)
 

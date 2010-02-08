@@ -1,0 +1,14 @@
+In the error equation, the sensor noise is multiplied by $\mathbf{L}$ and the process noise is not. Therefore,
+\begin{enumerate}
+	\item if $\mathbf{L}$ is very small, the effect of sensor noise $v$ is removed but the observer is ``slow'' to respond, so that the error will not reject the effect of $w$ very well.
+	\item if $\mathbf{L}$ is large, the observer response is ``fast'' and the error rejects the process noise $w$ well, but the sensor noise $v$ is amplified by $\mathbf{L}$ resulting in large errors.
+\end{enumerate}
+
+Optimal control design methods can be used to achieve the ``best'' compromise.
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

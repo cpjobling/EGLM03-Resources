@@ -1,0 +1,27 @@
+Let the error in the estimated states $\hat{\mathbf{x}}$ be:
+\[
+\mathbf{e}=\mathbf{x}=\hat{\mathbf{x}}
+\]
+then
+\[
+\frac{d\mathbf{e}}{dt}=\frac{d\mathbf{x}}{dt}-\frac{d\hat{\mathbf{x}}}{dt}
+\]
+
+Given,
+\[
+\frac{d\mathbf{x}}{dt}=\mathbf{A}\mathbf{x}+\mathbf{B}u\ \mathrm{and}\ y=\mathbf{C}\mathbf{x}
+\] 
+then
+\begin{eqnarray*}
+	\frac{d\mathbf{e}}{dt} & = & \left(\mathbf{A}\mathbf{x}+\mathbf{B}u\right)-\left\{\mathbf{A}\hat{\mathbf{x}}+\mathbf{B}u+\mathbf{L}(y-\mathbf{C}\hat{\mathbf{x}})\right\} \\
+	& = & \mathbf{A}(\mathbf{x}-\hat{\mathbf{x}})-\mathbf{L}(\mathbf{C}\mathbf{x}-\mathbf{C}\hat{\mathbf{x}}) = \mathbf{Ae}-\mathbf{LCe}\\
+	& = & (\mathbf{A}-\mathbf{LC})\mathbf{e}
+\end{eqnarray*}
+
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:
