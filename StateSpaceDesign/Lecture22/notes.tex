@@ -7,6 +7,210 @@
 % ----------------------------------------------------------------
 
 
+\section*{Combined Observer and Control} % (fold)
+\label{sec:combined_observer_and_control}
+
+The observer states can be used to provide feedback control when the plant’s own states are not available. The combined observer-controller is equivalent to the classical compensator. The combined system has twice as many states as the plant because of the duplicated states of the observer. 
+
+How does the whole thing behave?
+
+\subsection*{Dynamics of the combined system} % (fold)
+\label{sub:dynamics_of_the_combined_system}
+
+
+ 
+\begin{description}
+	\item[The control:] $u=r-\mathbf{K}\hat{\mathbf{x}}$
+	\item[The plant dynamics:] $\dot{\mathbf{x}}=\mathbf{A}\mathbf{x}+\mathbf{B}(r-\mathbf{K}\hat{\mathbf{x}})$
+	\item[Error:] $\mathbf{e}=\mathbf{x}-\hat{\mathbf{x}}$ so $\hat{\mathbf{x}}=\mathbf{x}-\mathbf{e}$ therefore
+	\begin{eqnarray*}
+			\dot{\mathbf{x}} & = & \mathbf{A}\mathbf{x}+\mathbf{B}r-\mathbf{BK}(\mathbf{x}-\mathbf{e}) \\
+			                 & = & (\mathbf{A}-\mathbf{BK})\mathbf{x}+\mathbf{BK}\mathbf{e}-\mathbf{B}r
+	\end{eqnarray*}
+\end{description}
+
+From previous work the error dynamics are:
+\[
+\dot{\mathbf{e}} = (\mathbf{A}-\mathbf{LC})\mathbf{e}
+\]
+
+
+The eigen values or poles of the combined system are the roots of the CE:
+\begin{eqnarray*}
+	\det \left[ {s{\bf{I}}_{2n}  - \left[ {\begin{array}{*{20}c}
+	   {\left( {{\bf{A}} - {\bf{BK}}} \right)} & {{\bf{BK}}}  \\
+	   {\bf{0}} & {\left( {{\bf{A}} - {\bf{LC}}} \right)}  \\
+	\end{array}} \right]} \right] & = &  0 \\
+	\det \left[ {\begin{array}{*{20}c}
+	   {\left[ {s{\bf{I}} - \left( {{\bf{A}} - {\bf{BK}}} \right)} \right]} & { - {\bf{BK}}}  \\
+	   {\bf{0}} & {\left[ {s{\bf{I}} - \left( {{\bf{A}} - {\bf{LC}}} \right)} \right]}  \\
+	\end{array}} \right] & = & 0
+\end{eqnarray*}
+ 
+The matrix is block triangular with square matrices on the diagonal. Therefore:
+\[
+	\det \left[ {s{\bf{I}} - \left( {{\bf{A}} - {\bf{BK}}} \right)} \right]\det\left[ {s{\bf{I}} - \left( {{\bf{A}} - {\bf{LC}}} \right)} \right] = 0 
+\]
+\[
+	\alpha_c(s)\alpha_e(s) = 0 
+\]
+ 
+
+These are the combined characteristic polynomials of the controller and the observer.
+
+% subsection dynamics_of_the_combined_system (end)
+
+
+% section combined_observer_and_control (end)
+
+
+\subsection*{Separation Principle} % (fold)
+\label{sub:separation_principle}
+
+From the above work, we can conclude that the set of poles of the combined observer-controller system is the union of the set of closed loop controller poles and the set of observer poles.
+
+The controller matrix  $\mathbf{K}$  is designed as before, as if the real plant states are going to be used for the feedback. This fixes the positions of the controller poles into the desired positions.
+
+Then, quite independently, the matrix $\mathbf{L}$ is designed as before to fix the observer poles as required.
+
+Using the observer states for the control feedback instead of the plant states does not affect the closed loop poles.
+
+This is a fortunate situation and is known as the \textbf{separation principle}. The problems of controller design and observer design have been separated.
+ 
+% subsection separation_principle (end)
+
+
+\section*{The Equivalent Classical Compensator} % (fold)
+\label{sec:the_equivalent_classical_compensator}
+
+We shall determine the classical compensator TF which is equivalent to the combined observer-controller. This is simpler to do if we remove the reference input, for the time being.
+
+Setting the reference input $r = 0$  gives:
+
+ 
+Taking Laplace transforms, ignoring I.C.’s:
+
+ 
+ 
+
+
+
+
+
+
+
+ 
+Alternatively,
+
+% section the_equivalent_classical_compensator (end)
+
+
+
+ 
+\section{Introducing the Reference Input} % (fold)
+\label{sec:introducing_the_reference_input}
+
+\subsection{1. The Normal Position} % (fold)
+\label{sub:1_the_normal_position}
+
+In this case the reference input  r  is introduced as before:       .  This results in an equivalent classical system with the structure shown below:
+
+
+
+
+
+
+Finding F(s) and H(s)
+
+For the observer we have:
+
+ 
+ 
+For the controller we have:
+ 
+
+A Useful Theorem:
+If M is square and V is a row vector and W is a column vector then,
+
+ 
+
+ 
+Zeros and Poles of F(s) and H(s)
+
+Applying the theorem:
+ 
+Similarly for H(s):
+ 
+
+ 
+The Overall Closed Loop TF
+
+ 
+ 
+We know from previous work that the denominator, corresponding to the closed loop CE of the overall system must, from the separation principle, be equivalent to:
+ 
+ 
+ 
+
+Notice here how the input TF F(s) contains as its zeros all the poles of the observer given by  .
+
+Because of the separation principle, these are also half of the poles of the overall closed loop TF.
+
+The pole-zero cancellation results in the final TF having just the plant zeros and the controller poles.
+
+Thus we can say that, using the observer states for the feedback, instead of the unavailable plant states, has not affected the closed loop TF.
+
+This is not the case when the reference input is introduced elsewhere.
+% subsection 1_the_normal_position (end)
+
+
+ 
+\subsection{2. Observer Driven by the Tracking Error
+} % (fold)
+\label{sub:2_observer_driven_by_the_tracking_error_}
+
+Sometimes it is desired to sense the tracking error and use this to control the system.
+
+The tracking error is the difference between the desired and actual outputs,
+ 
+Some sensors can only measure a difference between two measurands. eg  a thermocouple can only sense the temperature difference between its hot and cold junctions.
+
+
+
+
+
+
+
+
+Redraw:
+
+
+
+
+
+ 
+In this configuration the observer is driven by:
+ 
+Here H(s) is the same as before:
+
+ 
+
+ 
+The overall TF is:
+
+ 
+
+In this case we see that the overall TF contains the poles of the observer as well as the controller.
+
+Whereas in the normal position changes in the reference input do not excite the error dynamics of the observer, in this configuration they do.
+
+As a result the difference between the observer and the plant states is affected during operation and take further time to settle down.
+% subsection 2_observer_driven_by_the_tracking_error_ (end)
+
+
+
+% section introducing_the_reference_input (end)
+
 
 
 
