@@ -1,0 +1,223 @@
+%% State Space Modelling of Dynamic Systems
+%% Lecture 21: State Observers
+\def\FileDate{10/04/02}
+\def\FileVersion{1.0}
+% ----------------------------------------------------------------
+% Notes pages *********************************************************
+% ----------------------------------------------------------------
+
+In many practical cases it is not possible to measure all the states of a system.
+That is  we cannot form  $u=r-\mathbf{Kx}$  for the purposes of feedback control because we do not have access to $\mathbf{x}$\footnote{Or some states in $\mathbf{x}$, either because the states are not \emph{physical states} and hence cannot be measured, or because they \emph{are} physical states but we do not have suitable sensors for the physical quantity that is represented by the state.}
+
+If the structure of the system is known  (i.e. $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$, and $\mathbf{D}$) then it may be possible to reconstruct the states from one or more of the system outputs by means of an observer. It is necessary that the system states be observable from the output(s).
+
+\ifslidesonly
+\begin{slide}
+   \heading{State Observers}
+   \begin{itemize}
+   	\item In many practical cases it is not possible to measure all the states of a system.
+   	\item That is  we cannot form  $u=r−\mathbf{Kx}$  for the purposes of feedback control because we do not have access to $\mathbf{x}$.
+   	\item If we know $\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$, and $\mathbf{D}$ then it may be possible to reconstruct the states from one or more of the system outputs by means of an \textbf{observer}. 
+   	\item It is necessary that the system states be observable from the output(s).
+   \end{itemize}
+\end{slide}
+\fi
+
+\begin{slide}
+   \heading{State Observer}
+The main idea is to construct a model of the system and subject it to the same input:
+\begin{center}
+	\resizebox{200pt}{!}{\includegraphics{pictures/observer1.pdf}}
+\end{center}
+\end{slide}
+
+Severe differences occur between $\mathbf{x}$  and  $\hat{\mathbf{x}}$ due to disturbances and parameter errors. Solution:-  Employ feedback !
+
+\begin{slide}
+   \heading{State Observer with Feedback}
+\begin{center}
+	\resizebox{280pt}{!}{\includegraphics{pictures/observer2.pdf}}
+\end{center}
+\end{slide}
+\textbf{NB} To simplify treatment, we take $\mathbf{D}=0$.
+
+\input{frag1}
+\ifslidesonly
+\begin{slide}
+	\heading{Observer State Equations}
+   \input{frag1}
+\end{slide}
+\fi
+
+
+\input{frag2}
+\ifslidesonly
+\begin{slide}
+	\heading{Observed State Errors}
+   \input{frag2}
+\end{slide}
+\fi
+ 
+\input{frag3}
+\ifslidesonly
+\begin{slide}
+	\heading{Properties of the Observed Error State Equations}
+   \input{frag3}
+\end{slide}
+\fi
+
+
+\section*{Design of the $\mathbf{L}$ Matrix} % (fold)
+\label{sec:design_of_the_l_matrix}
+
+\input{frag4}
+\ifslidesonly
+\begin{slide}
+	\heading{Design of the $\mathbf{L}$ Matrix (1)}
+   \input{frag4}
+\end{slide}
+\fi
+
+\input{frag5}
+\ifslidesonly
+\begin{slide}
+	\heading{Design of the $\mathbf{L}$ Matrix (2)}
+   \input{frag5}
+\end{slide}
+\fi
+
+\input{frag6}
+\ifslidesonly
+\begin{slide}
+	\heading{Design of the $\mathbf{L}$ Matrix (3)}
+   \input{frag6}
+\end{slide}
+\fi
+
+
+\subsection*{Example 1} % (fold)
+\label{sub:example_1}
+
+\textbf{Problem}: Design an observer with poles or eigen values $\lambda_{1,2} = –20,\ −20$ using the observer canonical form for the system with a TF:
+\[
+\frac{Y(s)}{U(s)}=\frac{7}{s^2+15s+44}.
+\]
+ 
+\textbf{SOLUTION}:
+The observer canonical form gives:
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGaaCyqaiabg2da9maadmaabaqbamqabi
+% GaaaqaaiabgkHiTiaaigdacaaI1aaabaGaaGymaaqaaiabgkHiTiaa
+% isdacaaI0aaabaGaaGimaaaaaiaawUfacaGLDbaacaGG7aGaaGjbVl
+% aahkeacqGH9aqpdaWadaqaauaadeqaceaaaeaacaaIWaaabaGaaG4n
+% aaaaaiaawUfacaGLDbaacaGG7aGaaGjbVlaahoeacqGH9aqpdaWada
+% qaauaadeqabiaaaeaacaaIXaaabaGaaGimaaaaaiaawUfacaGLDbaa
+% caGG7aGaaGjbVlaahseacqGH9aqpcaaIWaaaaa!4C31!
+\[
+{\bf{A}} = \left[ {\begin{array}{*{20}c}
+   { - 15} & 1  \\
+   { - 44} & 0  \\
+\end{array}} \right];\;{\bf{B}} = \left[ {\begin{array}{*{20}c}
+   0  \\
+   7  \\
+\end{array}} \right];\;{\bf{C}} = \left[ {\begin{array}{*{20}c}
+   1 & 0  \\
+\end{array}} \right];\;{\bf{D}} = 0
+\]
+with $\mathbf{L}=[l_1,\ l_2]^T$  we have observer poles at the roots of:
+\[
+s^2+(15+l_1)s+(44+l_2)=0.
+\]
+ 
+
+The desired CE is:
+\[
+\alpha_e(s)=(s + 20)(s + 20)=s^2+40s+400=0
+\]
+
+Comparing coefficients gives:
+\begin{eqnarray*}
+	s^1:\ 15 + l_1 & = & 40 \to l_1=25 \\
+	s^0:\ 44 + l_2 & = & 400 \to l_2=356 \\	
+\end{eqnarray*}
+ 
+
+So the observer states are given by:
+\[
+\frac{d\hat{\mathbf{x}}}{dt}=\mathbf{A}\hat{\mathbf{x}}+\mathbf{B}u-\mathbf{L}(\mathbf{C}\hat{\mathbf{x}}-y)
+\]
+where $\mathbf{L}=[25\ 356]^T.$
+
+\begin{slide}
+   \heading{Block Diagram of the Observer}
+\begin{center}
+	\resizebox{250pt}{!}{\includegraphics{pictures/observer3.pdf}}
+\end{center}
+\end{slide}
+
+% subsection example_1 (end)
+
+% section design_of_the_l_matrix (end)
+
+
+\section*{Design of $\mathbf{L}$ Matrix for Other Forms of State Equation} % (fold)
+\label{sec:design_of_l_matrix_for_other_forms_of_state_equation}
+
+
+\input{frag7}
+\ifslidesonly
+\begin{slide}
+	\heading{Design of $\mathbf{L}$ Matrix for Other Forms of State Equation}
+   \input{frag7}
+\end{slide}
+\fi
+
+In MATLAB we could evaluate the $\mathbf{L}$ matrix using:
+\begin{verbatim}
+	L=(acker(A',C',p))'
+\end{verbatim}  where  \verb|p|  is a vector of desired observer poles.
+ 
+
+
+% section design_of_l_matrix_for_other_forms_of_state_equation (end)
+
+ 
+\section*{Choice of Observer Poles} % (fold)
+\label{sec:choice_of_observer_poles}
+
+
+\input{frag8}
+\ifslidesonly
+\begin{slide}
+	\heading{Choice of Observer Poles (1)}
+   \input{frag8}
+\end{slide}
+\fi
+
+\input{frag9}
+\ifslidesonly
+\begin{slide}
+	\heading{Choice of Observer Poles (2)}
+   \input{frag9}
+\end{slide}
+\fi
+
+
+
+% section choice_of_observer_poles (end)
+
+
+
+%----------------------------------------------------------------
+% The end of notes
+% ----------------------------------------------------------------
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
