@@ -2,11 +2,11 @@
 
 source ../../course.tcsh
 source ../section.tcsh
-set LNO=21
+set LNO=22
 set FILEDATE="16 February 2010"
 set VERSION="1.0"
-set TITLE='State Observers'
-set SHORT_TITLE='State Observers' # $z would be interpreted by the shell
+set TITLE='Combined Observer and Control'
+set SHORT_TITLE='Observers for Control' # $z would be interpreted by the shell
 set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"
 
 source ../../process.tcsh
