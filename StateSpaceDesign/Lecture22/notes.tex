@@ -29,7 +29,36 @@ From previous work the error dynamics are:
 \[
 \dot{\mathbf{e}} = (\mathbf{A}-\mathbf{LC})\mathbf{e}
 \]
-
+Therefore the dynamics of the combined system is:
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aqaKnaaaaWenf2ys9wBH5garuavP1wzZbItLDhis9
+% wBH5garmWu51MyVXgaruWqVvNCPvMCG4uz3bqee0evGueE0jxyaiba
+% ieYlf9irVeeu0dXdh9vqqj-hHeeu0xXdbba9frFj0-OqFfea0dXdd9
+% vqaq-JfrVkFHe9pgea0dXdar-Jb9hs0dXdbPYxe9vr0-vr0-vqpi0d
+% c9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaadmaabaqbam
+% qabiqaaaqaamaalaaabaGaamizaiaahIhaaeaacaWGKbGaamiDaaaa
+% aeaadaWcaaqaaiaadsgacaWHLbaabaGaamizaiaadshaaaaaaaGaay
+% 5waiaaw2faaiabg2da9maadmaabaqbamqabiGaaaqaamaabmaabaGa
+% aCyqaiabgkHiTiaahkeacaWHlbaacaGLOaGaayzkaaaabaGaaCOqai
+% aahUeaaeaacaWHWaaabaWaaeWaaeaacaWHbbGaeyOeI0IaaCitaiaa
+% hoeaaiaawIcacaGLPaaaaaaacaGLBbGaayzxaaWaamWaaeaafaWabe
+% GabaaabaGaaCiEaaqaaiaahwgaaaaacaGLBbGaayzxaaGaey4kaSYa
+% amWaaeaafaWabeGabaaabaGaaCOqaaqaaiaahcdaaaaacaGLBbGaay
+% zxaaGaamOCaaaa!54DA!
+\[\left[ {\begin{array}{*{20}c}
+   {\frac{{d{\bf{x}}}}{{dt}}}  \\
+   {\frac{{d{\bf{e}}}}{{dt}}}  \\
+\end{array}} \right] = \left[ {\begin{array}{*{20}c}
+   {\left( {{\bf{A}} - {\bf{BK}}} \right)} & {{\bf{BK}}}  \\
+   {\bf{0}} & {\left( {{\bf{A}} - {\bf{LC}}} \right)}  \\
+\end{array}} \right]\left[ {\begin{array}{*{20}c}
+   {\bf{x}}  \\
+   {\bf{e}}  \\
+\end{array}} \right] + \left[ {\begin{array}{*{20}c}
+   {\bf{B}}  \\
+   {\bf{0}}  \\
+\end{array}} \right]r
+\]
 
 The eigenvalues or poles of the combined system are the roots of the CE:
 \begin{eqnarray*}
