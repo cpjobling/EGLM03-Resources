@@ -35,7 +35,7 @@ From previous work the error dynamics are:
 \]
 
 
-The eigen values or poles of the combined system are the roots of the CE:
+The eigenvalues or poles of the combined system are the roots of the CE:
 \begin{eqnarray*}
 	\det \left[ {s{\bf{I}}_{2n}  - \left[ {\begin{array}{*{20}c}
 	   {\left( {{\bf{A}} - {\bf{BK}}} \right)} & {{\bf{BK}}}  \\
@@ -84,127 +84,312 @@ This is a fortunate situation and is known as the \textbf{separation principle}.
 \label{sec:the_equivalent_classical_compensator}
 
 We shall determine the classical compensator TF which is equivalent to the combined observer-controller. This is simpler to do if we remove the reference input, for the time being.
+\begin{center}
+	\resizebox{!}{2in}{\includegraphics{pictures/fig1.pdf}}
+\end{center}
 
 Setting the reference input $r = 0$  gives:
-
+\[
+\frac{d\hat{\mathbf{x}}}{dt}=(\mathbf{A}-\mathbf{LC})\hat{\mathbf{x}}+ \mathbf{B}u+\mathbf{L}y
+\]
+where $u=-\mathbf{K}\hat{\mathbf{x}}$ therefore
+\[
+\frac{d\hat{\mathbf{x}}}{dt}=(\mathbf{A}-\mathbf{LC})\hat{\mathbf{x}} - \mathbf{BK}\hat{\mathbf{x}}+\mathbf{L}y
+\]
+or
+\[
+\frac{d\hat{\mathbf{x}}}{dt}=(\mathbf{A} - \mathbf{LC} - \mathbf{BK})\hat{\mathbf{x}} + \mathbf{L}y
+\]
+Taking Laplace transforms, ignoring ICs:
+\begin{eqnarray*}
+s\hat{\mathbf{X}}(s) & = & (\mathbf{A} - \mathbf{LC} - \mathbf{BK})\hat{\mathbf{X}}(s) + \mathbf{L}Y(s) \\	
+\underbrace {(s{\bf{I}} - {\bf{A}} + {\bf{BK}} + {\bf{LC}})}_{{\bf{M + BK}}}{\bf{\hat X}}(s) & = & {\bf{L}}Y(s) \\
+\hat{\mathbf{X}}(s) & = & (\mathbf{M}+\mathbf{BK})^{-1}{\bf{L}}Y(s)
+\end{eqnarray*}
+where $\mathbf{M}=s\mathbf{I}-\mathbf{A}+\mathbf{LC}$.
  
-Taking Laplace transforms, ignoring I.C.’s:
-
- 
- 
-
-
-
-
-
+\[
+U(s)=-\mathbf{K}\hat{\mathbf{X}}(s)=-\mathbf{K}(\mathbf{M}+\mathbf{BK})^{-1}\mathbf{L}Y(s)
+\]
+therefore the compensator TF is:
+\[
+H(s)=-\frac{U(s)}{Y(s)}=\mathbf{K}(\mathbf{M}+\mathbf{BK})^{-1}\mathbf{L}
+\]
 
 
- 
-Alternatively,
+Alternatively, since
+\[
+s{\bf{\hat X}} =  {\bf{A\hat X}} + {\bf{B}}U + {\bf{L}}\left( {Y - {\bf{C\hat X}}} \right)
+\]
+then,
+\[
+\left( {s{\bf{I}} - {\bf{A}} + {\bf{LC}}} \right){\bf{\hat X}} = {\bf{B}}U + {\bf{L}}Y 
+\]
+or,
+\[
+{\bf{\hat X}} = {\bf{M}}^{ - 1} {\bf{B}}U + {\bf{M}}^{ - 1} {\bf{L}}Y
+\]
+
+Now
+\[
+U =  - {\bf{K\hat X}} 
+\]
+so
+\[
+U  =   - {\bf{K}}\left( {{\bf{M}}^{ - 1} {\bf{B}}U + {\bf{M}}^{ - 1} {\bf{L}}Y} \right) 
+\]
+\[
+ \left( {1 + {\bf{KM}}^{ - 1} {\bf{B}}} \right)U =  - {\bf{KM}}^{ - 1} {\bf{L}}Y
+\]
+\[ 
+ H\left( s \right) =  - \frac{U}{Y} = \frac{{{\bf{KM}}^{ - 1} {\bf{L}}}}{{1 + {\bf{KM}}^{ - 1} {\bf{B}}}} 
+\]
 
 % section the_equivalent_classical_compensator (end)
 
 
 
  
-\section{Introducing the Reference Input} % (fold)
+\section*{Introducing the Reference Input} % (fold)
 \label{sec:introducing_the_reference_input}
 
-\subsection{1. The Normal Position} % (fold)
+\subsection*{1. The Normal Position} % (fold)
 \label{sub:1_the_normal_position}
 
-In this case the reference input  r  is introduced as before:       .  This results in an equivalent classical system with the structure shown below:
+In this case the reference input $r$ is introduced as before: $u=r-\mathbf{K}\hat{\mathbf{x}}$.  This results in 
+an equivalent classical system with the structure shown below:
+\begin{center}
+	\resizebox{!}{2in}{\includegraphics{pictures/fig2.pdf}}
+\end{center}
 
 
-
-
-
-
-Finding F(s) and H(s)
+\subsubsection*{Finding $F(s)$ and $H(s)$} % (fold)
+\label{ssub:finding_f_s_and_h_s_}
 
 For the observer we have:
+\[
+\frac{d\hat{\mathbf{x}}}{dt} = \mathbf{A}\hat{\mathbf{x}}+\mathbf{B}u-\mathbf{L}(\mathbf{C}\hat{\mathbf{x}} - y)
+\]
+Taking Laplace transforms ignoring ICs
+\begin{eqnarray*}
+s\hat{\mathbf{X}}(s) & = & \mathbf{A}\hat{\mathbf{X}} - \mathbf{B}U - \mathbf{LC}\hat{\mathbf{X}} + \mathbf{L}Y(s) \\	
+\underbrace {(s{\bf{I}} - {\bf{A}} + {\bf{LC}})}_{{\bf{M}}}{\bf{\hat X}} & = & {\bf B}U + {\bf{L}}Y(s) \\
+\hat{\mathbf{X}} & = & \mathbf{M}^{-1}\mathbf{B}U + \mathbf{M}^{-1}{\bf{L}}Y
+\end{eqnarray*}
 
- 
- 
 For the controller we have:
+\[
+u = r - \mathbf{K}\hat{\mathbf{x}}
+\]
+Taking laplace transforms
+\[
+U = R - \mathbf{K}\hat{\mathbf{X}}
+\]
+Therefore, for the combined observer-controller
+\[
+U=R-\mathbf{K}\left(\mathbf{M}^{-1}\mathbf{B}U + \mathbf{M}^{-1}{\bf{L}}Y\right)
+\]
+Re-arranging:
+\[
+\left(\mathbf{KM}^{-1}\mathbf{B}+1\right)U=R-\mathbf{KM}^{-1}\mathbf{L}Y
+\]
+therefore,
+\[
+U=\frac{1}{\mathbf{KM}^{-1}\mathbf{B}+1}R-\frac{\mathbf{KM}^{-1}\mathbf{L}}{\mathbf{KM}^{-1}\mathbf{B}+1}Y
+\]
+
+Comparing with: $$U=F(s)R-H(s)Y$$
+\[
+F(s) = \frac{1}{\mathbf{KM}^{-1}\mathbf{B}+1}
+\]
+and
+\[
+H(s) = \frac{\mathbf{KM}^{-1}\mathbf{L}}{\mathbf{KM}^{-1}\mathbf{B}+1}
+\]
+
+% subsubsection finding_f_s_and_h_s_ (end)
+
  
 
-A Useful Theorem:
-If M is square and V is a row vector and W is a column vector then,
+\subsubsection*{A useful theorem} % (fold)
+\label{ssub:a_useful_theorem}
 
+If $\mathbf{M}$ is square and $\mathbf{V}$ is a row vector and $\mathbf{W}$ is a column vector then,
+\[
+\mathbf{VM}^{-1}\mathbf{W}=\frac{\det\left(\mathbf{M}+\mathbf{WV}\right)}{\det{\mathbf{M}}}-1
+\]
  
 
  
-Zeros and Poles of F(s) and H(s)
+% subsubsection a_useful_theorem (end)
+\subsubsection*{Zeros and Poles of $F(s)$ and $H(s)$} % (fold)
+\label{ssub:zeros_and_poles_of_f_s_and_h_s_}
 
 Applying the theorem:
- 
-Similarly for H(s):
- 
+\[
+\mathbf{KM}^{-1}\mathbf{B}+1=\frac{\det\left(\mathbf{M}+\mathbf{BK}\right)}{\det{\mathbf{M}}}
+\]
+therefore,
+\[
+F(s) = \frac{\det\mathbf{M}}{\det\left(\mathbf{M}+\mathbf{BK}\right)}
+\]
 
- 
-The Overall Closed Loop TF
+From previous work,
+\[
+\det\mathbf{M}=\det\left(s\mathbf{I}-\mathbf{A}=\mathbf{LC}\right)=\alpha_e(s)
+\]
+where $\alpha_e(s)=0$ is the characteristic equation of the observer.
 
- 
- 
+Let $\det\left(\mathbf{M}+\mathbf{BK}\right)=\alpha_1(s)$ then,
+\[
+F(s)=\frac{\alpha_e(s)}{\alpha_1(s)}.
+\]
+
+Similarly for $H(s)$:
+\[
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aqaKnaaaaWenf2ys9wBH5garuavP1wzZbItLDhis9
+% wBH5garmWu51MyVXgaruWqVvNCPvMCG4uz3bqee0evGueE0jxyaiba
+% ieYlNi-xH8yiVm0Fh9viWhsqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbb
+% G8FasPYRqj0-yi0dXdbba9pGe9xq-JbbG8A8frFve9Fve9Ff0dc9Gq
+% pi0dmeaabaqaciGacaGaaeqabaWaaeaaeaaakeaacaWGibWaaeWaae
+% aacaWGZbaacaGLOaGaayzkaaGaeyypa0ZaaSaaaeaadaqadaqaamaa
+% laaabaGaciizaiaacwgacaGG0bWaaeWaaeaacaWHnbGaey4kaSIaaC
+% itaiaahUeaaiaawIcacaGLPaaaaeaaciGGKbGaaiyzaiaacshacaWH
+% nbaaaiabgkHiTiaaigdaaiaawIcacaGLPaaaaeaadaWcaaqaaiGacs
+% gacaGGLbGaaiiDamaabmaabaGaaCytaiabgUcaRiaahkeacaWHlbaa
+% caGLOaGaayzkaaaabaGaciizaiaacwgacaGG0bGaaCytaaaaaaGaey
+% ypa0ZaaSaaaeaaciGGKbGaaiyzaiaacshadaqadaqaaiaah2eacqGH
+% RaWkcaWHmbGaaC4saaGaayjkaiaawMcaaiabgkHiTiGacsgacaGGLb
+% GaaiiDaiaah2eaaeaaciGGKbGaaiyzaiaacshadaqadaqaaiaah2ea
+% cqGHRaWkcaWHcbGaaC4saaGaayjkaiaawMcaaaaaaaa!6645!
+H\left( s \right) = \frac{{\left( {\frac{{\det \left( {{\bf{M}} + {\bf{LK}}} \right)}}{{\det {\bf{M}}}} - 1} \right)}}{{\frac{{\det \left( {{\bf{M}} + {\bf{BK}}} \right)}}{{\det {\bf{M}}}}}} = \frac{{\det \left( {{\bf{M}} + {\bf{LK}}} \right) - \det {\bf{M}}}}{{\det \left( {{\bf{M}} + {\bf{BK}}} \right)}}
+\]
+Letting $\det\left(\mathbf{M}+\mathbf{LK}\right)-\det\mathbf{M}=\alpha_2(s)$ then,
+\[
+H(s)\frac{\alpha_2(s)}{\alpha_1(s)}.
+\]
+
+% subsubsection zeros_and_poles_of_f_s_and_h_s_ (end)
+
+
+\subsubsection*{The Overall Closed Loop TF} % (fold)
+\label{ssub:the_overall_closed_loop_tf}
+\[
+\frac{Y(s)}{R(s)}=F(s)=\frac{G(s)}{1+G(s)H(s)}
+\]
+Let the plant TF be:
+\[
+\frac{\alpha_z(s)}{\alpha_p(s)}
+\]
+therefore,
+\begin{eqnarray*}
+	\frac{Y(s)}{R(s)} &=& \frac{\alpha_e(s)}{\alpha_1(s)}\frac{\frac{\alpha_z(s)}{\alpha_p(s)}}{1+\frac{\alpha_z(s)}{\alpha_p(s)}\frac{\alpha_2(s)}{\alpha_1(s)}} \\
+	\frac{Y(s)}{R(s)} &=& \frac{\alpha_e(s)\alpha_z(s)}{\alpha_p(s)\alpha_1(s)+\alpha_z(s)\alpha_2(s)}
+\end{eqnarray*}
+
 We know from previous work that the denominator, corresponding to the closed loop CE of the overall system must, from the separation principle, be equivalent to:
- 
- 
- 
+\[
+\alpha_e(s)\alpha_c(s)
+\]
+therefore,
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaWaaSaaaeaacaWGzbGaaiikaiaadohaca
+% GGPaaabaGaamOuaiaacIcacaWGZbGaaiykaaaacqGH9aqpdaWcaaqa
+% aiabeg7aHnaaBaaaleaacaWGLbaabeaakiaacIcacaWGZbGaaiykai
+% abeg7aHnaaBaaaleaacaWG6baabeaakiaacIcacaWGZbGaaiykaaqa
+% aiabeg7aHnaaBaaaleaacaWGLbaabeaakiaacIcacaWGZbGaaiykai
+% abeg7aHnaaBaaaleaacaWGJbaabeaakiaacIcacaWGZbGaaiykaaaa
+% cqGH9aqpdaWcaaqaaiabeg7aHnaaBaaaleaacaWG6baabeaakiaacI
+% cacaWGZbGaaiykaaqaaiabeg7aHnaaBaaaleaacaWGJbaabeaakiaa
+% cIcacaWGZbGaaiykaaaaaaa!552B!
+\[
+\frac{{Y(s)}}{{R(s)}} = \frac{{\alpha _e (s)\alpha _z (s)}}{{\alpha _e (s)\alpha _c (s)}} = \frac{{\alpha _z (s)}}{{\alpha _c (s)}}
+\]
 
-Notice here how the input TF F(s) contains as its zeros all the poles of the observer given by  .
-
+Notice here how the input TF $F(s)$ contains as its zeros all the poles of the observer given by $\alpha_e(s)$.
 Because of the separation principle, these are also half of the poles of the overall closed loop TF.
-
 The pole-zero cancellation results in the final TF having just the plant zeros and the controller poles.
 
 Thus we can say that, using the observer states for the feedback, instead of the unavailable plant states, has not affected the closed loop TF.
-
 This is not the case when the reference input is introduced elsewhere.
+
+% subsubsection the_overall_closed_loop_tf (end)
+
 % subsection 1_the_normal_position (end)
 
 
  
-\subsection{2. Observer Driven by the Tracking Error
+\subsection*{2. Observer Driven by the Tracking Error
 } % (fold)
 \label{sub:2_observer_driven_by_the_tracking_error_}
 
 Sometimes it is desired to sense the tracking error and use this to control the system.
 
 The tracking error is the difference between the desired and actual outputs,
+% MathType!MTEF!2!1!+-
+% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
+% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
+% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
+% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
+% aiaabeqaamaabaabaaGcbaGabmyzayaaiaGaeyypa0JaeyOeI0Iaam
+% OCaiabgUcaRiaadMhaaaa!33D5!
+\[
+\tilde e =  - r + y
+\]
+
  
 Some sensors can only measure a difference between two measurands. eg  a thermocouple can only sense the temperature difference between its hot and cold junctions.
-
-
-
-
-
-
-
-
+\begin{center}
+	\resizebox{!}{2in}{\includegraphics{pictures/fig3.pdf}}
+\end{center}
 Redraw:
+\begin{center}
+	\resizebox{!}{2in}{\includegraphics{pictures/fig4.pdf}}
+\end{center}
 
-
-
-
-
- 
 In this configuration the observer is driven by:
- 
-Here H(s) is the same as before:
+\[
+\tilde E =  Y + R
+\] 
+Hence the observer dynamics are:
+\[
+s\hat{\mathbf{X}}=\mathbf{A}\hat{\mathbf{X}}+\mathbf{B}U+\mathbf{L}(\tilde E - \mathbf{C}\hat{\mathbf{X}})
+\]
+therefore,
+\begin{eqnarray*}
+	\underbrace {\left( {s{\bf{I}} - {\bf{A}} + {\bf{LC}}} \right)}_{\bf{M}}{\bf{\hat X}} & = & {\bf{B}}U + {\bf{L}}\tilde E \\
+	{\bf{\hat X}} & = & {\bf{M}}^{ - 1} {\bf{B}}U + {\bf{M}}^{ - 1} {\bf{L}}\tilde E
+\end{eqnarray*}
 
- 
+Now $U=-\mathbf{K}\hat{\mathbf{X}}$, therefore
+\begin{eqnarray*}
+	U & = &  - \bf{KM}^{ - 1} {\bf{B}}U - {\bf{KM}}^{ - 1} {\bf{L}}\tilde E \\
+	U & = &  - \frac{{{\bf{KM}}^{ - 1} {\bf{L}}}}{{1 + {\bf{KM}}^{ - 1} {\bf{B}}}}\tilde E \\
+	H\left( s \right) & = &  - \frac{U}{{\tilde E}} = \frac{{{\bf{KM}}^{ - 1} {\bf{L}}}}{{1 + {\bf{KM}}^{ - 1} {\bf{B}}}}
+\end{eqnarray*}
 
+Here $H(s)$ is the same as before:
+\[
+\frac{\alpha_2(s)}{\alpha_1(s)}
+\]
+where $\alpha_1(s)=\det(\mathbf{M}+\mathbf{BK})$ and $\alpha_2(s)=\det(\mathbf{M}+\mathbf{LK})-\det{M}$.
  
 The overall TF is:
-
+\begin{eqnarray*}
+	\frac{Y(s)}{R(s)} &=& \frac{G(s)}{1+G(s)H(s)}= \frac{\frac{\alpha_z(s)}{\alpha_p(s)}\times\frac{\alpha_2(s)}{\alpha_1(s)}}{1+\frac{\alpha_z(s)}{\alpha_p(s)}\times\frac{\alpha_2(s)}{\alpha_1(s)}} \\
+	\frac{Y(s)}{R(s)} &=& \frac{\alpha_z(s)\alpha_2(s)}{\alpha_p(s)\alpha_1(s)+\alpha_z(s)\alpha_2(s)}=\frac{\alpha_z\alpha_2}{\alpha_c\alpha_e}
+\end{eqnarray*}
  
 
 In this case we see that the overall TF contains the poles of the observer as well as the controller.
-
 Whereas in the normal position changes in the reference input do not excite the error dynamics of the observer, in this configuration they do.
-
 As a result the difference between the observer and the plant states is affected during operation and take further time to settle down.
+
 % subsection 2_observer_driven_by_the_tracking_error_ (end)
 
 
