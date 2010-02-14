@@ -6,15 +6,11 @@
 % Notes pages *********************************************************
 % ----------------------------------------------------------------
 
-
-\section*{Combined Observer and Control} % (fold)
-\label{sec:combined_observer_and_control}
-
 The observer states can be used to provide feedback control when the plant’s own states are not available. The combined observer-controller is equivalent to the classical compensator. The combined system has twice as many states as the plant because of the duplicated states of the observer. 
 
 How does the whole thing behave?
 
-\subsection*{Dynamics of the combined system} % (fold)
+\section*{Dynamics of the combined system} % (fold)
 \label{sub:dynamics_of_the_combined_system}
 
 
@@ -58,10 +54,9 @@ The matrix is block triangular with square matrices on the diagonal. Therefore:
 
 These are the combined characteristic polynomials of the controller and the observer.
 
-% subsection dynamics_of_the_combined_system (end)
+% section dynamics_of_the_combined_system (end)
 
 
-% section combined_observer_and_control (end)
 
 
 \subsection*{Separation Principle} % (fold)
@@ -77,10 +72,10 @@ Using the observer states for the control feedback instead of the plant states d
 
 This is a fortunate situation and is known as the \textbf{separation principle}. The problems of controller design and observer design have been separated.
  
-% subsection separation_principle (end)
+% section separation_principle (end)
 
 
-\section*{The Equivalent Classical Compensator} % (fold)
+\subsection*{The Equivalent Classical Compensator} % (fold)
 \label{sec:the_equivalent_classical_compensator}
 
 We shall determine the classical compensator TF which is equivalent to the combined observer-controller. This is simpler to do if we remove the reference input, for the time being.
