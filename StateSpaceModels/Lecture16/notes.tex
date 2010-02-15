@@ -217,14 +217,14 @@ single-output system of order $n$ is
 \[\frac{b_ns^n+b_{n-1}s^{n-1}+\cdots+b_1s + b_0}{s^n+a_{n-1}s^{n-1}+\cdots+a_1s + a_0}\]
 An alternative form, obtained by dividing the numerator by the
 denominator, is
-\[b_n+\frac{(b_{n-1}-b_n)s^{n-1}+\cdots+(b_1-b_n)+(b_0-b_n)}{s^n+a_{n-1}s^{n-1}+\cdots+a_1s + a_0}.\]
+\[b_n+\frac{(b_{n-1} - b_n a_{n-1})s^{n-1}+\cdots+(b_1 - b_n a_1)+(b_0 - b_n a_0)}{s^n+a_{n-1}s^{n-1}+\cdots+a_1s + a_0}.\]
 If we define $d=b_n$ and the modified numerator coefficients are
-\[c_j=b_j-b_n,\ j=1,2,\ldots,n\] then the transfer function may be
+\[c_j=b_j - b_n a_j,\ j=1,2,\ldots,n\] then the transfer function may be
 re-written
 \[d+\frac{c_{n-1}s^{n-1}+c_{n-2}s^{n-2}+\cdots+c_1s + c_n}{s^n+a_{n-1}s^{n-1}+\cdots++a_1s + a_0}.\]
 Writing the transfer function in its functional form we have:
 \[Y(s)=d U(s) +\frac{c_{n-1}s^{n-1}+c_{n-2}s^{n-2}+\cdots+c_1s +
-c_n}{s^n+a_{n-1}s^{n-1}+\cdots+a_1s + a_0}U(s).\] Performing a
+c_0}{s^n+a_{n-1}s^{n-1}+\cdots+a_1s + a_0}U(s).\] Performing a
 similar analysis, as before, we obtain the state-equations for a
 proper system:
 \begin{eqnarray*}\dot{\mathbf{x}} & = & \left[\begin{array}{ccccc}
@@ -240,7 +240,7 @@ proper system:
   \vdots \\
   1
 \end{array}\right]u\\
-y & = & [c_0,\ c_1,\ \dots,\ c_{m-1}, c_m] \mathbf{x} + d
+y & = & [c_0,\ c_1,\ \dots,\ c_{n-1}, c_n] \mathbf{x} + d
 u.\end{eqnarray*} The block diagram fro this system is illustrated
 in \sref{slide:proper}.
 \begin{slide}\label{slide:proper}
@@ -489,7 +489,7 @@ form.
 \section*{Examples of Companion Forms}
 The system with transfer function
 \[G(s)=\frac{Y(s)}{U(s)}=\frac{2s^3 + 16s^2 + 30s + 8}{s^3 + 7s^2 + 10s}\]
-was found, in the last lecture, to have companion form
+was found, earlier, to have companion form
 \begin{eqnarray*}\mathbf{A} & = & \left[\begin{array}{ccc}
   0 & 1 & 0 \\
   0 & 0 & 1 \\
