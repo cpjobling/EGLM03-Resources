@@ -99,7 +99,7 @@ We are now ready to show how to find the eigenvectors $\mathbf{x}_i$. First we f
    \heading{Finding the eigenvectors of a system}
    To find the eigenvectors $\mathbf{x}_i$ of a system matrix $\mathbf{A}$
 \begin{enumerate}
-   	\item First find the eigenvalues, $\lambda_i$, using $\det(\lambda_i\mathbf{I}-\mathbf{A} = \mathbf{0})$
+   	\item First find the eigenvalues, $\lambda_i$, using $\det(\lambda_i\mathbf{I}-\mathbf{A}) = \mathbf{0}$
    	\item Use $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{x}_i$ to find the eigenvectors.
    \end{enumerate}
    See the worked example in the notes.
@@ -469,7 +469,7 @@ Therefore the transformed system is
  {\bf{\dot w}} = \left[ {\begin{array}{*{20}c}
    { - 1.5} & 1 & 0  \\
    { - 1.25} & {0.7} & {0.4}  \\
-   { - 2.5} & { - 0.4} & {0.2}  \\
+   { - 2.5} & { 0.4} & {-6.2}  \\
 \end{array}} \right]{\bf{w}} + \left[ {\begin{array}{*{20}c}
    0  \\
    0  \\
@@ -598,7 +598,7 @@ finally form the similar systems's system matrix, input matrix and output matrix
 % slcaaIXaaaaaGaay5waiaaw2faaaaaaa!840A!
 \[
 \begin{array}{c}
- {\bf{P}}^{ - 1} {\bf{A}}P = \left[ {\begin{array}{*{20}c}
+ {\bf{T}}^{ - 1} {\bf{A}}T = \left[ {\begin{array}{*{20}c}
    {{1 \mathord{\left/
  {\vphantom {1 2}} \right.
  \kern-\nulldelimiterspace} 2}} & {{1 \mathord{\left/
@@ -619,7 +619,7 @@ finally form the similar systems's system matrix, input matrix and output matrix
    { - 2} & 0  \\
    0 & { - 4}  \\
 \end{array}} \right] \\ 
- {\bf{P}}^{ - 1} {\bf{B}} = \left[ {\begin{array}{*{20}c}
+ {\bf{T}}^{ - 1} {\bf{B}} = \left[ {\begin{array}{*{20}c}
    {{1 \mathord{\left/
  {\vphantom {1 2}} \right.
  \kern-\nulldelimiterspace} 2}} & {{1 \mathord{\left/
@@ -641,7 +641,7 @@ finally form the similar systems's system matrix, input matrix and output matrix
  {\vphantom {1 2}} \right.
  \kern-\nulldelimiterspace} 2}}  \\
 \end{array}} \right] \\ 
- {\bf{CP}} = \left[ {\begin{array}{*{20}c}
+ {\bf{CT}} = \left[ {\begin{array}{*{20}c}
    2 & 3  \\
 \end{array}} \right]\;\left[ {\begin{array}{*{20}c}
    1 & 1  \\
