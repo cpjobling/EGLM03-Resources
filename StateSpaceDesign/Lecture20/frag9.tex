@@ -2,12 +2,15 @@ The last example had a system TF with no zeros. In this case it is easy to const
 \[
 u=r-5x_1-156x_2
 \]
+so, taking Laplace transforms:
+\[
+U(s) = R(s) - 5X_1(s) - 156X_2(s)
+\]
 
 Now $y=7x_2$ and $\dot{x}_2=x_1$ therefore $X_2(s)=Y(s)/7$ and $X_1(s)=sX_2(s)=sY(s)/7$. Therefore
-\begin{eqnarray*}
-	U(s) & = & R(s)-rX_1(s)-156X_2(s) \\
-	& = & R(s) - \frac{1}{7}(5s+156)Y(s)
-\end{eqnarray*}
+\[
+	U(s) =  R(s) - \frac{1}{7}(5s+156)Y(s)
+\]
 
 \endinput
 

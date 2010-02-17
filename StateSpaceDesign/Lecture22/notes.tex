@@ -6,9 +6,31 @@
 % Notes pages *********************************************************
 % ----------------------------------------------------------------
 
-The observer states can be used to provide feedback control when the plant’s own states are not available. The combined observer-controller is equivalent to the classical compensator. The combined system has twice as many states as the plant because of the duplicated states of the observer. 
+\input{frag1}
+\ifslidesonly
+\begin{slide}
+	\heading{Combined Observer and Control}
+   \input{frag1}
+\end{slide}
+\fi
 
-How does the whole thing behave?
+\ifslidesonly
+\begin{slide}
+	\heading{Contents of this Lecture}
+   \begin{itemize}
+   	\item Dynamics of the combined controller-observer system
+\begin{itemize}
+	\item Separation principle
+	\item Equivalent classical controller
+\end{itemize}
+\item Introducing the reference input
+\begin{enumerate}
+	\item The normal position
+	\item Observer driven by the tracking error
+\end{enumerate}
+   \end{itemize}
+\end{slide}
+\fi
 
 \section*{Dynamics of the combined system} % (fold)
 \label{sub:dynamics_of_the_combined_system}
@@ -30,21 +52,6 @@ From previous work the error dynamics are:
 \dot{\mathbf{e}} = (\mathbf{A}-\mathbf{LC})\mathbf{e}
 \]
 Therefore the dynamics of the combined system is:
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aqaKnaaaaWenf2ys9wBH5garuavP1wzZbItLDhis9
-% wBH5garmWu51MyVXgaruWqVvNCPvMCG4uz3bqee0evGueE0jxyaiba
-% ieYlf9irVeeu0dXdh9vqqj-hHeeu0xXdbba9frFj0-OqFfea0dXdd9
-% vqaq-JfrVkFHe9pgea0dXdar-Jb9hs0dXdbPYxe9vr0-vr0-vqpi0d
-% c9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaamaadmaabaqbam
-% qabiqaaaqaamaalaaabaGaamizaiaahIhaaeaacaWGKbGaamiDaaaa
-% aeaadaWcaaqaaiaadsgacaWHLbaabaGaamizaiaadshaaaaaaaGaay
-% 5waiaaw2faaiabg2da9maadmaabaqbamqabiGaaaqaamaabmaabaGa
-% aCyqaiabgkHiTiaahkeacaWHlbaacaGLOaGaayzkaaaabaGaaCOqai
-% aahUeaaeaacaWHWaaabaWaaeWaaeaacaWHbbGaeyOeI0IaaCitaiaa
-% hoeaaiaawIcacaGLPaaaaaaacaGLBbGaayzxaaWaamWaaeaafaWabe
-% GabaaabaGaaCiEaaqaaiaahwgaaaaacaGLBbGaayzxaaGaey4kaSYa
-% amWaaeaafaWabeGabaaabaGaaCOqaaqaaiaahcdaaaaacaGLBbGaay
-% zxaaGaamOCaaaa!54DA!
 \[\left[ {\begin{array}{*{20}c}
    {\frac{{d{\bf{x}}}}{{dt}}}  \\
    {\frac{{d{\bf{e}}}}{{dt}}}  \\
@@ -107,10 +114,14 @@ This is a fortunate situation and is known as the \textbf{separation principle}.
 \subsection*{The Equivalent Classical Compensator} % (fold)
 \label{sec:the_equivalent_classical_compensator}
 
-We shall determine the classical compensator TF which is equivalent to the combined observer-controller. This is simpler to do if we remove the reference input, for the time being.
-\begin{center}
-	\resizebox{!}{2in}{\includegraphics{pictures/fig1.pdf}}
-\end{center}
+\input{frag3}
+\ifslidesonly
+\begin{slide}
+	\heading{The Equivalent Classical Compensator}
+   \input{frag3}
+\end{slide}
+\fi
+
 
 Setting the reference input $r = 0$  gives:
 \[
@@ -177,14 +188,36 @@ U  =   - {\bf{K}}\left( {{\bf{M}}^{ - 1} {\bf{B}}U + {\bf{M}}^{ - 1} {\bf{L}}Y} 
 \section*{Introducing the Reference Input} % (fold)
 \label{sec:introducing_the_reference_input}
 
+\ifslidesonly
+\begin{slide}
+   \heading{Introducing the Reference Input}
+Two cases considered:
+\begin{enumerate}
+	\item The Normal Position
+	\begin{itemize}
+		\item The reference input is introduced as $u=r-\mathbf{K}\hat{\mathbf{x}}$.
+	\end{itemize}
+	\item Observer driven by the tracking error
+	\begin{itemize}
+		\item Sense the tracking error and use this to control the system.
+		\item The tracking error is the difference between the desired and actual outputs $\tilde e =  - r + y$
+	\end{itemize}
+	Systems in each case have different properties.
+\end{enumerate}
+   
+\end{slide}
+\fi
 \subsection*{1. The Normal Position} % (fold)
 \label{sub:1_the_normal_position}
 
-In this case the reference input $r$ is introduced as before: $u=r-\mathbf{K}\hat{\mathbf{x}}$.  This results in 
-an equivalent classical system with the structure shown below:
-\begin{center}
-	\resizebox{!}{2in}{\includegraphics{pictures/fig2.pdf}}
-\end{center}
+\input{frag2}
+\ifslidesonly
+\begin{slide}
+	\heading{1. The Normal Position}
+   \input{frag2}
+\end{slide}
+\fi
+
 
 
 \subsubsection*{Finding $F(s)$ and $H(s)$} % (fold)
@@ -355,13 +388,6 @@ This is not the case when the reference input is introduced elsewhere.
 Sometimes it is desired to sense the tracking error and use this to control the system.
 
 The tracking error is the difference between the desired and actual outputs,
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGabmyzayaaiaGaeyypa0JaeyOeI0Iaam
-% OCaiabgUcaRiaadMhaaaa!33D5!
 \[
 \tilde e =  - r + y
 \]
@@ -371,10 +397,30 @@ Some sensors can only measure a difference between two measurands. eg  a thermoc
 \begin{center}
 	\resizebox{!}{2in}{\includegraphics{pictures/fig3.pdf}}
 \end{center}
+\ifslidesonly
+\begin{slide}
+   \heading{2. Observer Driven by the Tracking Error}
+The tracking error is the difference between the desired and actual outputs,
+\[
+\tilde e =  - r + y
+\]
+   \begin{center}
+	\resizebox{200pt}{!}{\includegraphics{pictures/fig3.pdf}}
+   \end{center}
+\end{slide}
+\fi
 Redraw:
 \begin{center}
-	\resizebox{300pt}{!}{\includegraphics{pictures/fig4.pdf}}
+	\resizebox{250pt}{!}{\includegraphics{pictures/fig4.pdf}}
 \end{center}
+\ifslidesonly
+\begin{slide}
+   \heading{Redraw Block Diagram}
+   \begin{center}
+	\resizebox{250pt}{!}{\includegraphics{pictures/fig4.pdf}}
+\end{center}
+\end{slide}
+\fi
 
 In this configuration the observer is driven by:
 \[
@@ -416,6 +462,23 @@ As a result the difference between the observer and the plant states is affected
 
 % subsection 2_observer_driven_by_the_tracking_error_ (end)
 
+\ifslidesonly
+\begin{slide}
+	\heading{Summary of this Lecture}
+   \begin{itemize}
+   	\item Dynamics of the combined controller-observer system
+\begin{itemize}
+	\item Separation principle
+	\item Equivalent classical controller
+\end{itemize}
+\item Introducing the reference input
+\begin{enumerate}
+	\item The normal position
+	\item Observer driven by the tracking error
+\end{enumerate}
+   \end{itemize}
+\end{slide}
+\fi
 
 
 % section introducing_the_reference_input (end)

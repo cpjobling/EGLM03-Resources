@@ -81,7 +81,7 @@ with state transformation matrix $\mathbf{T}$ giving:
 \begin{eqnarray*}
 	\mathbf{x} & = & \mathbf{Tw} \\
 	\dot{\mathbf{w}}& = &\mathbf{T}^{-1}\mathbf{ATw}+\mathbf{T}^{-1}\mathbf{Bu} \\
-	& = & \mathbf{\Lambda w}= \mathbf{T}^{-1}\mathbf{Bw}
+	& = & \mathbf{\Lambda w} + \mathbf{T}^{-1}\mathbf{Bw}
 \end{eqnarray*}
 where $\mathbf{\Lambda}$ is a diagonal matrix.
  
@@ -104,7 +104,7 @@ with state transformation matrix $\mathbf{T}$ giving:
 \begin{eqnarray*}
 	\mathbf{x} & = & \mathbf{Tw} \\
 	\dot{\mathbf{w}}& = &\mathbf{T}^{-1}\mathbf{ATw}+\mathbf{T}^{-1}\mathbf{Bu} \\
-	& = & \mathbf{\Lambda w}= \mathbf{T}^{-1}\mathbf{Bw}
+	& = & \mathbf{\Lambda w} + \mathbf{T}^{-1}\mathbf{Bu}
 \end{eqnarray*}
 where $\mathbf{\Lambda}$ is a diagonal matrix.
 \end{slide}
@@ -305,7 +305,7 @@ Therefore the system is observable.
 
 % subsection example (end)Test the following system for controllability and observability:
 
-\subsection{Exercise} % (fold)
+\subsection*{Exercise} % (fold)
 \label{sub:exercise}
 
 Confirm these results by using system transformation to normal form.

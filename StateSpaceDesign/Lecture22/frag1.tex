@@ -1,19 +1,9 @@
-Therefore the dynamics of the combined system are:
-\[
-\left[ {\begin{array}{*{20}c}
-   {{\bf{\dot x}}}  \\
-   {{\bf{\dot e}}}  \\
-\end{array}} \right] = \left[ {\begin{array}{*{20}c}
-   {\left( {{\bf{A}} - {\bf{BK}}} \right)} & {{\bf{BK}}}  \\
-   {\bf{0}} & {\left( {{\bf{A}} - {\bf{LC}}} \right)}  \\
-\end{array}} \right]\left[ {\begin{array}{*{20}c}
-   {\bf{x}}  \\
-   {\bf{e}}  \\
-\end{array}} \right] + \left[ {\begin{array}{*{20}c}
-   {\bf{B}}  \\
-   {\bf{0}}  \\
-	\end{array}} \right]r
-\]
+\begin{itemize}
+	\item The observer states can be used to provide feedback control when the plant's own states are not available. 
+	\item The combined observer-controller is equivalent to a classical compensator. 
+	\item The combined system has twice as many states as the plant because of the duplicated states of the observer. 
+	\item \emph{Question to be answered here}: how does the whole thing behave?
+\end{itemize}
 
 \endinput
 
