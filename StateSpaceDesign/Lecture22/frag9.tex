@@ -1,0 +1,24 @@
+Taking Laplace transforms, ignoring ICs:
+\begin{eqnarray*}
+s\hat{\mathbf{X}}(s) & = & (\mathbf{A} - \mathbf{LC} - \mathbf{BK})\hat{\mathbf{X}}(s) + \mathbf{L}Y(s) \\	
+\underbrace {(s{\bf{I}} - {\bf{A}} + {\bf{BK}} + {\bf{LC}})}_{{\bf{M + BK}}}{\bf{\hat X}}(s) & = & {\bf{L}}Y(s) \\
+\hat{\mathbf{X}}(s) & = & (\mathbf{M}+\mathbf{BK})^{-1}{\bf{L}}Y(s)
+\end{eqnarray*}
+where $\mathbf{M}=s\mathbf{I}-\mathbf{A}+\mathbf{LC}$.
+ 
+\[
+U(s)=-\mathbf{K}\hat{\mathbf{X}}(s)=-\mathbf{K}(\mathbf{M}+\mathbf{BK})^{-1}\mathbf{L}Y(s)
+\]
+therefore the compensator TF is:
+\[
+H(s)=-\frac{U(s)}{Y(s)}=\mathbf{K}(\mathbf{M}+\mathbf{BK})^{-1}\mathbf{L}
+\]
+
+
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

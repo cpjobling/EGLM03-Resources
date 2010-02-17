@@ -35,60 +35,41 @@
 \section*{Dynamics of the combined system} % (fold)
 \label{sub:dynamics_of_the_combined_system}
 
+\input{frag4}
+\ifslidesonly
+\begin{slide}
+	\heading{Dynamics of the combined system (1)}
+   \input{frag4}
+\end{slide}
+\fi
 
- 
-\begin{description}
-	\item[The control:] $u=r-\mathbf{K}\hat{\mathbf{x}}$
-	\item[The plant dynamics:] $\dot{\mathbf{x}}=\mathbf{A}\mathbf{x}+\mathbf{B}(r-\mathbf{K}\hat{\mathbf{x}})$
-	\item[Error:] $\mathbf{e}=\mathbf{x}-\hat{\mathbf{x}}$ so $\hat{\mathbf{x}}=\mathbf{x}-\mathbf{e}$ therefore
-	\begin{eqnarray*}
-			\dot{\mathbf{x}} & = & \mathbf{A}\mathbf{x}+\mathbf{B}r-\mathbf{BK}(\mathbf{x}-\mathbf{e}) \\
-			                 & = & (\mathbf{A}-\mathbf{BK})\mathbf{x}+\mathbf{BK}\mathbf{e}-\mathbf{B}r
-	\end{eqnarray*}
-\end{description}
+\input{frag5}
+\ifslidesonly
+\begin{slide}
+	\heading{Dynamics of the combined system (2)}
+   \input{frag5}
+\end{slide}
+\fi 
 
-From previous work the error dynamics are:
-\[
-\dot{\mathbf{e}} = (\mathbf{A}-\mathbf{LC})\mathbf{e}
-\]
-Therefore the dynamics of the combined system is:
-\[\left[ {\begin{array}{*{20}c}
-   {\frac{{d{\bf{x}}}}{{dt}}}  \\
-   {\frac{{d{\bf{e}}}}{{dt}}}  \\
-\end{array}} \right] = \left[ {\begin{array}{*{20}c}
-   {\left( {{\bf{A}} - {\bf{BK}}} \right)} & {{\bf{BK}}}  \\
-   {\bf{0}} & {\left( {{\bf{A}} - {\bf{LC}}} \right)}  \\
-\end{array}} \right]\left[ {\begin{array}{*{20}c}
-   {\bf{x}}  \\
-   {\bf{e}}  \\
-\end{array}} \right] + \left[ {\begin{array}{*{20}c}
-   {\bf{B}}  \\
-   {\bf{0}}  \\
-\end{array}} \right]r
-\]
 
-The eigenvalues or poles of the combined system are the roots of the CE:
-\begin{eqnarray*}
-	\det \left[ {s{\bf{I}}_{2n}  - \left[ {\begin{array}{*{20}c}
-	   {\left( {{\bf{A}} - {\bf{BK}}} \right)} & {{\bf{BK}}}  \\
-	   {\bf{0}} & {\left( {{\bf{A}} - {\bf{LC}}} \right)}  \\
-	\end{array}} \right]} \right] & = &  0 \\
-	\det \left[ {\begin{array}{*{20}c}
-	   {\left[ {s{\bf{I}} - \left( {{\bf{A}} - {\bf{BK}}} \right)} \right]} & { - {\bf{BK}}}  \\
-	   {\bf{0}} & {\left[ {s{\bf{I}} - \left( {{\bf{A}} - {\bf{LC}}} \right)} \right]}  \\
-	\end{array}} \right] & = & 0
-\end{eqnarray*}
- 
-The matrix is block triangular with square matrices on the diagonal. Therefore:
-\[
-	\det \left[ {s{\bf{I}} - \left( {{\bf{A}} - {\bf{BK}}} \right)} \right]\det\left[ {s{\bf{I}} - \left( {{\bf{A}} - {\bf{LC}}} \right)} \right] = 0 
-\]
-\[
-	\alpha_c(s)\alpha_e(s) = 0 
-\]
- 
 
-These are the combined characteristic polynomials of the controller and the observer.
+
+\input{frag6}
+\ifslidesonly
+\begin{slide}
+	\heading{Characteristic Equation (1)}
+   \input{frag6}
+\end{slide}
+\fi
+
+\input{frag7}
+\ifslidesonly
+\begin{slide}
+	\heading{Characteristic Equation (2)}
+   \input{frag7}
+\end{slide}
+\fi
+
 
 % section dynamics_of_the_combined_system (end)
 
@@ -107,6 +88,19 @@ Then, quite independently, the matrix $\mathbf{L}$ is designed as before to fix 
 Using the observer states for the control feedback instead of the plant states does not affect the closed loop poles.
 
 This is a fortunate situation and is known as the \textbf{separation principle}. The problems of controller design and observer design have been separated.
+
+\ifslidesonly
+\begin{slide}
+	\heading{Separation Principle}
+	\begin{itemize}
+		\item Poles of the combined observer-controller system is the union of closed loop controller and observer poles.
+		\item The controller matrix  $\mathbf{K}$  is designed as before.
+		\item Quite independently, the matrix $\mathbf{L}$ is designed to fix the observer poles as required.
+		\item Using the observer states for the control feedback instead of the plant states does not affect the closed loop poles.
+	\end{itemize}
+   This is a fortunate situation and is known as the \textbf{separation principle}. The problems of controller design and observer design have been separated.
+\end{slide}
+\fi
  
 % section separation_principle (end)
 
@@ -114,71 +108,50 @@ This is a fortunate situation and is known as the \textbf{separation principle}.
 \subsection*{The Equivalent Classical Compensator} % (fold)
 \label{sec:the_equivalent_classical_compensator}
 
+
 \input{frag3}
 \ifslidesonly
 \begin{slide}
 	\heading{The Equivalent Classical Compensator}
-   \input{frag3}
+	\input{frag3}
 \end{slide}
 \fi
 
 
 Setting the reference input $r = 0$  gives:
-\[
-\frac{d\hat{\mathbf{x}}}{dt}=(\mathbf{A}-\mathbf{LC})\hat{\mathbf{x}}+ \mathbf{B}u+\mathbf{L}y
-\]
-where $u=-\mathbf{K}\hat{\mathbf{x}}$ therefore
-\[
-\frac{d\hat{\mathbf{x}}}{dt}=(\mathbf{A}-\mathbf{LC})\hat{\mathbf{x}} - \mathbf{BK}\hat{\mathbf{x}}+\mathbf{L}y
-\]
-or
-\[
-\frac{d\hat{\mathbf{x}}}{dt}=(\mathbf{A} - \mathbf{LC} - \mathbf{BK})\hat{\mathbf{x}} + \mathbf{L}y
-\]
+\input{frag8}
+\ifslidesonly
+\begin{slide}
+	\heading{When $r=0$}
+   \input{frag8}
+\end{slide}
+\fi
+
 Taking Laplace transforms, ignoring ICs:
-\begin{eqnarray*}
-s\hat{\mathbf{X}}(s) & = & (\mathbf{A} - \mathbf{LC} - \mathbf{BK})\hat{\mathbf{X}}(s) + \mathbf{L}Y(s) \\	
-\underbrace {(s{\bf{I}} - {\bf{A}} + {\bf{BK}} + {\bf{LC}})}_{{\bf{M + BK}}}{\bf{\hat X}}(s) & = & {\bf{L}}Y(s) \\
-\hat{\mathbf{X}}(s) & = & (\mathbf{M}+\mathbf{BK})^{-1}{\bf{L}}Y(s)
-\end{eqnarray*}
-where $\mathbf{M}=s\mathbf{I}-\mathbf{A}+\mathbf{LC}$.
- 
-\[
-U(s)=-\mathbf{K}\hat{\mathbf{X}}(s)=-\mathbf{K}(\mathbf{M}+\mathbf{BK})^{-1}\mathbf{L}Y(s)
-\]
-therefore the compensator TF is:
-\[
-H(s)=-\frac{U(s)}{Y(s)}=\mathbf{K}(\mathbf{M}+\mathbf{BK})^{-1}\mathbf{L}
-\]
+\input{frag9}
+\ifslidesonly
+\begin{slide}
+	\heading{Taking Laplace Transforms}
+   \input{frag9}
+\end{slide}
+\fi
 
 
 Alternatively, since
-\[
-s{\bf{\hat X}} =  {\bf{A\hat X}} + {\bf{B}}U + {\bf{L}}\left( {Y - {\bf{C\hat X}}} \right)
-\]
-then,
-\[
-\left( {s{\bf{I}} - {\bf{A}} + {\bf{LC}}} \right){\bf{\hat X}} = {\bf{B}}U + {\bf{L}}Y 
-\]
-or,
-\[
-{\bf{\hat X}} = {\bf{M}}^{ - 1} {\bf{B}}U + {\bf{M}}^{ - 1} {\bf{L}}Y
-\]
-
-Now
-\[
-U =  - {\bf{K\hat X}} 
-\]
-so
-\[
-U  =   - {\bf{K}}\left( {{\bf{M}}^{ - 1} {\bf{B}}U + {\bf{M}}^{ - 1} {\bf{L}}Y} \right) 
-\]
-\[
- \left( {1 + {\bf{KM}}^{ - 1} {\bf{B}}} \right)U =  - {\bf{KM}}^{ - 1} {\bf{L}}Y
-\]
-\[ 
- H\left( s \right) =  - \frac{U}{Y} = \frac{{{\bf{KM}}^{ - 1} {\bf{L}}}}{{1 + {\bf{KM}}^{ - 1} {\bf{B}}}} 
-\]
+\input{frag10}
+\ifslidesonly
+\begin{slide}
+	\heading{Alternative Formulation (1)}
+   \input{frag10}
+\end{slide}
+\fi
+\input{frag11}
+\ifslidesonly
+\begin{slide}
+	\heading{Alternative Formulation (2)}
+   \input{frag11}
+\end{slide}
+\fi
 
 % section the_equivalent_classical_compensator (end)
 
@@ -224,36 +197,32 @@ Two cases considered:
 \label{ssub:finding_f_s_and_h_s_}
 
 For the observer we have:
-\[
-\frac{d\hat{\mathbf{x}}}{dt} = \mathbf{A}\hat{\mathbf{x}}+\mathbf{B}u-\mathbf{L}(\mathbf{C}\hat{\mathbf{x}} - y)
-\]
-Taking Laplace transforms ignoring ICs
-\begin{eqnarray*}
-s\hat{\mathbf{X}}(s) & = & \mathbf{A}\hat{\mathbf{X}} - \mathbf{B}U - \mathbf{LC}\hat{\mathbf{X}} + \mathbf{L}Y(s) \\	
-\underbrace {(s{\bf{I}} - {\bf{A}} + {\bf{LC}})}_{{\bf{M}}}{\bf{\hat X}} & = & {\bf B}U + {\bf{L}}Y(s) \\
-\hat{\mathbf{X}} & = & \mathbf{M}^{-1}\mathbf{B}U + \mathbf{M}^{-1}{\bf{L}}Y
-\end{eqnarray*}
+\input{frag12}
+\ifslidesonly
+\begin{slide}
+	\heading{Finding$F(s)$ and $H(s)$: Observer}
+   \input{frag12}
+\end{slide}
+\fi
 
 For the controller we have:
-\[
-u = r - \mathbf{K}\hat{\mathbf{x}}
-\]
-Taking laplace transforms
-\[
-U = R - \mathbf{K}\hat{\mathbf{X}}
-\]
+\input{frag13}
+\ifslidesonly
+\begin{slide}
+	\heading{Finding$F(s)$ and $H(s)$: Controller}
+   \input{frag13}
+\end{slide}
+\fi
+
 Therefore, for the combined observer-controller
-\[
-U=R-\mathbf{K}\left(\mathbf{M}^{-1}\mathbf{B}U + \mathbf{M}^{-1}{\bf{L}}Y\right)
-\]
-Re-arranging:
-\[
-\left(\mathbf{KM}^{-1}\mathbf{B}+1\right)U=R-\mathbf{KM}^{-1}\mathbf{L}Y
-\]
-therefore,
-\[
-U=\frac{1}{\mathbf{KM}^{-1}\mathbf{B}+1}R-\frac{\mathbf{KM}^{-1}\mathbf{L}}{\mathbf{KM}^{-1}\mathbf{B}+1}Y
-\]
+\input{frag14}
+\ifslidesonly
+\begin{slide}
+	\heading{Finding$F(s)$ and $H(s)$: Combined Observer-Controller}
+   \input{frag14}
+\end{slide}
+\fi
+
 
 Comparing with: $$U=F(s)R-H(s)Y$$
 \[
@@ -271,109 +240,76 @@ H(s) = \frac{\mathbf{KM}^{-1}\mathbf{L}}{\mathbf{KM}^{-1}\mathbf{B}+1}
 \subsubsection*{A useful theorem} % (fold)
 \label{ssub:a_useful_theorem}
 
-If $\mathbf{M}$ is square and $\mathbf{V}$ is a row vector and $\mathbf{W}$ is a column vector then,
-\[
-\mathbf{VM}^{-1}\mathbf{W}=\frac{\det\left(\mathbf{M}+\mathbf{WV}\right)}{\det{\mathbf{M}}}-1
-\]
- 
+\input{frag15}
+\ifslidesonly
+\begin{slide}
+	\heading{A Useful Theorem}
+   \input{frag15}
+\end{slide}
+\fi
 
  
 % subsubsection a_useful_theorem (end)
 \subsubsection*{Zeros and Poles of $F(s)$ and $H(s)$} % (fold)
 \label{ssub:zeros_and_poles_of_f_s_and_h_s_}
 
-Applying the theorem:
-\[
-\mathbf{KM}^{-1}\mathbf{B}+1=\frac{\det\left(\mathbf{M}+\mathbf{BK}\right)}{\det{\mathbf{M}}}
-\]
-therefore,
-\[
-F(s) = \frac{\det\mathbf{M}}{\det\left(\mathbf{M}+\mathbf{BK}\right)}
-\]
+\input{frag16}
+\ifslidesonly
+\begin{slide}
+	\heading{Zeros and Poles of $F(s)$ (1)}
+   \input{frag16}
+\end{slide}
+\fi
 
-From previous work,
-\[
-\det\mathbf{M}=\det\left(s\mathbf{I}-\mathbf{A}=\mathbf{LC}\right)=\alpha_e(s)
-\]
-where $\alpha_e(s)=0$ is the characteristic equation of the observer.
-
-Let $\det\left(\mathbf{M}+\mathbf{BK}\right)=\alpha_1(s)$ then,
-\[
-F(s)=\frac{\alpha_e(s)}{\alpha_1(s)}.
-\]
+\input{frag17}
+\ifslidesonly
+\begin{slide}
+	\heading{Zeros and Poles of $F(s)$ (2)}
+   \input{frag17}
+\end{slide}
+\fi
 
 Similarly for $H(s)$:
-\[
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aqaKnaaaaWenf2ys9wBH5garuavP1wzZbItLDhis9
-% wBH5garmWu51MyVXgaruWqVvNCPvMCG4uz3bqee0evGueE0jxyaiba
-% ieYlNi-xH8yiVm0Fh9viWhsqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbb
-% G8FasPYRqj0-yi0dXdbba9pGe9xq-JbbG8A8frFve9Fve9Ff0dc9Gq
-% pi0dmeaabaqaciGacaGaaeqabaWaaeaaeaaakeaacaWGibWaaeWaae
-% aacaWGZbaacaGLOaGaayzkaaGaeyypa0ZaaSaaaeaadaqadaqaamaa
-% laaabaGaciizaiaacwgacaGG0bWaaeWaaeaacaWHnbGaey4kaSIaaC
-% itaiaahUeaaiaawIcacaGLPaaaaeaaciGGKbGaaiyzaiaacshacaWH
-% nbaaaiabgkHiTiaaigdaaiaawIcacaGLPaaaaeaadaWcaaqaaiGacs
-% gacaGGLbGaaiiDamaabmaabaGaaCytaiabgUcaRiaahkeacaWHlbaa
-% caGLOaGaayzkaaaabaGaciizaiaacwgacaGG0bGaaCytaaaaaaGaey
-% ypa0ZaaSaaaeaaciGGKbGaaiyzaiaacshadaqadaqaaiaah2eacqGH
-% RaWkcaWHmbGaaC4saaGaayjkaiaawMcaaiabgkHiTiGacsgacaGGLb
-% GaaiiDaiaah2eaaeaaciGGKbGaaiyzaiaacshadaqadaqaaiaah2ea
-% cqGHRaWkcaWHcbGaaC4saaGaayjkaiaawMcaaaaaaaa!6645!
-H\left( s \right) = \frac{{\left( {\frac{{\det \left( {{\bf{M}} + {\bf{LK}}} \right)}}{{\det {\bf{M}}}} - 1} \right)}}{{\frac{{\det \left( {{\bf{M}} + {\bf{BK}}} \right)}}{{\det {\bf{M}}}}}} = \frac{{\det \left( {{\bf{M}} + {\bf{LK}}} \right) - \det {\bf{M}}}}{{\det \left( {{\bf{M}} + {\bf{BK}}} \right)}}
-\]
-Letting $\det\left(\mathbf{M}+\mathbf{LK}\right)-\det\mathbf{M}=\alpha_2(s)$ then,
-\[
-H(s)\frac{\alpha_2(s)}{\alpha_1(s)}.
-\]
+\input{frag18}
+\ifslidesonly
+\begin{slide}
+	\heading{Zeros and Poles of $H(s)$}
+   \input{frag18}
+\end{slide}
+\fi
+
 
 % subsubsection zeros_and_poles_of_f_s_and_h_s_ (end)
 
 
 \subsubsection*{The Overall Closed Loop TF} % (fold)
 \label{ssub:the_overall_closed_loop_tf}
-\[
-\frac{Y(s)}{R(s)}=F(s)=\frac{G(s)}{1+G(s)H(s)}
-\]
-Let the plant TF be:
-\[
-\frac{\alpha_z(s)}{\alpha_p(s)}
-\]
-therefore,
-\begin{eqnarray*}
-	\frac{Y(s)}{R(s)} &=& \frac{\alpha_e(s)}{\alpha_1(s)}\frac{\frac{\alpha_z(s)}{\alpha_p(s)}}{1+\frac{\alpha_z(s)}{\alpha_p(s)}\frac{\alpha_2(s)}{\alpha_1(s)}} \\
-	\frac{Y(s)}{R(s)} &=& \frac{\alpha_e(s)\alpha_z(s)}{\alpha_p(s)\alpha_1(s)+\alpha_z(s)\alpha_2(s)}
-\end{eqnarray*}
 
-We know from previous work that the denominator, corresponding to the closed loop CE of the overall system must, from the separation principle, be equivalent to:
-\[
-\alpha_e(s)\alpha_c(s)
-\]
-therefore,
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaWaaSaaaeaacaWGzbGaaiikaiaadohaca
-% GGPaaabaGaamOuaiaacIcacaWGZbGaaiykaaaacqGH9aqpdaWcaaqa
-% aiabeg7aHnaaBaaaleaacaWGLbaabeaakiaacIcacaWGZbGaaiykai
-% abeg7aHnaaBaaaleaacaWG6baabeaakiaacIcacaWGZbGaaiykaaqa
-% aiabeg7aHnaaBaaaleaacaWGLbaabeaakiaacIcacaWGZbGaaiykai
-% abeg7aHnaaBaaaleaacaWGJbaabeaakiaacIcacaWGZbGaaiykaaaa
-% cqGH9aqpdaWcaaqaaiabeg7aHnaaBaaaleaacaWG6baabeaakiaacI
-% cacaWGZbGaaiykaaqaaiabeg7aHnaaBaaaleaacaWGJbaabeaakiaa
-% cIcacaWGZbGaaiykaaaaaaa!552B!
-\[
-\frac{{Y(s)}}{{R(s)}} = \frac{{\alpha _e (s)\alpha _z (s)}}{{\alpha _e (s)\alpha _c (s)}} = \frac{{\alpha _z (s)}}{{\alpha _c (s)}}
-\]
+\input{frag19}
+\ifslidesonly
+\begin{slide}
+	\heading{The Overall Closed Loop TF (1)}
+   \input{frag19}
+\end{slide}
+\fi
 
-Notice here how the input TF $F(s)$ contains as its zeros all the poles of the observer given by $\alpha_e(s)$.
-Because of the separation principle, these are also half of the poles of the overall closed loop TF.
-The pole-zero cancellation results in the final TF having just the plant zeros and the controller poles.
+\input{frag20}
+\ifslidesonly
+\begin{slide}
+	\heading{The Overall Closed Loop TF (2)}
+   \input{frag20}
+\end{slide}
+\fi
 
-Thus we can say that, using the observer states for the feedback, instead of the unavailable plant states, has not affected the closed loop TF.
-This is not the case when the reference input is introduced elsewhere.
+\input{frag21}
+\ifslidesonly
+\begin{slide}
+	\heading{The Overall Closed Loop TF: Comments}
+   \input{frag21}
+\end{slide}
+\fi
+
+
 
 % subsubsection the_overall_closed_loop_tf (end)
 
@@ -422,43 +358,47 @@ Redraw:
 \end{slide}
 \fi
 
-In this configuration the observer is driven by:
-\[
-\tilde E =  Y + R
-\] 
-Hence the observer dynamics are:
-\[
-s\hat{\mathbf{X}}=\mathbf{A}\hat{\mathbf{X}}+\mathbf{B}U+\mathbf{L}(\tilde E - \mathbf{C}\hat{\mathbf{X}})
-\]
-therefore,
-\begin{eqnarray*}
-	\underbrace {\left( {s{\bf{I}} - {\bf{A}} + {\bf{LC}}} \right)}_{\bf{M}}{\bf{\hat X}} & = & {\bf{B}}U + {\bf{L}}\tilde E \\
-	{\bf{\hat X}} & = & {\bf{M}}^{ - 1} {\bf{B}}U + {\bf{M}}^{ - 1} {\bf{L}}\tilde E
-\end{eqnarray*}
+\input{frag23}
+\ifslidesonly
+\begin{slide}
+	\heading{Observer Driven by the Tracking Error (1)}
+   \input{frag23}
+\end{slide}
+\fi
 
-Now $U=-\mathbf{K}\hat{\mathbf{X}}$, therefore
-\begin{eqnarray*}
-	U & = &  - \bf{KM}^{ - 1} {\bf{B}}U - {\bf{KM}}^{ - 1} {\bf{L}}\tilde E \\
-	U & = &  - \frac{{{\bf{KM}}^{ - 1} {\bf{L}}}}{{1 + {\bf{KM}}^{ - 1} {\bf{B}}}}\tilde E \\
-	H\left( s \right) & = &  - \frac{U}{{\tilde E}} = \frac{{{\bf{KM}}^{ - 1} {\bf{L}}}}{{1 + {\bf{KM}}^{ - 1} {\bf{B}}}}
-\end{eqnarray*}
+\input{frag24}
+\ifslidesonly
+\begin{slide}
+	\heading{Observer Driven by the Tracking Error (2)}
+   \input{frag24}
+\end{slide}
+\fi
 
-Here $H(s)$ is the same as before:
-\[
-\frac{\alpha_2(s)}{\alpha_1(s)}
-\]
-where $\alpha_1(s)=\det(\mathbf{M}+\mathbf{BK})$ and $\alpha_2(s)=\det(\mathbf{M}+\mathbf{LK})-\det{M}$.
- 
+\input{frag25}
+\ifslidesonly
+\begin{slide}
+	\heading{Observer Driven by the Tracking Error: $H(s)$}
+   \input{frag25}
+\end{slide}
+\fi
+
 The overall TF is:
-\begin{eqnarray*}
-	\frac{Y(s)}{R(s)} &=& \frac{G(s)}{1+G(s)H(s)}= \frac{\frac{\alpha_z(s)}{\alpha_p(s)}\times\frac{\alpha_2(s)}{\alpha_1(s)}}{1+\frac{\alpha_z(s)}{\alpha_p(s)}\times\frac{\alpha_2(s)}{\alpha_1(s)}} \\
-	\frac{Y(s)}{R(s)} &=& \frac{\alpha_z(s)\alpha_2(s)}{\alpha_p(s)\alpha_1(s)+\alpha_z(s)\alpha_2(s)}=\frac{\alpha_z\alpha_2}{\alpha_c\alpha_e}
-\end{eqnarray*}
- 
+\input{frag26}
+\ifslidesonly
+\begin{slide}
+	\heading{Observer Driven by the Tracking Error: Overall TF}
+   \input{frag26}
+\end{slide}
+\fi
 
-In this case we see that the overall TF contains the poles of the observer as well as the controller.
-Whereas in the normal position changes in the reference input do not excite the error dynamics of the observer, in this configuration they do.
-As a result the difference between the observer and the plant states is affected during operation and take further time to settle down.
+\input{frag27}
+\ifslidesonly
+\begin{slide}
+	\heading{Observer Driven by the Tracking Error: Comments}
+   \input{frag27}
+\end{slide}
+\fi
+
 
 % subsection 2_observer_driven_by_the_tracking_error_ (end)
 

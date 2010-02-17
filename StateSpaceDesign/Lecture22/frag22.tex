@@ -1,0 +1,44 @@
+In this configuration the observer is driven by:
+\[
+\tilde E =  Y + R
+\] 
+Hence the observer dynamics are:
+\[
+s\hat{\mathbf{X}}=\mathbf{A}\hat{\mathbf{X}}+\mathbf{B}U+\mathbf{L}(\tilde E - \mathbf{C}\hat{\mathbf{X}})
+\]
+therefore,
+\begin{eqnarray*}
+	\underbrace {\left( {s{\bf{I}} - {\bf{A}} + {\bf{LC}}} \right)}_{\bf{M}}{\bf{\hat X}} & = & {\bf{B}}U + {\bf{L}}\tilde E \\
+	{\bf{\hat X}} & = & {\bf{M}}^{ - 1} {\bf{B}}U + {\bf{M}}^{ - 1} {\bf{L}}\tilde E
+\end{eqnarray*}
+
+Now $U=-\mathbf{K}\hat{\mathbf{X}}$, therefore
+\begin{eqnarray*}
+	U & = &  - \bf{KM}^{ - 1} {\bf{B}}U - {\bf{KM}}^{ - 1} {\bf{L}}\tilde E \\
+	U & = &  - \frac{{{\bf{KM}}^{ - 1} {\bf{L}}}}{{1 + {\bf{KM}}^{ - 1} {\bf{B}}}}\tilde E \\
+	H\left( s \right) & = &  - \frac{U}{{\tilde E}} = \frac{{{\bf{KM}}^{ - 1} {\bf{L}}}}{{1 + {\bf{KM}}^{ - 1} {\bf{B}}}}
+\end{eqnarray*}
+
+Here $H(s)$ is the same as before:
+\[
+\frac{\alpha_2(s)}{\alpha_1(s)}
+\]
+where $\alpha_1(s)=\det(\mathbf{M}+\mathbf{BK})$ and $\alpha_2(s)=\det(\mathbf{M}+\mathbf{LK})-\det{M}$.
+ 
+The overall TF is:
+\begin{eqnarray*}
+	\frac{Y(s)}{R(s)} &=& \frac{G(s)}{1+G(s)H(s)}= \frac{\frac{\alpha_z(s)}{\alpha_p(s)}\times\frac{\alpha_2(s)}{\alpha_1(s)}}{1+\frac{\alpha_z(s)}{\alpha_p(s)}\times\frac{\alpha_2(s)}{\alpha_1(s)}} \\
+	\frac{Y(s)}{R(s)} &=& \frac{\alpha_z(s)\alpha_2(s)}{\alpha_p(s)\alpha_1(s)+\alpha_z(s)\alpha_2(s)}=\frac{\alpha_z\alpha_2}{\alpha_c\alpha_e}
+\end{eqnarray*}
+ 
+
+In this case we see that the overall TF contains the poles of the observer as well as the controller.
+Whereas in the normal position changes in the reference input do not excite the error dynamics of the observer, in this configuration they do.
+As a result the difference between the observer and the plant states is affected during operation and take further time to settle down.
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:

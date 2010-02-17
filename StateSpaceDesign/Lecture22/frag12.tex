@@ -1,0 +1,18 @@
+
+\[
+\frac{d\hat{\mathbf{x}}}{dt} = \mathbf{A}\hat{\mathbf{x}}+\mathbf{B}u-\mathbf{L}(\mathbf{C}\hat{\mathbf{x}} - y)
+\]
+Taking Laplace transforms ignoring ICs
+\begin{eqnarray*}
+s\hat{\mathbf{X}}(s) & = & \mathbf{A}\hat{\mathbf{X}} - \mathbf{B}U - \mathbf{LC}\hat{\mathbf{X}} + \mathbf{L}Y(s) \\	
+\underbrace {(s{\bf{I}} - {\bf{A}} + {\bf{LC}})}_{{\bf{M}}}{\bf{\hat X}} & = & {\bf B}U + {\bf{L}}Y(s) \\
+\hat{\mathbf{X}} & = & \mathbf{M}^{-1}\mathbf{B}U + \mathbf{M}^{-1}{\bf{L}}Y
+\end{eqnarray*}
+
+
+\endinput
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "notes"
+%%% End:
