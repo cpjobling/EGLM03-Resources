@@ -2,13 +2,14 @@
 
 \documentclass[a4,slidesonly,semrot]{seminar}
 
-\newif\ifpdf
-\ifx\pdfoutput\undefined
-   \pdffalse
-\else
-   \pdfoutput=1
-   \pdftrue
-\fi  
+\usepackage{ifpdf}
+%\newif\ifpdf
+%\ifx\pdfoutput\undefined
+%   \pdffalse
+%\else
+%   \pdfoutput=1
+%   \pdftrue
+%\fi  
 
 \ifpdf
   \usepackage[pdftex]{graphicx}

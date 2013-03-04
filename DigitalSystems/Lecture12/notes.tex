@@ -124,12 +124,12 @@ a negative going unit step, also of height $v_k$, which is activated
 at $t=\{k+1\}T$ seconds. The sum of these two signals is 
 \begin{eqnarray*}
   p(t) &=& v_k \epsilon(t - kT) - v_k \epsilon(t - \{k+1\}T)\\
-       &=& v_k\left[\epsilon(t - kT) - v_k \epsilon(t - \{k+1\}T)\right]
+       &=& v_k\left[\epsilon(t - kT) - \epsilon(t - \{k+1\}T)\right]
 \end{eqnarray*}
 So for the sequence:
 \begin{equation}
   \label{eq:l11e5}
-  v(t) = \sum_{k=0}^{\infty} v_k\left[\epsilon(t - kT) - v_k \epsilon(t - \{k+1\}T)\right]
+  v(t) = \sum_{k=0}^{\infty} v_k\left[\epsilon(t - kT) - \epsilon(t - \{k+1\}T)\right]
 \end{equation}
 In transform form this is
 \begin{eqnarray*}
@@ -182,6 +182,15 @@ so
          &=& \frac{1-e^{-aT}}{z-e^{-aT}}.
   \end{eqnarray*}
 \end{slide}
+
+\textbf{Malab note}: the zero-order-hold equivalent is the default 
+system used for continuous system equivalence in \emph{Matlab}. To 
+convert a continous system in any \emph{lti} format\footnote{%
+The LTI functions are \emph{tf}, \emph{ss}, and \emph{zpk}. For more
+information, type \emph{help lti} inside \emph{Matlab}.} use:
+\begin{verbatim}
+lti_d = c2d(lti, Ts); % You must provide a sampling time
+\end{verbatim} 
 
 \section*{Other Continuous System Equivalences}
 
@@ -244,7 +253,7 @@ The most obvious approximations are illustrated in \sref{slide:l11s20d} to \sref
 
 Completing the analysis, we can show that $$y(nT)\approx y(nT-T) + \frac{T}{2}\{u(nT-T)+u(T)\}$$ which on taking z-transforms gives $$Y(z)=z^{-1}Y(z)+\frac{T}{2}\{z^{-1}U(z)+U(z)\}$$ thus 
 \begin{equation}
-\frac{Y(z)}{U(z)}=D(z)=\frac{T}{2}\{\frac{1+z^{-1}}{1-z^{-1}}\}.
+\frac{Y(z)}{U(z)}=D(z)=\frac{T}{2}\left\{ {\frac{{1 + {z^{ - 1}}}}{{1 - {z^{ - 1}}}}} \right\}.
 \end{equation}
 By comparison with continuous integration $Y(s)/U(s)=1/s$, this result, obtained by \emph{numerical integration} allows us to say that $$s \approx \frac{2}{T}\{\frac{1-z^{-1}}{1+z^{-1}}\}.$$ This result is summarised in SLIDE~\ref{slide:l11s22}. Similar arguments can be used to determine the forward- and backward-rectangular approximations shown in SLIDES~\ref{slide:l11s20} and \ref{slide:l11s21}.
 
@@ -255,9 +264,9 @@ By comparison with continuous integration $Y(s)/U(s)=1/s$, this result, obtained
      s &=& \frac{2}{T}\, \frac{z-1}{z+1} \\
      z &=& \frac{1 + 1/2 sT}{1 - 1/2 sT}
   \end{eqnarray*}
-  compare expansion $$z=(1+ 1/2 sT)(1- 1/2 sT)^{-1} = 1 + sT + 1/2
- s^2T^2 + 1/4 s^3T^3
- + \cdots$$  with $$z = e^{sT} = 1 + sT + 1/2 s^2T^2 + 1/6 s^3T^3 + \cdots$$
+  compare expansion $$z=(1+ (1/2) sT)(1- (1/2) sT)^{-1} = 1 + sT + (1/2)
+ s^2T^2 + (1/4) s^3T^3
+ + \cdots$$  with $$z = e^{sT} = 1 + sT + (1/2) s^2T^2 + (1/6) s^3T^3 + \cdots$$
 \end{slide}
 
 \begin{slide}\label{slide:l11s20}
@@ -267,7 +276,7 @@ By comparison with continuous integration $Y(s)/U(s)=1/s$, this result, obtained
      s &=& \frac{z-1}{T} \\
      z &=& 1 + sT
   \end{eqnarray*}
-  compare with $$z = e^{sT} = 1 + sT + 1/2 s^2T^2 + 1/6 s^3T^3 + \cdots$$
+  compare with $$z = e^{sT} = 1 + sT + (1/2) s^2T^2 + (1/6) s^3T^3 + \cdots$$
 \end{slide}
 
 \begin{slide}\label{slide:l11s21}
@@ -278,7 +287,7 @@ By comparison with continuous integration $Y(s)/U(s)=1/s$, this result, obtained
      z &=& \frac{1}{1 + sT}
   \end{eqnarray*}
   compare expansion $$z=(1-sT)^{-1} = 1 + sT + s^2T^2 + s^3T^3
- + \cdots$$  with $$z = e^{sT} = 1 + sT + 1/2 s^2T^2 + 1/6 s^3T^3 + \cdots$$
+ + \cdots$$  with $$z = e^{sT} = 1 + sT + (1/2) s^2T^2 + (1/6) s^3T^3 + \cdots$$
 \end{slide}
 
 
@@ -291,9 +300,14 @@ is known as ``\emph{Tustin's Bilinear Transformation}''.
   digital system with transfer function
   \begin{eqnarray*}
     H(z)&=& \frac{a}{\frac{2}{T}\,\frac{z-1}{z+1}+a} \\
-        &=& \frac{\left(\frac{aT/2}{1+aT/2}\right)(z+1)}{z-\left(\frac{1-aT/2}{1+aT/2}\right)}.
+        &=& \frac{\left(\frac{(aT)/2}{1+(aT)/2}\right)(z+1)}{z-\left(\frac{1-(aT)/2}{1+(aT)/2}\right)}.
   \end{eqnarray*}
 \end{slide}
+
+\textbf{Malab note}: the bilinear transform equivalent is obtained by passing the argument \verb|'tustin'| to the \emph{c2d} method:
+\begin{verbatim}
+lti_d = c2d(lti, Ts, 'tustin'); 
+\end{verbatim} 
 
 \subsection*{Matched pole-zero approximations}
 
@@ -317,12 +331,12 @@ Since continuous transfer functions often have more poles than zeros, that is $n
 \subsubsection*{Example 2}
 
 Use the Matched-Pole-Zero (MPZ) approximation to give the z-transfer function equivalent to
-$$D(s)=\frac{s+b}{s+b}.$$ Order of numerator and denominator are equal so there are no infinite zeros and by matching poles and zeros  $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1 - e^{-bT}z^{-1})}.$$ For $D(s)$ the DC gain is $D(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $D(z)|_{z=1}$ (from final value theorem) that is $$k\frac{(1-e^{-aT})}{(1-e^{-bT})} = \frac{a}{b}.$$ We choose $k$ so that the DC gains match, i.e. $$k=\frac{a(1-e^{-bT})}{b(1-e^{-aT})}.$$
+$$D(s)=\frac{s+a}{s+b}.$$ Order of numerator and denominator are equal so there are no infinite zeros and by matching poles and zeros  $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1 - e^{-bT}z^{-1})}.$$ For $D(s)$ the DC gain is $D(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $D(z)|_{z=1}$ (from final value theorem) that is $$k\frac{(1-e^{-aT})}{(1-e^{-bT})} = \frac{a}{b}.$$ We choose $k$ so that the DC gains match, i.e. $$k=\frac{a(1-e^{-bT})}{b(1-e^{-aT})}.$$
 
 \subsubsection*{Example 3}
 
 Use the Matched-Pole-Zero (MPZ) approximation to give the z-transfer function equivalent to
-$$D(s)=\frac{s+b}{s(s+b)}.$$ Here, the order of the denominator is one greater than the numerator so there is $n-m = 2 - 1 = 1$ infinite zero. Placing this zero at $z = -1$ makes the MPZ transfer function $$D(z)=k\frac{(1+z^{-1})(1-e^{-aT}z^{-1})}{(1-z^{-1})(1 - e^{-bT}z^{-1})}.$$ As $D(s)$ is type 1, the DC gain is $sD(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $(1-z^{-1})D(z)|_{z=1}$ that is 
+$$D(s)=\frac{s+a}{s(s+b)}.$$ Here, the order of the denominator is one greater than the numerator so there is $n-m = 2 - 1 = 1$ infinite zero. Placing this zero at $z = -1$ makes the MPZ transfer function $$D(z)=k\frac{(1+z^{-1})(1-e^{-aT}z^{-1})}{(1-z^{-1})(1 - e^{-bT}z^{-1})}.$$ As $D(s)$ is type 1, the DC gain is $sD(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $(1-z^{-1})D(z)|_{z=1}$ that is 
 \begin{eqnarray*}
 k\frac{(1+z^{-1})(1-e^{-aT})}{(1-e^{-bT})}|_{z=1} & = & k\frac{2(1-e^{-aT})}{(1-e^{-bT})} \\
         & = & \frac{a}{b} 
@@ -358,7 +372,7 @@ See notes for an example.
 
 \subsubsection*{Example 4}
 
-Re-implement Example 3 using the Modified MPZ method. If we allow an infinite zero $$D(s)=\frac{s+2}{s(s+b)}$$ becomes $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1-z^{-1})(1-e^{-bT}z^{-1})}$$ and $$k=\frac{a}{b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
+Re-implement Example 3 using the Modified MPZ method. If we allow an infinite zero $$D(s)=\frac{s+a}{s(s+b)}$$ becomes $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1-z^{-1})(1-e^{-bT}z^{-1})}$$ and $$k=\frac{a}{b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
 
 The implementation is now
 
@@ -366,6 +380,11 @@ $$y(n) = (1 - e^{-bT})y(n-1)-e^{-bT}y(n-2)+k(u(n-1)-e^{-aT}u(n-2))$$
 
 and now the computation for $y(n)$ is performed only on past values of $u(n)$ and $y(n)$ and a whole sample period is available for computation. 
 
+\textbf{Matlab note}: the matched-pole zero equivalent of an LTI system is obtained by passing \verb|'matched'| as the third argument to \emph{c2d}:
+\begin{verbatim}
+lti_d = c2d(lti, Ts, 'matched')
+\end{verbatim}
+There isn't a built-in method that returns the \emph{modified}-matched-pole zero equivalent.
 
 
 %----------------------------------------------------------------

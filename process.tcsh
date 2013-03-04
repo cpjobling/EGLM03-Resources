@@ -30,9 +30,9 @@ EOF
 end
 
 sed -e "s/^%\\twoup/\\twoup/" < lecture${LNO}.tex >! lect${LNO}_2up.tex
-latex lect${LNO}_2up.tex; latex lect${LNO}_2up.tex
-latex lecture$LNO; latex lecture$LNO
-latex slides$LNO; latex slides$LNO 
+pdflatex lect${LNO}_2up.tex; pdflatex lect${LNO}_2up.tex
+pdflatex lecture$LNO; pdflatex lecture$LNO
+pdflatex slides$LNO; pdflatex slides$LNO 
 echo Done!
 mv -f slides${LNO}.pdf ../../slides
 mv -f lect*.pdf ../../handouts
