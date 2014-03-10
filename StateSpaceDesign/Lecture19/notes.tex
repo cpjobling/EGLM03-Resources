@@ -349,7 +349,7 @@ rank(OM) % should be 2.
 \begin{verbatim}
 A = [-6 -5; 1 0]; B = [1; 0]
 C = [3 1];
-sys = ss(A, B, C);
+sys = ss(A, B, C, [0]);
 OM = obsv(sys)
 CM = ctrb(sys)
 \end{verbatim}
