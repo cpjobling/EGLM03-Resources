@@ -16,3 +16,12 @@ step(circ_ss)
 circ_tf=tf(circ_ss)
 %% Determine poles and zeros
 circ_zpk=zpk(circ_ss)
+%% The state transition matrix
+% Calculated using the symbolic math tools provided by Matlab
+% See help symbolic
+syms phi t s
+phi = inv(s*eye(2) - A)
+%% The state transfer matrix
+G = C*phi*B + D
+G = simplify(G)
+pretty(G)
