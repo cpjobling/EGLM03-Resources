@@ -8,93 +8,82 @@
 
 \section*{Digital System Models}
 
-The equivalent of the differential equation model for continuous
-systems is the difference equation for digital systems. Replacing
-the differential operator $\frac{d}{dt}$ by the advance operator
-$\triangle$ gives the general form of the differential equation as
-\begin{equation}\label{eq:l9e1}
-  \triangle^ny + a_{1}\triangle^{n-1}y + \ldots +  a_n y = b_0
-  \triangle^n u + b_{1}\triangle^{n-1} u + \ldots + b_n u.
-\end{equation}
-Now, given the definition of the advance operator derived in a
-previous lecture $$\triangle^n v_k = v_{k+n}$$ we can re-write
-equation (\ref{eq:l9e1}) as the \emph{difference equation}
-\begin{equation}\label{eq:l9e2}
-  y_{k+n} + a_{1}y_{k+n-1} + \ldots + a_n y_k = b_0
-   u_{k+n} + b_{1} u_{k+n-1} + \ldots +  b_n u_k.
-\end{equation}
+\ifslidesonly
+\begin{slide}\label{slide:l9sA}
+\heading{Digital system models}
+\input{chunk1}
+\end{slide}
+\fi
+\input{chunk1}
 
-Unlike the differential equation, however, which is hardly ever
-expressed in an integral form, the difference equation is more
-usually expressed in terms of the delay operator $\nabla$.
-Applying the operator $\nabla^n$ to equation (\ref{eq:l9e1}) gives
-\begin{eqnarray}\label{eq:l9e3}
-y + a_{1}\nabla y + \ldots  + a_n \nabla^n y &=& b_0 u +
-b_{1}\nabla u + \ldots +  b_n\nabla^n u\\
-  y_{k} + a_{1}y_{k-1} + \ldots +  a_n y_{k-n}
-   &=& b_0
-   u_{k} + b_{1} u + \ldots + b_n u_{k-n}.\label{eq:19e4}
-   \end{eqnarray}
 
-Applying the $z$ transform directly to the difference equation
-with the delay operator (\ref{eq:l9e3}) gives
-\begin{eqnarray}\label{l9e5}
- Y + a_{1}z^{-1} Y + \ldots + a_n z^{-n} Y
-&=& b_0 U + b_{1}z^{-1} U + \ldots + b_n z^{-n} U\\ (1 +
-a_{1}z^{-1} + \ldots +  a_n z^{-n}) Y &=& (b_0 + b_{1}z^{-1} +
-\ldots + b_n z^{-n}) U \label{eq:19e6}
-   \end{eqnarray}
+\ifslidesonly
+\begin{slide}\label{slide:l9sB} \heading{Difference equation}
+\input{chunk2}
+\end{slide}
+\fi
+\input{chunk2}
 
+\ifslidesonly
+\begin{slide}\label{slide:l9sC} \heading{Difference equation in terms of the delay operator}
+\input{chunk3}
+\end{slide}
+\fi
+\input{chunk3}
+
+
+\ifslidesonly
+\begin{slide}\label{slide:l9sD} \heading{$z$-transform of difference equation}
+\input{chunk4}
+\end{slide}
+\fi
+\input{chunk4}
+
+\ifslidesonly
 \begin{slide}\label{slide:l9s1} \heading{$z$ Transfer Function}
-Given that
-\[(1 +
-a_{1}z^{-1} + \ldots +  a_n z^{-n}) Y(z) = (b_0 + b_1 z^{-1} +
-\ldots + b_n z^{-n}) U(z)\] The $z$ transfer function is
-\[H(z) = \frac{Y(z)}{U(z)}=\frac{b_0 + b_{1}z^{-1} + \ldots + b_n
-z^{-n}}{1 + a_1z^{-1} + \ldots + a_n z^{-n}}\]
-
-A digital system in this general form is known as a
-``\emph{pole-zero, infinite impulse response, recursive
-auto-regressive moving average digital filter(!)}''
+\input{chunk5.tex}
 \end{slide}
+\fi
+\input{chunk5.tex}
 
+\ifslidesonly
 \begin{slide}\label{slide:l9s2} \heading{$z$ Transfer Function (2)}
-If $b_1 = b_2 = \cdots = b_n = 0$ then the transfer function is
-\[H(z) = \frac{b_0}{1 + a_1z^{-1} + \ldots + a_n z^{-n}}\]
-
-A digital system in this form is known as an ``\emph{all pole,
-infinite impulse response, recursive auto-regressive digital
-filter.}''
+\input{chunk6}
 \end{slide}
+\fi
+\input{chunk6}
 
+\ifslidesonly
 \begin{slide}\label{slide:l9s3} \heading{$z$ Transfer Function (3)}
-When $a_1 = a_2 = \cdots = a_n = 0$ then the transfer function is
-\[H(z) = b_0 + b_{1}z^{-1} + \ldots + b_n
-z^{-n}\]
-
-A digital system in this form is known as an ``\emph{all zero,
-finite impulse response, non recursive moving average digital
-filter.}''
+\input{chunk7}
 \end{slide}
+\fi
+\input{chunk7}
+
+\ifslidesonly
 \begin{slide}\heading{Other forms of digital transfer function}
-The transfer function can also be expressed in the
-zero-pole-gain form
-\[H(z) = \frac{k(z-z_1)(z-z_2)\cdots(z-z_n)}{(z-p_1)(z-p_2)\cdots(z-p_n)}\]
-and the partial fraction form
-\[H(z) = \frac{r_1}{z-p_1}+\frac{r_2}{z-p_2}\cdots\frac{r_n}{z-p_n}\]
+\input{chunk8}
 \end{slide}
+\fi
+\input{chunk8}
 
+\ifslidesonly
 \begin{slide}\label{slide:l9s4} \heading{Canonical Forms}
-\begin{itemize}
-\item With the transfer function written as
-\[H(z) = \frac{b_0 z^n + b_{n-1} z^{n-1} + \cdots + b_1 z + b_n}{z^n + a_1 z^{n-1} + \cdots + a_{n-1} z + b_n}\]
-there is a direct analogy with the general form of the continuous
-system transfer function with $s$ instead of $z$. \item That was
-implemented with the physically realistic integral operator $\int
-dt$ for which the digital equivalent is the delay operator
-$\nabla$. 
-\end{itemize}
+\input{chunk9}
 \end{slide}
+\fi
+\input{chunk9}
+
+\ifslidesonly
+\begin{slide}
+\heading{End of Pre-Class Presentation}
+This concludes the pre-class presentation.
+
+In the class we will
+look at system response and compute the impulse and step responses of
+and example system.
+\end{slide}
+\fi
 
 %% Digital Systems
 %% Digital System Response
@@ -105,18 +94,15 @@ As in the case of a continuous system, the response of a digital
 signal comprises the sum of a free response and a forced response.
 The free response is dependent on the initial conditions of a
 digital system states, and as these are taken as zero here the
-free response is also zero and will not be considered further. The
-response of a digital system with transfer function $H(z)$ to a
-digital input signal $u$ is therefore the digital output signal
-$y$ given in transform form as
-\begin{equation}\label{eq:l10e1}
-  Y(z) =H(z) U(z)
-\end{equation}
-Taking the inverse transform gives the digital system response as
-\begin{equation}\label{eq:l10e2}
-  y_k = \mathcal{Z}^{-1}Y(z) = \mathcal{Z}^{-1} \left\{H(z)
-  U(z)\right\}
-\end{equation}
+free response is also zero and will not be considered further.
+
+\ifslidesonly
+\begin{slide}\label{slide:l9s5} \heading{Digital System Response}
+\input{chunk10}
+\end{slide}
+\fi
+\input{chunk10}
+
 The inverse transform needed to determine the digital system
 response is obtained using the inverse z transform methods, e.g.
 polynomial division and partial fraction expansion, discussed in a
@@ -128,21 +114,23 @@ The elemental singularity signals in a digital system response
 include the digital impulse signal and the digital step input.
 
 \subsubsection*{Impulse response}
-The digital impulse signal is given by
-\begin{equation}\label{eq:l10e3}
-  v = \delta = \{\delta_k\}
-\end{equation}
-where $\delta_0 = 1$ when $k = 0$, and $\delta_k = 0$ otherwise.
-Therefore the sequence for the impulse is simply
-\[\delta_k = 1,\ 0,\ 0,\ 0,\ \ldots.\]
 
-The transform of the digital impulse signal is
-\begin{equation}\label{eq:l10e4}
-  V = \Delta = \sum_{k=0}^{\infty}\delta_k z^{-k} = 1
-\end{equation}
+\ifslidesonly
+\begin{slide}\label{slide:l9s6} \heading{Impulse signal}
+\input{chunk11}
+\end{slide}
+\fi
+\input{chunk11}
 
-Consider the system \[ H(z) = \frac{4z^2 - 16}{z^2 - 0.25}\], the
-impulse response will be
+\ifslidesonly
+\begin{slide}\label{slide:l9s7} \heading{Example 1: Impulse Response}
+Calculate the impulse response of the digital system with transfer function
+  \[ H(z) = \frac{4z^2 - 16}{z^2 - 0.25}\]
+\end{slide}
+\fi
+Consider the system
+\[ H(z) = \frac{4z^2 - 16}{z^2 - 0.25}\]
+The impulse response will be
 \[ Y(z) = H(z)\times 1 = \frac{4z^2 - 16}{z^2 - 0.25}\]
 We shall determine this response using the partial fraction
 expansion.
@@ -177,21 +165,28 @@ Thus
 \end{eqnarray*}
 
 \subsubsection*{Step response}
-The digital step signal is
-\begin{equation}\label{eq:l10e5}
-  v = \epsilon = \{\epsilon_k\}
-\end{equation}
-where $\epsilon_k = 1$ when $k \ge 0$, and $\epsilon_k = 0$
-otherwise. Therefore the sequence for the step is simply
-\[\epsilon_k = 1,\ 1,\ 1,\ 1,\ \ldots.\]
 
-The transform of the digital step signal is
-\begin{eqnarray}\label{eq:l10e6}
-  V = E &=& \sum_{k=0}^{\infty}\epsilon_k z^{-k}\\
-        &=& \sum_{k=0}^{\infty} z^{-k}\nonumber \\
-        &=& 1 + z^{-1} + z^{-2} + z^{-3} + \cdots z^{-n} + \cdots \nonumber\\
-        &=& \frac{1}{1-z^{-1}} = \frac{z}{z-1}.
-\end{eqnarray}
+\ifslidesonly
+\begin{slide}\label{slide:l9s8} \heading{Step signal}
+\input{chunk12}
+\end{slide}
+\fi
+\input{chunk12}
+
+\ifslidesonly
+\begin{slide}\label{slide:l9s9} \heading{$z$-transform of step signal}
+\input{chunk13}
+\end{slide}
+\fi
+\input{chunk13}
+
+\ifslidesonly
+\begin{slide}\label{slide:l9s10} \heading{Example 2: Step Response}
+Calculate the step response of the digital system with transfer function
+  \[ H(z) = \frac{4z^2 - 16}{z^2 - 0.25}\]
+\end{slide}
+\fi
+
 The step response of the example system is
 \[ Y(z) = H(z)\times \frac{z}{z-1} = \frac{z(4z^2 - 16)}{(z-1)(z^2 - 0.25)}\]
 We shall determine this response using the partial fraction
