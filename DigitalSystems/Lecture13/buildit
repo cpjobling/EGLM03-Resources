@@ -3,8 +3,8 @@
 source ../../course.tcsh
 source ../section.tcsh
 set LNO=13
-set FILEDATE="11th February 2010"
-set VERSION="1.2"
+set FILEDATE="5th March 2015"
+set VERSION="1.3"
 set TITLE='Introduction to Digital Control'
 set SHORT_TITLE='Digital Control (Intro)' # $z would be interpreted by the shell
 set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"
