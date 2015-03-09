@@ -1,0 +1,11 @@
+In transform form this is
+\begin{eqnarray*}
+  V(s) &=& \sum_{k=0}^{\infty} v_k\left(\frac{1}{s}e^{-kTs} -
+  \frac{1}{s}e^{-\left\{k+1\right\}Ts}\right)\\
+       &=& \frac{1}{s}\left(1-e^{-Ts}\right) \sum_{k=0}^{\infty} v_k
+  e^{-kTs}\\
+       &=& \frac{1}{s}\left(1-z^{-1}\right) \sum_{k=0}^{\infty} v_k
+  z^{-k}\\
+       &=& \frac{1}{s}\,\frac{z-1}{z}\,V(z)
+\end{eqnarray*}
+\endinput
