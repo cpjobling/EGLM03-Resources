@@ -181,11 +181,11 @@ lti_d = c2d(lti, Ts); % You must provide a sampling time or use -1 if undefined
 
 \section*{Other Continuous System Equivalences}
 
-\subsection*{Approximations based on numerical integration}
+\subsection*{Approximation based on numerical integration}
 
 \ifslidesonly
 \begin{slide}
-\heading{Approximations based on numerical integration}
+\heading{Approximation based on numerical integration}
 \input{chunk08}
 \end{slide}
 \fi
@@ -200,7 +200,17 @@ lti_d = c2d(lti, Ts); % You must provide a sampling time or use -1 if undefined
   \resizebox{300pt}{!}{\includegraphics{pictures/s-to-z.pdf}}
 \end{slide}
 
-Thus, the transfer function we are seeking will in fact be an approximation of the integral $y(t)=\int u(t) dt$. We can illustrate this as shown in SLIDE~\ref{slide:l11s20b}. If we sample the curve $u(t)$ and consider the situation at the $n$-th sampling instant, we will have $$y(nT) = \int_{0}^{nT} u(t) dt$$ We can rewrite this as $$y(nT)= \int_{0}^{nT-T} u(t) dt + \int_{nT-T}^{nT} u(t) dt$$ where the second integral term is the shaded area shown in SLIDE~\ref{slide:l11s20c}. Now if we assume that the first integral term was approximated by the digital integrator in the previous sampling instant, then $y(nT-T) = \int_{0}^{nT-T} u(t) dt$ is known, and consequently we have $$y(nT) = y(nT-T) + \int_{nT-T}^{nT} u(t) dt$$ and we only need to determine the area of the shaded region to approximate $y(nT)$.
+Thus, the transfer function we are seeking will in fact be an approximation of
+the integral $y(t)=\int u(t) dt$. We can illustrate this as shown in SLIDE~\ref{slide:l11s20b}.
+If we sample the curve $u(t)$ and consider the situation at the $n$-th sampling
+instant, we will have $$y(nT) = \int_{0}^{nT} u(t) dt$$ We can rewrite this as
+$$y(nT)= \int_{0}^{nT-T} u(t) dt + \int_{nT-T}^{nT} u(t) dt$$
+where the second integral term is the shaded area shown in SLIDE~\ref{slide:l11s20c}.
+Now if we assume that the first integral term was approximated by the digital
+integrator in the previous sampling instant, then
+$y(nT-T) = \int_{0}^{nT-T} u(t) dt$ is known, and consequently we have
+$$y(nT) = y(nT-T) + \int_{nT-T}^{nT} u(t) dt$$
+and we only need to determine the area of the shaded region to approximate $y(nT)$.
 
 \begin{slide}\label{slide:l11s20b}
 \heading{Model of Integration}
@@ -216,7 +226,10 @@ Thus, the transfer function we are seeking will in fact be an approximation of t
 \end{center}
 \end{slide}
 
-The most obvious approximations are illustrated in \sref{slide:l11s20d} to \sref{slide:l11s20f}. It is clear that if we are to disallow any further subdivision of the shaded area, the \emph{trapezoidal approximation} will provide the most accurate result.
+The most obvious approximations are illustrated in \sref{slide:l11s20d} to
+\sref{slide:l11s20f}. It is clear that if we are to disallow any further
+subdivision of the shaded area, the \emph{trapezoidal approximation}
+will provide the most accurate result.
 
 \begin{slide}\label{slide:l11s20d}
 \heading{Forward Rectangular Approximation}
@@ -298,8 +311,8 @@ is known as ``\emph{Tustin's Bilinear Transformation}''.
   bilinear transformation.
 \end{slide}
 
-\subsubsection{Solution} Tustin's
-bilinear transformation gives a
+\subsubsection{Solution}
+Tustin's bilinear transformation gives a
  digital system with transfer function
  \begin{eqnarray*}
    H(z)&=& \frac{a}{\frac{2}{T}\,\frac{z-1}{z+1}+a} \\
@@ -313,13 +326,21 @@ lti_d = c2d(lti, Ts, 'tustin');
 
 \subsection*{Matched pole-zero approximations}
 
-Another way to obtain a digital approximation of a continuous transfer function is to use the relationship $z = e^{sT}$ to map poles and zeros of the continuous transfer function into poles and zeros in the z-transfer function.
+Another way to obtain a digital approximation of a continuous transfer function
+is to use the relationship $z = e^{sT}$ to map poles and zeros of the continuous
+transfer function into poles and zeros in the z-transfer function.
 
-Since continuous transfer functions often have more poles than zeros, that is $n-m$ zeros at infinity, zeros at infinity are replaced in the z-transfer function by zeros at $z = -1$ which is equivalent to half the sampling frequency $\omega_s/2$ (i.e. the highest frequency possible in the z-domain). Thus if $n-m =1$ we add $(1+z^{-1})$, if $n-m=2$, $(1+z^{-1})^2$, etc.
+Since continuous transfer functions often have more poles than zeros,
+that is $n-m$ zeros at infinity, zeros at infinity are replaced in the z-transfer
+function by zeros at $z = -1$ which is equivalent to half the sampling frequency
+$\omega_s/2$ (i.e. the highest frequency possible in the z-domain).
+Thus if $n-m =1$ we add $(1+z^{-1})$, if $n-m=2$, $(1+z^{-1})^2$, etc.
 
 \begin{slide}\label{slides:l11s24}
 	\heading{Matched-Pole Zero method}
-	Idea is that all poles and zeros of continuous transfer function $D(s)$ can become poles and zeros of digital transfer function $D(z)$ if the mapping $z=e^{sT}$ is used.
+	Idea is that all poles and zeros of continuous transfer function $D(s)$ can
+  become poles and zeros of digital transfer function $D(z)$ if the mapping
+  $z=e^{sT}$ is used.
 
 	Method:
 	\begin{enumerate}
@@ -330,23 +351,45 @@ Since continuous transfer functions often have more poles than zeros, that is $n
 	See examples in the notes.
 \end{slide}
 
-\subsubsection*{Example 2}
+\begin{slide}
+\heading{Example 3}
+Use the Matched-Pole-Zero (MPZ) approximation to give the z-transfer function equivalent to
+$$D(s)=\frac{s+a}{s+b}.$$
+\end{slide}
+\subsubsection*{Solution}
+Order of numerator and denominator are equal so there are no infinite zeros and
+by matching poles and zeros
+$$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1 - e^{-bT}z^{-1})}.$$
+For $D(s)$ the DC gain is $D(s)|_{s=0} = a/b$.
+The DC gain for $D(z)$ is $D(z)|_{z=1}$ (from final value theorem) that is
+$$k\frac{(1-e^{-aT})}{(1-e^{-bT})} = \frac{a}{b}.$$
+We choose $k$ so that the DC gains match, i.e.
+$$k=\frac{a(1-e^{-bT})}{b(1-e^{-aT})}.$$
+
+\begin{slide}
+\heading{Example 4}
 
 Use the Matched-Pole-Zero (MPZ) approximation to give the z-transfer function equivalent to
-$$D(s)=\frac{s+a}{s+b}.$$ Order of numerator and denominator are equal so there are no infinite zeros and by matching poles and zeros  $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1 - e^{-bT}z^{-1})}.$$ For $D(s)$ the DC gain is $D(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $D(z)|_{z=1}$ (from final value theorem) that is $$k\frac{(1-e^{-aT})}{(1-e^{-bT})} = \frac{a}{b}.$$ We choose $k$ so that the DC gains match, i.e. $$k=\frac{a(1-e^{-bT})}{b(1-e^{-aT})}.$$
+$$D(s)=\frac{s+a}{s(s+b)}.$$
+\end{slide}
 
-\subsubsection*{Example 3}
-
-Use the Matched-Pole-Zero (MPZ) approximation to give the z-transfer function equivalent to
-$$D(s)=\frac{s+a}{s(s+b)}.$$ Here, the order of the denominator is one greater than the numerator so there is $n-m = 2 - 1 = 1$ infinite zero. Placing this zero at $z = -1$ makes the MPZ transfer function $$D(z)=k\frac{(1+z^{-1})(1-e^{-aT}z^{-1})}{(1-z^{-1})(1 - e^{-bT}z^{-1})}.$$ As $D(s)$ is type 1, the DC gain is $sD(s)|_{s=0} = a/b$. The DC gain for $D(z)$ is $(1-z^{-1})D(z)|_{z=1}$ that is
+\subsubsection*{Solution}
+Here, the order of the denominator is one greater than the numerator so there is
+$n-m = 2 - 1 = 1$ infinite zero. Placing this zero at $z = -1$ makes the MPZ transfer
+function
+$$D(z)=k\frac{(1+z^{-1})(1-e^{-aT}z^{-1})}{(1-z^{-1})(1 - e^{-bT}z^{-1})}.$$
+As $D(s)$ is type 1, the DC gain is $sD(s)|_{s=0} = a/b$.
+The DC gain for $D(z)$ is $(1-z^{-1})D(z)|_{z=1}$ that is
 \begin{eqnarray*}
 k\frac{(1+z^{-1})(1-e^{-aT})}{(1-e^{-bT})}|_{z=1} & = & k\frac{2(1-e^{-aT})}{(1-e^{-bT})} \\
         & = & \frac{a}{b}
 \end{eqnarray*}
 
-Again, we choose $k$ so that the DC gains match, i.e. $$k = \frac{a}{2b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
+Again, we choose $k$ so that the DC gains match, i.e.
+$$k = \frac{a}{2b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
 
-We would implement $D(z)$ as a \emph{difference equation} defined in terms of the sampled inputs and outputs as shown in SLIDE~\ref{slides:slides:l11s25} for Example 2.
+We would implement $D(z)$ as a \emph{difference equation} defined in terms of the
+sampled inputs and outputs as shown in SLIDE~\ref{slides:slides:l11s25} for Example 3.
 \begin{slide}\label{slides:l11s25}
 	\heading{Implementation of an MPZ Approximation}
 	If $$\frac{Y(z)}{U(z)}=D(z)=k\frac{1-\alpha z^{-1}}{1-\beta z^{-1}}$$ then digital implementation will be
@@ -356,7 +399,13 @@ We would implement $D(z)$ as a \emph{difference equation} defined in terms of th
 	Implementation only works if computation rate $<<$ significant dynamics of the sampled system and a small fraction of sampling time $T$.
 \end{slide}
 
-In the implementation, you should notice that it is actually physically impossible to sample $u(t)$, compute $y(n)$ and output $y(n)$ all at the same instant of time. Hence the equation is actually impossible to implement. However, if the computation is sufficiently fast, the delay between sampling $u(t)$ and outputting $y(t)$ will be small and can often be neglected.  A rule of thumb has computation delay $< t_r/20$ of the dominant pole. It should certainly be a small fraction of the sampling period $T$.
+In the implementation, you should notice that it is actually physically impossible
+to sample $u(t)$, compute $y(n)$ and output $y(n)$ all at the same instant of time.
+Hence the equation is actually impossible to implement. However, if the
+computation is sufficiently fast, the delay between sampling $u(t)$ and outputting
+$y(t)$ will be small and can often be neglected.
+A rule of thumb has computation delay $< t_r/20$ of the dominant pole.
+It should certainly be a small fraction of the sampling period $T$.
 
 \begin{slide}\label{slides:l11s26}
 	\heading{Modified MPZ}
@@ -364,23 +413,31 @@ In the implementation, you should notice that it is actually physically impossib
 	\item
 	Used if constraint on computation time cannot be met.
 
-	\item Allow a zero at infinity in $D(z)$ so that order of numerator is one less than denominator.
+	\item Allow a zero at infinity in $D(z)$ so that order of numerator is one
+  less than denominator.
 
-	\item This ensures that only past values of $u$ and $y$ appear in the implementation equation and a whole sample period is available for computation
+	\item This ensures that only past values of $u$ and $y$ appear in the implementation
+  equation and a whole sample period is available for computation
 
 \end{itemize}
-See notes for an example.
 \end{slide}
 
-\subsubsection*{Example 4}
+\begin{slide}\heading{Example 5}
 
-Re-implement Example 3 using the Modified MPZ method. If we allow an infinite zero $$D(s)=\frac{s+a}{s(s+b)}$$ becomes $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1-z^{-1})(1-e^{-bT}z^{-1})}$$ and $$k=\frac{a}{b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
+Re-implement Example 3 using the Modified MPZ method.
+\end{slide}
+\subsubsection*{Solution}
+If we allow an infinite zero
+$$D(s)=\frac{s+a}{s(s+b)}$$ becomes
+$$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1-z^{-1})(1-e^{-bT}z^{-1})}$$ and
+$$k=\frac{a}{b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
 
 The implementation is now
 
 $$y(n) = (1 - e^{-bT})y(n-1)-e^{-bT}y(n-2)+k(u(n-1)-e^{-aT}u(n-2))$$
 
-and now the computation for $y(n)$ is performed only on past values of $u(n)$ and $y(n)$ and a whole sample period is available for computation.
+and now the computation for $y(n)$ is performed only on past values of $u(n)$ and
+$y(n)$ and a whole sample period is available for computation.
 
 \textbf{Matlab note}: the matched-pole zero equivalent of an LTI system is obtained by passing \verb|'matched'| as the third argument to \emph{c2d}:
 \begin{verbatim}

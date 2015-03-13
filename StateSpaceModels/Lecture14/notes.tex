@@ -11,7 +11,7 @@
 \heading{Introduction to State Space}
 \begin{itemize}
 	\item \emph{Classical control system theory} is based on the Transfer Function model.
-	\item Can only be used for systems that are defined by LTI differential equations. 
+	\item Can only be used for systems that are defined by LTI differential equations.
 	\item \emph{Modern control systems theory} is based on a time-domain description of systems.
 	\item Convenient matrix form makes the model attractive for simulation, analysis and design using packages like Matlab.
 	\item All classical control methods seen so far also apply to state-space models.
@@ -26,7 +26,7 @@ State space models can do anything that classical TF models can do.
 
 In addition state space models have allowed control theory to be extended in various directions as shown in \sref{slides:l13s2}
 
- 
+
 \begin{slide}\label{slides:l13s2}
 	\heading{The Advances Enabled by State Space Models}
 \begin{enumerate}
@@ -39,7 +39,7 @@ In addition state space models have allowed control theory to be extended in var
 \end{slide}
 In this module we will restrict ourselves to the study of mostly to SISO LTI systems, but is important to note the possibility of its extension to more challenging areas.
 
- 
+
 \subsection*{Construction of State Space Models}
 
 The state-space model is a form of system representation that is used
@@ -246,26 +246,28 @@ Alternatively, in a state space model extra variables, called \textbf{states}, a
 		 \vdots      \nonumber \\
 		\frac{dx_{n-2}}{dt} & = & \frac{d^{n-2}y}{dt^{n-2}} = x_{n-1}   \\
 		\frac{dx_{n-1}}{dt} & = & \frac{d^{n-1}y}{dt^{n-1}} = x_n   \\
-	    \frac{dx_n}{dt} &=& \frac{d^{n}y}{dt^{n}} =  f\left(x_n, x_{n-1}, \ldots, x_3, x_2, x_1, u(t), t \right) 
+	    \frac{dx_n}{dt} &=& \frac{d^{n}y}{dt^{n}} =  f\left(x_n, x_{n-1}, \ldots, x_3, x_2, x_1, u(t), t \right)
 	\end{eqnarray}
 \end{slide}
 \fi
 An nth order system gives rise to a state space model consisting of n coupled 1st order differential equations (the \emph{state equations} (\ref{eq:l13e13b})--(\ref{eq:l13e13c})) in terms of $n$ state variables and the input forcing function(s) . In addition there are the \emph{output equations} (\ref{eq:l13e13a}) expressing other variables, or outputs, of interest, also in terms of the states and inputs.
 
 You should note that the formulation used in the differential equation (\ref{eq:l13e12}) and its equivalent state equations (\ref{eq:l13e13a})--(\ref{eq:l13e13c}) is completely general and makes no assumptions about the nature of $f$. In fact the only condition, is that it represents a lumped parameter system rather than a distributed parameter system. The need to solve such equations by simulation is the basis of the integral models we introduced in Lecture 2.
- 
+
 \subsubsection*{Example 2}
 
 Derive a state space model for the system described by the differential equation:
- 
+
 $$\frac{d^2y}{dt^2}+3\frac{dy}{dt}+2y=u(t)$$
 \ifslidesonly
 \begin{slide}
 	\heading{Example 2}
-	
+
 	Derive a state space model for the system described by the differential equation:
 
 	$$\frac{d^2y}{dt^2}+3\frac{dy}{dt}+2y=u(t)$$
+
+	You should try this now. We will give the solution in the live class.
 \end{slide}
 \fi
 Introducing state variables $x_1=y$ and $x_2=dy/dt$ then the state equations are:
@@ -273,7 +275,7 @@ $$\frac{dx_1}{dt}=\frac{dy}{dt}=x_2$$
 $$\frac{dx_2}{dt}=\frac{d^2y}{dt^2}=-2x_1 - 3x_2 + u$$
 and the output equation is:
 $$y=x_1.$$
- 
+
 \begin{slide}
 \heading{Physical states}
 The states are often chosen to have a direct physical significance such as:
@@ -292,7 +294,8 @@ The states are often chosen to have a direct physical significance such as:
 	\begin{center}
 		\resizebox{100pt}{!}{\includegraphics{pictures/smd.pdf}}
 	\end{center}
-	(See lecture 2)
+
+	You should try this now. We will give the solution in the live class.
 \end{slide}
 
 For this system, summing the forces in the direction $x$ we have
@@ -313,7 +316,7 @@ You should construct the Simulink model represented by these equations and compa
 \begin{itemize}
 	\item The state equations can be solved uniquely when the input functions are given together with the initial values of all the states.
 	\item The solutions for the states are substituted into the output equations to obtain the solutions for the other variables in the system.
-	\item In the above examples the states are physical quantities associated with energy storage in the system. The energy stored in a inductor is $E_L=Li_L^2/2$, and the energy stored in a capacitor is $E_C=CV_C^2/2$. 
+	\item In the above examples the states are physical quantities associated with energy storage in the system. The energy stored in a inductor is $E_L=Li_L^2/2$, and the energy stored in a capacitor is $E_C=CV_C^2/2$.
 	\item Similarly for mechanical systems the velocity of a mass relates to its kinetic energy and the force in a spring relates to its elastic potential energy.
 	\item The states encode the configuration of the system, or its whole past history.
 	\item The choice of states is not unique, but they must be chosen such that the configuration of the system can be unambiguously and completely determined from them.
@@ -330,7 +333,7 @@ You should construct the Simulink model represented by these equations and compa
 \end{itemize}
 \end{slide}
 \fi
- 
+
 \subsection*{State Space Models for Linear Systems}
 
 Linear systems are the most important ones for control system analysis and design as the best methods and techniques apply to these.
@@ -401,7 +404,7 @@ $\mathbf{B}$ is the $n\times q$ ``\emph{input matrix}''.
 
 
 The state equations allow us to describe the internal behaviour of
-the system when subjected to stimuli from the inputs. In 
+the system when subjected to stimuli from the inputs. In
 example 1, we need nothing more if we wish to describe the way that
 the capacitor voltage $v_{31}$ and inductor current $i_1$ change
 with time under the influence of the input current $u$. However,
@@ -414,8 +417,8 @@ see that, in terms of the state variables and the system input
 \begin{eqnarray}
 \label{eq:l13y1} v_{31}&=&1\times v_{31} \\
 i_1 & = & 1\times i_1 \\
-v_{32} &=& 1\times v_{31} - R \times i_1 \\ 
-v_{21} & = & R \times i_1 \\ 
+v_{32} &=& 1\times v_{31} - R \times i_1 \\
+v_{21} & = & R \times i_1 \\
 \label{eq:l13yn} i_2 & = & u - 1\times i_1.
 \end{eqnarray}
 \ifslidesonly
@@ -425,9 +428,9 @@ For illustration purposes we write an ``output equation'' for every
 possible signal.
 \begin{eqnarray*}
 v_{31}&=&1\times v_{31} \\
-i_1 & = & 1\times i_1 \\ 
-v_{32} &=& 1\times v_{31} - R \times i_1 \\ 
-v_{21} & = & R \times i_1\\ 
+i_1 & = & 1\times i_1 \\
+v_{32} &=& 1\times v_{31} - R \times i_1 \\
+v_{21} & = & R \times i_1\\
 i_2 & = & u - 1\times i_1.
 \end{eqnarray*}
 \end{slide}
@@ -558,15 +561,22 @@ to match the general model is shown in \sref{slides:l13s9}.
 	D = [0; 0; 0; 0; 1];
 	circ_ss = ss(A, B, C, D,...
 	   'statename',{'v31' 'i1'}, 'inputname','u',...
-	   'outputname', {'v31' 'i1' 'v32' 'v21' 'i2'});	
+	   'outputname', {'v31' 'i1' 'v32' 'v21' 'i2'});
 	\end{verbatim}
 	Once you have the state-space model, all the analysis techniques seen so far are open to you.
 \end{slide}
 
 Important note, for this to work you must assign numerical values to the the parameters \texttt{Cap}, \texttt{R} and \texttt{L}.
 
+\subsubsection*{In class activity}
 
- 
+In class we will construct the state-space model for the Antenna Azimuth Case Study Problem from Nise.
+\ifslidesonly
+\begin{slide}
+\heading{Example 4}
+Construct the state-space model for the Antenna Azimuth Case Study Problem from Nise.
+\end{slide}
+\fi 
 
 
 %----------------------------------------------------------------

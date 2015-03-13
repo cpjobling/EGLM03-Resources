@@ -1,0 +1,14 @@
+We could implement this in pseudo code:
+\begin{verbatim}
+while (true) do
+  /* read current error from ADC */
+  e(n) = ADC
+  /* calculate and output control action */
+  u(n) = 0.5488 * u(n-1) + 12.64 * e(n) - 11.44 * e(n-1)
+  /* Store past values */
+  e(n-1) = e(n)
+  u(n-1) = u(n)
+  wait for next sample time
+end while
+\end{verbatim}
+\endinput
