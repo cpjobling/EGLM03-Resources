@@ -11,7 +11,8 @@
    \begin{itemize}
    	\item Laplace Transform of State Space Models
    	\item Time Responses for State Space Models
-   	\item Problems
+    \item Detailed example (in class)
+   	\item Problems (homework)
    \end{itemize}
 \end{slide}
 
@@ -513,6 +514,27 @@ of the final equation gives \[x(t) = e^{at}.\] For the vector case
 a little more involved!}, we can show that
 \[\phit{}=e^{\mathbf{A}t}\] where $e^{\mathbf{A}t}$ is called the matrix exponential.
 
+\subsection*{Unforced system response}
+To determine the response of the system to the initial state we recall that
+\[\mathbf{x} = \mathbf{B}\mathbf{\Phis} \mathbf{x}(0)\]
+ and putting this together with the definition of $\mathbf{Y(s)}$ we can
+ determine the unforced system response of a system.
+
+\begin{slide} \label{slide:l4s11a}
+\heading{Zero Input System Response}
+For non-zero initial conditions and zero input we have
+\begin{eqnarray}\label{eq:l4eq6a}
+  \mathbf{X}(s)&=&\resolvent{}\mathbf{x}(0) \\
+&=& \Phis{}\mathbf{x}(0) \label{eq:l4eq7a}
+\end{eqnarray}
+The zero-input system output transform is therefore given by
+\begin{equation}\label{eq:l4eq8a}
+ \mathbf{Y}_\mathrm{zi}(s)=\mathbf{C}\Phis{}\mathbf{x}(0).
+\end{equation}
+\end{slide}
+Because we have already shown that $\phi(t)$ will be a linear combination of modes,
+the unforced system response $y(t)$ will be another linear combination of the same modes.
+
 \subsection*{The Zero State Response}
 We now consider the case where the initial condition vector
 $\mathbf{x}(0)=\mathbf{0}$ and we will obtain the response of the
@@ -526,14 +548,29 @@ For zero initial conditions we have
   \mathbf{X}(s)&=&\resolvent{}\mathbf{B}\mathbf{U}(s) \\
 &=& \Phis{}\mathbf{B}\mathbf{U}(s) \label{eq:l4eq7}
 \end{eqnarray}
-The system output transform (see last lecture) is given by
+The system output transform (forced response) is given by
 \begin{equation}\label{eq:l4eq8}
- \mathbf{Y}(s)=\left[\mathbf{C}\Phis{}\mathbf{B}+\mathbf{D}\right]\mathbf{U}(s)
+ \mathbf{Y}_{\mathrm{zs}}(s)=\left[\mathbf{C}\Phis{}\mathbf{B}+\mathbf{D}\right]\mathbf{U}(s)
 \end{equation} (where $\mathbf{C}\Phis{}\mathbf{B}+\mathbf{D}$ is the system transfer
 matrix).
 \end{slide}
+
+\subsection*{Full System Response}
+\ifslidesonly
+\begin{slide}
+\heading{Full System Response}
+\input{frag12}
+\end{slide}
+\fi
+\input{frag12}
+\ifslidesonly
+\begin{slide}
+\heading{End of Pre-Class Presentation}
+In the class we will reinforce these concepts by working through an example in detail.
+\end{slide}
+\fi
 \begin{slide}\label{slide:l4s12}
-\heading{Zero State Response (Example)} Let
+\heading{Example} Let
 \begin{eqnarray*}\dot{\mathbf{x}}&=&\left[\begin{array}{cc}
   0 & 1 \\
   -6 & -5
@@ -549,9 +586,12 @@ matrix).
   \epsilon(t)
 \end{array}\right].
 \end{eqnarray*}
+Calculate the full system response for this system given that the initial conditions
+are $\mathbf{x}(0)=[-1, 1]^T$.
 \end{slide}
-\begin{slide}\label{slide:l4s13}
-\heading{Zero State Response: Transfer Function} The transfer
+
+\subsection*{Solution}
+The transfer
 function is \begin{eqnarray*}
 \mathbf{G}(s)&=&\mathbf{C}\Phis{}\mathbf{B} =
 \left[\begin{array}{cc}
@@ -578,9 +618,8 @@ function is \begin{eqnarray*}
    \frac{-s-12}{(s+2)(s+3)} & \frac{-6}{(s+2)(s+3)}
 \end{array}\right]
 \end{eqnarray*}
-\end{slide}
-\begin{slide}\label{slide:l4s14}
-\heading{Output Transform} The transform of the input vector is
+
+The transform of the input vector is
 \[\mathbf{U}(s) = \mathcal{L}\left[\begin{array}{c}
   e^{-t} \\
   \epsilon(t)
@@ -603,9 +642,8 @@ function is \begin{eqnarray*}
    -\frac{1}{s}-\frac{11/2}{s+1}+\frac{13}{s+2}-\frac{13/2}{s+3}
 \end{array}\right]
 \end{eqnarray*}
-\end{slide}
-\begin{slide}\label{slide:l4s15}
-\heading{System Time Response} Inverse Laplace transforming the
+
+Inverse Laplace transforming the
 previous result gives the zero-state output response of the
 system: \[\left[\begin{array}{c}
   \frac{8}{3}\epsilon(t)+\frac{25}{2}e^{-t}-26e^{-2t}+\frac{65}{6}e^{-3t} \\
@@ -614,17 +652,11 @@ system: \[\left[\begin{array}{c}
 Note that response is now a linear combination of the system modes
 ($e^{-2t}$ and $e^{-3t}$) and the input modes ($\epsilon(t)$ [the
 unit step function] and $e^{-t}$).
-\end{slide}
-\subsection*{Full System Response}
-The full system response for the state-space model is simply the
-sum of the zero-state and zero-input responses:
-\begin{eqnarray*}\mathbf{Y}_{\mathrm{full}}(s) &=& \mathbf{Y}_{\mathrm{zs}}(s) +
-\mathbf{Y}_{\mathrm{zi}}(s)\\ &=&
-\mathbf{C}\Phis{}\left[\mathbf{x}(0)+\mathbf{B}\mathbf{U}(s)\right].\end{eqnarray*}
+
 If the initial condition vector $\mathbf{x}(0)=[-1, 1]^T$ what is
 the total response of the system?
-\begin{slide}\label{slide:l4s16}
-\heading{Total System Response} \begin{eqnarray*} \mathbf{Y}(s)&=&
+
+\begin{eqnarray*} \mathbf{Y}(s)&=&
 \left[\begin{array}{cc}
   2 & -1 \\
   0 & 1
@@ -651,9 +683,8 @@ the total response of the system?
   \frac{s^2}{s(s+1)}
 \end{array}\right]
 \end{eqnarray*}
-\end{slide}
-\begin{slide}\label{slide:l4s17}
-\heading{Total System Response (2)} \begin{eqnarray*}
+
+\begin{eqnarray*}
 \mathbf{Y}(s)&=& \left[\begin{array}{c}
   \frac{-3s^2-10s^2+34s+16}{s(s+1)(s+2)(s+3)} \\
   \frac{s^3+6s^2-12s-6}{s(s+1)(s+2)(s+3)}
@@ -663,6 +694,23 @@ the total response of the system?
    -\epsilon(t)-\frac{11}{2}e^{-t}+17e^{-2t}-\frac{19}{2}e^{-3t}
 \end{array}\right].
 \end{eqnarray*}
+
+\begin{slide}
+\heading{Solving this problem in Matlab}
+We can use the symbolic toolbox!
+\begin{verbatim}
+A = [0, 1; -6, -5]; B = [2, 1; -1, 0];
+C = [2, -1; 0, 1]; D = [0, 0; 0, 0];
+x0 = [-1, 1]';
+syms t s
+u = [exp(-t),heaviside(t)];
+U = laplace(u)
+PhiS = inv(s*eye(2) - A)
+Yzs = (C*PhiS*B + D)*Us
+Yzi = C*PhiS*x0
+Ytotal = Yzs + Yzi
+y = ilaplace(Ytotal)
+\end{verbatim}
 \end{slide}
 
 \begin{slide}

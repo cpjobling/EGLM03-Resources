@@ -20,10 +20,11 @@ description into one of a small number of ``standard'' or
 \emph{canonical forms}.
 
 \begin{slide}
-	\heading{Canonical Forms}
+	\heading{Part 1: Introducing Canonical Forms}
 	Standard forms for state space models derived from differential equations or transfer function models.
 	\begin{itemize}
-		\item Companion form
+		\item Derivation of the companion form
+		\item Example
 		\item Controller canonical form
 		\item Observer canonical form
 		\item Normal form
@@ -33,17 +34,22 @@ description into one of a small number of ``standard'' or
 
 
 
-\section*{The Companion Form}
+\section*{Converting a Differential Equation into State Space Form}
 These notes describe how a general differential equation may be
 converted into a state-space model.
 
 Consider the general differential equation:
+\ifslidesonly
+\begin{slide}
+\heading{Differential Equation into State Space}
+Consider the equation:
+\input{frag0}
 
-\[
-\frac{d^{n}y}{dt^{n}} +
-a_{n-1}\frac{d^{n-1}y}{dt^{n-1}}+a_{n-2}\frac{d^{n-2}y}{dt^{n-2}}+\cdots+a_1\frac{dy}{dt}+a_0
-y = b_0 u
-\]
+In class we will show how this can be converted into the so-called ``companion form''
+state-space model.
+\end{slide}
+\fi
+\input{frag0}
 We rearrange this equation so that the highest power is on the
 left
 \[
@@ -163,14 +169,17 @@ y & = & [1,\ 0,\ 0,\ \ldots, 0] \mathbf{x}.
 \resizebox{300pt}{!}{\includegraphics{pictures/companion1.pdf}}
 \end{slide}
 
+\subsection*{System with a Strictly Proper Transfer Function}
 Now let us consider the case of a system that has derivatives of
-the input. A strictly proper system has transfer function
-\[G(s)=\frac{Y(s)}{U(s)} = \frac{b_ms^m +
-b_{m-1}s^{m-1}+b_{m-2}s^{m-2}+\cdots+b_1s+b_0}{s^n +
-a_{n-1}s^{n-1}+a_{n-2}s^{n-2}+\cdots+a_1s+a_0}\] where $m<n$. 
+the input.
+\ifslidesonly
+\begin{slide}
+\heading{Strictly proper system}
+\input{frag2}
+\end{slide}
+\fi
+\input{frag2}
 
-How
-is this more general system converted into a state-space model?
 Well, let us introduce an intermediate variable $W(s)$ and use this to
 split the transfer function into two parts like so:
 \begin{equation}\label{eq:l5e1}
@@ -220,9 +229,14 @@ the case $m=n-1$.
 \resizebox{300pt}{!}{\includegraphics{pictures/companion2.pdf}}
 \end{slide}
 
-The general form of a transfer function of a proper single-input,
-single-output system of order $n$ is
-\[\frac{b_ns^n+b_{n-1}s^{n-1}+\cdots+b_1s + b_0}{s^n+a_{n-1}s^{n-1}+\cdots+a_1s + a_0}\]
+\subsection*{System with a Proper Transfer Function}
+\ifslidesonly
+\begin{slide}
+\heading{Proper System}
+\input{frag3}
+\end{slide}
+\fi
+\input{frag3}
 An alternative form, obtained by dividing the numerator by the
 denominator, is
 \[b_n+\frac{(b_{n-1} - b_n a_{n-1})s^{n-1}+\cdots+(b_1 - b_n a_1)+(b_0 - b_n a_0)}{s^n+a_{n-1}s^{n-1}+\cdots+a_1s + a_0}.\]
@@ -257,23 +271,31 @@ in \sref{slide:proper}.
 \end{slide}
 
 
-\section*{Example}
 
+\ifslidesonly
 \begin{slide}
 \heading{Example}
-System with transfer function
-\[G(s)=\frac{Y(s)}{U(s)}=\frac{2s^3 + 16s^2 + 30s + 8}{s^3 + 7s^2 + 10s}\]
-This system is ``proper'' because order of numerator equals order of denominator.
+\input{frag4}
 \end{slide}
 \begin{slide}
-\heading{Example (2)}
+\heading{End of Pre-Class Presentation}
+In class we will:
+\begin{itemize}
+\item Work through the three cases introduced here
+\item Complete the worked example
+\end{itemize}
+\end{slide}
+\fi
+\section*{Example}
+
+\input{frag4}
+
+\subsection*{Solution}
 First divide the numerator into the denominator to get
 \begin{eqnarray*}G(s)&=&\frac{2(s^3 + 7s^2 + 10s) + 2s^2 + 10s + 8}{s^3 + 7s^2 +
 10s}\\ &=& \frac{2s^2 + 10s + 8}{s^3 + 7s^2 + 10s} +
-2.\end{eqnarray*} 
-\end{slide}
-\begin{slide}
-\heading{Example (completed)}
+2.\end{eqnarray*}
+
 The companion form of the state matrices are
 \begin{eqnarray*}\mathbf{A} & = & \left[\begin{array}{ccc}
   0 & 1 & 0 \\
@@ -286,17 +308,23 @@ The companion form of the state matrices are
 \end{array}\right]\\ \mathbf{C} & = & \left[\begin{array}{ccc}
   8 & 10 & 2
 \end{array}\right]\ \mathbf{D}=\left[2\right]\end{eqnarray*}
+
+\begin{slide}
+\heading{Part 2: Other Canonical Forms}
+\begin{itemize}
+	\item Controller canonical form
+	\item Observer canonical form
+	\item Normal form
+	\item Jordan forms
+\end{itemize}
 \end{slide}
 
-%% State Space Modelling of Dynamic Systems
-%% Normal Canonical Form
-\def\FileDate{98/11/03}
-\def\FileVersion{1.0}
-% ----------------------------------------------------------------
-% Notes pages *********************************************************
-% ----------------------------------------------------------------
-
 \section*{Controller Canonical Form}
+\ifslidesonly
+\begin{slide}
+\heading{Controller Canonical Form}
+\end{slide}
+\fi
 If one defines a transfer function in \Matlab{}, e.g. as shown in
 \sref{slide:l5s5}, the result of converting the system into
 state-space form is rather surprisingly not the companion form we
@@ -445,6 +473,13 @@ Diagram} \resizebox{300pt}{!}{\includegraphics{pictures/ccanon.pdf}}
 \end{slide}
 
 \section*{Observer Canonical Form}
+\ifslidesonly
+\begin{slide}
+\heading{Observer Canonical Form}
+The observer canonical form is the "dual" of the controller
+canonical form.
+\end{slide}
+\fi
 The observer canonical form is the "dual" of the controller
 canonical form. The state equations are shown in
 \sref{slide:l5s9}. Note that the $\mathbf{A}$ matrix is the
@@ -495,20 +530,13 @@ form.
 \end{slide}
 
 \section*{Examples of Companion Forms}
-The system with transfer function
-\[G(s)=\frac{Y(s)}{U(s)}=\frac{2s^3 + 16s^2 + 30s + 8}{s^3 + 7s^2 + 10s}\]
-was found, earlier, to have companion form
-\begin{eqnarray*}\mathbf{A} & = & \left[\begin{array}{ccc}
-  0 & 1 & 0 \\
-  0 & 0 & 1 \\
-  0 & -10 & -7
-\end{array}\right]\ \mathbf{B}=\left[\begin{array}{c}
-  0 \\
-  0 \\
-  1
-\end{array}\right]\\ \mathbf{C} & = & \left[\begin{array}{ccc}
-  8 & 10 & 2
-\end{array}\right]\ \mathbf{D}=\left[2\right]\end{eqnarray*}
+\ifslidesonly
+\begin{slide}
+\heading{Examples of Companion Forms}
+\input{frag5}
+\end{slide}
+\fi
+\input{frag5}
 The controller canonical form is obtained by re-ordering the state
 variables:
 \begin{eqnarray*}\mathbf{A} & = & \left[\begin{array}{ccc}
@@ -559,7 +587,7 @@ canonical state matrices:
 \begin{verbatim}
 >> [n,m]=size(Acc); % n = m = 3 for the example
 >> Acf = Acc(n:-1:1,n:-1:1);
->> Bcf = Bcc(n:-1:1,:); 
+>> Bcf = Bcc(n:-1:1,:);
 >> Ccf = Ccc(:,n:-1:1);
 >> Dcf = Dcc;
 \end{verbatim}
@@ -587,6 +615,11 @@ final canonical form, the so-called ``normal'' or ``parallel''
 form.
 
 \section*{Normal Canonical Form}
+\ifslidesonly
+\begin{slide}
+\heading{Normal Canonical Form}
+\end{slide}
+\fi
 The normal form of
 a state-space model isolates the characteristic values, also
 called the eigen values, or system poles, of the system.
@@ -715,8 +748,8 @@ and the normal observable canonical form is:
 
 Notice that in the case of a system defined in \emph{normal form}, because the $\mathbf{A}$ matrix is diagonal, the state equations are decoupled from each other and can be solved independently. This canonical form is useful for the solution of the state equations. Thus given initial states $x_1(t)=x_{10}$, $x_2(t)=x_{20}$, etc at $t=0$ and taking Laplace transforms of the first row of the state equations derived above, the solutions are:
 \begin{eqnarray*}
- sX_1 (s) - x_{10}  & = & p_1 X_1 (s) + r_1 U(s) \\ 
- (s - p_1 )X_1 (s) & = & x_{10}  + r_1 U(s) \\ 
+ sX_1 (s) - x_{10}  & = & p_1 X_1 (s) + r_1 U(s) \\
+ (s - p_1 )X_1 (s) & = & x_{10}  + r_1 U(s) \\
  X_1 (s) & = & \frac{{x_{10} }}{{s - p_1 }} + \frac{{r_1 }}{{s - p_1 }}U(s)
 \end{eqnarray*}
 Taking inverse Laplace transforms:
@@ -727,8 +760,8 @@ and similarly for the other states.
 	\heading{Time response from Normal Form}
 	Given initial states $x_1(t)=x_{10}$, $x_2(t)=x_{20}$, etc at $t=0$
 	\begin{eqnarray*}
-	 sX_1 (s) - x_{10}  & = & p_1 X_1 (s) + r_1 U(s) \\ 
-	 (s - p_1 )X_1 (s) & = & x_{10}  + r_1 U(s) \\ 
+	 sX_1 (s) - x_{10}  & = & p_1 X_1 (s) + r_1 U(s) \\
+	 (s - p_1 )X_1 (s) & = & x_{10}  + r_1 U(s) \\
 	 X_1 (s) & = & \frac{{x_{10} }}{{s - p_1 }} + \frac{{r_1 }}{{s - p_1 }}U(s)
 	\end{eqnarray*}
 	Taking inverse Laplace transforms:
@@ -747,6 +780,15 @@ These are then combined through the output equation to give the solution for $y$
 \end{slide}
 \fi
 
+\ifslidesonly
+\begin{slide}
+\heading{Jordan Forms}
+\begin{itemize}
+\item Systems with repeated poles
+\item Systems wih complex poles
+\end{itemize}
+\end{slide}
+\fi
 \subsection*{System with Repeated Poles}
 
 If the transfer function has repeated poles, then the form of the
@@ -908,7 +950,19 @@ But this is not realisable so instead we use
 \end{array}\right] \mathbf{D} = \left[0\right].
 \end{eqnarray*}
 
-
+\ifslidesonly
+\begin{slide}
+\heading{Exnd of Pre-Class Presentation}
+In class we will work through the examples given here
+and if we have time we'll look at
+\begin{itemize}
+\item Examples of controllable and observable forms
+\item Normal form
+\item Time response of normal form
+\item Jordan forms
+\end{itemize}
+\end{slide}
+\fi
 
 
 %----------------------------------------------------------------
@@ -916,7 +970,7 @@ But this is not realisable so instead we use
 % ----------------------------------------------------------------
 \endinput
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
-%%% End: 
+%%% End:
