@@ -3,8 +3,8 @@
 source ../../course.tcsh
 source ../section.tcsh
 set LNO=17
-set FILEDATE="15 February 2010"
-set VERSION="1.0"
+set FILEDATE="21 April 2015"
+set VERSION="1.1"
 set TITLE='Transformation of States and System Diagonalization'
 set SHORT_TITLE='State Transformation' # $z would be interpreted by the shell
 set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"

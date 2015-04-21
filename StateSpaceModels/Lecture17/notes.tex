@@ -15,17 +15,17 @@ In this lecture we define eigenvalues and eigenvectors, show the system transfor
 
 \ifslidesonly
 \begin{slide}
-   \heading{Transformation of State Models}
+   \heading{Pre-Class Presentation: Transformation of State Models}
 \begin{itemize}
 	\item For a given transfer function the canonical forms are equivalent in their input-output relationships.
 	\item We can convert one form of canonical system into another by the application of simple matrix operations.
 	\item Transforming to normal form simplifies the calculation of system response.
 	\item The \emph{eigenvalues} of the $\mathbf{A}$ matrix are key to the process.
 	\item Knowledge of a system's eigenvalues means that we can determine the system response of any LTI system.
-\end{itemize}   
+\end{itemize}
 \end{slide}
 \begin{slide}
-   \heading{Lecture Contents}
+   \heading{Session Contents}
 \begin{itemize}
 	\item Eigenvalues and eigenvectors
 	\item System transformation
@@ -63,12 +63,12 @@ In this lecture we define eigenvalues and eigenvectors, show the system transfor
 
 To find the eigenvectors, we arrange equation (\ref{eq:eigenvector}). Eigenvectors, $\mathbf{x}_i$, satisfy
 \begin{equation}\label{eq:581}
-	\mathbf{0}=(\lambda_i\mathbf{I}-\mathbf{A})\mathbf{x}_i 
+	\mathbf{0}=(\lambda_i\mathbf{I}-\mathbf{A})\mathbf{x}_i
 \end{equation}
 Solving for $\mathbf{x}_i$ by premultiplying both sides by $(\lambda_i\mathbf{I}-\mathbf{A})^{-1}$ yields
 \[
-	\mathbf{x}_i = (\lambda_i\mathbf{I}-\mathbf{A})^{-1}\mathbf{0} = 
-	       \frac{\textrm{adj}(\lambda_i\mathbf{I}-\mathbf{A})^{-1}}{\det(\lambda_i\mathbf{I}-\mathbf{A})^{-1}}\mathbf{0} 
+	\mathbf{x}_i = (\lambda_i\mathbf{I}-\mathbf{A})^{-1}\mathbf{0} =
+	       \frac{\textrm{adj}(\lambda_i\mathbf{I}-\mathbf{A})^{-1}}{\det(\lambda_i\mathbf{I}-\mathbf{A})^{-1}}\mathbf{0}
 \]
 Since $\mathbf{x}_i\ne \mathbf{0}$, a nonzero solution exists if
 \begin{equation}\label{eq:eigenvalue}
@@ -82,17 +82,20 @@ The eigenvalues of the matrix $\mathbf{A}$ are the values of $\lambda_i$ that sa
 
 The eigenvectors, $\mathbf{x}_i$, satisfy
 \begin{equation}
-	\mathbf{0}=(\lambda_i\mathbf{I}-\mathbf{A})\mathbf{x}_i \label{eq:581} 
+	\mathbf{0}=(\lambda_i\mathbf{I}-\mathbf{A})\mathbf{x}_i \label{eq:581}
 \end{equation}
 Solving for $\mathbf{x}_i$ (see notes), a nonzero solution exists if
 \begin{equation}\label{eq:eigenvalue}
 	\det(\lambda_i\mathbf{I}-\mathbf{A}) = \mathbf{0} \label{eq:eigenvalue}
-\end{equation}   
+\end{equation}
 From which $\lambda_i$, the eigenvalues, can be found.
 \end{slide}
 \fi
 
-We are now ready to show how to find the eigenvectors $\mathbf{x}_i$. First we find the eigenvalues, $\lambda_i$, using $\det(\lambda_i\mathbf{I}-\mathbf{A} = \mathbf{0})$, and then we use equation (\ref{eq:eigenvector}) to find the eigenvectors.
+We are now ready to show how to find the eigenvectors $\mathbf{x}_i$.
+First we find the eigenvalues, $\lambda_i$, using
+$\det(\lambda_i\mathbf{I}-\mathbf{A} = \mathbf{0})$, and then we
+use equation (\ref{eq:eigenvector}) to find the eigenvectors.
 
 \ifslidesonly
 \begin{slide}
@@ -102,7 +105,7 @@ We are now ready to show how to find the eigenvectors $\mathbf{x}_i$. First we f
    	\item First find the eigenvalues, $\lambda_i$, using $\det(\lambda_i\mathbf{I}-\mathbf{A}) = \mathbf{0}$
    	\item Use $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{x}_i$ to find the eigenvectors.
    \end{enumerate}
-   See the worked example in the notes.
+   We will work through an example in class.
 \end{slide}
 \fi
 
@@ -142,16 +145,16 @@ We are now ready to show how to find the eigenvectors $\mathbf{x}_i$. First we f
 \end{array}} \right] - \left[ {\begin{array}{*{20}c}
    { - 3} & 1  \\
    1 & { - 3}  \\
-\end{array}} \right]} \right| \\ 
+\end{array}} \right]} \right| \\
   = \left| {\begin{array}{*{20}c}
    {\lambda  + 3} & { - 1}  \\
    { - 1} & {\lambda  + 3}  \\
-\end{array}} \right| \\ 
-  = \lambda ^2  + 6\lambda  + 8 \\ 
+\end{array}} \right| \\
+  = \lambda ^2  + 6\lambda  + 8 \\
  \end{array}
 \]
 
-from which the eigenvalues are $\lambda_1 = -2$ and $\lambda_2 = -4$. 
+from which the eigenvalues are $\lambda_1 = -2$ and $\lambda_2 = -4$.
 
 Using Eq. (\ref{eq:eigenvector}) successively with each eigenvalue, we have
 % MathType!MTEF!2!1!+-
@@ -170,7 +173,7 @@ Using Eq. (\ref{eq:eigenvector}) successively with each eigenvalue, we have
 % aaaakiaawUfacaGLDbaaaaaa!4B20!
 \[
 \begin{array}{l}
- {\bf{Ax}}_i  = \lambda {\bf{x}}_i  \\ 
+ {\bf{Ax}}_i  = \lambda {\bf{x}}_i  \\
  \left[ {\begin{array}{*{20}c}
    { - 3} & 1  \\
    1 & { - 3}  \\
@@ -180,7 +183,7 @@ Using Eq. (\ref{eq:eigenvector}) successively with each eigenvalue, we have
 \end{array}} \right] =  - 2\left[ {\begin{array}{*{20}c}
    {x_1 }  \\
    {x_2 }  \\
-\end{array}} \right] \\ 
+\end{array}} \right] \\
  \end{array}
 \]
 or
@@ -277,13 +280,13 @@ Using Eqs. (\ref{ex1:ev1}) and (\ref{ex1:ev2}), one choice of eigenvectors is
 \begin{slide}
 	\heading{Similarity Transform Preserves Eigenvalues}
 	The transformation $\mathbf{T}^{-1}\mathbf{AT}$ is a \emph{similarity transform}. That is the eigenvalues are the same as for $\mathbf{A}$.
-	
+
 \emph{Proof}
    \input{frag5}
 \end{slide}
 \fi
 
-Therefore if $\lambda$ is an eigenvalue of $\mathbf{A}$ the it is also one of $\mathbf{A}'=\mathbf{T}^{-1}\mathbf{AT}$. 
+Therefore if $\lambda$ is an eigenvalue of $\mathbf{A}$ the it is also one of $\mathbf{A}'=\mathbf{T}^{-1}\mathbf{AT}$.
 
 \emph{QED}.
 
@@ -293,41 +296,8 @@ Therefore if $\lambda$ is an eigenvalue of $\mathbf{A}$ the it is also one of $\
 \label{sub:similarity_transforms_on_state_equations}
 
 \textbf{Problem}: Given the system represented in state space by the following equations
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGceaqabeaaceWH4bGbaiaacqGH9aqpdaWada
-% qaauaadeqadmaaaeaacaaIWaaabaGaaGymaaqaaiaaicdaaeaacaaI
-% WaaabaGaaGimaaqaaiaaigdaaeaacqGHsislcaaIYaaabaGaeyOeI0
-% IaaGynaaqaaiabgkHiTiaaiEdaaaaacaGLBbGaayzxaaGaaCiEaiab
-% gUcaRmaadmaabaqbamqabmqaaaqaaiaaicdaaeaacaaIWaaabaGaaG
-% ymaaaaaiaawUfacaGLDbaacaWG1baabaGaamyEaiabg2da9maadmaa
-% baqbamqabeWaaaqaaiaaigdaaeaacaaIWaaabaGaaGimaaaaaiaawU
-% facaGLDbaacaWH4baaaaa!49DB!
-\[
-\begin{array}{l}
- {\bf{\dot x}} = \left[ {\begin{array}{*{20}c}
-   0 & 1 & 0  \\
-   0 & 0 & 1  \\
-   { - 2} & { - 5} & { - 7}  \\
-\end{array}} \right]{\bf{x}} + \left[ {\begin{array}{*{20}c}
-   0  \\
-   0  \\
-   1  \\
-\end{array}} \right]u \\ 
- y = \left[ {\begin{array}{*{20}c}
-   1 & 0 & 0  \\
-\end{array}} \right]{\bf{x}} \\ 
- \end{array}
-\]
-transform the system to a new set of state variables, $\mathbf{w}$, where the new state variables are related to the original state variables, $\mathbf{x}$, as follows:
-\begin{eqnarray*}
-	w_1 & = & 2x_1 \\
-	w_2 & = & 3x_1 + 2x_2 \\
-	w_3 & = & x_1 + 4x_2 + 5x_3
-\end{eqnarray*}
+\input{example2}
+
 
 \textbf{SOLUTION}: Expressing the transformed states in vector-matrix form,
 % MathType!MTEF!2!1!+-
@@ -385,12 +355,12 @@ Thus
    {0.5} & 0 & 0  \\
    { - 0.75} & {0.5} & 0  \\
    {0.5} & { - 0.4} & {0.2}  \\
-\end{array}} \right] \\ 
+\end{array}} \right] \\
   = \left[ {\begin{array}{*{20}c}
    { - 1.5} & 1 & 0  \\
    { - 1.25} & {0.7} & {0.4}  \\
    { - 2.5} & {0.4} & { - 6.2}  \\
-\end{array}} \right] \\ 
+\end{array}} \right] \\
  \end{array}
 \]
 
@@ -474,22 +444,22 @@ Therefore the transformed system is
    0  \\
    0  \\
    5  \\
-\end{array}} \right]u \\ 
+\end{array}} \right]u \\
  y = \left[ {\begin{array}{*{20}c}
    {0.5} & 0 & 0  \\
-\end{array}} \right]{\bf{w}} \\ 
+\end{array}} \right]{\bf{w}} \\
  \end{array}
 \]
 
 
 % subsection similarity_transforms_on_state_equations (end)
- 
+
 \section*{Diagonalization of a System Matrix} % (fold)
 \label{sec:diagonalization_of_a_system_matrix}
 
 If we choose the eigenvectors of a system matrix $\mathbf{A}$ to be the basis of a transformation, $\mathbf{T}$, the resulting system matrix will be in the diagonal normal form. Let the transformation matrix $\mathbf{T}$ consist of the eigenvectors of $\mathbf{A}$, $\mathbf{x}_i$.
 \begin{equation}\label{eq:591}
-	\mathbf{T}=[\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3, \ldots, \mathbf{x}_n] 
+	\mathbf{T}=[\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3, \ldots, \mathbf{x}_n]
 \end{equation}
 Since $\mathbf{x}_i$ are eigenvectors, $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{x}_i$, which can be written equivalently as a set of equations expressed by
 \begin{equation}\label{eq:592}
@@ -497,7 +467,7 @@ Since $\mathbf{x}_i$ are eigenvectors, $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{
 \end{equation}
 where $\mathbf{\Lambda}$ is a matrix which has the eigenvalues $\lambda_i$ on the diagonal in some order and zeros elsewhere, and $\mathbf{T}$ is as defined in Eq. (\ref{eq:591}). Solving Eq. (\ref{eq:592}) for $\mathbf{\Lambda}$ by premultiplying by $\mathbf{T}^{-1}$, we get
 \begin{equation}\label{eq:593}
-	\mathbf{\Lambda}=\mathbf{T}^{-1}\mathbf{AT} 
+	\mathbf{\Lambda}=\mathbf{T}^{-1}\mathbf{AT}
 \end{equation}
 which is the system matrix in normal canonical form.\footnote{Note we need to perform some additional manipulations if there are repeated or complex eigenvalues. We leave the discovery of these extra steps as an exercise for the interested student. It will not be examined!}
 \ifslidesonly
@@ -505,7 +475,7 @@ which is the system matrix in normal canonical form.\footnote{Note we need to pe
    \heading{To Diagonalize a State Space Model}
    Choose the eigenvectors of a system matrix $\mathbf{A}$ to be the basis of a transformation $\mathbf{T}$.
 \begin{equation}\label{eq:591}
-	\mathbf{T}=[\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3, \ldots, \mathbf{x}_n] 
+	\mathbf{T}=[\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3, \ldots, \mathbf{x}_n]
 \end{equation}
 $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{x}_i$, can be written equivalently as a set of equations expressed by
 \begin{equation}\label{eq:592}
@@ -513,43 +483,19 @@ $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{x}_i$, can be written equivalently as a
 \end{equation}
 Solving Eq. (\ref{eq:592}) for $\mathbf{\Lambda}$
 \begin{equation}\label{eq:593}
-	\mathbf{\Lambda}=\mathbf{T}^{-1}\mathbf{AT} 
+	\mathbf{\Lambda}=\mathbf{T}^{-1}\mathbf{AT}
 \end{equation}
 which is the system matrix in normal canonical form.
 \end{slide}
 \fi
-In summary, under the transformation $\mathbf{T}$, consisting of the eigenvalues of the system matrix, the transformed system is identical to that obtained using the partial fraction expansion of the transfer function with distinct real roots. 
+In summary, under the transformation $\mathbf{T}$, consisting of the eigenvalues of the system matrix, the transformed system is identical to that obtained using the partial fraction expansion of the transfer function with distinct real roots.
 % section diagonalization_of_a_system_matrix (end)
 
 \subsection*{Example 3: Diagonalization of a system in state space} % (fold)
 \label{ssub:example_2}
+\textbf{Problem}: Given the system shown below, find the diagonal (normal form) system that is similar.
+\input{example3}
 
-\textbf{Problem}: Give the system shown below, find the diagonal (normal form) system that is similar.
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGceaabbeaaceWH4bGbaiaacqGH9aqpdaWada
-% qaauaadeqaciaaaeaacqGHsislcaaIZaaabaGaaGymaaqaaiaaigda
-% aeaacqGHsislcaaIZaaaaaGaay5waiaaw2faaiaahIhacqGHRaWkda
-% WadaqaauaadeqaceaaaeaacaaIXaaabaGaaGOmaaaaaiaawUfacaGL
-% DbaacaWG1baabaGaamyEaiabg2da9maadmaabaqbamqabeGaaaqaai
-% aaikdaaeaacaaIZaaaaaGaay5waiaaw2faaiaahIhaaaaa!43CE!
-\[
-\begin{array}{c}
- {\bf{\dot x}} = \left[ {\begin{array}{*{20}c}
-   { - 3} & 1  \\
-   1 & { - 3}  \\
-\end{array}} \right]{\bf{x}} + \left[ {\begin{array}{*{20}c}
-   1  \\
-   2  \\
-\end{array}} \right]u \\ 
- y = \left[ {\begin{array}{*{20}c}
-   2 & 3  \\
-\end{array}} \right]{\bf{x}} \\ 
- \end{array}
-\]
 
 \textbf{SOLUTION}: First find the eigenvalues and the eigenvectors. This step was performed in Example~1. Next form the transformation matrix $\mathbf{T}$, whose columns are the eignevectors.
 % MathType!MTEF!2!1!+-
@@ -618,7 +564,7 @@ finally form the similar systems's system matrix, input matrix and output matrix
 \end{array}} \right] = \left[ {\begin{array}{*{20}c}
    { - 2} & 0  \\
    0 & { - 4}  \\
-\end{array}} \right] \\ 
+\end{array}} \right] \\
  {\bf{T}}^{ - 1} {\bf{B}} = \left[ {\begin{array}{*{20}c}
    {{1 \mathord{\left/
  {\vphantom {1 2}} \right.
@@ -640,7 +586,7 @@ finally form the similar systems's system matrix, input matrix and output matrix
    { - {1 \mathord{\left/
  {\vphantom {1 2}} \right.
  \kern-\nulldelimiterspace} 2}}  \\
-\end{array}} \right] \\ 
+\end{array}} \right] \\
  {\bf{CT}} = \left[ {\begin{array}{*{20}c}
    2 & 3  \\
 \end{array}} \right]\;\left[ {\begin{array}{*{20}c}
@@ -648,7 +594,7 @@ finally form the similar systems's system matrix, input matrix and output matrix
    1 & { - 1}  \\
 \end{array}} \right] = \left[ {\begin{array}{*{20}c}
    5 & { - 1}  \\
-\end{array}} \right] \\ 
+\end{array}} \right] \\
  \end{array}
 \]
 Substituting this result into the equivalent state equations gives
@@ -676,10 +622,10 @@ Substituting this result into the equivalent state equations gives
    { - {1 \mathord{\left/
  {\vphantom {1 2}} \right.
  \kern-\nulldelimiterspace} 2}}  \\
-\end{array}} \right]u \\ 
+\end{array}} \right]u \\
  y = \left[ {\begin{array}{*{20}c}
    5 & { - 1}  \\
-\end{array}} \right]{\bf{w}} \\ 
+\end{array}} \right]{\bf{w}} \\
  \end{array}
 \]
 
@@ -689,7 +635,7 @@ Notice that the transformed system matrix is diagonal, with the eigenvalues on t
 
 \section*{Using Diagonalization to Solve State Equations}
 
-It is possible to obtain solutions for the state equations in any set of states, $\mathbf{x}$, by transforming to normal canonical form and solving the latter's states, $\mathbf{w}$, as shown in Lecture 16. 
+It is possible to obtain solutions for the state equations in any set of states, $\mathbf{x}$, by transforming to normal canonical form and solving the latter's states, $\mathbf{w}$, as shown in Lecture 16.
 
 The initial states are found, using the inverse transformation, as:
 \[
@@ -701,7 +647,7 @@ The solutions to the original states can then be found from $\mathbf{w}$ using t
 \mathbf{x}=\mathbf{Tw}
 \]
 
-Since the state space model for $\mathbf{w}$ is in normal form then the state matrix, $\mathbf{A}' = \mathbf{\Lambda}$, is diagonal with the eigenvalues of $\mathbf{A}$ in some order on the diagonal. 
+Since the state space model for $\mathbf{w}$ is in normal form then the state matrix, $\mathbf{A}' = \mathbf{\Lambda}$, is diagonal with the eigenvalues of $\mathbf{A}$ in some order on the diagonal.
 
 As demonstrated above, the columns of the transformation matrix,  $\mathbf{T}$  will be formed by concatenation of the corresponding eigenvectors of $\mathbf{A}$ in the same order.
 \ifslidesonly
@@ -713,33 +659,14 @@ As demonstrated above, the columns of the transformation matrix,  $\mathbf{T}$  
    	\item Thus if we have $\mathbf{w}$ the initial states will be $\mathbf{w}_0=\mathbf{T}^{-1}\mathbf{x}_0$, and
    	\item The solutions to the original states can then be found from $\mathbf{w}$ using the transformation $\mathbf{x}=\mathbf{Tw}$
 \end{itemize}
-See example 3 in the notes.
+Example 4 illustrates the procedure.
 \end{slide}
 \fi
 
 \subsection*{Example 4} % (fold)
 \label{sub:example_3}
 \textbf{Problem}: Solve the state equations
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaGabCiEayaacaGaeyypa0ZaamWaaeaafa
-% WabeGacaaabaGaeyOeI0IaaG4maaqaaiabgkHiTiaaikdaaeaacaaI
-% XaaabaGaaGimaaaaaiaawUfacaGLDbaacaWH4bGaey4kaSYaamWaae
-% aafaWabeGabaaabaGaaGymaaqaaiaaicdaaaaacaGLBbGaayzxaaGa
-% amyDaaaa!3D41!
-\[
-{\bf{\dot x}} = \left[ {\begin{array}{*{20}c}
-   { - 3} & { - 2}  \\
-   1 & 0  \\
-\end{array}} \right]{\bf{x}} + \left[ {\begin{array}{*{20}c}
-   1  \\
-   0  \\
-\end{array}} \right]u
-\]
-given $\mathbf{x}_0 = [1 0]^T$ at $t=0$  and  $u=0$.
+\input{example4}
 
 \textbf{SOLUTION}: \emph{First find the eigenvalues}:
 The eigenvalues of the state matrix are the roots of:
@@ -774,13 +701,13 @@ The eigenvalues of the state matrix are the roots of:
 \end{array}} \right]} \right) = \left| {\begin{array}{*{20}c}
    {\lambda  + 3} & 2  \\
    { - 1} & \lambda   \\
-\end{array}} \right| = 0 \\ 
- (\lambda  + 3)\lambda  + 2 = \lambda ^2  + 3\lambda  + 2 = (\lambda  + 1)(\lambda  + 2) = 2 \\ 
+\end{array}} \right| = 0 \\
+ (\lambda  + 3)\lambda  + 2 = \lambda ^2  + 3\lambda  + 2 = (\lambda  + 1)(\lambda  + 2) = 2 \\
  \end{array}
 \]
 Thus $\lambda_1=-1$ and $\lambda_2=-2$.
 
-\emph{Next, find the transformation matrix}: The eigenvectors are the solutions of $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{x}_i$ for $i=1,2$. 
+\emph{Next, find the transformation matrix}: The eigenvectors are the solutions of $\mathbf{A}\mathbf{x}_i=\lambda_i\mathbf{x}_i$ for $i=1,2$.
 
 For $i=1$
 % MathType!MTEF!2!1!+-
@@ -813,13 +740,13 @@ For $i=1$
 \end{array}} \right]}_{{\bf{x}}_1 } & = & \underbrace {( - 1)}_{\lambda _1 }\left[ {\begin{array}{*{20}c}
    {x_1 }  \\
    {x_2 }  \\
-\end{array}} \right] \\ 
-  - 3x_1  - 2x_2  & = &  - x_1  \\ 
- x_1  + 0x_2  & = &  - x_2  \\ 
+\end{array}} \right] \\
+  - 3x_1  - 2x_2  & = &  - x_1  \\
+ x_1  + 0x_2  & = &  - x_2  \\
  \end{eqnarray*}
 These equations are linearly dependent, and if we let $x_1 =1$ then $x_2 = -1$ giving $\mathbf{x}_1=[1,\ -1]^T$.
 
-Similarly, for $i=2$ we obtain $\mathbf{x}_2=[1, -0.5]^T$. 
+Similarly, for $i=2$ we obtain $\mathbf{x}_2=[1, -0.5]^T$.
 
 Then
 % MathType!MTEF!2!1!+-
@@ -843,17 +770,17 @@ Then
 \end{array}} \right] = \left[ {\begin{array}{*{20}c}
    1 & 1  \\
    { - 1} & { - 0.5}  \\
-\end{array}} \right] \\ 
+\end{array}} \right] \\
  {\bf{T}}^{ - 1}  = \left[ {\begin{array}{*{20}c}
    { - 1} & { - 2}  \\
    2 & 2  \\
-\end{array}} \right] \\ 
+\end{array}} \right] \\
  \end{array}
 \]
 
 
 
-\emph{Finally solve the state equations of the transformed system} 
+\emph{Finally solve the state equations of the transformed system}
 
 Transform the initial states:
 % MathType!MTEF!2!1!+-
@@ -881,7 +808,7 @@ Transform the initial states:
 \end{array}} \right]
 \]
 
- 
+
 
 Solve for the transformed states:
 \begin{eqnarray*}
@@ -921,13 +848,70 @@ Therefore
 	x_1 & = & -e^{-t} + 2e^{-2t} \\
 	x_2 & = & e^{-t}-e^{-2t} \\
 \end{eqnarray*}
- 
+
+% Session marker slides
+\ifslidesonly
+\begin{slide}
+\heading{Summary of Pre-Class Presentation}
+\begin{itemize}
+\item Eigenvalues and eigenvectors
+\item System transformation
+\item Diagonalization of a state space model
+\item Solution to the general state equations
+\end{itemize}
+\end{slide}
+\begin{slide}
+\heading{Activities for Class}
+\begin{itemize}
+\item Worked Examples (solutions in notes)
+\item System Transformations in Matlab
+\end{itemize}
+\end{slide}
+\fi
+
+% Examples to be done in class
+\ifslidesonly
+\begin{slide}
+\heading{Worked Examples}
+\end{slide}
+\begin{slide}
+\heading{Example 1: Eigenvalues and Eigevectors}
+Find the eigenvectors of the matrix
+\begin{displaymath}
+	{\bf{A}} = \left[ {\begin{array}{*{20}c}
+	   { - 3} & 1  \\
+	   1 & { - 3}  \\
+	\end{array}} \right]
+\end{displaymath}
+\end{slide}
+\begin{slide}
+\heading{Example 2: System Transformation}
+Given the system represented in state space by the following equations
+\input{example2}
+\end{slide}
+\begin{slide}
+\heading{Example 3: Diagonalization of a system in state space}
+Given the system shown below, find the diagonal (normal form) system that is similar.
+\input{example3}
+\end{slide}
+\begin{slide}
+\heading{Example 4: Solution of General State Equations}
+Solve the state equations
+\input{example4}
+\end{slide}
+\fi
+
 \section*{System Transforms in Matlab}
 
 Matlab provides a rich set of tools for finding eigenvalues and eigenvectors, transforming state equations using similarity transforms and solving state space equations. We conclude this lecture by reworking the first three examples in Matlab. You should repeat these examples during the self-directed learning session.
 
 \subsection*{Eigenvalues and eigenvectors}
 
+\ifslidesonly
+\begin{slide}
+\heading{System Transformations in Matlab}
+\end{slide}
+\fi
 \begin{slide}
    \heading{Eigenvalues and eigenvectors}
    Solution of Example 1
@@ -995,12 +979,13 @@ Example 3
 % subsection example_3 (end)  Solve the state equations
 
 
+
 %----------------------------------------------------------------
 % The end of notes
 % ----------------------------------------------------------------
 \endinput
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
-%%% End: 
+%%% End:
