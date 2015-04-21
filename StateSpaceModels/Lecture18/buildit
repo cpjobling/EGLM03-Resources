@@ -3,8 +3,8 @@
 source ../../course.tcsh
 source ../section.tcsh
 set LNO=18
-set FILEDATE="15 February 2010"
-set VERSION="1.0"
+set FILEDATE="22 March 2015"
+set VERSION="1.1"
 set TITLE='The General Solution of State Space Models'
 set SHORT_TITLE='General Solution of SS Models' # $z would be interpreted by the shell
 set RIGHT="${SHORT_SECTION}: ${SHORT_TITLE}"

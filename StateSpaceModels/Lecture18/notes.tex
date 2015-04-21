@@ -15,7 +15,7 @@ Once we have completed this material, we will be in a position to move on to loo
 In mathematics, the Taylor series is a representation of a function as an infinite sum of terms calculated from the values of its derivatives at a single point. It is named after the English mathematician Brook Taylor. It is common practice to use a finite number of terms of the series to approximate a function. The Taylor series may be regarded as the limit of the Taylor polynomials.\footnote{Definition from `Taylor Series', Wikipedia.}
 
 We use Taylor series to approximate general functions, and here we adapt the Taylor series to discover the form of a function of a matrix.
- 
+
 \input{frag1}
 \ifslidesonly
 \begin{slide}
@@ -24,7 +24,7 @@ We use Taylor series to approximate general functions, and here we adapt the Tay
 \end{slide}
 \fi
 
- 
+
 
 \input{frag2}
 \ifslidesonly
@@ -35,7 +35,7 @@ We use Taylor series to approximate general functions, and here we adapt the Tay
 \fi
 
 
- 
+
 \input{frag3}
 \ifslidesonly
 \begin{slide}
@@ -44,7 +44,7 @@ We use Taylor series to approximate general functions, and here we adapt the Tay
 \end{slide}
 \fi
 
- 
+
 \input{frag4}
 \ifslidesonly
 \begin{slide}
@@ -62,31 +62,27 @@ We use Taylor series to approximate general functions, and here we adapt the Tay
 \end{slide}
 \fi
 
+\ifslidesonly
+\begin{slide}
+\heading{End of Pre-Class Presentation}
+In the class we will work through a worked example of this approach
+and contrast it with two alternatives -- diagonalization by similarity transform
+and Laplace.
+\end{slide}
+\fi
 
- 
 \subsection*{Example 1}
-
+\ifslidesonly
+\begin{slide}
+\heading{Example 1}
+Find the solution of:
+\input{example1}
+{\bf Note}: The solutions to this example and the remaining alternatives
+ are available in the form of Matlab scripts and as Pencasts on Blackboard.
+\end{slide}
+\fi
 \textbf{Problem}: Find the solution of:
-% MathType!MTEF!2!1!+-
-% faaagaart1ev2aaaKnaaaaWenf2ys9wBH5garuavP1wzZbqedmvETj
-% 2BSbqefm0B1jxALjharqqtubsr4rNCHbGeaGqiVu0Je9sqqrpepC0x
-% bbL8FesqqrFfpeea0xe9Lq-Jc9vqaqpepm0xbba9pwe9Q8fs0-yqaq
-% pepae9pg0FirpepeKkFr0xfr-xfr-xb9Gqpi0dc9adbaqaaeGaciGa
-% aiaabeqaamaabaabaaGcbaWaaSaaaeaacaWGKbGaaCiEaaqaaiaads
-% gacaWG0baaaiabg2da9maadmaabaqbamqabiGaaaqaaiabgkHiTiaa
-% iodaaeaacqGHsislcaaIYaaabaGaaGymaaqaaiaaicdaaaaacaGLBb
-% GaayzxaaGaaCiEaiabgUcaRmaadmaabaqbamqabiqaaaqaaiaaigda
-% aeaacaaIWaaaaaGaay5waiaaw2faaiaadwhaaaa!4013!
-\[
-\frac{{d{\bf{x}}}}{{dt}} = \left[ {\begin{array}{*{20}c}
-   { - 3} & { - 2}  \\
-   1 & 0  \\
-\end{array}} \right]{\bf{x}} + \left[ {\begin{array}{*{20}c}
-   1  \\
-   0  \\
-\end{array}} \right]u
-\]
-given $\mathbf{x}_0=[1,\ 1]^T$, and $u = 1$ for $t\ge 0$.
+\input{example1}
 
 \textbf{SOLUTION}: The state matrix $\mathbf{A}$ is the same as Example 4 from Lecture 17, so the transformation matrix is:
 % MathType!MTEF!2!1!+-
@@ -120,7 +116,7 @@ with an inverse:
 \end{array}} \right]
 \]
 and with corresponding eigenvalues $\lambda_1=-1$ and $\lambda_2=-2$.
- 
+
 Therefore the state transition matrix is:
 \begin{eqnarray*}
 \mathbf{\phi}(t) & = & e^{\mathbf{A}t}=\mathbf{T}e^{\mathbf{\Lambda}t}\mathbf{T}^{-1} \\
@@ -147,7 +143,7 @@ Therefore the state transition matrix is:
 	\end{array}} \right] \\
 \end{eqnarray*}
 
- 
+
 The solution is:
 \[
 \mathbf{x}(t) = \mathrm{term}_1+\int_0^t\mathrm{term}_2 d\tau.
@@ -183,15 +179,15 @@ and
 	   {\int_0^t {\left. {\left\{ { - e^{ - (t - \tau )}  + 2e^{ - 2(t - \tau )} } \right.} \right\}d\tau } }  \\
 	   {\int_0^t {\left. {\left\{ {e^{ - (t - \tau )}  - e^{ - 2(t - \tau )} } \right.} \right\}d\tau } }  \\
 	\end{array}} \right] \\
-	& = & 
+	& = &
 	  \left[ {\begin{array}{*{20}c}
 	   {\left. {\left\{ { - e^{ - (t - \tau )}  + e^{ - 2(t - \tau )} } \right.} \right\}}  \\
 	   {\left. {\left\{ {e^{ - (t - \tau )}  - 0.5e^{ - 2(t - \tau )} } \right.} \right\}}  \\
-	\end{array}} \right]_{\tau  = 0}^t  \\ 
+	\end{array}} \right]_{\tau  = 0}^t  \\
 	 & = & \left[ {\begin{array}{*{20}c}
 	   { - 1 + e^{ - t}  + 1 - e^{ - 2t} }  \\
 	   { - 1 + e^{ - t}  - 0.5 + 0.5e^{ - 2t} }  \\
-	\end{array}} \right] \\ 
+	\end{array}} \right] \\
 	 &  = & \left[ {\begin{array}{*{20}c}
 	   {e^{ - t}  - e^{ - 2t} }  \\
 	   {0.5 - e^{ - t}  + 0.5e^{ - 2t} }  \\
@@ -230,9 +226,18 @@ Therefore:
 \]
 
 
- 
+
 
 \subsection*{Alternative solution 1}
+\ifslidesonly
+\begin{slide}
+\heading{Alternative solution 1}
+Repeat Example 1 using the transformation to normal canonical form:
+\[
+\frac{d\mathbf{w}}{t}=\mathbf{\Lambda w}+ \mathbf{T}^{-1}\mathbf{B}u
+\]
+\end{slide}
+\fi
 Using the transformation to normal canonical form:
 \[
 \frac{d\mathbf{w}}{t}=\mathbf{\Lambda w}+ \mathbf{T}^{-1}\mathbf{B}u
@@ -295,14 +300,14 @@ Using the transformation to normal canonical form:
 	w_1 & = & w_{10}e^{-t}-\int_0^t e^{-(t-\tau)} d\tau \\
 	    & = & -3e^{-t}-\left[e^{-(t-\tau)}\right]_0^t \\
 	    & = & -3e^{-t}-\left[1 - e^{-t}\right] \\
-	    & = & -1 -2e^{-t}	
+	    & = & -1 -2e^{-t}
 \end{eqnarray*}
- 
+
 \begin{eqnarray*}
 	w_2 & = & w_{20}e^{-2t}+2\int_0^t e^{-2(t-\tau)} d\tau \\
 	    & = & 4e^{-2t}+2\left[0.5e^{-2(t-\tau)}\right]_0^t \\
 	    & = & 4e^{-2t}+\left[1 - e^{-2t}\right] \\
-	    & = & 1 + 3e^{-2t}	
+	    & = & 1 + 3e^{-2t}
 \end{eqnarray*}
 
 % MathType!MTEF!2!1!+-
@@ -347,8 +352,14 @@ Therefore
 \]
 
 
- 
-\subsection*{Alternative solution 2} 
+
+\subsection*{Alternative solution 2}
+ \ifslidesonly
+ \begin{slide}
+ \heading{Alternative solution 2}
+ Solve the problem of example 1 using the Laplace transform method.
+ \end{slide}
+ \fi
 Using the Laplace transform method.
 
 Taking Laplace transforms of the state equations, taking account of the initial conditions:
@@ -461,7 +472,7 @@ Finally, taking inverse Laplace transforms:
 % ----------------------------------------------------------------
 \endinput
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
-%%% End: 
+%%% End:
