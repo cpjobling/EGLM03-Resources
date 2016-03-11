@@ -378,18 +378,23 @@ Here, the order of the denominator is one greater than the numerator so there is
 $n-m = 2 - 1 = 1$ infinite zero. Placing this zero at $z = -1$ makes the MPZ transfer
 function
 $$D(z)=k\frac{(1+z^{-1})(1-e^{-aT}z^{-1})}{(1-z^{-1})(1 - e^{-bT}z^{-1})}.$$
-As $D(s)$ is type 1, the DC gain is $sD(s)|_{s=0} = a/b$.
-The DC gain for $D(z)$ is $(1-z^{-1})D(z)|_{z=1}$ that is
+As $D(s)$ is type 1, we can't use the value of $D(0)$ to compute the DC gain.
+Instead, let us compute the gain at $s = -1$:
 \begin{eqnarray*}
-k\frac{(1+z^{-1})(1-e^{-aT})}{(1-e^{-bT})}|_{z=1} & = & k\frac{2(1-e^{-aT})}{(1-e^{-bT})} \\
-        & = & \frac{a}{b}
+  D( - 1) &=& {\left. {\frac{{s + a}}{{s(s + b)}}} \right|_{s =  - 1}} \\
+   &=& \frac{{-1 + a}}{{( - 1)(-1 + b)}} = \frac{{a - 1}}{{(1 - b)}} \\
+\end{eqnarray*}
+The equivalent value $s=-1$ in the $z$-plane is $z=e^{-T}$.
+\begin{eqnarray*}
+  k{\left. {\frac{{(1 + {z^{ - 1}})(1 - {e^{ - aT}}{z^{ - 1}})}}{{(1 - {e^{ - bT}}{z^{ - 1}})}}} \right|_{z = {e^{ - T}}}} &=& k\frac{{(1 + {e^T})(1 - {e^{ - aT}}{e^T})}}{{(1 - {e^{ - bT}}{e^T})}} \hfill \\
+   &=& k\frac{{\left( {1 + {e^T}} \right)\left( {1 - {e^{ - (1 - a)T}}} \right)}}{{\left( {1 - {e^{ - (1 - b)T}}} \right)}} \hfill \\
 \end{eqnarray*}
 
-Again, we choose $k$ so that the DC gains match, i.e.
-$$k = \frac{a}{2b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
+Again, we choose $k$ so that the equivalent gains match, i.e.
+$$k =  \left( {\frac{{1 - b}}{{a - 1}}} \right)\frac{{\left( {1 - {e^{ - (1 - b)T}}} \right)}}{{\left( {1 + {e^T}} \right)\left( {1 - {e^{ - (1 - a)T}}} \right)}}.$$
 
 We would implement $D(z)$ as a \emph{difference equation} defined in terms of the
-sampled inputs and outputs as shown in SLIDE~\ref{slides:slides:l11s25} for Example 3.
+sampled inputs and outputs as shown in SLIDE~\ref{slides:l11s25} for Example 3.
 \begin{slide}\label{slides:l11s25}
 	\heading{Implementation of an MPZ Approximation}
 	If $$\frac{Y(z)}{U(z)}=D(z)=k\frac{1-\alpha z^{-1}}{1-\beta z^{-1}}$$ then digital implementation will be
@@ -411,7 +416,7 @@ It should certainly be a small fraction of the sampling period $T$.
 	\heading{Modified MPZ}
 	\begin{itemize}
 	\item
-	Used if constraint on computation time cannot be met.
+	Used if constraint on computation time cannot be met\footnote{Which these days is unlikely}.
 
 	\item Allow a zero at infinity in $D(z)$ so that order of numerator is one
   less than denominator.
@@ -430,7 +435,7 @@ Re-implement Example 3 using the Modified MPZ method.
 If we allow an infinite zero
 $$D(s)=\frac{s+a}{s(s+b)}$$ becomes
 $$D(z)=k\frac{(1-e^{-aT}z^{-1})}{(1-z^{-1})(1-e^{-bT}z^{-1})}$$ and
-$$k=\frac{a}{b}\frac{(1-e^{-bT})}{(1-e^{-aT})}.$$
+$$k = \left( {\frac{{1 - b}}{{a - 1}}} \right)\frac{{\left( {1 - {e^{ - (1 - b)T}}} \right)}}{{\left( {1 - {e^{ - (1 - a)T}}} \right)}}.$$
 
 The implementation is now
 
